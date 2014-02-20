@@ -1,0 +1,35 @@
+<ol class="breadcrumb">
+    <li><a href="#/events">Events</a></li>
+    <li class="active">{{title}}</li>
+</ol>
+
+<h1>{{title}}</h1>
+
+<div id="content">
+    <form class="form-horizontal" name="form" novalidate focus-error ng-submit="save()">
+        <div class="form-group" ng-class="{'has-error': submitted && form.name.$invalid}">
+            <label for="term" class="col-md-3 control-label">Name <span class="required">*</span></label>
+            <div class="col-md-3">
+                <input type="text" class="form-control" id="name" name="name" required ng-model="event.name">
+            </div>
+            <div class="col-md-6">
+                <span class="help-block" ng-show="submitted && form.name.$error.required">Please enter a name!</span>
+            </div>
+        </div>
+        <div class="form-group" ng-class="{'has-error': submitted && form.country.$invalid}">
+            <label for="abbreviation" class="col-md-3 control-label">Country <span class="required">*</span></label>
+            <div class="col-md-1">
+                <input type="text" class="form-control" id="country" name="country" ng-model="event.country">
+            </div>
+            <div class="col-md-8">
+                <span class="help-block" ng-show="submitted && form.country.$error.required">Please select a country!</span>
+            </div>
+        </div>
+        <div class="form-group">
+            <div class="col-md-offset-3 col-md-9">
+                <button type="submit" class="btn btn-success" id="saveEntry">Save<spinner ng-show="loading" class="ng-hide"></spinner></button>
+                <a href="#/events" class="btn btn-default">Cancel</a>
+            </div>
+        </div>
+    </form>
+</div>

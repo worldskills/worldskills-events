@@ -1,3 +1,11 @@
+<ol class="breadcrumb">
+    <li>Events</li>
+</ol>
+
+<p class="pull-right">
+    <a href="#" class="btn btn-success">Add Event</a>
+</p>
+
 <h1>Events</h1>
 
 <div class="table-responsive" ng-show="events.events">
@@ -5,24 +13,27 @@
         <colgroup>
             <col width="10%" />
             <col width="30%" />
-            <col width="30%" />
-            <col width="30%" />
+            <col width="20%" />
+            <col width="20%" />
+            <col width="20%" />
         </colgroup>
         <thead>
             <tr>
                 <th>ID</th>
                 <th>Name</th>
                 <th>Date</th>
-                <th>Country</th>
+                <th>End Date</th>
+                <th>Location</th>
             </tr>
         </thead>
-        <tfoot><tr><td colspan="4"></td></tr></tfoot>
+        <tfoot><tr><td colspan="5"></td></tr></tfoot>
         <tbody>
             <tr ng-repeat="event in events.events">
-                <td>{{event.id}}</td>
-                <td>{{event.name}}</td>
-                <td>{{event.start_date}}</td>
-                <td>{{event.country}}</td>
+                <td><a href="#/events/{{event.id}}">{{event.id}}</a></td>
+                <td><a href="#/events/{{event.id}}">{{event.name}}</a></td>
+                <td>{{event.start_date|date:'d MMMM yyyy'}}</td>
+                <td>{{event.end_date|date:'d MMMM yyyy'}}</td>
+                <td>{{event.town}} {{event.country}}</td>
             </tr>
         </tbody>
     </table>
