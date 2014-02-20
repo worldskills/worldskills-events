@@ -12,7 +12,7 @@ cp app/scripts/config.js.dev app/scripts/config.js
 
 ## Development
 
-Run local development server for [http://localhost:9000]:
+Run local development server for [http://localhost:9000](http://localhost:9000/):
 
 ```
 grunt server
