@@ -203,7 +203,6 @@ module.exports = function (grunt) {
   grunt.registerTask('server', 'Server app on http://localhost:8000/', ['connect:server']);
 
   grunt.registerTask('test', [
-    'connect:test',
     'karma'
   ]);
 
