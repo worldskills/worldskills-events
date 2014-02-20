@@ -33,7 +33,7 @@
                 <td><a href="#/events/{{event.id}}">{{event.name}}</a></td>
                 <td>{{event.start_date|date:'d MMMM yyyy'}}</td>
                 <td>{{event.end_date|date:'d MMMM yyyy'}}</td>
-                <td>{{event.town}} {{event.country}}</td>
+                <td>{{event.town}}<span ng-show="event.town && event.country">, </span>{{event.country|translate}}</td>
             </tr>
         </tbody>
     </table>

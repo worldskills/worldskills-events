@@ -2,7 +2,7 @@
     'use strict';
 
     var eventsApp = angular.module('eventsApp', [
-        'ngResource', 'ngSanitize', 'ngRoute', 'ui.bootstrap'
+        'ngResource', 'ngSanitize', 'ngRoute', 'ui.bootstrap', 'pascalprecht.translate'
     ]);
 
     eventsApp.config(function($routeProvider) {
@@ -17,5 +17,16 @@
         }).otherwise({
             redirectTo: '/events'
         });
+    });
+
+    eventsApp.config(function($translateProvider) {
+
+        $translateProvider.useStaticFilesLoader({
+            prefix: 'languages/',
+            suffix: '.json'
+        });
+
+        $translateProvider.preferredLanguage('en');
+        $translateProvider.fallbackLanguage('en');
     });
 })();
