@@ -1,0 +1,6 @@
+(function() {
+    'use strict';
+
+    angular.module('eventsApp').constant('API_EVENTS', 'http://localhost:8080/events');
+
+})();
