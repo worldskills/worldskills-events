@@ -7,6 +7,9 @@
         }, {
             query: {
                 method: 'GET'
+            },
+            update: {
+                method: 'PUT'
             }
         });
     });

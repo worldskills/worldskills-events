@@ -14,12 +14,18 @@ module.exports = function(config) {
 
         // list of files / patterns to load in the browser
         files: [
+            'app/bower_components/jquery/jquery.js',
             'app/bower_components/angular/angular.js',
             'app/bower_components/angular-mocks/angular-mocks.js',
             'app/bower_components/angular-resource/angular-resource.js',
             'app/bower_components/angular-sanitize/angular-sanitize.js',
+            'app/bower_components/angular-translate/angular-translate.js',
+            'app/bower_components/angular-translate-loader-static-files/angular-translate-loader-static-files.js',
             'app/bower_components/angular-route/angular-route.js',
             'app/bower_components/angular-bootstrap/ui-bootstrap.js',
+            'app/bower_components/angular-bootstrap/ui-bootstrap-tpls.js',
+            'app/bower_components/select2/select2.min.js',
+            'app/bower_components/angular-ui-select2/src/select2.js',
             'app/scripts/*.js',
             'app/scripts/**/*.js',
             'test/spec/**/*.js'

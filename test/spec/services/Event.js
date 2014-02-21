@@ -14,6 +14,10 @@ describe('Service: Event', function() {
 
     it('should load events', inject(function() {
 
+        $httpBackend.expectGET('languages/en.json').respond({});
+        $httpBackend.expectGET('languages/en.json').respond({});
+        $httpBackend.expectGET('languages/en.json').respond({});
+
         $httpBackend.expectGET(new RegExp('/events/events')).respond({
             events: [
                 {}, {}

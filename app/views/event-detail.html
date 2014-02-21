@@ -1,14 +1,23 @@
 <ol class="breadcrumb">
     <li><a href="#/events">Events</a></li>
-    <li class="active">{{title}}</li>
+    <li class="active">{{id ? (title || " ") : "Add Event"}}</li>
 </ol>
 
-<h1>{{title}}</h1>
+<h1>{{id ? (title || " ") : "Add Event"}}</h1>
 
 <hr/>
 
 <div id="content">
     <form class="form-horizontal" name="form" novalidate focus-error ng-submit="save()">
+        <div class="form-group" ng-class="{'has-error': submitted && form.name.$invalid}">
+            <label for="name" class="col-md-3 control-label">Name <span class="required">*</span></label>
+            <div class="col-md-3">
+                <input type="text" class="form-control" id="name" name="name" required ng-model="event.name">
+            </div>
+            <div class="col-md-6">
+                <span class="help-block" ng-show="submitted && form.name.$error.required">Please enter a name!</span>
+            </div>
+        </div>
         <div class="form-group" ng-class="{'has-error': submitted && form.entity.$invalid}">
             <label for="country" class="col-md-3 control-label">Entity <span class="required">*</span></label>
             <div class="col-md-5">
@@ -20,13 +29,15 @@
                 <span class="help-block" ng-show="submitted && form.country.$error.required">Please select a country!</span>
             </div>
         </div>
-        <div class="form-group" ng-class="{'has-error': submitted && form.name.$invalid}">
-            <label for="name" class="col-md-3 control-label">Name <span class="required">*</span></label>
+        <div class="form-group" ng-class="{'has-error': submitted && form.type.$invalid}">
+            <label for="name" class="col-md-3 control-label">Type <span class="required">*</span></label>
             <div class="col-md-3">
-                <input type="text" class="form-control" id="name" name="name" required ng-model="event.name">
+                <select ui-select2 class="form-control" id="type" name="type" ng-model="event.type">
+                    <option value="competition">Competition</option>
+                </select>
             </div>
             <div class="col-md-6">
-                <span class="help-block" ng-show="submitted && form.name.$error.required">Please enter a name!</span>
+                <span class="help-block" ng-show="submitted && form.type.$error.required">Please select a type!</span>
             </div>
         </div>
         <div class="form-group" ng-class="{'has-error': submitted && form.start_date.$invalid}">
@@ -39,7 +50,7 @@
             </div>
         </div>
         <div class="form-group" ng-class="{'has-error': submitted && form.end_date.$invalid}">
-            <label for="end_date" class="col-md-3 control-label">End date</label>
+            <label for="end_date" class="col-md-3 control-label">End date <span class="required">*</span></label>
             <div class="col-md-2">
                 <input type="text" datepicker-popup class="form-control" id="end_date" name="end_date" required ng-model="event.end_date">
             </div>
@@ -58,7 +69,13 @@
         <div class="form-group" ng-class="{'has-error': submitted && form.town.$invalid}">
             <label for="town" class="col-md-3 control-label">Town</label>
             <div class="col-md-3">
-                <input type="text" class="form-control" id="town" name="town" required ng-model="event.town">
+                <input type="text" class="form-control" id="town" name="town" ng-model="event.town">
+            </div>
+        </div>
+        <div class="form-group" ng-class="{'has-error': submitted && form.code.$invalid}">
+            <label for="code" class="col-md-3 control-label">Code</label>
+            <div class="col-md-2">
+                <input type="text" class="form-control" id="code" name="code" ng-model="event.code">
             </div>
         </div>
         <div class="form-group">

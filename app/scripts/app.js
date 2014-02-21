@@ -10,6 +10,10 @@
         $routeProvider.when('/events', {
             templateUrl: 'views/events.html',
             controller: 'EventsCtrl'
+        }).when('/events/create', {
+            templateUrl: 'views/event-detail.html',
+            controller: 'EventCreateCtrl',
+            requireLoggedIn: true
         }).when('/events/:id', {
             templateUrl: 'views/event-detail.html',
             controller: 'EventDetailCtrl',

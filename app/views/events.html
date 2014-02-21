@@ -3,12 +3,12 @@
 </ol>
 
 <p class="pull-right">
-    <a href="#" class="btn btn-success">Add Event</a>
+    <a href="#/events/create" class="btn btn-success">Add Event</a>
 </p>
 
 <h1>Events</h1>
 
-<div class="table-responsive" ng-show="events.events">
+<div class="table-responsive">
     <table class="table table-striped">
         <colgroup>
             <col width="10%" />
@@ -34,6 +34,9 @@
                 <td>{{event.start_date|date:'d MMMM yyyy'}}</td>
                 <td>{{event.end_date|date:'d MMMM yyyy'}}</td>
                 <td>{{event.town}}<span ng-show="event.town && event.country">, </span>{{event.country|translate}}</td>
+            </tr>
+            <tr ng-show="!events.events">
+                <td colspan="5">No events found.</td>
             </tr>
         </tbody>
     </table>
