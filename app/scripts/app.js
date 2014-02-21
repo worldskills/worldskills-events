@@ -2,7 +2,7 @@
     'use strict';
 
     var eventsApp = angular.module('eventsApp', [
-        'ngResource', 'ngSanitize', 'ngRoute', 'ui.bootstrap', 'pascalprecht.translate'
+        'ngResource', 'ngSanitize', 'ngRoute', 'ui.bootstrap', 'ui.select2', 'pascalprecht.translate'
     ]);
 
     eventsApp.config(function($routeProvider) {
