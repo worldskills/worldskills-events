@@ -22,7 +22,7 @@
             <label for="abbreviation" class="col-md-3 control-label">Country <span class="required">*</span></label>
             <div class="col-md-3">
                 <select class="form-control" ng-model="event.country">
-                    <option ng-repeat="country in countries" value="{{country}}">{{country|translate}}</option>
+                    <option ng-repeat="country in countries|orderBy:'name'" value="{{country.code}}">{{country.code|translate}}</option>
                 </select>
             </div>
             <div class="col-md-6">
