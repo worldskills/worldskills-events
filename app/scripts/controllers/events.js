@@ -17,5 +17,8 @@
                 });
             });
         });
+        $http({method: 'GET', url: API_EVENTS + '/entities'}).success(function(data, status, headers, config) {
+            $scope.entities = data.entities;
+        });
     });
 })();
