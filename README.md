@@ -17,3 +17,13 @@ Run local development server for [http://localhost:9000](http://localhost:9000/)
 ```
 grunt server
 ```
+
+## Documentation
+
+To generate the documentation install [Pandoc](http://johnmacfarlane.net/pandoc/) and run:
+
+```
+cd docs
+pandoc --toc index.md -oworldskills-events.pdf
+open worldskills-events.pdf
+```
