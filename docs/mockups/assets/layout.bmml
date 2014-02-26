@@ -1,0 +1,30 @@
+<mockup version="1.0" skin="sketch" fontFace="Balsamiq Sans" measuredW="969" measuredH="860" mockupW="909" mockupH="840">
+  <controls>
+    <control controlID="1" controlTypeID="com.balsamiq.mockups::BreadCrumbs" x="126" y="198" w="-1" h="-1" measuredW="267" measuredH="24" zOrder="4" locked="false" isInGroup="-1">
+      <controlProperties>
+        <text>Home%2C%20Events%2C%20WorldSkills%20S%E3o%20Paulo%202015</text>
+      </controlProperties>
+    </control>
+    <control controlID="2" controlTypeID="com.balsamiq.mockups::BrowserWindow" x="60" y="20" w="909" h="840" measuredW="450" measuredH="400" zOrder="0" locked="false" isInGroup="-1">
+      <controlProperties>
+        <text>WorldSkills%20Events%0Ahttp%3A//events.worldskills.org/</text>
+      </controlProperties>
+    </control>
+    <control controlID="3" controlTypeID="com.balsamiq.mockups::Title" x="126" y="140" w="-1" h="-1" measuredW="168" measuredH="23" zOrder="1" locked="false" isInGroup="-1">
+      <controlProperties>
+        <size>20</size>
+        <text>WorldSkills%20Events</text>
+      </controlProperties>
+    </control>
+    <control controlID="5" controlTypeID="com.balsamiq.mockups::ComboBox" x="797" y="139" w="-1" h="-1" measuredW="85" measuredH="24" zOrder="2" locked="false" isInGroup="-1">
+      <controlProperties>
+        <text>John%20Doe</text>
+      </controlProperties>
+    </control>
+    <control controlID="6" controlTypeID="com.balsamiq.mockups::HRule" x="62" y="176" w="903" h="-1" measuredW="100" measuredH="10" zOrder="3" locked="false" isInGroup="-1">
+      <controlProperties>
+        <stroke>solid</stroke>
+      </controlProperties>
+    </control>
+  </controls>
+</mockup>
