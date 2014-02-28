@@ -9,10 +9,10 @@
     "worldskills-bootstrap": "*",
     "angular-resource": "~1.2.0",
     "angular-sanitize": "~1.2.0",
-    "angular-route": "~1.2.0",
     "angular-translate": "~2.0.0",
     "angular-translate-loader-static-files": "~2.0.0",
-    "angular-ui-select2": "~0.0.5"
+    "angular-ui-select2": "~0.0.5",
+    "angular-ui-router": "~0.2.9"
   },
   "devDependencies": {
     "angular-mocks": "~1.2.0",

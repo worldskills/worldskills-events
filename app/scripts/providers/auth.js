@@ -108,12 +108,19 @@
                 $http.defaults.headers.common.Authorization = 'Bearer ' + auth.accessToken;
             }
 
-            $http({method: 'GET', url: API_AUTH + '/users/loggedIn'}).success(function(data, status, headers, config) {
-                auth.user = data;
-            });
+            $http({method: 'GET', url: API_AUTH + '/users/loggedIn'})
+                .success(function(data, status, headers, config) {
+                    auth.user = data;
+                }).
+                error(function(data, status, headers, config) {
+                    // error getting current user, clear access token
+                    sessionStorage.removeItem('access_token');
+                    auth.accessToken = null;
+                    auth.loggedIn = false;
+                });
 
-            $rootScope.$on('$routeChangeStart', function (event, next, current) {
-                if (next.requireLoggedIn) {
+            $rootScope.$on('$stateChangeStart', function (event, toState, toParams, fromState, fromParams) {
+                if (typeof toState.data != 'undefined' && !!toState.data.requireLoggedIn) {
                     if (!auth.loggedIn) {
                         document.location.href = auth.loginUrl;
                     }

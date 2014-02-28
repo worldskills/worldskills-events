@@ -5,8 +5,8 @@
         $scope.events = Event.query();
     });
 
-    angular.module('eventsApp').controller('EventDetailCtrl', function($scope, $routeParams, Event, $http, API_EVENTS, $translate, $location) {
-        $scope.id = $routeParams.id;
+    angular.module('eventsApp').controller('EventDetailCtrl', function($scope, $stateParams, Event, $http, API_EVENTS, $translate, $state) {
+        $scope.id = $stateParams.id;
         $scope.event = Event.get({id: $scope.id}, function (event) {
             $scope.title = event.name;
         });
@@ -25,12 +25,12 @@
             $scope.submitted = true;
             $scope.loading = true;
             $scope.event.$update(function () {
-                $location.path('/entries');
+                $state.go('events');
             });
         };
     });
 
-    angular.module('eventsApp').controller('EventCreateCtrl', function($scope, Event, $http, API_EVENTS, $translate, $location) {
+    angular.module('eventsApp').controller('EventCreateCtrl', function($scope, Event, $http, API_EVENTS, $translate, $state) {
         $scope.event = new Event();
         $scope.event.code = '';
         $scope.event.town = '';
@@ -54,7 +54,7 @@
             }
             $scope.loading = true;
             $scope.event.$save(function () {
-                $location.path('/events');
+                $state.go('events');
             });
         };
     });

@@ -1,5 +1,5 @@
 <ol class="breadcrumb">
-    <li><a href="#/events">Events</a></li>
+    <li><a ui-sref="events">Events</a></li>
     <li class="active">{{id ? (title || " ") : "Add Event"}}</li>
 </ol>
 
@@ -81,7 +81,7 @@
         <div class="form-group">
             <div class="col-md-offset-3 col-md-9">
                 <button type="submit" class="btn btn-success" id="saveEntry">Save<spinner ng-show="loading" class="ng-hide"></spinner></button>
-                <a href="#/events" class="btn btn-default">Cancel</a>
+                <a ui-sref="events" class="btn btn-default">Cancel</a>
             </div>
         </div>
     </form>

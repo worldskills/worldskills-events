@@ -2,24 +2,29 @@
     'use strict';
 
     var eventsApp = angular.module('eventsApp', [
-        'ngResource', 'ngSanitize', 'ngRoute', 'ui.bootstrap', 'ui.select2', 'pascalprecht.translate'
+        'ngResource', 'ngSanitize', 'ui.router', 'ui.bootstrap', 'ui.select2', 'pascalprecht.translate'
     ]);
 
-    eventsApp.config(function($routeProvider) {
-
-        $routeProvider.when('/events', {
+    eventsApp.config(function($stateProvider, $urlRouterProvider) {
+        $urlRouterProvider.otherwise('/events');
+        $stateProvider.state('events', {
+            url: '/events',
             templateUrl: 'views/events.html',
             controller: 'EventsCtrl'
-        }).when('/events/create', {
+        }).state('event_create', {
+            url: '/events/create',
             templateUrl: 'views/event-detail.html',
             controller: 'EventCreateCtrl',
-            requireLoggedIn: true
-        }).when('/events/:id', {
+            data: {
+                requireLoggedIn: true
+            }
+        }).state('event', {
+            url: '/events/{id}',
             templateUrl: 'views/event-detail.html',
             controller: 'EventDetailCtrl',
-            requireLoggedIn: true
-        }).otherwise({
-            redirectTo: '/events'
+            data: {
+                requireLoggedIn: true
+            }
         });
     });
 
