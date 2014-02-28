@@ -13,7 +13,7 @@
 <link rel="stylesheet" href="styles/app.css">
 <!-- endbuild -->
 </head>
-<body ng-app="eventsApp">
+<body ng-app="eventsApp" ng-controller="ContainerCtrl">
     <!--[if lt IE 9]>
         <script src="bower_components/es5-shim/es5-shim.js"></script>
         <script src="bower_components/json3/lib/json3.min.js"></script>
@@ -31,15 +31,16 @@
                 <ul class="nav navbar-nav">
                     <li><a href="#"></a></li>
                 </ul>
-                <ul class="nav navbar-nav navbar-right">
-                    <li class="dropdown"><a href="#" class="dropdown-toggle" data-toggle="dropdown">
-                            John Doe <b class="caret"></b>
+                <ul class="nav navbar-nav navbar-right" ng-cloak>
+                    <li ng-show="!auth.loggedIn"><a href="{{auth.loginUrl}}">Login</a></li>
+                    <li class="dropdown" ng-show="auth.loggedIn">
+                        <a href="" class="dropdown-toggle" data-toggle="dropdown">
+                            {{auth.user.first_name}} {{auth.user.last_name}} <b class="caret"></b>
                         </a>
                         <ul class="dropdown-menu">
-                            <li><a href="#">Profile</a></li>
-                            <li><a href="#">Change Password</a></li>
-                            <li><a href="#">Logout</a></li>
-                        </ul></li>
+                            <li><a href="" ng-click="logout()">Logout</a></li>
+                        </ul>
+                    </li>
                 </ul>
                 <form class="navbar-form navbar-right" role="search">
                     <div class="form-group">
@@ -86,6 +87,8 @@
 
     <script src="scripts/app.js"></script>
     <script src="scripts/config.js"></script>
+    <script src="scripts/providers/auth.js"></script>
+    <script src="scripts/controllers/container.js"></script>
     <script src="scripts/controllers/events.js"></script>
     <script src="scripts/services/Event.js"></script>
     <!-- endbuild -->
