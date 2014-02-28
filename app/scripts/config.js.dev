@@ -1,6 +1,11 @@
 (function() {
     'use strict';
 
-    angular.module('eventsApp').constant('API_EVENTS', 'http://localhost:8080/events');
+    var eventsApp = angular.module('eventsApp'); 
+    eventsApp.constant('API_EVENTS', 'http://localhost:8080/events');
+    eventsApp.constant('CLIENT_ID', '');
+    eventsApp.constant('API_AUTH', 'http://localhost:8080/auth');
+    eventsApp.constant('AUTHORIZE_URL', 'http://worldskills_auth.dev/oauth/authorize');
+    eventsApp.constant('LOGOUT_URL', 'http://worldskills_auth.dev/logout');
 
 })();
