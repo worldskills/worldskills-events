@@ -7,7 +7,6 @@
 
     angular.module('eventsApp').controller('EventCtrl', function($scope, $stateParams, Event, $http, API_EVENTS, $translate, $state) {
         $scope.id = $stateParams.id;
-        $scope.state = $state;
         $scope.event = Event.get({id: $scope.id}, function (event) {
             $scope.title = event.name;
         });
