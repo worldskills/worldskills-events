@@ -5,19 +5,15 @@
         $scope.events = Event.query();
     });
 
-    angular.module('eventsApp').controller('EventDetailCtrl', function($scope, $stateParams, Event, $http, API_EVENTS, $translate, $state) {
+    angular.module('eventsApp').controller('EventCtrl', function($scope, $stateParams, Event, $http, API_EVENTS, $translate, $state) {
         $scope.id = $stateParams.id;
+        $scope.state = $state;
         $scope.event = Event.get({id: $scope.id}, function (event) {
             $scope.title = event.name;
         });
-        $http({method: 'GET', url: API_EVENTS + '/countries'}).success(function(data, status, headers, config) {
-            $scope.countries = [];
-            angular.forEach(data.countries, function (code) {
-                $translate(code).then(function (name) {                    
-                    $scope.countries.push({code: code, name: name});
-                });
-            });
-        });
+    });
+
+    angular.module('eventsApp').controller('EventDetailCtrl', function($scope, $stateParams, Event, $http, API_EVENTS, $translate, $state) {
         $http({method: 'GET', url: API_EVENTS + '/entities'}).success(function(data, status, headers, config) {
             $scope.entities = data.entities;
         });

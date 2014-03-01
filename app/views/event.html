@@ -1,0 +1,15 @@
+<ol class="breadcrumb">
+    <li><a ui-sref="events">Events</a></li>
+    <li class="active">{{title || " "}}</li>
+</ol>
+
+<h1>{{title || " "}}</h1>
+
+<ul class="nav nav-tabs">
+    <li ng-class="{active: state.includes('event.detail')}"><a ui-sref="event.detail(event.id)">Event</a></li>
+    <li ng-class="{active: state.includes('event.skills')}"><a ui-sref="event.skills(event.id)">Skills</a></li>
+    <li ng-class="{active: state.includes('event.sponsors')}"><a ui-sref="event.sponsors(event.id)">Sponsors</a></li>
+</ul>
+
+<div id="content" ui-view>
+</div>

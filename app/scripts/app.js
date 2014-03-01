@@ -13,15 +13,32 @@
             controller: 'EventsCtrl'
         }).state('event_create', {
             url: '/events/create',
-            templateUrl: 'views/event-detail.html',
+            templateUrl: 'views/event-create.html',
             controller: 'EventCreateCtrl',
             data: {
                 requireLoggedIn: true
             }
         }).state('event', {
             url: '/events/{id}',
+            templateUrl: 'views/event.html',
+            controller: 'EventCtrl',
+            abstract: true,
+        }).state('event.detail', {
+            url: '',
             templateUrl: 'views/event-detail.html',
             controller: 'EventDetailCtrl',
+            data: {
+                requireLoggedIn: true
+            }
+        }).state('event.skills', {
+            url: '/skills',
+            templateUrl: 'views/event-skills.html',
+            data: {
+                requireLoggedIn: true
+            }
+        }).state('event.sponsors', {
+            url: '/sponsors',
+            templateUrl: 'views/event-sponsors.html',
             data: {
                 requireLoggedIn: true
             }
