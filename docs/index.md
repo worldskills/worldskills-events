@@ -4,7 +4,7 @@ title: WorldSkills Events
 
 # Introduction
 
-The WorldSkills Events application is used to manage all events related to WorldSkills. This includes Competitions, GAs, Champions Forums and regional events. It also used to manage Competition related information like Skills and sponsors.
+The WorldSkills Events application is used to manage all events related to WorldSkills. This includes Competitions, GAs, Champions Forums and regional events. It is also used to manage Competition related information like Skills and sponsors.
 
 # Events List
 
@@ -14,7 +14,7 @@ This is the first view and lists all events. The list can be filtered by name an
 
 # Event Detail
 
-This view appears after clicking on an event in the Events List. All details of an event can be edited here. If the user selects the type “Competition” and saves the event, the Skills tab becomes visible. A event can also be duplicated with all the Skills and sponsors.
+This view appears after clicking on an event in the Events List. All details of an event can be edited here. If the user selects the type “Competition” and saves the event, the Skills tab becomes visible. An event can also be duplicated with all the Skills and sponsors.
 
 ![Mockup Event Detail](mockups/event.png)
 
@@ -26,7 +26,7 @@ Each Competition can have multiple Skills. This view lists all Skills of an even
 
 # Event Skill Detail
 
-After clicking a Skill in the Skills List the user can edit the details of a Skill. Each Skill has a type, describing wether it’s an Official Skill, a Demonstration Skill, a Presentation Skill or a Multi Skill. A Multi Skill is a ranking generated from multiple Skills.
+After clicking on a Skill in the Skills List the user can edit the details of a Skill. Each Skill has a type, describing wether it’s an Official Skill, a Demonstration Skill, a Presentation Skill or a Multi Skill. A Multi Skill is a ranking generated from multiple Skills.
 
 ![Mockup Event Skill Detail](mockups/skill.png)
 
