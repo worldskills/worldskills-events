@@ -9,6 +9,7 @@ describe('Service: Event', function() {
     var $httpBackend, Event;
     beforeEach(inject(function(_$httpBackend_, _Event_) {
         $httpBackend = _$httpBackend_;
+        $httpBackend.whenGET(/views\/.*/).respond('');
         Event = _Event_;
     }));
 
