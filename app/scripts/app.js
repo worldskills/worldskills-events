@@ -53,6 +53,10 @@
         });
     });
 
+    eventsApp.config(function($uiViewScrollProvider) {
+        $uiViewScrollProvider.useAnchorScroll();
+    });
+
     eventsApp.config(function($translateProvider) {
 
         $translateProvider.useStaticFilesLoader({
