@@ -32,22 +32,23 @@
             });
         };
     });
-    angular.module('eventsApp').controller('EventSkillsCtrl', function($scope, $stateParams, Event, $http, API_EVENTS, $translate, $state) {
-        $scope.currentPage = 1;
-        $scope.changePage = function (page) {
-            $scope.event.$promise.then(function(data) {
-                var url;
-                angular.forEach(data.links, function (link) {
-                   if (link.rel == 'skills') {
-                       url = link.href;
-                   } 
+    angular.module('eventsApp').controller('EventSkillsCtrl', function($scope, $stateParams, Event, $http, API_EVENTS, $translate, $state, WorldSkills) {
+        $scope.skills = [];
+        var getSkills = function (url) {
+            $http({method: 'GET', url: url}).success(function(data, status, headers, config) {
+                angular.forEach(data.skills, function (skill) {
+                    $scope.skills.push(skill);
                 });
-                $http({method: 'GET', url: url + '?offset=' + ((page - 1) * 10)}).success(function(data, status, headers, config) {
-                    $scope.skills = data;
-                });
+                var next = WorldSkills.getLink(data.links, 'next');
+                if (next) {
+                    getSkills(next);
+                }
             });
         };
-        $scope.changePage(1);
+        $scope.event.$promise.then(function(data) {
+            var url = WorldSkills.getLink(data.links, 'skills');
+            getSkills(url);
+        });
     });
 
     angular.module('eventsApp').controller('EventCreateCtrl', function($scope, Event, $http, API_EVENTS, $translate, $state) {

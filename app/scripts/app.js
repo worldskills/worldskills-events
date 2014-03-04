@@ -43,6 +43,13 @@
             data: {
                 requireLoggedIn: true
             }
+        }).state('skill', {
+            url: '/skills/{id}',
+            templateUrl: 'views/skill.html',
+            controller: 'SkillCtrl',
+            data: {
+                requireLoggedIn: true
+            }
         });
     });
 
