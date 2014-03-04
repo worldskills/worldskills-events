@@ -13,6 +13,14 @@
     });
 
     angular.module('eventsApp').controller('EventDetailCtrl', function($scope, $stateParams, Event, $http, API_EVENTS, $translate, $state) {
+        $http({method: 'GET', url: API_EVENTS + '/countries'}).success(function(data, status, headers, config) {
+            $scope.countries = [];
+            angular.forEach(data.countries, function (code) {
+                $translate(code).then(function (name) {                    
+                    $scope.countries.push({code: code, name: name});
+                });
+            });
+        });
         $http({method: 'GET', url: API_EVENTS + '/entities'}).success(function(data, status, headers, config) {
             $scope.entities = data.entities;
         });
@@ -23,6 +31,23 @@
                 $state.go('events');
             });
         };
+    });
+    angular.module('eventsApp').controller('EventSkillsCtrl', function($scope, $stateParams, Event, $http, API_EVENTS, $translate, $state) {
+        $scope.currentPage = 1;
+        $scope.changePage = function (page) {
+            $scope.event.$promise.then(function(data) {
+                var url;
+                angular.forEach(data.links, function (link) {
+                   if (link.rel == 'skills') {
+                       url = link.href;
+                   } 
+                });
+                $http({method: 'GET', url: url + '?offset=' + ((page - 1) * 10)}).success(function(data, status, headers, config) {
+                    $scope.skills = data;
+                });
+            });
+        };
+        $scope.changePage(1);
     });
 
     angular.module('eventsApp').controller('EventCreateCtrl', function($scope, Event, $http, API_EVENTS, $translate, $state) {

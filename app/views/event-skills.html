@@ -1,3 +1,28 @@
-<ul>
-    <li>Skills</li>
-</ul>
+<div class="table-responsive">
+    <table class="table table-striped">
+        <colgroup>
+            <col width="10%" />
+            <col width="60%" />
+            <col width="30%" />
+        </colgroup>
+        <thead>
+            <tr>
+                <th>Number</th>
+                <th>Name</th>
+                <th>Type</th>
+            </tr>
+        </thead>
+        <tfoot><tr><td colspan="3"></td></tr></tfoot>
+        <tbody>
+            <tr ng-repeat="skill in skills.skills">
+                <td>{{skill.number}}</td>
+                <td>{{skill.name.text}}</td>
+                <td>{{skill.type}}</td>
+            </tr>
+            <tr ng-show="!skills.skills">
+                <td colspan="3">No Skills found.</td>
+            </tr>
+        </tbody>
+    </table>
+</div>
+<pagination items-per-page="10" total-items="skills.total_count" page="currentPage" on-select-page="changePage(page)"></pagination>

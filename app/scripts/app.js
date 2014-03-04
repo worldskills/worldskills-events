@@ -33,6 +33,7 @@
         }).state('event.skills', {
             url: '/skills',
             templateUrl: 'views/event-skills.html',
+            controller: 'EventSkillsCtrl',
             data: {
                 requireLoggedIn: true
             }
