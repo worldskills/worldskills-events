@@ -46,10 +46,10 @@
         <text>Cancel</text>
       </controlProperties>
     </control>
-    <control controlID="20" controlTypeID="com.balsamiq.mockups::TabBar" x="239" y="380" w="756" h="515" measuredW="216" measuredH="100" zOrder="1" locked="false" isInGroup="-1">
+    <control controlID="20" controlTypeID="com.balsamiq.mockups::TabBar" x="239" y="380" w="756" h="515" measuredW="263" measuredH="100" zOrder="1" locked="false" isInGroup="-1">
       <controlProperties>
         <selectedIndex>0</selectedIndex>
-        <text>Event%2C%20Skills%2C%20Sponsors</text>
+        <text>Event%2C%20Skills%2C%20Sectors%2C%20Sponsors</text>
       </controlProperties>
     </control>
     <control controlID="21" controlTypeID="com.balsamiq.mockups::Label" x="282" y="537" w="-1" h="-1" measuredW="78" measuredH="21" zOrder="11" locked="false" isInGroup="-1">
