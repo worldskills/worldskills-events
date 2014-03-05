@@ -22,6 +22,13 @@
         $scope.event = Event.get({id: $scope.id}, function (event) {
             $scope.title = event.name;
         });
+        $scope.deleteEvent = function() {
+            $scope.deleteLoading = true;
+            $scope.event.$delete(function () {
+                alert('The Event has been deleted successfully.');
+                $state.go('events');
+            });
+        };
     });
 
     angular.module('eventsApp').controller('EventDetailCtrl', function($scope, $stateParams, Event, $http, API_EVENTS, $translate, $state) {
