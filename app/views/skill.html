@@ -55,6 +55,70 @@
                 <textarea class="form-control" id="description" name="description" rows="9" ng-model="skill.description.text"></textarea>
             </div>
         </div>
+        <div class="form-group" ng-class="{'has-error': submitted && form.description_industry_action.$invalid}">
+            <label for="description_industry_action" class="col-md-3 control-label">Skill explained</label>
+            <div class="col-md-6">
+                <textarea class="form-control" id="description_industry_action" name="description_industry_action" rows="9" ng-model="skill.description_industry_action.text"></textarea>
+            </div>
+        </div>
+        <div class="form-group" ng-class="{'has-error': submitted && form.description_required_skills.$invalid}">
+            <label for="description_required_skills" class="col-md-3 control-label">Required skills</label>
+            <div class="col-md-6">
+                <textarea class="form-control" id="description_required_skills" name="description_required_skills" rows="9" ng-model="skill.description_required_skills.text"></textarea>
+            </div>
+        </div>
+        <div class="form-group" ng-class="{'has-error': submitted && form.description_competition_action.$invalid}">
+            <label for="description_competition_action" class="col-md-3 control-label">What the Competitors do</label>
+            <div class="col-md-6">
+                <textarea class="form-control" id="description_competition_action" name="description_competition_action" rows="9" ng-model="skill.description_competition_action.text"></textarea>
+            </div>
+        </div>
+        <div class="form-group" ng-class="{'has-error': submitted && form.min_teams.$invalid}">
+            <label for="code" class="col-md-3 control-label">Min. Teams</label>
+            <div class="col-md-2">
+                <input type="text" class="form-control" id="min_teams" name="min_teams" ng-model="skill.min_teams">
+            </div>
+        </div>
+        <div class="form-group" ng-class="{'has-error': submitted && form.team_size.$invalid}">
+            <label for="team_size" class="col-md-3 control-label">Team Size</label>
+            <div class="col-md-2">
+                <input type="text" class="form-control" id="team_size" name="team_size" ng-model="skill.team_size">
+            </div>
+        </div>
+        <div class="form-group" ng-class="{'has-error': submitted && form.identify_judges.$invalid}">
+            <div class="col-md-offset-3 col-md-6">
+                <div class="checkbox">
+                    <label>
+                        <input type="checkbox" id="identify_judges" name="identify_judges" ng-model="skill.identify_judges">
+                        Identify Judges
+                    </label>
+                </div>
+                <div class="checkbox">
+                    <label>
+                        <input type="checkbox" id="group_competitors" name="group_competitors" ng-model="skill.group_competitors">
+                        Group Competitors
+                    </label>
+                </div>
+                <div class="checkbox">
+                    <label>
+                        <input type="checkbox" id="compatriot_marking" name="compatriot_marking" ng-model="skill.compatriot_marking">
+                        Compatriot Marking
+                    </label>
+                </div>
+                <div class="checkbox">
+                    <label>
+                        <input type="checkbox" id="generate_500_scale" name="generate_500_scale" ng-model="skill.generate_500_scale">
+                        Generate 500 Scale
+                    </label>
+                </div>
+                <div class="checkbox">
+                    <label>
+                        <input type="checkbox" id="landscape_marking" name="landscape_marking" ng-model="skill.landscape_marking">
+                        Landscape Marking
+                    </label>
+                </div>
+            </div>
+        </div>
         <div class="form-group">
             <div class="col-md-offset-3 col-md-9">
                 <button type="submit" class="btn btn-success" id="saveEntry">Save<spinner ng-show="loading" class="ng-hide"></spinner></button>
