@@ -1,8 +1,20 @@
 (function() {
     'use strict';
 
-    angular.module('eventsApp').controller('EventsCtrl', function($scope, Event) {
-        $scope.events = Event.query();
+    angular.module('eventsApp').controller('EventsCtrl', function($scope, $stateParams, Event, $location) {
+        var page = parseInt($stateParams.page, 10) || 1;
+        $scope.itemsPerPage = 10;
+        $scope.load = function (page) {
+             Event.query({limit: $scope.itemsPerPage, offset: $scope.itemsPerPage * (page - 1)}, function (data) {
+                $scope.events = data;
+                $scope.currentPage = page;
+            });
+        };
+        $scope.changePage = function (page) {
+            $location.search('page', page);
+            $scope.load(page);
+        };
+        $scope.load(page);
     });
 
     angular.module('eventsApp').controller('EventCtrl', function($scope, $stateParams, Event, $http, API_EVENTS, $translate, $state) {

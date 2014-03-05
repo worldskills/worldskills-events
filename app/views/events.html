@@ -35,9 +35,11 @@
                 <td>{{event.end_date|date:'d MMMM yyyy'}}</td>
                 <td>{{event.town}}<span ng-show="event.town && event.country">, </span>{{event.country|translate}}</td>
             </tr>
-            <tr ng-show="!events.events">
+            <tr ng-show="events.total_count == 0">
                 <td colspan="5">No events found.</td>
             </tr>
         </tbody>
     </table>
 </div>
+
+<pagination items-per-page="itemsPerPage" total-items="events.total_count" page="currentPage" on-select-page="changePage(page)"></pagination>

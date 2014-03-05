@@ -8,9 +8,10 @@
     eventsApp.config(function($stateProvider, $urlRouterProvider) {
         $urlRouterProvider.otherwise('/events');
         $stateProvider.state('events', {
-            url: '/events',
+            url: '/events?page',
             templateUrl: 'views/events.html',
-            controller: 'EventsCtrl'
+            controller: 'EventsCtrl',
+            reloadOnSearch: false
         }).state('event_create', {
             url: '/events/create',
             templateUrl: 'views/event-create.html',
