@@ -15,8 +15,8 @@
         <tfoot><tr><td colspan="3"></td></tr></tfoot>
         <tbody>
             <tr ng-repeat="skill in skills">
-                <td><a ui-sref="skill({id: skill.id, page: currentPage})">{{skill.number}}</a></td>
-                <td><a ui-sref="skill({id: skill.id, page: currentPage})">{{skill.name.text}}</a></td>
+                <td><a ui-sref="skill({id: skill.id})">{{skill.number}}</a></td>
+                <td><a ui-sref="skill({id: skill.id})">{{skill.name.text}}</a></td>
                 <td>{{("skill_type_" + skill.type)|translate}}</td>
             </tr>
             <tr ng-show="!skills">
