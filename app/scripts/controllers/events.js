@@ -69,6 +69,24 @@
             getSkills(url);
         });
     });
+    angular.module('eventsApp').controller('EventSponsorsCtrl', function($scope, $stateParams, Event, $http, API_EVENTS, $translate, $state, WorldSkills) {
+        $scope.sponsors = [];
+        var getSponsors = function (url) {
+            $http({method: 'GET', url: url}).success(function(data, status, headers, config) {
+                angular.forEach(data.sponsors, function (skill) {
+                    $scope.sponsors.push(skill);
+                });
+                var next = WorldSkills.getLink(data.links, 'next');
+                if (next) {
+                    getSponsors(next);
+                }
+            });
+        };
+        $scope.event.$promise.then(function(data) {
+            var url = WorldSkills.getLink(data.links, 'sponsors');
+            getSponsors(url);
+        });
+    });
 
     angular.module('eventsApp').controller('EventCreateCtrl', function($scope, Event, $http, API_EVENTS, $translate, $state) {
         $scope.event = new Event();

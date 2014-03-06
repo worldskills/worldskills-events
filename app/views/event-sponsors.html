@@ -1,3 +1,28 @@
-<ul>
-    <li>Sponsors</li>
-</ul>
+<p>
+    <a ui-sref="sponsor_create({eventId: event.id})" class="btn btn-success">Add Sponsor</a>
+</p>
+
+<div class="table-responsive">
+    <table class="table table-striped">
+        <colgroup>
+            <col width="10%" />
+            <col width="90%" />
+        </colgroup>
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Name</th>
+            </tr>
+        </thead>
+        <tfoot><tr><td colspan="2"></td></tr></tfoot>
+        <tbody>
+            <tr ng-repeat="sponsor in sponsors">
+                <td><a ui-sref="sponsor({id: sponsor.id})">{{sponsor.id}}</a></td>
+                <td><a ui-sref="sponsor({id: sponsor.id})">{{sponsor.name}}</a></td>
+            </tr>
+            <tr ng-show="sponsors.length == 0">
+                <td colspan="2">No Sponsors found.</td>
+            </tr>
+        </tbody>
+    </table>
+</div>

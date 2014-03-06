@@ -41,6 +41,21 @@
         }).state('event.sponsors', {
             url: '/sponsors',
             templateUrl: 'views/event-sponsors.html',
+            controller: 'EventSponsorsCtrl',
+            data: {
+                requireLoggedIn: true
+            }
+        }).state('sponsor_create', {
+            url: '/events/{eventId}/sponsors/create',
+            templateUrl: 'views/sponsor.html',
+            controller: 'SponsorCreateCtrl',
+            data: {
+                requireLoggedIn: true
+            }
+        }).state('sponsor', {
+            url: '/sponsors/{id}',
+            templateUrl: 'views/sponsor.html',
+            controller: 'SponsorCtrl',
             data: {
                 requireLoggedIn: true
             }

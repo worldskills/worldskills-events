@@ -1,0 +1,40 @@
+<ol class="breadcrumb">
+    <li><a ui-sref="events">Events</a></li>
+    <li><a ui-sref="event.detail({id: sponsor.event.id})">{{sponsor.event.name}}</a></li>
+    <li><a ui-sref="event.sponsors({id: sponsor.event.id})">Sponsors</a></li>
+    <li class="active">{{id ? (title || " ") : "Add Sponsor"}}</li>
+</ol>
+
+<p class="pull-right">
+    <button ng-click="deleteSponsor()" class="btn btn-danger" id="deleteEntry">Delete Sponsor<spinner ng-show="deleteLoading" class="ng-hide"></spinner></button>
+</p>
+
+<h1>{{id ? (title || " ") : "Add Sponsor"}}</h1>
+
+<hr>
+
+<div id="content">
+    <form class="form-horizontal" name="form" novalidate focus-error ng-submit="save()">
+        <div class="form-group" ng-class="{'has-error': submitted && form.name.$invalid}">
+            <label for="name" class="col-md-3 control-label">Name <span class="required">*</span></label>
+            <div class="col-md-3">
+                <input type="text" class="form-control" id="name" name="name" required ng-model="sponsor.name">
+            </div>
+            <div class="col-md-6">
+                <span class="help-block" ng-show="submitted && form.name.$error.required">Please enter a name!</span>
+            </div>
+        </div>
+        <div class="form-group" ng-class="{'has-error': submitted && form.logo.$invalid}">
+            <label for="logo" class="col-md-3 control-label">Logo</label>
+            <div class="col-md-3">
+                <input type="text" class="form-control" id="logo" name="logo" ng-model="sponsor.logo">
+            </div>
+        </div>
+        <div class="form-group">
+            <div class="col-md-offset-3 col-md-9">
+                <button type="submit" class="btn btn-success">Save<spinner ng-show="loading" class="ng-hide"></spinner></button>
+                <a ui-sref="event.sponsors({id: sponsor.event.id})" class="btn btn-default">Cancel</a>
+            </div>
+        </div>
+    </form>
+</div>
