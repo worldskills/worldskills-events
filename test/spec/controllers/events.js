@@ -196,4 +196,65 @@ describe('controllers events', function() {
             expect($state.go).toHaveBeenCalledWith('events');
         });
     });
+
+    describe('EventSkillsCtrl', function() {
+
+        var $httpBackend, $scope, EventSkillsCtrl, event;
+
+        // Initialize the controller and a mock scope
+        beforeEach(inject(function(_$httpBackend_, $controller, $rootScope, $q) {
+
+            $httpBackend = _$httpBackend_;
+
+            event = $q.defer();
+
+            $scope = $rootScope.$new();
+            $scope.event = {
+                $promise: event.promise
+            };
+
+            EventSkillsCtrl = $controller('EventSkillsCtrl', {
+                $scope: $scope
+            });
+        }));
+
+        it('should load all skills', function() {
+
+            event.resolve({
+                links: [
+                    {
+                        rel: 'skills',
+                        href: 'http://localhost:8080/events/skills'
+                    }
+                ]
+            });
+
+            $httpBackend.expectGET('http://localhost:8080/events/skills').respond({
+                skills: [
+                    {
+                        name: 'Web Design'
+                    }, {
+                        name: 'Landscape Gardening'
+                    }
+                ],
+                links: [
+                    {
+                        rel: 'next',
+                        href: 'http://localhost:8080/events/skills?offset=2'
+                    }
+                ]
+            });
+            $httpBackend.expectGET('http://localhost:8080/events/skills?offset=2').respond({
+                skills: [
+                    {
+                        name: 'Hairdressing'
+                    }
+                ],
+                links: []
+            });
+            $httpBackend.flush();
+
+            expect($scope.skills.length).toBe(3);
+        });
+    });
 });
