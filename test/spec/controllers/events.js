@@ -139,10 +139,10 @@ describe('controllers events', function() {
 
     describe('EventDetailCtrl', function() {
 
-        var $httpBackend, $scope, EventDetailCtrl;
+        var $httpBackend, $scope, $state, EventDetailCtrl;
 
         // Initialize the controller and a mock scope
-        beforeEach(inject(function(_$httpBackend_, $controller, _$state_, $rootScope) {
+        beforeEach(inject(function(_$httpBackend_, $controller, _$state_, $rootScope, Event) {
 
             $httpBackend = _$httpBackend_;
             $httpBackend.expectGET('http://localhost:8080/events/countries').respond({
@@ -161,15 +161,21 @@ describe('controllers events', function() {
             });
 
             $scope = $rootScope.$new();
+            $scope.event = new Event();
+            $scope.event.id = 1;
+
+            $state = _$state_;
+            $state.go = jasmine.createSpy();
 
             EventDetailCtrl = $controller('EventDetailCtrl', {
-                $scope: $scope
+                $scope: $scope,
+                $state: $state
             });
 
             $httpBackend.flush();
         }));
 
-        it('should load countries', function() {
+        it('should load countries and entities', function() {
 
             expect($scope.countries).toEqualData([
                 {
@@ -178,6 +184,16 @@ describe('controllers events', function() {
                 }
             ]);
             expect($scope.countries.length).toBe(1);
+        });
+
+        it('should save', function() {
+
+            $scope.save();
+
+            $httpBackend.expectPUT('http://localhost:8080/events/events/1').respond({});
+            $httpBackend.flush();
+
+            expect($state.go).toHaveBeenCalledWith('events');
         });
     });
 });
