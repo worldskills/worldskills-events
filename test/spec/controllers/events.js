@@ -257,4 +257,65 @@ describe('controllers events', function() {
             expect($scope.skills.length).toBe(3);
         });
     });
+
+    describe('EventSponsorsCtrl', function() {
+
+        var $httpBackend, $scope, EventSponsorsCtrl, event;
+
+        // Initialize the controller and a mock scope
+        beforeEach(inject(function(_$httpBackend_, $controller, $rootScope, $q) {
+
+            $httpBackend = _$httpBackend_;
+
+            event = $q.defer();
+
+            $scope = $rootScope.$new();
+            $scope.event = {
+                $promise: event.promise
+            };
+
+            EventSponsorsCtrl = $controller('EventSponsorsCtrl', {
+                $scope: $scope
+            });
+        }));
+
+        it('should load all sponsors', function() {
+
+            event.resolve({
+                links: [
+                    {
+                        rel: 'sponsors',
+                        href: 'http://localhost:8080/events/sponsors'
+                    }
+                ]
+            });
+
+            $httpBackend.expectGET('http://localhost:8080/events/sponsors').respond({
+                sponsors: [
+                    {
+                        name: 'Autodesk'
+                    }, {
+                        name: '3M'
+                    }
+                ],
+                links: [
+                    {
+                        rel: 'next',
+                        href: 'http://localhost:8080/events/sponsors?offset=2'
+                    }
+                ]
+            });
+            $httpBackend.expectGET('http://localhost:8080/events/sponsors?offset=2').respond({
+                sponsors: [
+                    {
+                        name: 'Cisco'
+                    }
+                ],
+                links: []
+            });
+            $httpBackend.flush();
+
+            expect($scope.sponsors.length).toBe(3);
+        });
+    });
 });
