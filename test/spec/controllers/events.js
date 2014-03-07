@@ -174,7 +174,7 @@ describe('controllers events', function() {
             expect($scope.countries).toEqualData([
                 {
                     code: 'AQ',
-                    name: 'Antarctica'
+                    name: 'Switzerland'
                 }
             ]);
             expect($scope.countries.length).toBe(1);
