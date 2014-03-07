@@ -190,7 +190,9 @@ describe('controllers events', function() {
 
             $scope.save();
 
-            $httpBackend.expectPUT('http://localhost:8080/events/events/1').respond({});
+            $httpBackend.expectPUT('http://localhost:8080/events/events/1', {
+                id: 1
+            }).respond({});
             $httpBackend.flush();
 
             expect($state.go).toHaveBeenCalledWith('events');
@@ -376,7 +378,10 @@ describe('controllers events', function() {
 
             $scope.save();
 
-            $httpBackend.expectPOST('http://localhost:8080/events/events').respond({
+            $httpBackend.expectPOST('http://localhost:8080/events/events', {
+                code: '',
+                town: ''
+            }).respond({
                 id: 1,
                 name: 'WorldSkills São Paulo 2015'
             });
