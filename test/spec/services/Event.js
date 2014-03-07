@@ -8,18 +8,17 @@ describe('Service: Event', function() {
     // instantiate service
     var $httpBackend, Event;
     beforeEach(inject(function(_$httpBackend_, _Event_) {
+
         $httpBackend = _$httpBackend_;
+        $httpBackend.whenGET(/languages\/.*/).respond({});
         $httpBackend.whenGET(/views\/.*/).respond('');
+
         Event = _Event_;
     }));
 
     it('should load events', inject(function() {
 
-        $httpBackend.expectGET('languages/en.json').respond({});
-        $httpBackend.expectGET('languages/en.json').respond({});
-        $httpBackend.expectGET('languages/en.json').respond({});
-
-        $httpBackend.expectGET(new RegExp('/events/events')).respond({
+        $httpBackend.expectGET(/events\/events/).respond({
             events: [
                 {}, {}
             ]
