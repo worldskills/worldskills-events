@@ -5,10 +5,20 @@ describe('controllers events', function() {
     // load the module
     beforeEach(module('eventsApp'));
 
+    beforeEach(function() {
+        this.addMatchers({
+            toEqualData: function(expected) {
+                return angular.equals(this.actual, expected);
+            }
+        });
+    });
+
     // catch views and languages requests
     beforeEach(inject(function($httpBackend) {
 
-        $httpBackend.whenGET(/languages\/.*/).respond({});
+        $httpBackend.whenGET(/languages\/.*/).respond({
+            "AQ": "Antarctica"
+        });
         $httpBackend.whenGET(/views\/.*/).respond('');
     }));
 
@@ -124,6 +134,43 @@ describe('controllers events', function() {
             $httpBackend.flush();
 
             expect($state.go).toHaveBeenCalledWith('events');
+        });
+    });
+
+    describe('EventDetailCtrl', function() {
+
+        var $httpBackend, $scope, EventDetailCtrl;
+
+        // Initialize the controller and a mock scope
+        beforeEach(inject(function(_$httpBackend_, $controller, _$state_, $rootScope) {
+
+            $httpBackend = _$httpBackend_;
+            $httpBackend.expectGET('http://localhost:8080/events/countries').respond({
+                countries: [
+                    'AQ'
+                ]
+            });
+            $httpBackend.expectGET('http://localhost:8080/events/entities').respond({
+                entities: []
+            });
+
+            $scope = $rootScope.$new();
+
+            EventDetailCtrl = $controller('EventDetailCtrl', {
+                $scope: $scope
+            });
+
+            $httpBackend.flush();
+        }));
+
+        it('should load countries', function() {
+
+            expect($scope.countries).toEqualData([
+                {
+                    code: 'AQ',
+                    name: 'Antarctica'
+                }
+            ]);
         });
     });
 });
