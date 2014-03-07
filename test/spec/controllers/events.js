@@ -1,6 +1,6 @@
 'use strict';
 
-describe('Event Controllers', function() {
+describe('controllers events', function() {
 
     // load the module
     beforeEach(module('eventsApp'));
@@ -83,10 +83,10 @@ describe('Event Controllers', function() {
 
     describe('EventCtrl', function() {
 
-        var $httpBackend, $scope, EventCtrl;
+        var $httpBackend, $scope, $state, EventCtrl;
 
         // Initialize the controller and a mock scope
-        beforeEach(inject(function(_$httpBackend_, $controller, $rootScope) {
+        beforeEach(inject(function(_$httpBackend_, $controller, _$state_, $rootScope) {
 
             $httpBackend = _$httpBackend_;
             $httpBackend.expectGET('http://localhost:8080/events/events/1').respond({
@@ -96,20 +96,34 @@ describe('Event Controllers', function() {
 
             $scope = $rootScope.$new();
 
+            $state = _$state_;
+            $state.go = jasmine.createSpy();
+
             EventCtrl = $controller('EventCtrl', {
                 $scope: $scope,
+                $state: $state,
                 $stateParams: {
                     id: 1
                 }
             });
+
+            $httpBackend.flush();
         }));
 
         it('should load event', function() {
 
-            $httpBackend.flush();
-
             expect($scope.title).toBe('WorldSkills São Paulo 2015');
             expect($scope.event.id).toBe(1);
+        });
+
+        it('should delete event', function() {
+
+            $scope.deleteEvent();
+
+            $httpBackend.expectDELETE('http://localhost:8080/events/events/1').respond('');
+            $httpBackend.flush();
+
+            expect($state.go).toHaveBeenCalledWith('events');
         });
     });
 });
