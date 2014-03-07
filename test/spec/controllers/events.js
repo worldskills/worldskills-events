@@ -151,7 +151,13 @@ describe('controllers events', function() {
                 ]
             });
             $httpBackend.expectGET('http://localhost:8080/events/entities').respond({
-                entities: []
+                entities: [
+                    {
+                        id: 1,
+                        name: 'WorldSkills International',
+                        code: 'WSI'
+                    }
+                ]
             });
 
             $scope = $rootScope.$new();
@@ -171,6 +177,7 @@ describe('controllers events', function() {
                     name: 'Antarctica'
                 }
             ]);
+            expect($scope.countries.length).toBe(1);
         });
     });
 });
