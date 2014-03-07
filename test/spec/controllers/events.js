@@ -318,4 +318,71 @@ describe('controllers events', function() {
             expect($scope.sponsors.length).toBe(3);
         });
     });
+
+    describe('EventCreateCtrl', function() {
+
+        var $httpBackend, $scope, $state, EventCreateCtrl;
+
+        // Initialize the controller and a mock scope
+        beforeEach(inject(function(_$httpBackend_, $controller, _$state_, $rootScope) {
+
+            $httpBackend = _$httpBackend_;
+            $httpBackend.expectGET('http://localhost:8080/events/countries').respond({
+                countries: [
+                    'AQ'
+                ]
+            });
+            $httpBackend.expectGET('http://localhost:8080/events/entities').respond({
+                entities: [
+                    {
+                        id: 1,
+                        name: 'WorldSkills International',
+                        code: 'WSI'
+                    }
+                ]
+            });
+
+            $scope = $rootScope.$new();
+            $scope.form = {
+                $invalid: false
+            };
+
+            $state = _$state_;
+            $state.go = jasmine.createSpy();
+
+            EventCreateCtrl = $controller('EventCreateCtrl', {
+                $scope: $scope,
+                $state: $state,
+                $stateParams: {
+                    id: 1
+                }
+            });
+
+            $httpBackend.flush();
+        }));
+
+        it('should load countries and entities', function() {
+
+            expect($scope.countries).toEqualData([
+                {
+                    code: 'AQ',
+                    name: 'Antarctica'
+                }
+            ]);
+            expect($scope.countries.length).toBe(1);
+        });
+
+        it('should create event', function() {
+
+            $scope.save();
+
+            $httpBackend.expectPOST('http://localhost:8080/events/events').respond({
+                id: 1,
+                name: 'WorldSkills São Paulo 2015'
+            });
+            $httpBackend.flush();
+
+            expect($state.go).toHaveBeenCalledWith('events');
+        });
+    });
 });
