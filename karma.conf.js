@@ -7,6 +7,13 @@ module.exports = function(config) {
         // base path, that will be used to resolve files and exclude
         basePath: '',
 
+        preprocessors: {
+          // source files, that you wanna generate coverage for
+          // do not include tests or libraries
+          // (these files will be instrumented by Istanbul)
+          'app/scripts/**/*.js': ['coverage']
+        },
+
         // testing framework to use (jasmine/mocha/qunit/...)
         frameworks: [
             'jasmine'
@@ -54,6 +61,8 @@ module.exports = function(config) {
         browsers: [
             'PhantomJS'
         ],
+
+        reporters: ['progress', 'coverage'],
 
         // Continuous Integration mode
         // if true, it capture browsers, run tests and exit
