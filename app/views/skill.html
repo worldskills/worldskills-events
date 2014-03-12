@@ -2,10 +2,10 @@
     <li><a ui-sref="events">Events</a></li>
     <li><a ui-sref="event.detail({id: skill.event.id})">{{skill.event.name}}</a></li>
     <li><a ui-sref="event.skills({id: skill.event.id})">Skills</a></li>
-    <li class="active">{{title || " "}}</li>
+    <li class="active">{{id ? (title || " ") : "Add Skill"}}</li>
 </ol>
 
-<h1>{{title || " "}}</h1>
+<h1>{{id ? (title || " ") : "Add Skill"}}</h1>
 
 <hr>
 
@@ -21,7 +21,7 @@
             </div>
         </div>
         <div class="form-group" ng-class="{'has-error': submitted && form.number.$invalid}">
-            <label for="code" class="col-md-3 control-label">Number</label>
+            <label for="code" class="col-md-3 control-label">Number <span class="required">*</span></label>
             <div class="col-md-2">
                 <input type="text" class="form-control" id="code" name="code" required ng-model="skill.number">
             </div>

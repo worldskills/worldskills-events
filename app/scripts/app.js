@@ -59,6 +59,13 @@
             data: {
                 requireLoggedIn: true
             }
+        }).state('skill_create', {
+            url: '/events/{eventId}/skills/create',
+            templateUrl: 'views/skill.html',
+            controller: 'SkillCreateCtrl',
+            data: {
+                requireLoggedIn: true
+            }
         }).state('skill', {
             url: '/skills/{id}',
             templateUrl: 'views/skill.html',
