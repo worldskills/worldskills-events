@@ -5,6 +5,10 @@
     <li class="active">{{id ? (title || " ") : "Add Skill"}}</li>
 </ol>
 
+<p class="pull-right" ng-show="id">
+    <button ng-click="remove()" class="btn btn-danger">Delete Skill<spinner ng-show="deleteLoading" class="ng-hide"></spinner></button>
+</p>
+
 <h1>{{id ? (title || " ") : "Add Skill"}}</h1>
 
 <hr>

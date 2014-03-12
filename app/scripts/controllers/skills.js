@@ -39,5 +39,12 @@
                 $state.go('event.skills', {id: $scope.skill.event.id});
             });
         };
+        $scope.remove = function() {
+            $scope.deleteLoading = true;
+            $scope.skill.$delete(function () {
+                alert('The Skill has been deleted successfully.');
+                $state.go('event.skills', {id: $scope.skill.event.id});
+            });
+        };
     });
 })();
