@@ -3,7 +3,7 @@
 </ol>
 
 <p class="pull-right">
-    <a ui-sref="event_create" class="btn btn-success">Add Event</a>
+    <a ui-sref="event_create.form" class="btn btn-success">Add Event</a>
 </p>
 
 <h1>Events</h1>
@@ -29,8 +29,8 @@
         <tfoot><tr><td colspan="5"></td></tr></tfoot>
         <tbody>
             <tr ng-repeat="event in events.events">
-                <td><a ui-sref="event.detail({ id: event.id })">{{event.id}}</a></td>
-                <td><a ui-sref="event.detail({ id: event.id })">{{event.name}}</a></td>
+                <td><a ui-sref="event.form({ id: event.id })">{{event.id}}</a></td>
+                <td><a ui-sref="event.form({ id: event.id })">{{event.name}}</a></td>
                 <td>{{event.start_date|date:'d MMMM yyyy'}}</td>
                 <td>{{event.end_date|date:'d MMMM yyyy'}}</td>
                 <td>{{event.town}}<span ng-show="event.town && event.country">, </span>{{event.country|translate}}</td>

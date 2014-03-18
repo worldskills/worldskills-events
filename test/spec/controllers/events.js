@@ -137,9 +137,9 @@ describe('controllers events', function() {
         });
     });
 
-    describe('EventDetailCtrl', function() {
+    describe('EventFormCtrl', function() {
 
-        var $httpBackend, $scope, $state, EventDetailCtrl;
+        var $httpBackend, $scope, $state, EventFormCtrl;
 
         // Initialize the controller and a mock scope
         beforeEach(inject(function(_$httpBackend_, $controller, _$state_, $rootScope, Event) {
@@ -161,13 +161,16 @@ describe('controllers events', function() {
             });
 
             $scope = $rootScope.$new();
+            $scope.form = {
+                $valid: true
+            };
             $scope.event = new Event();
             $scope.event.id = 1;
 
             $state = _$state_;
             $state.go = jasmine.createSpy();
 
-            EventDetailCtrl = $controller('EventDetailCtrl', {
+            EventFormCtrl = $controller('EventFormCtrl', {
                 $scope: $scope,
                 $state: $state
             });
@@ -323,71 +326,24 @@ describe('controllers events', function() {
 
     describe('EventCreateCtrl', function() {
 
-        var $httpBackend, $scope, $state, EventCreateCtrl;
+        var $scope, EventCreateCtrl;
 
         // Initialize the controller and a mock scope
-        beforeEach(inject(function(_$httpBackend_, $controller, _$state_, $rootScope) {
-
-            $httpBackend = _$httpBackend_;
-            $httpBackend.expectGET('http://localhost:8080/events/countries').respond({
-                countries: [
-                    'AQ'
-                ]
-            });
-            $httpBackend.expectGET('http://localhost:8080/events/entities').respond({
-                entities: [
-                    {
-                        id: 1,
-                        name: 'WorldSkills International',
-                        code: 'WSI'
-                    }
-                ]
-            });
+        beforeEach(inject(function($controller, $rootScope) {
 
             $scope = $rootScope.$new();
-            $scope.form = {
-                $invalid: false
-            };
-
-            $state = _$state_;
-            $state.go = jasmine.createSpy();
 
             EventCreateCtrl = $controller('EventCreateCtrl', {
-                $scope: $scope,
-                $state: $state,
-                $stateParams: {
-                    id: 1
-                }
+                $scope: $scope
             });
-
-            $httpBackend.flush();
         }));
 
-        it('should load countries and entities', function() {
+        it('should initialize an event', function() {
 
-            expect($scope.countries).toEqualData([
-                {
-                    code: 'AQ',
-                    name: 'Antarctica'
-                }
-            ]);
-            expect($scope.countries.length).toBe(1);
-        });
-
-        it('should create event', function() {
-
-            $scope.save();
-
-            $httpBackend.expectPOST('http://localhost:8080/events/events', {
+            expect($scope.event).toEqualData({
                 code: '',
                 town: ''
-            }).respond({
-                id: 1,
-                name: 'WorldSkills São Paulo 2015'
             });
-            $httpBackend.flush();
-
-            expect($state.go).toHaveBeenCalledWith('events');
         });
     });
 });

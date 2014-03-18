@@ -16,6 +16,11 @@
             url: '/events/create',
             templateUrl: 'views/event-create.html',
             controller: 'EventCreateCtrl',
+            abstract: true
+        }).state('event_create.form', {
+            url: '',
+            templateUrl: 'views/event-form.html',
+            controller: 'EventFormCtrl',
             data: {
                 requireLoggedIn: true
             }
@@ -23,11 +28,11 @@
             url: '/events/{id}',
             templateUrl: 'views/event.html',
             controller: 'EventCtrl',
-            abstract: true,
-        }).state('event.detail', {
+            abstract: true
+        }).state('event.form', {
             url: '',
-            templateUrl: 'views/event-detail.html',
-            controller: 'EventDetailCtrl',
+            templateUrl: 'views/event-form.html',
+            controller: 'EventFormCtrl',
             data: {
                 requireLoggedIn: true
             }
