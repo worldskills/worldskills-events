@@ -11,7 +11,7 @@
 
 <ul class="nav nav-tabs">
     <li ng-class="{active: $state.includes('event.form')}"><a ui-sref="event.form">Event</a></li>
-    <li ng-class="{active: $state.includes('event.skills')}"><a ui-sref="event.skills">Skills</a></li>
+    <li ng-show="type == 'competition'" ng-class="{active: $state.includes('event.skills')}"><a ui-sref="event.skills">Skills</a></li>
     <li ng-class="{active: $state.includes('event.sponsors')}"><a ui-sref="event.sponsors">Sponsors</a></li>
 </ul>
 

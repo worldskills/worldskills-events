@@ -21,6 +21,7 @@
         $scope.id = $stateParams.id;
         $scope.event = Event.get({id: $scope.id}, function (event) {
             $scope.title = event.name;
+            $scope.type = event.type;
         });
         $scope.deleteEvent = function() {
             $scope.deleteLoading = true;
@@ -58,7 +59,7 @@
                     });
                 } else {
                     $scope.event.$save(function () {
-                        alert.success('The Event has been created successfully.');
+                        alert.success('The Event has been added successfully.');
                         $state.go('events');
                     });
                 }
