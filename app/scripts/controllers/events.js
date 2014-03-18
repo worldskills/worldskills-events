@@ -17,7 +17,7 @@
         $scope.load(page);
     });
 
-    angular.module('eventsApp').controller('EventCtrl', function($scope, $stateParams, Event, $http, API_EVENTS, $translate, $state) {
+    angular.module('eventsApp').controller('EventCtrl', function($scope, $stateParams, Event, $http, API_EVENTS, $translate, $state, alert) {
         $scope.id = $stateParams.id;
         $scope.event = Event.get({id: $scope.id}, function (event) {
             $scope.title = event.name;
@@ -25,7 +25,7 @@
         $scope.deleteEvent = function() {
             $scope.deleteLoading = true;
             $scope.event.$delete(function () {
-                alert('The Event has been deleted successfully.');
+                alert.success('The Event has been deleted successfully.');
                 $state.go('events');
             });
         };
@@ -35,7 +35,7 @@
         $scope.event.code = '';
         $scope.event.town = '';
     });
-    angular.module('eventsApp').controller('EventFormCtrl', function($scope, $stateParams, Event, $http, API_EVENTS, $translate, $state) {
+    angular.module('eventsApp').controller('EventFormCtrl', function($scope, $stateParams, Event, $http, API_EVENTS, $translate, $state, alert) {
         $http({method: 'GET', url: API_EVENTS + '/countries'}).success(function(data, status, headers, config) {
             $scope.countries = [];
             angular.forEach(data.countries, function (code) {
@@ -53,10 +53,12 @@
                 $scope.loading = true;
                 if ($scope.event.id) {
                     $scope.event.$update(function () {
+                        alert.success('The Event has been saved successfully.');
                         $state.go('events');
                     });
                 } else {
                     $scope.event.$save(function () {
+                        alert.success('The Event has been created successfully.');
                         $state.go('events');
                     });
                 }
