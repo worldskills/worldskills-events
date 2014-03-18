@@ -20,7 +20,7 @@
                 <td><a ui-sref="sponsor({id: sponsor.id})">{{sponsor.id}}</a></td>
                 <td><a ui-sref="sponsor({id: sponsor.id})">{{sponsor.name}}</a></td>
             </tr>
-            <tr ng-show="sponsors.length == 0">
+            <tr ng-show="sponsors == null">
                 <td colspan="2">No Sponsors found.</td>
             </tr>
         </tbody>

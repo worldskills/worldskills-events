@@ -76,6 +76,9 @@
                 if (next) {
                     getSkills(next);
                 }
+                if (data.total_count == 0) {
+                    $scope.skills = null;
+                }
             });
         };
         $scope.event.$promise.then(function(data) {
@@ -93,6 +96,9 @@
                 var next = WorldSkills.getLink(data.links, 'next');
                 if (next) {
                     getSponsors(next);
+                }
+                if (data.total_count == 0) {
+                    $scope.sponsors = null;
                 }
             });
         };

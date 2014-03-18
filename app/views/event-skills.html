@@ -23,7 +23,7 @@
                 <td><a ui-sref="skill({id: skill.id})">{{skill.name.text}}</a></td>
                 <td>{{("skill_type_" + skill.type)|translate}}</td>
             </tr>
-            <tr ng-show="skills.length == 0">
+            <tr ng-show="skills == null">
                 <td colspan="3">No Skills found.</td>
             </tr>
         </tbody>
