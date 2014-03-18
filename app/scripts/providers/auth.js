@@ -108,7 +108,7 @@
                 $http.defaults.headers.common.Authorization = 'Bearer ' + auth.accessToken;
             }
 
-            $http({method: 'GET', url: API_AUTH + '/users/loggedIn'})
+            var user = $http({method: 'GET', url: API_AUTH + '/users/loggedIn'})
                 .success(function(data, status, headers, config) {
                     auth.user = data;
                 }).
@@ -121,9 +121,10 @@
 
             $rootScope.$on('$stateChangeStart', function (event, toState, toParams, fromState, fromParams) {
                 if (typeof toState.data != 'undefined' && !!toState.data.requireLoggedIn) {
-                    if (!auth.loggedIn) {
+                    user.error(function () {
+                        // error loading loggedIn user, redirect to login
                         document.location.href = auth.loginUrl;
-                    }
+                    });
                 }
             });
 
