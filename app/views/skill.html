@@ -25,9 +25,9 @@
             </div>
         </div>
         <div class="form-group" ng-class="{'has-error': submitted && form.number.$invalid}">
-            <label for="code" class="col-md-3 control-label">Number <span class="required">*</span></label>
+            <label for="number" class="col-md-3 control-label">Number <span class="required">*</span></label>
             <div class="col-md-2">
-                <input type="text" class="form-control" id="code" name="code" required ng-model="skill.number">
+                <input type="text" class="form-control" id="number" name="number" required ng-model="skill.number">
             </div>
             <div class="col-md-6">
                 <span class="help-block" ng-show="submitted && form.number.$error.required">Please enter a number!</span>
@@ -56,7 +56,7 @@
             </div>
         </div>
         <div class="form-group" ng-class="{'has-error': submitted && form.description.$invalid}">
-            <label for="description_required_skills" class="col-md-3 control-label">Description</label>
+            <label for="description" class="col-md-3 control-label">Description</label>
             <div class="col-md-6">
                 <textarea class="form-control" id="description" name="description" rows="9" ng-model="skill.description.text"></textarea>
             </div>
@@ -80,7 +80,7 @@
             </div>
         </div>
         <div class="form-group" ng-class="{'has-error': submitted && form.min_teams.$invalid}">
-            <label for="code" class="col-md-3 control-label">Min. Teams</label>
+            <label for="min_teams" class="col-md-3 control-label">Min. Teams</label>
             <div class="col-md-2">
                 <input type="text" class="form-control" id="min_teams" name="min_teams" ng-model="skill.min_teams">
             </div>
