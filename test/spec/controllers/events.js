@@ -45,7 +45,7 @@ describe('controllers events', function() {
 
             EventsCtrl();
 
-            $httpBackend.expectGET('http://localhost:8080/events/events?limit=10&offset=0').respond({
+            $httpBackend.expectGET('http://localhost:8080/events?limit=10&offset=0').respond({
                 events: [
                     {
                         name: 'WorldSkills São Paulo 2015'
@@ -60,7 +60,7 @@ describe('controllers events', function() {
 
             $scope.changePage(2);
 
-            $httpBackend.expectGET('http://localhost:8080/events/events?limit=10&offset=10').respond({
+            $httpBackend.expectGET('http://localhost:8080/events?limit=10&offset=10').respond({
                 events: [
                     {
                         name: 'WorldSkills London 2011'
@@ -78,7 +78,7 @@ describe('controllers events', function() {
                 page: '2'
             });
 
-            $httpBackend.expectGET('http://localhost:8080/events/events?limit=10&offset=10').respond({
+            $httpBackend.expectGET('http://localhost:8080/events?limit=10&offset=10').respond({
                 events: [
                     {
                         name: 'WorldSkills London 2011'
@@ -99,7 +99,7 @@ describe('controllers events', function() {
         beforeEach(inject(function(_$httpBackend_, $controller, _$state_, $rootScope) {
 
             $httpBackend = _$httpBackend_;
-            $httpBackend.expectGET('http://localhost:8080/events/events/1').respond({
+            $httpBackend.expectGET('http://localhost:8080/events/1').respond({
                 id: 1,
                 name: 'WorldSkills São Paulo 2015'
             });
@@ -130,7 +130,7 @@ describe('controllers events', function() {
 
             $scope.deleteEvent();
 
-            $httpBackend.expectDELETE('http://localhost:8080/events/events/1').respond('');
+            $httpBackend.expectDELETE('http://localhost:8080/events/1').respond('');
             $httpBackend.flush();
 
             expect($state.go).toHaveBeenCalledWith('events');
@@ -193,7 +193,7 @@ describe('controllers events', function() {
 
             $scope.save();
 
-            $httpBackend.expectPUT('http://localhost:8080/events/events/1', {
+            $httpBackend.expectPUT('http://localhost:8080/events/1', {
                 id: 1
             }).respond({});
             $httpBackend.flush();
