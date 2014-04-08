@@ -18,7 +18,7 @@ describe('Service: Event', function() {
 
     it('should load events', inject(function() {
 
-        $httpBackend.expectGET(/events\/events/).respond({
+        $httpBackend.expectGET(/events/).respond({
             events: [
                 {}, {}
             ]
