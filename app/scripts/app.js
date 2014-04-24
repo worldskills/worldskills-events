@@ -2,7 +2,7 @@
     'use strict';
 
     var eventsApp = angular.module('eventsApp', [
-        'ngResource', 'ngSanitize', 'ui.router', 'ui.bootstrap', 'ui.select2', 'pascalprecht.translate'
+        'ngResource', 'ngSanitize', 'ui.router', 'ui.bootstrap', 'ui.select2', 'pascalprecht.translate', 'angularFileUpload'
     ]);
 
     eventsApp.config(function($stateProvider, $urlRouterProvider) {

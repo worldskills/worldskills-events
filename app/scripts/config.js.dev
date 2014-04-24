@@ -3,6 +3,7 @@
 
     var eventsApp = angular.module('eventsApp'); 
     eventsApp.constant('API_EVENTS', 'http://localhost:8080/events');
+    eventsApp.constant('API_IMAGES', 'http://localhost:8080/images');
     eventsApp.constant('CLIENT_ID', '');
     eventsApp.constant('API_AUTH', 'http://localhost:8080/auth');
     eventsApp.constant('AUTHORIZE_URL', 'http://worldskills_auth.dev/oauth/authorize');
