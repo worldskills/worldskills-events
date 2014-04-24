@@ -21,6 +21,7 @@ module.exports = function(config) {
 
         // list of files / patterns to load in the browser
         files: [
+            'app/bower_components/ng-file-upload/angular-file-upload-shim.js',
             'app/bower_components/jquery/jquery.js',
             'app/bower_components/angular/angular.js',
             'app/bower_components/angular-mocks/angular-mocks.js',
@@ -33,6 +34,7 @@ module.exports = function(config) {
             'app/bower_components/angular-bootstrap/ui-bootstrap-tpls.js',
             'app/bower_components/select2/select2.min.js',
             'app/bower_components/angular-ui-select2/src/select2.js',
+            'app/bower_components/ng-file-upload/angular-file-upload.min.js',
             'app/scripts/*.js',
             'app/scripts/**/*.js',
             'test/spec/**/*.js'
