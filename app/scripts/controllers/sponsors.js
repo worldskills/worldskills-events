@@ -25,7 +25,7 @@
                 }
                 $scope.loading = true;
                 if (typeof logo != 'undefined') {
-                    $scope.sponsor.logo = {id: logo.id};
+                    $scope.sponsor.logo = {id: logo.id, thumbnail_hash: logo.thumbnail_hash};
                 }
                 $scope.sponsor.$save(function () {
                     $state.go('event.sponsors', {id: $scope.sponsor.event.id});
@@ -64,7 +64,7 @@
                 }
                 $scope.loading = true;
                 if (typeof logo != 'undefined') {
-                    $scope.sponsor.logo = {id: logo.id};
+                    $scope.sponsor.logo = {id: logo.id, thumbnail_hash: logo.thumbnail_hash};
                 } else if ($scope.removeLogo) {
                     delete $scope.sponsor.logo;
                 }
