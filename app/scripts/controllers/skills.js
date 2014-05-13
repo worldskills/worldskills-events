@@ -27,6 +27,15 @@
                 $scope.sectors = data.sectors;
             });
         });
+        $scope.deleteSkill = function() {
+            $scope.deleteLoading = true;
+            $scope.skill.$delete(function () {
+                alert.success('The Skill has been deleted successfully.');
+                $state.go('event.skills', {id: $scope.skill.event.id});
+            });
+        };
+    });
+    angular.module('eventsApp').controller('SkillFormCtrl', function($scope, $stateParams, Skill, $http, API_EVENTS, $translate, $state, WorldSkills, alert) {
         $scope.save = function() {
             $scope.submitted = true;
             if ($scope.form.$valid) {
@@ -37,11 +46,45 @@
                 });
             }
         };
-        $scope.remove = function() {
-            $scope.deleteLoading = true;
-            $scope.skill.$delete(function () {
-                alert.success('The Skill has been deleted successfully.');
-                $state.go('event.skills', {id: $scope.skill.event.id});
+    });
+    angular.module('eventsApp').controller('SkillPhotosCtrl', function($scope, $stateParams, Skill, SkillPhoto, $http, API_EVENTS, API_IMAGES, $q, $upload, $state, WorldSkills, alert) {
+        var photo = $q.when();
+        $scope.thumbnail = function (photo) {
+            return WorldSkills.getLink(photo.links, 'alternate');
+        };
+        $scope.onFileSelect = function($files) {
+            var deferred = $q.defer();
+            photo = deferred.promise;
+            $scope.upload = $upload.upload({
+                url: API_IMAGES,
+                data: {entity: $scope.skill.event.entity.id},
+                file: $files[0],
+            }).success(function(data, status, headers, config) {
+                deferred.resolve(data);
+            });
+        };
+        $scope.removePhotos = function() {
+            var notRemoved = [];
+            angular.forEach($scope.skill.photos, function (photo) {
+                if (photo.checked) {
+                    SkillPhoto.remove({id: $scope.skill.id, photo: photo.id});
+                } else {
+                    notRemoved.push(photo);
+                }
+            });
+            $scope.skill.photos = notRemoved;
+            alert.success('The selected photos have been removed.', true);
+        };
+        $scope.addPhoto = function() {
+            $scope.submitted = true;
+            photo.then(function (photo) {
+                if ($scope.form.$invalid) {
+                    angular.element($scope.form).find('.ng-invalid' ).focus();
+                    return;
+                }
+                SkillPhoto.update({id: $scope.skill.id, photo: photo.id}, function () {
+                    $state.go('skill.photos', {id: $scope.skill.id});
+                });
             });
         };
     });

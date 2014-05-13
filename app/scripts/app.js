@@ -66,8 +66,13 @@
             }
         }).state('skill_create', {
             url: '/events/{eventId}/skills/create',
-            templateUrl: 'views/skill.html',
+            templateUrl: 'views/skill-create.html',
             controller: 'SkillCreateCtrl',
+            abstract: true
+        }).state('skill_create.form', {
+            url: '',
+            templateUrl: 'views/skill-form.html',
+            controller: 'SkillFormCtrl',
             data: {
                 requireLoggedIn: true
             }
@@ -75,6 +80,18 @@
             url: '/skills/{id}',
             templateUrl: 'views/skill.html',
             controller: 'SkillCtrl',
+            abstract: true
+        }).state('skill.form', {
+            url: '',
+            templateUrl: 'views/skill-form.html',
+            controller: 'SkillFormCtrl',
+            data: {
+                requireLoggedIn: true
+            }
+        }).state('skill.photos', {
+            url: '/photos',
+            templateUrl: 'views/skill-photos.html',
+            controller: 'SkillPhotosCtrl',
             data: {
                 requireLoggedIn: true
             }

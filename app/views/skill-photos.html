@@ -1,0 +1,44 @@
+<div class="row">
+    <div class="col-sm-4 col-sm-push-8">
+        <form name="form" role="form" novalidate focus-error>
+            <div class="form-group" ng-class="{'has-error': submitted && form.photo.$invalid}">
+                <label for="photo">Add Photo</label>
+                <input type="file" id="photo" name="photo" required ng-file-select="onFileSelect($files)">
+            </div>
+            <button type="button" class="btn btn-success" ng-click="addPhoto()">Add Photo</button>
+        </form>
+    </div>
+    <div class="col-sm-8 col-sm-pull-4">
+        <hr class="visible-xs" />
+        <div class="table-responsive">
+            <table class="table table-striped">
+                <colgroup>
+                    <col width="5%" />
+                    <col width="95%" />
+                </colgroup>
+                <thead>
+                    <tr>
+                        <th>&nbsp;</th>
+                        <th>Photo</th>
+                    </tr>
+                </thead>
+                <tfoot><tr><td colspan="2"></td></tr></tfoot>
+                <tbody>
+                    <tr ng-repeat="photo in skill.photos">
+                        <td><input type="checkbox" ng-model="photo.checked" /></td>
+                        <td>
+                            <div class="ws-image-thumbnail">
+                                <img ng-src="{{thumbnail(photo)}}" />
+                            </div>
+                        </td>
+                    </tr>
+                    <tr ng-show="skill.photos.length == 0">
+                        <th>&nbsp;</th>
+                        <td>No photos found.</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+        <button type="button" class="btn btn-danger" ng-click="removePhotos()">Remove selected</button>
+    </div>
+</div>

@@ -13,4 +13,15 @@
             }
         });
     });
+
+    angular.module('eventsApp').service('SkillPhoto', function($resource, API_EVENTS) {
+        return $resource(API_EVENTS + '/skills/:id/photos/:photo', {
+            id: '@id',
+            photo: '@photo'
+        }, {
+            update: {
+                method: 'PUT'
+            }
+        });
+    });
 })();
