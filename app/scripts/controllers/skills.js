@@ -6,16 +6,6 @@
         $scope.skill.name = {text: '', lang_code: 'en'};
         $scope.skill.description = {text: '', lang_code: 'en'};
         $scope.skill.event = Event.get({id: $stateParams.eventId});
-        $scope.save = function() {
-            $scope.submitted = true;
-            if ($scope.form.$valid) {
-                $scope.loading = true;
-                $scope.skill.$save(function () {
-                    alert.success('The Skill has been added successfully.');
-                    $state.go('event.skills', {id: $scope.skill.event.id});
-                });
-            }
-        };
     });
 
     angular.module('eventsApp').controller('SkillCtrl', function($scope, $stateParams, Skill, $http, API_EVENTS, $translate, $state, WorldSkills, alert) {
@@ -40,10 +30,17 @@
             $scope.submitted = true;
             if ($scope.form.$valid) {
                 $scope.loading = true;
-                $scope.skill.$update(function () {
-                    alert.success('The Skill has been updated successfully.');
-                    $state.go('event.skills', {id: $scope.skill.event.id});
-                });
+                if ($scope.skill.id) {
+                    $scope.skill.$update(function () {
+                        alert.success('The Skill has been updated successfully.');
+                        $state.go('event.skills', {id: $scope.skill.event.id});
+                    });
+                } else {
+                    $scope.skill.$save(function () {
+                        alert.success('The Skill has been added successfully.');
+                        $state.go('event.skills', {id: $scope.skill.event.id});
+                    });
+                }
             }
         };
     });
