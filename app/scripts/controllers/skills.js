@@ -79,8 +79,8 @@
                     angular.element($scope.form).find('.ng-invalid' ).focus();
                     return;
                 }
-                SkillPhoto.update({id: $scope.skill.id, photo: photo.id}, function () {
-                    $state.go('skill.photos', {id: $scope.skill.id});
+                SkillPhoto.update({id: $scope.skill.id, photo: photo.id}, {thumbnail_hash: photo.thumbnail_hash}, function () {
+                    $state.go('skill.photos', {id: $scope.skill.id}, {reload: true});
                 });
             });
         };
