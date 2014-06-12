@@ -154,7 +154,10 @@ describe('controllers events', function() {
                 entities: [
                     {
                         id: 1,
-                        name: 'WorldSkills International',
+                        name: {
+                            lang_code: 'en',
+                            text: 'WorldSkills International'
+                        },
                         code: 'WSI'
                     }
                 ]
