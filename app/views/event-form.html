@@ -12,7 +12,7 @@
         <label for=""entity"" class="col-md-3 control-label">Entity <span class="required">*</span></label>
         <div class="col-md-5">
             <select ui-select2 class="form-control" id="entity" name="entity" required ng-model="event.entity.id">
-                <option ng-repeat="entity in entities" value="{{entity.id}}">{{entity.code}} {{entity.name.text}} ({{entity.organization.name}})</option>
+                <option ng-repeat="entity in entities" value="{{entity.id}}">{{entity.name.text}}</option>
             </select>
         </div>
         <div class="col-md-4">
