@@ -1,0 +1,19 @@
+<ol class="breadcrumb">
+    <li><a ui-sref="events">Events</a></li>
+    <li><a ui-sref="event.form({id: skill.event.id})">{{skill.event.name}}</a></li>
+    <li><a ui-sref="event.skills({id: skill.event.id})">Skills</a></li>
+    <li><a ui-sref="skill.form({id: skill.id})">{{skill.name.text}}</a></li>
+    <li><a ui-sref="skill.translations({id: skill.event.id})">Translations</a></li>
+    <li class="active">{{locale|translate}}</li>
+</ol>
+
+<p class="pull-right">
+    <button ng-click="deleteTranslation()" class="btn btn-danger">Delete Translation<spinner ng-show="deleteLoading" class="ng-hide"></spinner></button>
+</p>
+
+<h1>{{title || " "}}</h1>
+
+<hr/>
+
+<div id="content" ui-view>
+</div>

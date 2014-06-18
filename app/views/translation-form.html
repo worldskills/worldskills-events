@@ -1,0 +1,54 @@
+<form class="form-horizontal" name="form" novalidate focus-error ng-submit="save()">
+    <div class="form-group" ng-show="!locale" ng-class="{'has-error': submitted && form.locale.$invalid}">
+        <label for="locale" class="col-sm-3 control-label">Language <span class="required">*</span></label>
+        <div class="col-sm-4">
+            <select ui-select2 class="form-control" id="locale" name="locale" required ng-model="translation.name.lang_code">
+                <option value="en">{{'en'|translate}}</option>
+                <option value="de">{{'de'|translate}}</option>
+                <option value="pt_BR">{{'pt_BR'|translate}}</option>
+            </select>
+        </div>
+        <div class="col-sm-5">
+            <span class="help-block" ng-show="submitted && form.locale.$error.required">Please select a language!</span>
+        </div>
+    </div>
+    <div class="form-group" ng-class="{'has-error': submitted && form.name.$invalid}">
+        <label for="name" class="col-sm-3 control-label">Name <span class="required">*</span></label>
+        <div class="col-sm-4">
+            <input type="text" class="form-control" id="name" name="name" required ng-model="translation.name.text">
+        </div>
+        <div class="col-sm-5">
+            <span class="help-block" ng-show="submitted && form.name.$error.required">Please enter a name!</span>
+        </div>
+    </div>
+    <div class="form-group" ng-class="{'has-error': submitted && form.description.$invalid}">
+        <label for="description" class="col-sm-3 control-label">Description</label>
+        <div class="col-sm-6">
+            <textarea class="form-control" id="description" name="description" rows="9" ng-model="translation.description.text"></textarea>
+        </div>
+    </div>
+    <div class="form-group" ng-class="{'has-error': submitted && form.description_industry_action.$invalid}">
+        <label for="description_industry_action" class="col-sm-3 control-label">Skill explained</label>
+        <div class="col-sm-6">
+            <textarea class="form-control" id="description_industry_action" name="description_industry_action" rows="9" ng-model="translation.description_industry_action.text"></textarea>
+        </div>
+    </div>
+    <div class="form-group" ng-class="{'has-error': submitted && form.description_required_skills.$invalid}">
+        <label for="description_required_skills" class="col-sm-3 control-label">Required skills</label>
+        <div class="col-sm-6">
+            <textarea class="form-control" id="description_required_skills" name="description_required_skills" rows="9" ng-model="translation.description_required_skills.text"></textarea>
+        </div>
+    </div>
+    <div class="form-group" ng-class="{'has-error': submitted && form.description_competition_action.$invalid}">
+        <label for="description_competition_action" class="col-sm-3 control-label">What the Competitors do</label>
+        <div class="col-sm-6">
+            <textarea class="form-control" id="description_competition_action" name="description_competition_action" rows="9" ng-model="translation.description_competition_action.text"></textarea>
+        </div>
+    </div>
+    <div class="form-group">
+        <div class="col-sm-offset-3 col-sm-9">
+            <button type="submit" class="btn btn-success">Save Translation<spinner ng-show="loading" class="ng-hide"></spinner></button>
+            <a ui-sref="skill.translations({id: skill.id})" class="btn btn-default">Cancel</a>
+        </div>
+    </div>
+</form>

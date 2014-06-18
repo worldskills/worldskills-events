@@ -10,11 +10,19 @@
 
     angular.module('eventsApp').controller('SkillCtrl', function($scope, $stateParams, Skill, $http, API_EVENTS, $translate, $state, WorldSkills, alert) {
         $scope.id = $stateParams.id;
+        $scope.translations = [];
         $scope.skill = Skill.get({id: $scope.id}, function (skill) {
             $scope.title = skill.name.text;
             var url = WorldSkills.getLink(skill.event.links, 'sectors');
             $http({method: 'GET', url: url}).success(function(data, status, headers, config) {
                 $scope.sectors = data.sectors;
+            });
+            angular.forEach($scope.skill.links, function (link) {
+                if (link.rel == 'i18n') {
+                    $http({method: 'GET', url: link.href}).success(function(data, status, headers, config) {
+                        $scope.translations.push(new Skill(data));
+                    });
+                }
             });
         });
         $scope.deleteSkill = function() {
@@ -83,6 +91,80 @@
                     $state.go('skill.photos', {id: $scope.skill.id}, {reload: true});
                 });
             });
+        };
+    });
+    angular.module('eventsApp').controller('SkillTranslationsCtrl', function($scope, $stateParams, Skill, SkillPhoto, $http, API_EVENTS, API_IMAGES, $q, $upload, $state, WorldSkills, alert) {
+        
+    });
+    angular.module('eventsApp').controller('TranslationCtrl', function($scope, $stateParams, Skill, SkillTranslation, $http, API_EVENTS, API_IMAGES, $q, $upload, $translate, $state, WorldSkills, alert) {
+        $scope.skillId = $stateParams.skillId;
+        $scope.locale = $stateParams.locale;
+        $scope.skill = Skill.get({id: $scope.skillId}, function (skill) {
+            $translate($scope.locale).then(function (language) {
+                $scope.title = language + ' Tanslation ' + skill.name.text;
+           });
+        });
+        Skill.get({id: $scope.skillId, l: $scope.locale}, function (translation) {
+            $scope.translation = translation;
+            if (!$scope.translation.description) {
+                $scope.translation.description = {text: '', lang_code: ''};
+            }
+            if (!$scope.translation.description_industry_action) {
+                $scope.translation.description_industry_action = {text: '', lang_code: ''};
+            }
+            if (!$scope.translation.description_required_skills) {
+                $scope.translation.description_required_skills = {text: '', lang_code: ''};
+            }
+            if (!$scope.translation.description_competition_action) {
+                $scope.translation.description_competition_action = {text: '', lang_code: ''};
+            }
+        });
+        $scope.deleteTranslation = function() {
+            $scope.deleteLoading = true;
+            SkillTranslation.remove({id: $scope.skill.id, locale: $scope.locale}, function () {
+                alert.success('The translation has been deleted successfully.');
+                $state.go('skill.translations', {id: $scope.skill.id});
+            });
+        };
+    });
+    angular.module('eventsApp').controller('TranslationCreateCtrl', function($scope, $stateParams, Skill, $http, API_EVENTS, API_IMAGES, $q, $upload, $state, WorldSkills, alert) {
+        $scope.skillId = $stateParams.skillId;
+        $scope.skill = Skill.get({id: $scope.skillId}, function (skill) {
+            $scope.translation = angular.copy(skill);
+            $scope.translation.name.lang_code = '';
+            $scope.translation.name.text = '';
+            if (!$scope.translation.description) {
+                $scope.translation.description = {text: '', lang_code: ''};
+            }
+            if (!$scope.translation.description_industry_action) {
+                $scope.translation.description_industry_action = {text: '', lang_code: ''};
+            }
+            if (!$scope.translation.description_required_skills) {
+                $scope.translation.description_required_skills = {text: '', lang_code: ''};
+            }
+            if (!$scope.translation.description_competition_action) {
+                $scope.translation.description_competition_action = {text: '', lang_code: ''};
+            }
+            $scope.translation.description.text = '';
+            $scope.translation.description_industry_action.text = '';
+            $scope.translation.description_required_skills.text = '';
+            $scope.translation.description_competition_action.text = '';
+        });
+    });
+    angular.module('eventsApp').controller('TranslationFormCtrl', function($scope, $stateParams, Skill, $http, API_EVENTS, API_IMAGES, $q, $upload, $state, WorldSkills, alert) {
+        $scope.save = function() {
+            $scope.submitted = true;
+            if ($scope.form.$valid) {
+                $scope.loading = true;
+                $scope.translation.description.lang_code = $scope.translation.name.lang_code;
+                $scope.translation.description_industry_action.lang_code = $scope.translation.name.lang_code;
+                $scope.translation.description_required_skills.lang_code = $scope.translation.name.lang_code;
+                $scope.translation.description_competition_action.lang_code = $scope.translation.name.lang_code;
+                $scope.translation.$update(function () {
+                    alert.success('The translation has been updated successfully.');
+                    $state.go('skill.translations', {id: $scope.skill.id});
+                });
+            }
         };
     });
 })();

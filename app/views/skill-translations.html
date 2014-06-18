@@ -1,0 +1,28 @@
+<p>
+    <a ui-sref="translation_create.form({skillId: skill.id})" class="btn btn-success">Add Translation</a>
+</p>
+
+<div class="table-responsive">
+    <table class="table table-striped">
+        <colgroup>
+            <col width="50%" />
+            <col width="50%" />
+        </colgroup>
+        <thead>
+            <tr>
+                <th>Language</th>
+                <th>Translated Name</th>
+            </tr>
+        </thead>
+        <tfoot><tr><td colspan="2"></td></tr></tfoot>
+        <tbody>
+            <tr ng-repeat="translation in translations">
+                <td><a ui-sref="translation.form({skillId: skill.id, locale: translation.name.lang_code})">{{translation.name.lang_code|translate}}</a></td>
+                <td><a ui-sref="translation.form({skillId: skill.id, locale: translation.name.lang_code})">{{translation.name.text}}</a></td>
+            </tr>
+            <tr ng-show="translations.length == 0">
+                <td colspan="2">No translations found.</td>
+            </tr>
+        </tbody>
+    </table>
+</div>

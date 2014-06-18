@@ -95,6 +95,37 @@
             data: {
                 requireLoggedIn: true
             }
+        }).state('skill.translations', {
+            url: '/translations',
+            templateUrl: 'views/skill-translations.html',
+            controller: 'SkillTranslationsCtrl',
+            data: {
+                requireLoggedIn: true
+            }
+        }).state('translation_create', {
+            url: '/skills/{skillId}/translations/create',
+            templateUrl: 'views/translation-create.html',
+            controller: 'TranslationCreateCtrl',
+            abstract: true
+        }).state('translation_create.form', {
+            url: '',
+            templateUrl: 'views/translation-form.html',
+            controller: 'TranslationFormCtrl',
+            data: {
+                requireLoggedIn: true
+            }
+        }).state('translation', {
+            url: '/skills/{skillId}/translations/{locale}',
+            templateUrl: 'views/translation.html',
+            controller: 'TranslationCtrl',
+            abstract: true
+        }).state('translation.form', {
+            url: '',
+            templateUrl: 'views/translation-form.html',
+            controller: 'TranslationFormCtrl',
+            data: {
+                requireLoggedIn: true
+            }
         });
     });
 

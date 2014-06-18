@@ -9,7 +9,10 @@
                 method: 'GET'
             },
             update: {
-                method: 'PUT'
+                method: 'PUT',
+                params: {
+                    l: '@name.lang_code'
+                }
             }
         });
     });
@@ -20,6 +23,13 @@
             update: {
                 method: 'PUT'
             }
+        });
+    });
+    
+    angular.module('eventsApp').service('SkillTranslation', function($resource, $http, API_EVENTS) {
+        return $resource(API_EVENTS + '/skills/:id/translations/:locale', {
+            id: '@id',
+            locale: '@locale'
         });
     });
 })();
