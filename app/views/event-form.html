@@ -9,7 +9,7 @@
         </div>
     </div>
     <div class="form-group" ng-class="{'has-error': submitted && form.entity.$invalid}">
-        <label for=""entity"" class="col-sm-3 control-label">Entity <span class="required">*</span></label>
+        <label for="entity" class="col-sm-3 control-label">Entity <span class="required">*</span></label>
         <div class="col-sm-4">
             <select ui-select2 class="form-control" id="entity" name="entity" required ng-model="event.entity.id">
                 <option ng-repeat="entity in entities" value="{{entity.id}}">{{entity.name.text}}</option>
