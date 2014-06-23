@@ -150,7 +150,7 @@ describe('controllers events', function() {
                     'AQ'
                 ]
             });
-            $httpBackend.expectGET('http://localhost:8080/events/entities').respond({
+            $httpBackend.expectGET('http://localhost:8080/auth/ws_entities').respond({
                 entities: [
                     {
                         id: 1,

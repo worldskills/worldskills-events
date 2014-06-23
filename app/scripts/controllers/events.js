@@ -36,7 +36,7 @@
         $scope.event.code = '';
         $scope.event.town = '';
     });
-    angular.module('eventsApp').controller('EventFormCtrl', function($scope, $stateParams, Event, $http, API_EVENTS, $translate, $state, alert) {
+    angular.module('eventsApp').controller('EventFormCtrl', function($scope, $stateParams, Event, $http, API_EVENTS, API_AUTH, $translate, $state, alert) {
         $http({method: 'GET', url: API_EVENTS + '/countries'}).success(function(data, status, headers, config) {
             $scope.countries = [];
             angular.forEach(data.countries, function (code) {
@@ -45,8 +45,8 @@
                 });
             });
         });
-        $http({method: 'GET', url: API_EVENTS + '/entities'}).success(function(data, status, headers, config) {
-            $scope.entities = data.entities;
+        $http({method: 'GET', url: API_AUTH + '/ws_entities'}).success(function(data, status, headers, config) {
+            $scope.entities = data.ws_entity_list;
         });
         $scope.save = function() {
             $scope.submitted = true;
