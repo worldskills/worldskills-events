@@ -45,7 +45,16 @@
                 });
             });
         });
-        $http({method: 'GET', url: API_AUTH + '/ws_entities'}).success(function(data, status, headers, config) {
+        var ROLE_EDIT_EVENTS = 'EditEvents';
+        var ROLE_APP_EVENTS = '400';
+        $http({
+            method: 'GET',
+            url: API_AUTH + '/ws_entities',
+            params: {
+                role: ROLE_EDIT_EVENTS,
+                roleApp: ROLE_APP_EVENTS
+            }
+        }).success(function(data, status, headers, config) {
             $scope.entities = data.ws_entity_list;
         });
         $scope.save = function() {
