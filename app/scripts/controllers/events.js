@@ -1,20 +1,48 @@
 (function() {
     'use strict';
 
-    angular.module('eventsApp').controller('EventsCtrl', function($scope, $stateParams, Event, $location) {
+    angular.module('eventsApp').controller('EventsCtrl', function($scope, $stateParams, Event, $http, API_EVENTS, API_AUTH, $translate, $filter, $location) {
         var page = parseInt($stateParams.page, 10) || 1;
+        $scope.currentPage = page;
         $scope.itemsPerPage = 10;
         $scope.load = function (page) {
-             Event.query({limit: $scope.itemsPerPage, offset: $scope.itemsPerPage * (page - 1)}, function (data) {
+            var filters = angular.copy($scope.filters);
+            filters.before = $filter('date')(filters.before, 'yyyy-MM-dd');
+            filters.after = $filter('date')(filters.after, 'yyyy-MM-dd');
+            filters.offset = $scope.itemsPerPage * (page - 1); 
+            Event.query(filters, function (data) {
                 $scope.events = data;
                 $scope.currentPage = page;
             });
+        };
+        $http({method: 'GET', url: API_EVENTS + '/countries'}).success(function(data, status, headers, config) {
+            $scope.countries = [];
+            angular.forEach(data.countries, function (code) {
+                $translate(code).then(function (name) {
+                    $scope.countries.push({code: code, name: name});
+                });
+            });
+        });
+        $http({
+            method: 'GET',
+            url: API_AUTH + '/ws_entities'
+        }).success(function(data, status, headers, config) {
+            $scope.entities = data.ws_entity_list;
+        });
+        $scope.search = function () {
+            $scope.load($scope.currentPage);
         };
         $scope.changePage = function (page) {
             $location.search('page', page);
             $scope.load(page);
         };
-        $scope.load(page);
+        $scope.clear = function () {
+            $scope.filters = {
+                limit: $scope.itemsPerPage
+            };
+            $scope.load($scope.currentPage);
+        };
+        $scope.clear();
     });
 
     angular.module('eventsApp').controller('EventCtrl', function($scope, $stateParams, Event, $http, API_EVENTS, $translate, $state, alert) {
