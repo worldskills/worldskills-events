@@ -30,6 +30,23 @@ describe('controllers events', function() {
         beforeEach(inject(function(_$httpBackend_, $controller, $rootScope) {
 
             $httpBackend = _$httpBackend_;
+            $httpBackend.expectGET('http://localhost:8080/events/countries').respond({
+                countries: [
+                    'AQ'
+                ]
+            });
+            $httpBackend.expectGET('http://localhost:8080/auth/ws_entities').respond({
+                entities: [
+                    {
+                        id: 1,
+                        name: {
+                            lang_code: 'en',
+                            text: 'WorldSkills International'
+                        },
+                        code: 'WSI'
+                    }
+                ]
+            });
 
             $scope = $rootScope.$new();
 
