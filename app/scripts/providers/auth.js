@@ -83,7 +83,7 @@
             }
         }
 
-        this.$get = ['$rootScope', '$http', 'CLIENT_ID', 'AUTHORIZE_URL', 'LOGOUT_URL', 'API_AUTH', function($rootScope, $http, CLIENT_ID, AUTHORIZE_URL, LOGOUT_URL, API_AUTH) {
+        this.$get = ['$rootScope', '$http', 'CLIENT_ID', 'AUTHORIZE_URL', 'API_AUTH', function($rootScope, $http, CLIENT_ID, AUTHORIZE_URL, API_AUTH) {
 
             var appUrl = window.location.href.replace(window.location.hash, '');
 
@@ -91,16 +91,18 @@
             auth.accessToken = accessToken;
             auth.loggedIn = !!auth.accessToken;
             auth.loginUrl = AUTHORIZE_URL + '?response_type=token&scope=events_manage&state=' + encodeURIComponent(oauthState) + '&client_id=' + encodeURIComponent(CLIENT_ID) + '&redirect_uri=' + encodeURIComponent(appUrl);
-            auth.logoutUrl = LOGOUT_URL + '?client_id=' + encodeURIComponent(CLIENT_ID) + '&redirect_uri=' + encodeURIComponent(appUrl);
 
             auth.logout = function () {
+
+                // destroy session
+                $http({method: 'POST', url: API_AUTH + '/sessions/logout'});
 
                 // delete access token and OAuth state
                 sessionStorage.removeItem('access_token');
                 sessionStorage.removeItem('oauth_state');
 
-                // redirect to logout page
-                document.location.href = auth.logoutUrl;
+                // reload page
+                document.location.href = appUrl;
             };
 
             // add access token header
