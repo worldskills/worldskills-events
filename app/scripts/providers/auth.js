@@ -94,15 +94,20 @@
 
             auth.logout = function () {
 
-                // destroy session
-                $http({method: 'POST', url: API_AUTH + '/sessions/logout'});
+                var reloadPage = function () {
+
+                    // reload page
+                    document.location.href = appUrl;
+                };
 
                 // delete access token and OAuth state
                 sessionStorage.removeItem('access_token');
                 sessionStorage.removeItem('oauth_state');
 
-                // reload page
-                document.location.href = appUrl;
+                // destroy session
+                $http({method: 'POST', url: API_AUTH + '/sessions/logout'})
+                    .success(reloadPage)
+                    .error(reloadPage);
             };
 
             // add access token header
