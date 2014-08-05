@@ -62,7 +62,7 @@
             photo = deferred.promise;
             $scope.upload = $upload.upload({
                 url: API_IMAGES,
-                data: {entity: $scope.skill.event.entity.id},
+                data: {ws_entity: $scope.skill.event.ws_entity.id},
                 file: $files[0],
             }).success(function(data, status, headers, config) {
                 deferred.resolve(data);

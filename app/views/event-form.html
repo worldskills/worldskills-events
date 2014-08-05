@@ -8,15 +8,15 @@
             <span class="help-block" ng-show="submitted && form.name.$error.required">Please enter a name!</span>
         </div>
     </div>
-    <div class="form-group" ng-class="{'has-error': submitted && form.entity.$invalid}">
-        <label for="entity" class="col-sm-3 control-label">Entity <span class="required">*</span></label>
+    <div class="form-group" ng-class="{'has-error': submitted && form.ws_entity.$invalid}">
+        <label for="ws_entity" class="col-sm-3 control-label">Entity <span class="required">*</span></label>
         <div class="col-sm-4">
-            <select ui-select2 class="form-control" id="entity" name="entity" required ng-model="event.entity.id">
+            <select ui-select2 class="form-control" id="ws_entity" name="ws_entity" required ng-model="event.ws_entity.id">
                 <option ng-repeat="entity in entities" value="{{entity.id}}">{{entity.name.text}}</option>
             </select>
         </div>
         <div class="col-sm-5">
-            <span class="help-block" ng-show="submitted && form.entity.$error.required">Please select a entity!</span>
+            <span class="help-block" ng-show="submitted && form.ws_entity.$error.required">Please select a entity!</span>
         </div>
     </div>
     <div class="form-group" ng-class="{'has-error': submitted && form.organizer.$invalid}">
@@ -25,9 +25,6 @@
             <select ui-select2 class="form-control" id="organizer" name="organizer" ng-model="event.organizer.id">
                 <option ng-repeat="entity in entities" value="{{entity.id}}">{{entity.name.text}}</option>
             </select>
-        </div>
-        <div class="col-sm-5">
-            <span class="help-block" ng-show="submitted && form.entity.$error.required">Please select a entity!</span>
         </div>
     </div>
     <div class="form-group" ng-class="{'has-error': submitted && form.type.$invalid}">
