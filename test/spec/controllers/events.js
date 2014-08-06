@@ -62,7 +62,7 @@ describe('controllers events', function() {
 
             EventsCtrl();
 
-            $httpBackend.expectGET('http://localhost:8080/events?limit=10&offset=0').respond({
+            $httpBackend.expectGET('http://localhost:8080/events?limit=15&offset=0').respond({
                 events: [
                     {
                         name: 'WorldSkills São Paulo 2015'
@@ -77,7 +77,7 @@ describe('controllers events', function() {
 
             $scope.changePage(2);
 
-            $httpBackend.expectGET('http://localhost:8080/events?limit=10&offset=10').respond({
+            $httpBackend.expectGET('http://localhost:8080/events?limit=15&offset=15').respond({
                 events: [
                     {
                         name: 'WorldSkills London 2011'
@@ -95,7 +95,7 @@ describe('controllers events', function() {
                 page: '2'
             });
 
-            $httpBackend.expectGET('http://localhost:8080/events?limit=10&offset=10').respond({
+            $httpBackend.expectGET('http://localhost:8080/events?limit=15&offset=15').respond({
                 events: [
                     {
                         name: 'WorldSkills London 2011'
