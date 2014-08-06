@@ -129,7 +129,12 @@
             $rootScope.$on('$stateChangeStart', function (event, toState, toParams, fromState, fromParams) {
                 if (typeof toState.data != 'undefined' && !!toState.data.requireLoggedIn) {
                     user.error(function () {
-                        // error loading loggedIn user, redirect to login
+
+                        // error loading loggedIn user, store state
+                        sessionStorage.setItem('redirect_to_state', toState.name);
+                        sessionStorage.setItem('redirect_to_params', angular.toJson(toParams));
+
+                        // redirect to login
                         document.location.href = auth.loginUrl;
                     });
                 }
