@@ -17,9 +17,8 @@
         <div class="table-responsive">
             <table class="table table-striped">
                 <colgroup>
-                    <col width="6%" />
-                    <col width="34%" />
-                    <col width="20%" />
+                    <col width="10%" />
+                    <col width="50%" />
                     <col width="20%" />
                     <col width="20%" />
                 </colgroup>
@@ -28,7 +27,6 @@
                         <th>ID</th>
                         <th>Name</th>
                         <th>Date</th>
-                        <th>End Date</th>
                         <th>Country</th>
                     </tr>
                 </thead>
@@ -36,9 +34,8 @@
                 <tbody>
                     <tr ng-repeat="event in events.events">
                         <td><a ui-sref="event.form({ id: event.id })">{{event.id}}</a></td>
-                        <td><a ui-sref="event.form({ id: event.id })">{{event.name}}</a></td>
+                        <td><a ui-sref="event.form({ id: event.id })" title="{{event.name}}">{{event.name}}</a></td>
                         <td>{{event.start_date|date:'d MMMM yyyy'}}</td>
-                        <td>{{event.end_date|date:'d MMMM yyyy'}}</td>
                         <td>{{event.country|translate}}</td>
                     </tr>
                     <tr ng-show="events.total_count == 0">
@@ -93,4 +90,4 @@
     </div>
 </div>
 
-<pagination items-per-page="itemsPerPage" total-items="events.total_count" page="currentPage" on-select-page="changePage(page)"></pagination>
+<pagination items-per-page="itemsPerPage" total-items="events.total_count" page="currentPage" on-select-page="changePage(page)" max-size="10" boundary-links="true" rotate="false"></pagination>

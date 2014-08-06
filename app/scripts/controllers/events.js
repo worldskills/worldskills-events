@@ -4,7 +4,7 @@
     angular.module('eventsApp').controller('EventsCtrl', function($scope, $stateParams, Event, $http, API_EVENTS, API_AUTH, $translate, $filter, $location) {
         var page = parseInt($stateParams.page, 10) || 1;
         $scope.currentPage = page;
-        $scope.itemsPerPage = 10;
+        $scope.itemsPerPage = 15;
         $scope.load = function (page) {
             var filters = angular.copy($scope.filters);
             filters.before = $filter('date')(filters.before, 'yyyy-MM-dd');
