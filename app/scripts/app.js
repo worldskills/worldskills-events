@@ -6,7 +6,24 @@
     ]);
 
     eventsApp.config(function($stateProvider, $urlRouterProvider) {
-        $urlRouterProvider.otherwise('/events');
+        $urlRouterProvider.otherwise(function ($injector, $location) {
+            // check for existing redirect
+            var $state = $injector.get('$state');
+            var redirectToState = sessionStorage.getItem('redirect_to_state');
+            var redirectToParams = sessionStorage.getItem('redirect_to_params');
+            sessionStorage.removeItem('redirect_to_state');
+            sessionStorage.removeItem('redirect_to_params');
+            if (redirectToState) {
+                if (redirectToParams) {
+                    redirectToParams = angular.fromJson(redirectToParams);
+                } else {
+                    redirectToParams = {};
+                }
+                $state.go(redirectToState, redirectToParams);
+            } else {
+                $state.go('events');
+            }
+        });
         $stateProvider.state('events', {
             url: '/events?page',
             templateUrl: 'views/events.html',
