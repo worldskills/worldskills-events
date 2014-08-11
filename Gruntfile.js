@@ -8,6 +8,8 @@ module.exports = function (grunt) {
   // Time how long tasks take. Can help when optimizing build times
   require('time-grunt')(grunt);
 
+  var env = grunt.option('env') || 'staging';
+
   // Define the configuration for all the tasks
   grunt.initConfig({
 
@@ -25,13 +27,13 @@ module.exports = function (grunt) {
         },
         server: {
             options: {
-                port: 9000,
+                port: 10400,
                 keepalive: true
             }
         },
         test: {
             options: {
-                port: 9001,
+                port: 10401,
                 base: [
                    '.tmp',
                    'test',
@@ -103,7 +105,7 @@ module.exports = function (grunt) {
       html: ['<%= yeoman.dist %>/{,*/}*.html'],
       css: ['<%= yeoman.dist %>/styles/{,*/}*.css'],
       options: {
-        assetsDirs: ['<%= yeoman.dist %>']
+        assetsDirs: ['<%= yeoman.dist %>','<%= yeoman.dist %>/images']
       }
     },
 
@@ -170,8 +172,10 @@ module.exports = function (grunt) {
           src: [
             '*.{ico,png,txt}',
             '.htaccess',
-            'bower_components/**/*',
+            '*.html',
+            'views/{,*/}*.html',
             'images/{,*/}*.{webp}',
+            'languages/{,*/}*.json',
           ]
         }, {
           expand: true,
@@ -180,6 +184,13 @@ module.exports = function (grunt) {
           src: [
             'generated/*'
           ]
+        }, {
+          expand: true,
+          cwd: '<%= yeoman.app %>/bower_components/select2',
+          dest: '<%= yeoman.dist %>/styles',
+          src: [
+            '*.png'
+          ]
         }]
       },
       styles: {
@@ -187,6 +198,10 @@ module.exports = function (grunt) {
         cwd: '<%= yeoman.app %>/css',
         dest: '.tmp/styles/',
         src: '{,*/}*.css'
+      },
+      config: {
+        src: '<%= yeoman.app %>/scripts/config.js.' + env,
+        dest: '<%= yeoman.app %>/scripts/config.js'
       }
     },
 
@@ -208,6 +223,7 @@ module.exports = function (grunt) {
 
   grunt.registerTask('build', [
     'clean:dist',
+    'copy:config',
     'useminPrepare',
     'imagemin',
     'htmlmin',

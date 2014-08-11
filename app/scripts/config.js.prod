@@ -1,0 +1,11 @@
+(function() {
+    'use strict';
+
+    var eventsApp = angular.module('eventsApp'); 
+    eventsApp.constant('API_EVENTS', 'https://api.worldskills.org/events');
+    eventsApp.constant('API_IMAGES', 'https://api.worldskills.org/images');
+    eventsApp.constant('CLIENT_ID', '269f5d2');
+    eventsApp.constant('API_AUTH', 'https://api.worldskills.org/auth');
+    eventsApp.constant('AUTHORIZE_URL', 'https://auth.worldskills.org/oauth/authorize');
+
+})();
