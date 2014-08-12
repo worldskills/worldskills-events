@@ -1,8 +1,8 @@
 (function() {
     'use strict';
 
-    angular.module('eventsApp').service('Sponsor', function($resource, API_EVENTS) {
-        return $resource(API_EVENTS + '/sponsors/:id', {
+    angular.module('eventsApp').service('Sponsor', function($resource, WORLDSKILLS_API_EVENTS) {
+        return $resource(WORLDSKILLS_API_EVENTS + '/sponsors/:id', {
             id: '@id'
         }, {
             query: {

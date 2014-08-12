@@ -1,7 +1,7 @@
 (function() {
     'use strict';
 
-    angular.module('eventsApp').controller('EventsCtrl', function($scope, $stateParams, Event, $http, API_EVENTS, API_AUTH, $translate, $filter, $location) {
+    angular.module('eventsApp').controller('EventsCtrl', function($scope, $stateParams, Event, $http, WORLDSKILLS_API_EVENTS, WORLDSKILLS_API_AUTH, $translate, $filter, $location) {
         var page = parseInt($stateParams.page, 10) || 1;
         $scope.currentPage = page;
         $scope.itemsPerPage = 15;
@@ -15,7 +15,7 @@
                 $scope.currentPage = page;
             });
         };
-        $http({method: 'GET', url: API_EVENTS + '/countries'}).success(function(data, status, headers, config) {
+        $http({method: 'GET', url: WORLDSKILLS_API_EVENTS + '/countries'}).success(function(data, status, headers, config) {
             $scope.countries = [];
             angular.forEach(data.countries, function (code) {
                 $translate(code).then(function (name) {
@@ -25,7 +25,7 @@
         });
         $http({
             method: 'GET',
-            url: API_AUTH + '/ws_entities'
+            url: WORLDSKILLS_API_AUTH + '/ws_entities'
         }).success(function(data, status, headers, config) {
             $scope.entities = data.ws_entity_list;
         });
@@ -45,7 +45,7 @@
         $scope.clear();
     });
 
-    angular.module('eventsApp').controller('EventCtrl', function($scope, $stateParams, Event, $http, API_EVENTS, $translate, $state, alert) {
+    angular.module('eventsApp').controller('EventCtrl', function($scope, $stateParams, Event, $http, $translate, $state, alert) {
         $scope.id = $stateParams.id;
         $scope.event = Event.get({id: $scope.id}, function (event) {
             $scope.title = event.name;
@@ -64,8 +64,8 @@
         $scope.event.code = '';
         $scope.event.town = '';
     });
-    angular.module('eventsApp').controller('EventFormCtrl', function($scope, $stateParams, Event, $http, API_EVENTS, API_AUTH, $translate, $state, alert) {
-        $http({method: 'GET', url: API_EVENTS + '/countries'}).success(function(data, status, headers, config) {
+    angular.module('eventsApp').controller('EventFormCtrl', function($scope, $stateParams, Event, $http, WORLDSKILLS_API_EVENTS, WORLDSKILLS_API_AUTH, $translate, $state, alert) {
+        $http({method: 'GET', url: WORLDSKILLS_API_EVENTS + '/countries'}).success(function(data, status, headers, config) {
             $scope.countries = [];
             angular.forEach(data.countries, function (code) {
                 $translate(code).then(function (name) {
@@ -77,7 +77,7 @@
         var ROLE_APP_EVENTS = '400';
         $http({
             method: 'GET',
-            url: API_AUTH + '/ws_entities',
+            url: WORLDSKILLS_API_AUTH + '/ws_entities',
             params: {
                 role: ROLE_EDIT_EVENTS,
                 roleApp: ROLE_APP_EVENTS
@@ -103,7 +103,7 @@
             }
         };
     });
-    angular.module('eventsApp').controller('EventSkillsCtrl', function($scope, $stateParams, Event, $http, API_EVENTS, $translate, $state, WorldSkills) {
+    angular.module('eventsApp').controller('EventSkillsCtrl', function($scope, $stateParams, Event, $http, $translate, $state, WorldSkills) {
         $scope.skills = [];
         var getSkills = function (url) {
             $http({method: 'GET', url: url}).success(function(data, status, headers, config) {
@@ -124,7 +124,7 @@
             getSkills(url);
         });
     });
-    angular.module('eventsApp').controller('EventSponsorsCtrl', function($scope, $stateParams, Event, $http, API_EVENTS, $translate, $state, WorldSkills) {
+    angular.module('eventsApp').controller('EventSponsorsCtrl', function($scope, $stateParams, Event, $http, $translate, $state, WorldSkills) {
         $scope.sponsors = [];
         var getSponsors = function (url) {
             $http({method: 'GET', url: url}).success(function(data, status, headers, config) {

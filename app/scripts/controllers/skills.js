@@ -1,14 +1,14 @@
 (function() {
     'use strict';
 
-    angular.module('eventsApp').controller('SkillCreateCtrl', function($scope, $stateParams, Skill, Event, $http, API_EVENTS, $translate, $state, WorldSkills, alert) {
+    angular.module('eventsApp').controller('SkillCreateCtrl', function($scope, $stateParams, Skill, Event, $http, WORLDSKILLS_API_EVENTS, $translate, $state, WorldSkills, alert) {
         $scope.skill = new Skill();
         $scope.skill.name = {text: '', lang_code: 'en'};
         $scope.skill.description = {text: '', lang_code: 'en'};
         $scope.skill.event = Event.get({id: $stateParams.eventId});
     });
 
-    angular.module('eventsApp').controller('SkillCtrl', function($scope, $stateParams, Skill, $http, API_EVENTS, $translate, $state, WorldSkills, alert) {
+    angular.module('eventsApp').controller('SkillCtrl', function($scope, $stateParams, Skill, $http, WORLDSKILLS_API_EVENTS, $translate, $state, WorldSkills, alert) {
         $scope.id = $stateParams.id;
         $scope.translations = [];
         $scope.skill = Skill.get({id: $scope.id}, function (skill) {
@@ -33,7 +33,7 @@
             });
         };
     });
-    angular.module('eventsApp').controller('SkillFormCtrl', function($scope, $stateParams, Skill, $http, API_EVENTS, $translate, $state, WorldSkills, alert) {
+    angular.module('eventsApp').controller('SkillFormCtrl', function($scope, $stateParams, Skill, $http, WORLDSKILLS_API_EVENTS, $translate, $state, WorldSkills, alert) {
         $scope.save = function() {
             $scope.submitted = true;
             if ($scope.form.$valid) {
@@ -52,7 +52,7 @@
             }
         };
     });
-    angular.module('eventsApp').controller('SkillPhotosCtrl', function($scope, $stateParams, Skill, SkillPhoto, $http, API_EVENTS, API_IMAGES, $q, $upload, $state, WorldSkills, alert) {
+    angular.module('eventsApp').controller('SkillPhotosCtrl', function($scope, $stateParams, Skill, SkillPhoto, $http, WORLDSKILLS_API_EVENTS, WORLDSKILLS_API_IMAGES, $q, $upload, $state, WorldSkills, alert) {
         var photo = $q.when();
         $scope.thumbnail = function (photo) {
             return WorldSkills.getLink(photo.links, 'alternate');
@@ -61,7 +61,7 @@
             var deferred = $q.defer();
             photo = deferred.promise;
             $scope.upload = $upload.upload({
-                url: API_IMAGES,
+                url: WORLDSKILLS_API_IMAGES,
                 data: {ws_entity: $scope.skill.event.ws_entity.id},
                 file: $files[0],
             }).success(function(data, status, headers, config) {
@@ -93,10 +93,10 @@
             });
         };
     });
-    angular.module('eventsApp').controller('SkillTranslationsCtrl', function($scope, $stateParams, Skill, SkillPhoto, $http, API_EVENTS, API_IMAGES, $q, $upload, $state, WorldSkills, alert) {
+    angular.module('eventsApp').controller('SkillTranslationsCtrl', function($scope, $stateParams, Skill, SkillPhoto, $http, WORLDSKILLS_API_EVENTS, WORLDSKILLS_API_IMAGES, $q, $upload, $state, WorldSkills, alert) {
         
     });
-    angular.module('eventsApp').controller('TranslationCtrl', function($scope, $stateParams, Skill, SkillTranslation, $http, API_EVENTS, API_IMAGES, $q, $upload, $translate, $state, WorldSkills, alert) {
+    angular.module('eventsApp').controller('TranslationCtrl', function($scope, $stateParams, Skill, SkillTranslation, $http, WORLDSKILLS_API_EVENTS, WORLDSKILLS_API_IMAGES, $q, $upload, $translate, $state, WorldSkills, alert) {
         $scope.skillId = $stateParams.skillId;
         $scope.locale = $stateParams.locale;
         $scope.skill = Skill.get({id: $scope.skillId}, function (skill) {
@@ -127,7 +127,7 @@
             });
         };
     });
-    angular.module('eventsApp').controller('TranslationCreateCtrl', function($scope, $stateParams, Skill, $http, API_EVENTS, API_IMAGES, $q, $upload, $state, WorldSkills, alert) {
+    angular.module('eventsApp').controller('TranslationCreateCtrl', function($scope, $stateParams, Skill, $http, WORLDSKILLS_API_EVENTS, WORLDSKILLS_API_IMAGES, $q, $upload, $state, WorldSkills, alert) {
         $scope.skillId = $stateParams.skillId;
         $scope.skill = Skill.get({id: $scope.skillId}, function (skill) {
             $scope.translation = angular.copy(skill);
@@ -151,7 +151,7 @@
             $scope.translation.description_competition_action.text = '';
         });
     });
-    angular.module('eventsApp').controller('TranslationFormCtrl', function($scope, $stateParams, Skill, $http, API_EVENTS, API_IMAGES, $q, $upload, $state, WorldSkills, alert) {
+    angular.module('eventsApp').controller('TranslationFormCtrl', function($scope, $stateParams, Skill, $http, WORLDSKILLS_API_EVENTS, WORLDSKILLS_API_IMAGES, $q, $upload, $state, WorldSkills, alert) {
         $scope.save = function() {
             $scope.submitted = true;
             if ($scope.form.$valid) {

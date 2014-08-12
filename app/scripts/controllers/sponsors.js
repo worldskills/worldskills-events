@@ -1,7 +1,7 @@
 (function() {
     'use strict';
 
-    angular.module('eventsApp').controller('SponsorCreateCtrl', function($scope, $stateParams, Event, Sponsor, $http, API_EVENTS, API_IMAGES, $translate, $state, WorldSkills, $upload, $q) {
+    angular.module('eventsApp').controller('SponsorCreateCtrl', function($scope, $stateParams, Event, Sponsor, $http, WORLDSKILLS_API_EVENTS, WORLDSKILLS_API_IMAGES, $translate, $state, WorldSkills, $upload, $q) {
         var logo = $q.when();
         $scope.sponsor = new Sponsor();
         $scope.sponsor.event = Event.get({id: $stateParams.eventId});
@@ -9,7 +9,7 @@
             var deferred = $q.defer();
             logo = deferred.promise;
             $scope.upload = $upload.upload({
-                url: API_IMAGES,
+                url: WORLDSKILLS_API_IMAGES,
                 data: {ws_entity: $scope.sponsor.event.ws_entity.id},
                 file: $files[0],
             }).success(function(data, status, headers, config) {
@@ -34,7 +34,7 @@
         };
     });
 
-    angular.module('eventsApp').controller('SponsorCtrl', function($scope, $stateParams, Sponsor, $http, API_EVENTS, API_IMAGES, $translate, $state, WorldSkills, $upload, $q) {
+    angular.module('eventsApp').controller('SponsorCtrl', function($scope, $stateParams, Sponsor, $http, WORLDSKILLS_API_EVENTS, WORLDSKILLS_API_IMAGES, $translate, $state, WorldSkills, $upload, $q) {
         var logo = $q.when();
         $scope.id = $stateParams.id;
         $scope.sponsor = Sponsor.get({id: $scope.id}, function (sponsor) {
@@ -48,7 +48,7 @@
             var deferred = $q.defer();
             logo = deferred.promise;
             $scope.upload = $upload.upload({
-                url: API_IMAGES,
+                url: WORLDSKILLS_API_IMAGES,
                 data: {ws_entity: $scope.sponsor.event.ws_entity.id},
                 file: $files[0],
             }).success(function(data, status, headers, config) {

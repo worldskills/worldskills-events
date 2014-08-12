@@ -1,7 +1,7 @@
 (function() {
     'use strict';
 
-    angular.module('eventsApp').service('WorldSkills', function($resource, API_EVENTS) {
+    angular.module('eventsApp').service('WorldSkills', function($resource) {
         return {
             getLink: function(links, rel) {
                 var href;
