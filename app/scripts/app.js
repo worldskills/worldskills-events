@@ -28,6 +28,9 @@
             url: '/events?page',
             templateUrl: 'views/events.html',
             controller: 'EventsCtrl',
+            data: {
+                requireLoggedIn: true
+            },
             reloadOnSearch: false
         }).state('event_create', {
             url: '/events/create',
