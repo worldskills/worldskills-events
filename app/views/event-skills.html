@@ -1,5 +1,5 @@
 <p>
-    <a ui-sref="skill_create.form({eventId: event.id})" class="btn btn-success">Add Skill</a>
+    <a ui-sref="events.skill_create.form({eventId: event.id})" class="btn btn-success">Add Skill</a>
 </p>
 
 <div class="table-responsive">
@@ -19,8 +19,8 @@
         <tfoot><tr><td colspan="3"></td></tr></tfoot>
         <tbody>
             <tr ng-repeat="skill in skills">
-                <td><a ui-sref="skill.form({id: skill.id})">{{skill.number}}</a></td>
-                <td><a ui-sref="skill.form({id: skill.id})">{{skill.name.text}}</a></td>
+                <td><a ui-sref="events.skill.form({id: skill.id})">{{skill.number}}</a></td>
+                <td><a ui-sref="events.skill.form({id: skill.id})">{{skill.name.text}}</a></td>
                 <td>{{("skill_type_" + skill.type)|translate}}</td>
             </tr>
             <tr ng-show="skills == null">

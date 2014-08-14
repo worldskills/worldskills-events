@@ -1,9 +1,9 @@
 <ol class="breadcrumb">
-    <li><a ui-sref="events">Events</a></li>
-    <li><a ui-sref="event.form({id: skill.event.id})">{{skill.event.name}}</a></li>
-    <li><a ui-sref="event.skills({id: skill.event.id})">Skills</a></li>
-    <li><a ui-sref="skill.form({id: skill.id})">{{skill.name.text}}</a></li>
-    <li><a ui-sref="skill.translations({id: skill.event.id})">Translations</a></li>
+    <li><a ui-sref="events.list">Events</a></li>
+    <li><a ui-sref="events.event.form({id: skill.event.id})">{{skill.event.name}}</a></li>
+    <li><a ui-sref="events.event.skills({id: skill.event.id})">Skills</a></li>
+    <li><a ui-sref="events.skill.form({id: skill.id})">{{skill.name.text}}</a></li>
+    <li><a ui-sref="events.skill.translations({id: skill.id})">Translations</a></li>
     <li class="active">{{locale|translate}}</li>
 </ol>
 

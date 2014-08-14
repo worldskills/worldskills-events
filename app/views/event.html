@@ -1,5 +1,5 @@
 <ol class="breadcrumb">
-    <li><a ui-sref="events">Events</a></li>
+    <li><a ui-sref="events.list">Events</a></li>
     <li class="active">{{title || " "}}</li>
 </ol>
 
@@ -12,9 +12,9 @@
 <h1>{{title || " "}}</h1>
 
 <ul class="nav nav-tabs">
-    <li ui-sref-active="active"><a ui-sref="event.form">Event</a></li>
-    <li ng-show="type == 'competition'" ui-sref-active="active"><a ui-sref="event.skills">Skills</a></li>
-    <li ui-sref-active="active"><a ui-sref="event.sponsors">Sponsors</a></li>
+    <li ui-sref-active="active"><a ui-sref="events.event.form">Event</a></li>
+    <li ng-show="type == 'competition'" ui-sref-active="active"><a ui-sref="events.event.skills">Skills</a></li>
+    <li ui-sref-active="active"><a ui-sref="events.event.sponsors">Sponsors</a></li>
 </ul>
 
 <div id="content" ui-view>

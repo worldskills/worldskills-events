@@ -1,7 +1,7 @@
 <ol class="breadcrumb">
-    <li><a ui-sref="events">Events</a></li>
-    <li><a ui-sref="event.form({id: skill.event.id})">{{skill.event.name}}</a></li>
-    <li><a ui-sref="event.skills({id: skill.event.id})">Skills</a></li>
+    <li><a ui-sref="events.list">Events</a></li>
+    <li><a ui-sref="events.event.form({id: skill.event.id})">{{skill.event.name}}</a></li>
+    <li><a ui-sref="events.event.skills({id: skill.event.id})">Skills</a></li>
     <li class="active">{{id ? (title || " ") : "Add Skill"}}</li>
 </ol>
 
@@ -12,9 +12,9 @@
 <h1>{{id ? (title || " ") : "Add Skill"}}</h1>
 
 <ul class="nav nav-tabs">
-    <li ui-sref-active="active"><a ui-sref="skill.form">Skill</a></li>
-    <li ui-sref-active="active"><a ui-sref="skill.translations">Translations</a></li>
-    <li ui-sref-active="active"><a ui-sref="skill.photos">Photos</a></li>
+    <li ui-sref-active="active"><a ui-sref="events.skill.form">Skill</a></li>
+    <li ui-sref-active="active"><a ui-sref="events.skill.translations">Translations</a></li>
+    <li ui-sref-active="active"><a ui-sref="events.skill.photos">Photos</a></li>
 </ul>
 
 <div id="content" ui-view>

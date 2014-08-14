@@ -21,13 +21,18 @@
                 }
                 $state.go(redirectToState, redirectToParams);
             } else {
-                $state.go('events');
+                $state.go('events.list');
             }
         });
         $stateProvider.state('events', {
-            url: '/events?page',
+            url: '/events',
             templateUrl: 'views/events.html',
             controller: 'EventsCtrl',
+            abstract: true
+        }).state('events.list', {
+            url: '?page',
+            templateUrl: 'views/events-list.html',
+            controller: 'EventsListCtrl',
             data: {
                 requireLoggedIn: true
             },
@@ -44,102 +49,102 @@
             data: {
                 requireLoggedIn: true
             }
-        }).state('event', {
-            url: '/events/{id}',
+        }).state('events.event', {
+            url: '/{id}',
             templateUrl: 'views/event.html',
             controller: 'EventCtrl',
             abstract: true
-        }).state('event.form', {
+        }).state('events.event.form', {
             url: '',
             templateUrl: 'views/event-form.html',
             controller: 'EventFormCtrl',
             data: {
                 requireLoggedIn: true
             }
-        }).state('event.skills', {
+        }).state('events.event.skills', {
             url: '/skills',
             templateUrl: 'views/event-skills.html',
             controller: 'EventSkillsCtrl',
             data: {
                 requireLoggedIn: true
             }
-        }).state('event.sponsors', {
+        }).state('events.event.sponsors', {
             url: '/sponsors',
             templateUrl: 'views/event-sponsors.html',
             controller: 'EventSponsorsCtrl',
             data: {
                 requireLoggedIn: true
             }
-        }).state('sponsor_create', {
-            url: '/events/{eventId}/sponsors/create',
+        }).state('events.sponsor_create', {
+            url: '/{eventId}/sponsors/create',
             templateUrl: 'views/sponsor.html',
             controller: 'SponsorCreateCtrl',
             data: {
                 requireLoggedIn: true
             }
-        }).state('sponsor', {
+        }).state('events.sponsor', {
             url: '/sponsors/{id}',
             templateUrl: 'views/sponsor.html',
             controller: 'SponsorCtrl',
             data: {
                 requireLoggedIn: true
             }
-        }).state('skill_create', {
-            url: '/events/{eventId}/skills/create',
+        }).state('events.skill_create', {
+            url: '/{eventId}/skills/create',
             templateUrl: 'views/skill-create.html',
             controller: 'SkillCreateCtrl',
             abstract: true
-        }).state('skill_create.form', {
+        }).state('events.skill_create.form', {
             url: '',
             templateUrl: 'views/skill-form.html',
             controller: 'SkillFormCtrl',
             data: {
                 requireLoggedIn: true
             }
-        }).state('skill', {
+        }).state('events.skill', {
             url: '/skills/{id}',
             templateUrl: 'views/skill.html',
             controller: 'SkillCtrl',
             abstract: true
-        }).state('skill.form', {
+        }).state('events.skill.form', {
             url: '',
             templateUrl: 'views/skill-form.html',
             controller: 'SkillFormCtrl',
             data: {
                 requireLoggedIn: true
             }
-        }).state('skill.photos', {
+        }).state('events.skill.photos', {
             url: '/photos',
             templateUrl: 'views/skill-photos.html',
             controller: 'SkillPhotosCtrl',
             data: {
                 requireLoggedIn: true
             }
-        }).state('skill.translations', {
+        }).state('events.skill.translations', {
             url: '/translations',
             templateUrl: 'views/skill-translations.html',
             controller: 'SkillTranslationsCtrl',
             data: {
                 requireLoggedIn: true
             }
-        }).state('translation_create', {
+        }).state('events.translation_create', {
             url: '/skills/{skillId}/translations/create',
             templateUrl: 'views/translation-create.html',
             controller: 'TranslationCreateCtrl',
             abstract: true
-        }).state('translation_create.form', {
+        }).state('events.translation_create.form', {
             url: '',
             templateUrl: 'views/translation-form.html',
             controller: 'TranslationFormCtrl',
             data: {
                 requireLoggedIn: true
             }
-        }).state('translation', {
+        }).state('events.translation', {
             url: '/skills/{skillId}/translations/{locale}',
             templateUrl: 'views/translation.html',
             controller: 'TranslationCtrl',
             abstract: true
-        }).state('translation.form', {
+        }).state('events.translation.form', {
             url: '',
             templateUrl: 'views/translation-form.html',
             controller: 'TranslationFormCtrl',

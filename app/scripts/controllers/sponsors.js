@@ -27,7 +27,7 @@
                     $scope.sponsor.logo = {id: logo.id, thumbnail_hash: logo.thumbnail_hash};
                 }
                 $scope.sponsor.$save(function () {
-                    $state.go('event.sponsors', {id: $scope.sponsor.event.id});
+                    $state.go('events.event.sponsors', {id: $scope.sponsor.event.id});
                 });
             });
         };
@@ -67,7 +67,7 @@
                     delete $scope.sponsor.logo;
                 }
                 $scope.sponsor.$update(function () {
-                    $state.go('event.sponsors', {id: $scope.sponsor.event.id});
+                    $state.go('events.event.sponsors', {id: $scope.sponsor.event.id});
                 });
             });
         };
@@ -75,7 +75,7 @@
             $scope.deleteLoading = true;
             $scope.sponsor.$delete(function () {
                 alert('The Sponsor has been deleted successfully.');
-                $state.go('event.sponsors', {id: $scope.sponsor.event.id});
+                $state.go('events.event.sponsors', {id: $scope.sponsor.event.id});
             });
         };
     });

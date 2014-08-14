@@ -1,5 +1,5 @@
 <p>
-    <a ui-sref="sponsor_create({eventId: event.id})" class="btn btn-success">Add Sponsor</a>
+    <a ui-sref="events.sponsor_create({eventId: event.id})" class="btn btn-success">Add Sponsor</a>
 </p>
 
 <div class="table-responsive">
@@ -17,8 +17,8 @@
         <tfoot><tr><td colspan="2"></td></tr></tfoot>
         <tbody>
             <tr ng-repeat="sponsor in sponsors">
-                <td><a ui-sref="sponsor({id: sponsor.id})">{{sponsor.id}}</a></td>
-                <td><a ui-sref="sponsor({id: sponsor.id})">{{sponsor.name}}</a></td>
+                <td><a ui-sref="events.sponsor({id: sponsor.id})">{{sponsor.id}}</a></td>
+                <td><a ui-sref="events.sponsor({id: sponsor.id})">{{sponsor.name}}</a></td>
             </tr>
             <tr ng-show="sponsors == null">
                 <td colspan="2">No Sponsors found.</td>

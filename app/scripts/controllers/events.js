@@ -1,18 +1,28 @@
 (function() {
     'use strict';
 
-    angular.module('eventsApp').controller('EventsCtrl', function($scope, $stateParams, Event, $http, WORLDSKILLS_API_EVENTS, WORLDSKILLS_API_AUTH, $translate, $filter, $location) {
-        var page = parseInt($stateParams.page, 10) || 1;
-        $scope.currentPage = page;
-        $scope.itemsPerPage = 15;
+    angular.module('eventsApp').controller('EventsCtrl', function($scope) {
+        $scope.pagination = {
+            currentPage: 1,
+            itemsPerPage: 15
+        };
+    });
+
+    angular.module('eventsApp').controller('EventsListCtrl', function($scope, $stateParams, Event, $http, WORLDSKILLS_API_EVENTS, WORLDSKILLS_API_AUTH, $translate, $filter, $location) {
+        var page = parseInt($stateParams.page, 10);
+        if (page) {
+            $scope.pagination.currentPage = page;
+        } else {
+            $location.search('page', $scope.pagination.currentPage);
+        }
         $scope.load = function (page) {
             var filters = angular.copy($scope.filters);
             filters.before = $filter('date')(filters.before, 'yyyy-MM-dd');
             filters.after = $filter('date')(filters.after, 'yyyy-MM-dd');
-            filters.offset = $scope.itemsPerPage * (page - 1); 
+            filters.offset = $scope.pagination.itemsPerPage * (page - 1); 
             Event.query(filters, function (data) {
                 $scope.events = data;
-                $scope.currentPage = page;
+                $scope.pagination.currentPage = page;
             });
         };
         $http({method: 'GET', url: WORLDSKILLS_API_EVENTS + '/countries'}).success(function(data, status, headers, config) {
@@ -30,7 +40,7 @@
             $scope.entities = data.ws_entity_list;
         });
         $scope.search = function () {
-            $scope.load($scope.currentPage);
+            $scope.load($scope.pagination.currentPage);
         };
         $scope.changePage = function (page) {
             $location.search('page', page);
@@ -38,9 +48,9 @@
         };
         $scope.clear = function () {
             $scope.filters = {
-                limit: $scope.itemsPerPage
+                limit: $scope.pagination.itemsPerPage
             };
-            $scope.load($scope.currentPage);
+            $scope.load($scope.pagination.currentPage);
         };
         $scope.clear();
     });
@@ -55,7 +65,7 @@
             $scope.deleteLoading = true;
             $scope.event.$delete(function () {
                 alert.success('The Event has been deleted successfully.');
-                $state.go('events');
+                $state.go('events.list');
             });
         };
     });
@@ -92,12 +102,12 @@
                 if ($scope.event.id) {
                     $scope.event.$update(function () {
                         alert.success('The Event has been saved successfully.');
-                        $state.go('events');
+                        $state.go('events.list');
                     });
                 } else {
                     $scope.event.$save(function () {
                         alert.success('The Event has been added successfully.');
-                        $state.go('events');
+                        $state.go('events.list');
                     });
                 }
             }

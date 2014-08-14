@@ -29,7 +29,7 @@
             $scope.deleteLoading = true;
             $scope.skill.$delete(function () {
                 alert.success('The Skill has been deleted successfully.');
-                $state.go('event.skills', {id: $scope.skill.event.id});
+                $state.go('events.event.skills', {id: $scope.skill.event.id});
             });
         };
     });
@@ -41,12 +41,12 @@
                 if ($scope.skill.id) {
                     $scope.skill.$update(function () {
                         alert.success('The Skill has been updated successfully.');
-                        $state.go('event.skills', {id: $scope.skill.event.id});
+                        $state.go('events.event.skills', {id: $scope.skill.event.id});
                     });
                 } else {
                     $scope.skill.$save(function () {
                         alert.success('The Skill has been added successfully.');
-                        $state.go('event.skills', {id: $scope.skill.event.id});
+                        $state.go('events.event.skills', {id: $scope.skill.event.id});
                     });
                 }
             }
@@ -87,7 +87,7 @@
                     return;
                 }
                 SkillPhoto.update({id: $scope.skill.id, photo: photo.id}, {thumbnail_hash: photo.thumbnail_hash}, function () {
-                    $state.go('skill.photos', {id: $scope.skill.id}, {reload: true});
+                    $state.go('events.skill.photos', {id: $scope.skill.id}, {reload: true});
                 });
             });
         };
@@ -122,7 +122,7 @@
             $scope.deleteLoading = true;
             SkillTranslation.remove({id: $scope.skill.id, locale: $scope.locale}, function () {
                 alert.success('The translation has been deleted successfully.');
-                $state.go('skill.translations', {id: $scope.skill.id});
+                $state.go('events.skill.translations', {id: $scope.skill.id});
             });
         };
     });
@@ -161,7 +161,7 @@
                 $scope.translation.description_competition_action.lang_code = $scope.translation.name.lang_code;
                 $scope.translation.$update(function () {
                     alert.success('The translation has been updated successfully.');
-                    $state.go('skill.translations', {id: $scope.skill.id});
+                    $state.go('events.skill.translations', {id: $scope.skill.id});
                 });
             }
         };
