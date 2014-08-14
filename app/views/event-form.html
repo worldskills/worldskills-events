@@ -32,9 +32,11 @@
         <label for="type" class="col-sm-3 control-label">Type <span class="required">*</span></label>
         <div class="col-sm-4">
             <select ui-select2 class="form-control" id="type" name="type" required ng-model="event.type">
+                <option value="conference">Conference</option>
                 <option value="competition">Competition</option>
                 <option value="general_assembly">General Assembly</option>
                 <option value="champions_forum">Champions Forum</option>
+                <option value="meeting">Board or other meeting</option>
             </select>
         </div>
         <div class="col-sm-5">
