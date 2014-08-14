@@ -22,9 +22,9 @@ describe('controllers events', function() {
         $httpBackend.whenGET(/views\/.*/).respond('');
     }));
 
-    describe('EventsCtrl', function() {
+    describe('EventsListCtrl', function() {
 
-        var $httpBackend, $scope, EventsCtrl;
+        var $httpBackend, $scope, EventsListCtrl;
 
         // Initialize the controller and a mock scope
         beforeEach(inject(function(_$httpBackend_, $controller, $rootScope) {
@@ -49,9 +49,13 @@ describe('controllers events', function() {
             });
 
             $scope = $rootScope.$new();
+            $scope.pagination = {
+                currentPage: 1,
+                itemsPerPage: 15
+            };
 
-            EventsCtrl = function(stateParams) {
-                $controller('EventsCtrl', {
+            EventsListCtrl = function(stateParams) {
+                $controller('EventsListCtrl', {
                     $scope: $scope,
                     $stateParams: stateParams || {}
                 });
@@ -60,7 +64,7 @@ describe('controllers events', function() {
 
         it('should paginate events', function() {
 
-            EventsCtrl();
+            EventsListCtrl();
 
             $httpBackend.expectGET('http://localhost:8080/events?limit=15&offset=0').respond({
                 events: [
@@ -91,7 +95,7 @@ describe('controllers events', function() {
 
         it('should go to page passed by stateParams', function() {
 
-            EventsCtrl({
+            EventsListCtrl({
                 page: '2'
             });
 
@@ -150,7 +154,7 @@ describe('controllers events', function() {
             $httpBackend.expectDELETE('http://localhost:8080/events/1').respond('');
             $httpBackend.flush();
 
-            expect($state.go).toHaveBeenCalledWith('events');
+            expect($state.go).toHaveBeenCalledWith('events.list');
         });
     });
 
@@ -218,7 +222,7 @@ describe('controllers events', function() {
             }).respond({});
             $httpBackend.flush();
 
-            expect($state.go).toHaveBeenCalledWith('events');
+            expect($state.go).toHaveBeenCalledWith('events.list');
         });
     });
 
