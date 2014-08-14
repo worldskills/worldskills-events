@@ -10,7 +10,6 @@
             logo = deferred.promise;
             $scope.upload = $upload.upload({
                 url: WORLDSKILLS_API_IMAGES,
-                data: {ws_entity: $scope.sponsor.event.ws_entity.id},
                 file: $files[0],
             }).success(function(data, status, headers, config) {
                 deferred.resolve(data);
@@ -49,7 +48,6 @@
             logo = deferred.promise;
             $scope.upload = $upload.upload({
                 url: WORLDSKILLS_API_IMAGES,
-                data: {ws_entity: $scope.sponsor.event.ws_entity.id},
                 file: $files[0],
             }).success(function(data, status, headers, config) {
                 deferred.resolve(data);
