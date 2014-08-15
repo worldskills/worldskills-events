@@ -4,19 +4,27 @@
     angular.module('eventsApp').controller('EventsCtrl', function($scope) {
         $scope.pagination = {
             currentPage: 1,
-            itemsPerPage: 15
+            itemsPerPage: 15,
+            sort: 'start_date_desc'
         };
     });
 
     angular.module('eventsApp').controller('EventsListCtrl', function($scope, $stateParams, Event, $http, WORLDSKILLS_API_EVENTS, WORLDSKILLS_API_AUTH, $translate, $filter, $location) {
         var page = parseInt($stateParams.page, 10);
+        var sort = $stateParams.sort;
         if (page) {
             $scope.pagination.currentPage = page;
         } else {
             $location.search('page', $scope.pagination.currentPage);
         }
+        if (sort) {
+            $scope.pagination.sort = sort;
+        } else {
+            $location.search('sort', $scope.pagination.sort);
+        }
         $scope.load = function (page) {
             var filters = angular.copy($scope.filters);
+            filters.sort = $scope.pagination.sort;
             filters.before = $filter('date')(filters.before, 'yyyy-MM-dd');
             filters.after = $filter('date')(filters.after, 'yyyy-MM-dd');
             filters.offset = $scope.pagination.itemsPerPage * (page - 1); 
@@ -46,6 +54,11 @@
             $location.search('page', page);
             $scope.load(page);
         };
+        $scope.changeSort = function (sort) {
+            $location.search('sort', sort);
+            $scope.pagination.sort = sort;
+            $scope.load($scope.pagination.currentPage);
+        }
         $scope.clear = function () {
             $scope.filters = {
                 limit: $scope.pagination.itemsPerPage

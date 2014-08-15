@@ -26,7 +26,10 @@
                     <tr>
                         <th>ID</th>
                         <th>Name</th>
-                        <th>Date</th>
+                        <th ng-class="{'ws-table-sort': true, dropup: pagination.sort == 'start_date_asc'}" class="ws-table-sort" ng-click="changeSort(pagination.sort == 'start_date_desc' ? 'start_date_asc' : 'start_date_desc')">
+                            Date
+                            <span class="caret" ng-show="pagination.sort.indexOf('start_date_') == 0"></span>
+                        </th>
                         <th>Country</th>
                     </tr>
                 </thead>

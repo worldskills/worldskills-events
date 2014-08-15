@@ -30,7 +30,7 @@
             controller: 'EventsCtrl',
             abstract: true
         }).state('events.list', {
-            url: '?page',
+            url: '?page&sort',
             templateUrl: 'views/events-list.html',
             controller: 'EventsListCtrl',
             data: {

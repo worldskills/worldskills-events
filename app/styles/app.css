@@ -33,3 +33,7 @@
     max-width: 160px;
     max-height: 90px;
 }
+
+.ws-table-sort {
+    cursor: pointer;
+}
