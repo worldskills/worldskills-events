@@ -75,6 +75,12 @@
             <input type="text" class="form-control" id="town" name="town" ng-model="event.town">
         </div>
     </div>
+    <div class="form-group" ng-class="{'has-error': submitted && form.venue.$invalid}">
+        <label for="venue" class="col-sm-3 control-label">Venue</label>
+        <div class="col-sm-4">
+            <input type="text" class="form-control" id="venue" name="venue" ng-model="event.venue">
+        </div>
+    </div>
     <div class="form-group" ng-class="{'has-error': submitted && form.code.$invalid}">
         <label for="code" class="col-sm-3 control-label">Code</label>
         <div class="col-sm-3">
