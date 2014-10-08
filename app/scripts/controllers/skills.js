@@ -25,12 +25,26 @@
                 }
             });
         });
+        $scope.setStatusRemoved = function() {
+        	if (confirm('Setting the status of the Skill to Removed will hide it from all Skill lists. The data associated with it will not be deleted. Click OK to proceed.')) {
+	            $scope.setStatusRemovedLoading = true;
+	            Skill.get({id: $scope.id}, function (skill) {
+	            	skill.status = 'removed';
+	            	skill.$update(function () {
+	                    alert.success('The status of the Skill has been successfully set to Removed.');
+	                    $state.go('events.event.skills', {id: $scope.skill.event.id});
+	                });
+	            });
+        	}
+        };
         $scope.deleteSkill = function() {
-            $scope.deleteLoading = true;
-            $scope.skill.$delete(function () {
-                alert.success('The Skill has been deleted successfully.');
-                $state.go('events.event.skills', {id: $scope.skill.event.id});
-            });
+        	if (confirm('Deleting the Skill will also delete all data associated with this Skill. Click OK to proceed.')) {
+	            $scope.deleteLoading = true;
+	            $scope.skill.$delete(function () {
+	                alert.success('The Skill has been deleted successfully.');
+	                $state.go('events.event.skills', {id: $scope.skill.event.id});
+	            });
+        	}
         };
     });
     angular.module('eventsApp').controller('SkillFormCtrl', function($scope, $stateParams, Skill, $http, WORLDSKILLS_API_EVENTS, $translate, $state, WorldSkills, alert) {
