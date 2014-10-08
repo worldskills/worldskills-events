@@ -75,7 +75,7 @@
             $scope.type = event.type;
         });
         $scope.deleteEvent = function() {
-        	if (confirm('Deleting the Event will also delete all data associated with this Event. Click OK to proceed.')) {
+        	if (alert.confirm('Deleting the Event will also delete all data associated with this Event. Click OK to proceed.')) {
 	            $scope.deleteLoading = true;
 	            $scope.event.$delete(function () {
 	                alert.success('The Event has been deleted successfully.');

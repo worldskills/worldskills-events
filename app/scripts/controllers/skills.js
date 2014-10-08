@@ -26,7 +26,7 @@
             });
         });
         $scope.setStatusRemoved = function() {
-        	if (confirm('Setting the status of the Skill to Removed will hide it from all Skill lists. The data associated with it will not be deleted. Click OK to proceed.')) {
+        	if (alert.confirm('Setting the status of the Skill to Removed will hide it from all Skill lists. The data associated with it will not be deleted. Click OK to proceed.')) {
 	            $scope.setStatusRemovedLoading = true;
 	            Skill.get({id: $scope.id}, function (skill) {
 	            	skill.status = 'removed';
@@ -38,7 +38,7 @@
         	}
         };
         $scope.deleteSkill = function() {
-        	if (confirm('Deleting the Skill will also delete all data associated with this Skill. Click OK to proceed.')) {
+        	if (alert.confirm('Deleting the Skill will also delete all data associated with this Skill. Click OK to proceed.')) {
 	            $scope.deleteLoading = true;
 	            $scope.skill.$delete(function () {
 	                alert.success('The Skill has been deleted successfully.');
