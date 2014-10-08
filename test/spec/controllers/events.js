@@ -117,7 +117,7 @@ describe('controllers events', function() {
         var $httpBackend, $scope, $state, EventCtrl;
 
         // Initialize the controller and a mock scope
-        beforeEach(inject(function(_$httpBackend_, $controller, _$state_, $rootScope) {
+        beforeEach(inject(function(_$httpBackend_, $controller, _$state_, alert, $rootScope) {
 
             $httpBackend = _$httpBackend_;
             $httpBackend.expectGET('http://localhost:8080/events/1').respond({
@@ -129,6 +129,10 @@ describe('controllers events', function() {
 
             $state = _$state_;
             $state.go = jasmine.createSpy();
+
+            alert.confirm = function () {
+            	return true;
+            };
 
             EventCtrl = $controller('EventCtrl', {
                 $scope: $scope,
