@@ -75,11 +75,13 @@
             $scope.type = event.type;
         });
         $scope.deleteEvent = function() {
-            $scope.deleteLoading = true;
-            $scope.event.$delete(function () {
-                alert.success('The Event has been deleted successfully.');
-                $state.go('events.list');
-            });
+        	if (confirm('Deleting the Event will also delete all data associated with this Event. Click OK to proceed.')) {
+	            $scope.deleteLoading = true;
+	            $scope.event.$delete(function () {
+	                alert.success('The Event has been deleted successfully.');
+	                $state.go('events.list');
+	            });
+        	}
         };
     });
     angular.module('eventsApp').controller('EventCreateCtrl', function($scope, Event) {
