@@ -5,6 +5,8 @@
     <li class="active">{{id ? (title || " ") : "Add Skill"}}</li>
 </ol>
 
+<alerts></alerts>
+
 <p class="pull-right" ng-show="id">
     <button ng-click="setStatusRemoved()" class="btn btn-danger" title="Set status of Skill to removed, will prevent it from appearing in lists">Mark Skill as Removed<spinner ng-show="setStatusRemovedLoading" class="ng-hide"></spinner></button>
     <button ng-click="deleteSkill()" class="btn btn-default" title="Permanently delete Skill and all its data"><span class="text-danger">Delete Skill</span><spinner ng-show="deleteLoading" class="ng-hide"></spinner></button>
@@ -16,6 +18,7 @@
     <li ui-sref-active="active"><a ui-sref="events.skill.form">Skill</a></li>
     <li ui-sref-active="active"><a ui-sref="events.skill.translations">Translations</a></li>
     <li ui-sref-active="active"><a ui-sref="events.skill.photos">Photos</a></li>
+    <li ui-sref-active="active"><a ui-sref="events.skill.clone">Copy</a></li>
 </ul>
 
 <div id="content" ui-view>

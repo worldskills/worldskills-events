@@ -25,11 +25,21 @@
             }
         });
     });
-    
+
     angular.module('eventsApp').service('SkillTranslation', function($resource, $http, WORLDSKILLS_API_EVENTS) {
         return $resource(WORLDSKILLS_API_EVENTS + '/skills/:id/translations/:locale', {
             id: '@id',
             locale: '@locale'
         });
     });
+
+    angular.module('eventsApp').service('SkillClone', function($resource, WORLDSKILLS_API_EVENTS) {
+        return $resource(WORLDSKILLS_API_EVENTS + '/skills/:id/clone', {
+        }, {
+            clone: {
+                method: 'POST'
+            }
+        });
+    });
+
 })();

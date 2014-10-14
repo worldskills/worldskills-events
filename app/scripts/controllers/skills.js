@@ -26,25 +26,25 @@
             });
         });
         $scope.setStatusRemoved = function() {
-        	if (alert.confirm('Setting the status of the Skill to Removed will hide it from all Skill lists. The data associated with it will not be deleted. Click OK to proceed.')) {
-	            $scope.setStatusRemovedLoading = true;
-	            Skill.get({id: $scope.id}, function (skill) {
-	            	skill.status = 'removed';
-	            	skill.$update(function () {
-	                    alert.success('The status of the Skill has been successfully set to Removed.');
-	                    $state.go('events.event.skills', {id: $scope.skill.event.id});
-	                });
-	            });
-        	}
+           if (alert.confirm('Setting the status of the Skill to Removed will hide it from all Skill lists. The data associated with it will not be deleted. Click OK to proceed.')) {
+               $scope.setStatusRemovedLoading = true;
+               Skill.get({id: $scope.id}, function (skill) {
+                  skill.status = 'removed';
+                  skill.$update(function () {
+                       alert.success('The status of the Skill has been successfully set to Removed.');
+                       $state.go('events.event.skills', {id: $scope.skill.event.id});
+                   });
+               });
+           }
         };
         $scope.deleteSkill = function() {
-        	if (alert.confirm('Deleting the Skill will also delete all data associated with this Skill. Click OK to proceed.')) {
-	            $scope.deleteLoading = true;
-	            $scope.skill.$delete(function () {
-	                alert.success('The Skill has been deleted successfully.');
-	                $state.go('events.event.skills', {id: $scope.skill.event.id});
-	            });
-        	}
+           if (alert.confirm('Deleting the Skill will also delete all data associated with this Skill. Click OK to proceed.')) {
+               $scope.deleteLoading = true;
+               $scope.skill.$delete(function () {
+                   alert.success('The Skill has been deleted successfully.');
+                   $state.go('events.event.skills', {id: $scope.skill.event.id});
+               });
+           }
         };
     });
     angular.module('eventsApp').controller('SkillFormCtrl', function($scope, $stateParams, Skill, $http, WORLDSKILLS_API_EVENTS, $translate, $state, WorldSkills, alert) {
@@ -63,6 +63,24 @@
                         $state.go('events.event.skills', {id: $scope.skill.event.id});
                     });
                 }
+            }
+        };
+    });
+    angular.module('eventsApp').controller('SkillCloneCtrl', function($scope, $stateParams, Skill, SkillClone, Event, $http, WORLDSKILLS_API_EVENTS, $translate, $state, WorldSkills, alert) {
+        Event.query({limit: 300}, function (data) {
+            $scope.events = data;
+        });
+        $scope.clonedSkill = {
+           event: {id: null}
+        };
+        $scope.clone = function() {
+            $scope.submitted = true;
+            if ($scope.form.$valid) {
+                $scope.loading = true;
+                SkillClone.clone({id: $scope.skill.id}, $scope.clonedSkill, function (skill) {
+                    alert.success('The Skill has been copied successfully. Please edit the copy of the Skill below.');
+                    $state.go('events.skill.form', {id: skill.id});
+                });
             }
         };
     });

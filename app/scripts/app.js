@@ -113,6 +113,13 @@
             data: {
                 requireLoggedIn: true
             }
+        }).state('events.skill.clone', {
+            url: '/copy',
+            templateUrl: 'views/skill-clone.html',
+            controller: 'SkillCloneCtrl',
+            data: {
+                requireLoggedIn: true
+            }
         }).state('events.skill.photos', {
             url: '/photos',
             templateUrl: 'views/skill-photos.html',
