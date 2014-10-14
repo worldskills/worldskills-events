@@ -67,7 +67,7 @@
         };
     });
     angular.module('eventsApp').controller('SkillCloneCtrl', function($scope, $stateParams, Skill, SkillClone, Event, $http, WORLDSKILLS_API_EVENTS, $translate, $state, WorldSkills, alert) {
-        Event.query({limit: 300}, function (data) {
+        Event.query({limit: 300, type: 'competition'}, function (data) {
             $scope.events = data;
         });
         $scope.clonedSkill = {
