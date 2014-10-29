@@ -6,6 +6,6 @@
     eventsApp.constant('WORLDSKILLS_API_IMAGES', 'http://diaz.worldskills.org:8080/images');
     eventsApp.constant('WORLDSKILLS_CLIENT_ID', '269f5d2');
     eventsApp.constant('WORLDSKILLS_API_AUTH', 'http://diaz.worldskills.org:8080/auth');
-    eventsApp.constant('WORLDSKILLS_AUTHORIZE_URL', 'http://auth.diaz.worldskills.org/oauth/authorize');
+    eventsApp.constant('WORLDSKILLS_AUTHORIZE_URL', 'https://staging-auth.worldskills.org/oauth/authorize');
 
 })();
