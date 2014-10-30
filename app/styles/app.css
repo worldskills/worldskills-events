@@ -43,3 +43,7 @@
 .ng-hide {
     display: none !important;
 }
+
+footer {
+    padding-bottom: 70px;
+}
