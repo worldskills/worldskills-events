@@ -39,7 +39,7 @@
         $scope.sponsor = Sponsor.get({id: $scope.id}, function (sponsor) {
             $scope.title = sponsor.name;
             if (typeof sponsor.logo != 'undefined') {
-                $scope.logoImage = WorldSkills.getLink(sponsor.logo.links, 'alternate');
+                $scope.logoImage = WorldSkills.getLink(sponsor.logo.links, 'alternate') + '_small';
             }
         });
         $scope.removeLogo = false;
