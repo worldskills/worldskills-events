@@ -35,7 +35,7 @@ describe('controllers events', function() {
                     'AQ'
                 ]
             });
-            $httpBackend.expectGET('http://localhost:8080/auth/ws_entities').respond({
+            $httpBackend.expectGET('http://localhost:8080/auth/ws_entities?limit=100').respond({
                 entities: [
                     {
                         id: 1,
@@ -175,7 +175,19 @@ describe('controllers events', function() {
                     'AQ'
                 ]
             });
-            $httpBackend.expectGET('http://localhost:8080/auth/ws_entities?role=EditEvents&roleApp=400').respond({
+            $httpBackend.expectGET('http://localhost:8080/auth/ws_entities?limit=100&role=EditEvents&roleApp=400').respond({
+                entities: [
+                    {
+                        id: 1,
+                        name: {
+                            lang_code: 'en',
+                            text: 'WorldSkills International'
+                        },
+                        code: 'WSI'
+                    }
+                ]
+            });
+            $httpBackend.expectGET('http://localhost:8080/auth/ws_entities?limit=100').respond({
                 entities: [
                     {
                         id: 1,
