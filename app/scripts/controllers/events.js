@@ -43,7 +43,10 @@
         });
         $http({
             method: 'GET',
-            url: WORLDSKILLS_API_AUTH + '/ws_entities'
+            url: WORLDSKILLS_API_AUTH + '/ws_entities',
+            params: {
+                limit: 100
+            }
         }).success(function(data, status, headers, config) {
             $scope.entities = data.ws_entity_list;
         });
