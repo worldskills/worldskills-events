@@ -24,7 +24,7 @@
         <div class="col-sm-4">
             <select ui-select2="{allowClear: true}" class="form-control" id="organizer" name="organizer" ng-model="event.organizer.id">
                 <option></option>
-                <option ng-repeat="entity in entities" value="{{entity.id}}">{{entity.name.text}}</option>
+                <option ng-repeat="entity in organizers" value="{{entity.id}}">{{entity.name.text}}</option>
             </select>
         </div>
         <div class="col-sm-5">

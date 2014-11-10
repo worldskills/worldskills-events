@@ -104,11 +104,21 @@
             method: 'GET',
             url: WORLDSKILLS_API_AUTH + '/ws_entities',
             params: {
+                limit: 100,
                 role: ROLE_EDIT_EVENTS,
                 roleApp: ROLE_APP_EVENTS
             }
         }).success(function(data, status, headers, config) {
             $scope.entities = data.ws_entity_list;
+        });
+        $http({
+            method: 'GET',
+            url: WORLDSKILLS_API_AUTH + '/ws_entities',
+            params: {
+                limit: 100
+            }
+        }).success(function(data, status, headers, config) {
+            $scope.organizers = data.ws_entity_list;
         });
         $scope.save = function() {
             $scope.submitted = true;
