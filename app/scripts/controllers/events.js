@@ -23,12 +23,15 @@
             $location.search('sort', $scope.pagination.sort);
         }
         $scope.load = function (page) {
+            $scope.loading = true;
+            $scope.events.events = [];
             var filters = angular.copy($scope.filters);
             filters.sort = $scope.pagination.sort;
             filters.before = $filter('date')(filters.before, 'yyyy-MM-dd');
             filters.after = $filter('date')(filters.after, 'yyyy-MM-dd');
             filters.offset = $scope.pagination.itemsPerPage * (page - 1); 
             Event.query(filters, function (data) {
+                $scope.loading = false;
                 $scope.events = data;
                 $scope.pagination.currentPage = page;
             });
@@ -50,6 +53,9 @@
         }).success(function(data, status, headers, config) {
             $scope.entities = data.ws_entity_list;
         });
+        $scope.events = {
+            events: []
+        };
         $scope.search = function () {
             $scope.load($scope.pagination.currentPage);
         };

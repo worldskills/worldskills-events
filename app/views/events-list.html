@@ -14,7 +14,7 @@
 
 <div class="row">
     <div class="col-sm-9">
-        <div class="table-responsive">
+        <div class="table-responsive ws-events-list">
             <table class="table table-striped">
                 <colgroup>
                     <col width="10%" />
@@ -33,7 +33,9 @@
                         <th>Country</th>
                     </tr>
                 </thead>
-                <tfoot><tr><td colspan="4"></td></tr></tfoot>
+                <tfoot>
+                    <tr ng-show="!loading"><td colspan="4"></td></tr>
+                </tfoot>
                 <tbody>
                     <tr ng-repeat="event in events.events">
                         <td><a ui-sref="events.event.form({ id: event.id })">{{event.id}}</a></td>
@@ -41,8 +43,11 @@
                         <td>{{event.start_date|date:'d MMMM yyyy'}}</td>
                         <td>{{event.country|translate}}</td>
                     </tr>
-                    <tr ng-show="events.total_count == 0">
+                    <tr ng-show="!loading && events.total_count == 0">
                         <td colspan="4">No events found.</td>
+                    </tr>
+                    <tr ng-show="loading">
+                        <td colspan="4"><ws-spinner></ws-spinner></td>
                     </tr>
                 </tbody>
             </table>

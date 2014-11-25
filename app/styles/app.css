@@ -23,6 +23,10 @@
     margin-bottom: 0;
 }
 
+.ws-events-list .spinner {
+    margin: 262px auto 263px;
+}
+
 .ws-image-thumbnail {
     width: 160px;
     height: 90px;
