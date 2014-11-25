@@ -148,6 +148,7 @@
         };
     });
     angular.module('eventsApp').controller('EventSkillsCtrl', function($scope, $stateParams, Event, $http, $translate, $state, WorldSkills) {
+        $scope.loading = true;
         $scope.skills = [];
         var getSkills = function (url) {
             $http({method: 'GET', url: url}).success(function(data, status, headers, config) {
@@ -157,6 +158,8 @@
                 var next = WorldSkills.getLink(data.links, 'next');
                 if (next) {
                     getSkills(next);
+                } else {
+                    $scope.loading = false;
                 }
                 if (data.total_count == 0) {
                     $scope.skills = null;
