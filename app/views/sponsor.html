@@ -6,7 +6,7 @@
 </ol>
 
 <p class="pull-right">
-    <button ng-click="deleteSponsor()" class="btn btn-danger" id="deleteEntry">Delete Sponsor<spinner ng-show="deleteLoading" class="ng-hide"></spinner></button>
+    <button ng-click="deleteSponsor()" class="btn btn-danger" id="deleteEntry">Delete Sponsor<ws-text-spinner ng-show="deleteLoading" class="ng-hide"></ws-text-spinner></button>
 </p>
 
 <h1>{{id ? (title || " ") : "Add Sponsor"}}</h1>
@@ -44,7 +44,7 @@
         </div>
         <div class="form-group">
             <div class="col-sm-offset-3 col-sm-9">
-                <button type="submit" class="btn btn-success">Save<spinner ng-show="loading" class="ng-hide"></spinner></button>
+                <button type="submit" class="btn btn-success">Save<ws-text-spinner ng-show="loading" class="ng-hide"></ws-text-spinner></button>
                 <a ui-sref="events.event.sponsors({id: sponsor.event.id})" class="btn btn-default">Cancel</a>
             </div>
         </div>
