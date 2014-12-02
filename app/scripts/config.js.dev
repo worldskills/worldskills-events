@@ -6,6 +6,6 @@
     eventsApp.constant('WORLDSKILLS_API_IMAGES', 'http://localhost:8080/images');
     eventsApp.constant('WORLDSKILLS_CLIENT_ID', '269f5d2');
     eventsApp.constant('WORLDSKILLS_API_AUTH', 'http://localhost:8080/auth');
-    eventsApp.constant('WORLDSKILLS_AUTHORIZE_URL', 'http://worldskills_auth.dev/oauth/authorize');
+    eventsApp.constant('WORLDSKILLS_AUTHORIZE_URL', 'http://worldskills-auth.dev/oauth/authorize');
 
 })();
