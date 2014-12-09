@@ -129,6 +129,17 @@
         }).success(function(data, status, headers, config) {
             $scope.organizers = data.ws_entity_list;
         });
+        $scope.updateStartDate = function () {
+            if (typeof $scope.event.end_date == 'undefined') {
+                $scope.event.end_date = $scope.event.start_date;
+            }
+            if (typeof $scope.event.competition_start_date == 'undefined') {
+                $scope.event.competition_start_date = $scope.event.start_date;
+            }
+            if (typeof $scope.event.competition_end_date == 'undefined') {
+                $scope.event.competition_end_date = $scope.event.competition_start_date;
+            }
+        };
         $scope.save = function() {
             $scope.submitted = true;
             if ($scope.form.$valid) {
