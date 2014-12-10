@@ -133,12 +133,6 @@
             if (typeof $scope.event.end_date == 'undefined') {
                 $scope.event.end_date = $scope.event.start_date;
             }
-            if (typeof $scope.event.competition_start_date == 'undefined') {
-                $scope.event.competition_start_date = $scope.event.start_date;
-            }
-            if (typeof $scope.event.competition_end_date == 'undefined') {
-                $scope.event.competition_end_date = $scope.event.competition_start_date;
-            }
         };
         $scope.save = function() {
             $scope.submitted = true;

@@ -66,21 +66,15 @@
         </div>
     </div>
     <div class="form-group" ng-class="{'has-error': submitted && form.competition_start_date.$invalid}" ng-if="event.type == 'competition'">
-        <label for="competition_start_date" class="col-sm-3 control-label">Competition Start date <span class="required">*</span></label>
+        <label for="competition_start_date" class="col-sm-3 control-label">Competition Start date</label>
         <div class="col-sm-3">
-            <input type="text" datepicker-popup class="form-control" id="competition_start_date" name="competition_start_date" required ng-model="event.competition_start_date">
-        </div>
-        <div class="col-sm-offset-1 col-sm-5">
-            <span class="help-block" ng-show="submitted && form.start_date.$error.required">Please enter a Competition start date!</span>
+            <input type="text" datepicker-popup class="form-control" id="competition_start_date" name="competition_start_date" ng-model="event.competition_start_date">
         </div>
     </div>
     <div class="form-group" ng-class="{'has-error': submitted && form.competition_end_date.$invalid}" ng-if="event.type == 'competition'">
-        <label for="competition_end_date" class="col-sm-3 control-label">Competition End date <span class="required">*</span></label>
+        <label for="competition_end_date" class="col-sm-3 control-label">Competition End date</label>
         <div class="col-sm-3">
-            <input type="text" datepicker-popup class="form-control" id="competition_end_date" name="competition_end_date" required ng-model="event.competition_end_date">
-        </div>
-        <div class="col-sm-offset-1 col-sm-5">
-            <span class="help-block" ng-show="submitted && form.competition_end_date.$error.required">Please enter a Competition end date!</span>
+            <input type="text" datepicker-popup class="form-control" id="competition_end_date" name="competition_end_date" ng-model="event.competition_end_date">
         </div>
     </div>
     <hr/>
