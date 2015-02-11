@@ -135,8 +135,7 @@
                 $scope.title = language + ' Tanslation ' + skill.name.text;
            });
         });
-        Skill.get({id: $scope.skillId, l: $scope.locale}, function (translation) {
-            $scope.translation = translation;
+        $scope.translation = Skill.get({id: $scope.skillId, l: $scope.locale}, function (translation) {
             if (!$scope.translation.description) {
                 $scope.translation.description = {text: '', lang_code: ''};
             }
