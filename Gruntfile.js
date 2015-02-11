@@ -175,7 +175,14 @@ module.exports = function (grunt) {
             '*.html',
             'views/{,*/}*.html',
             'images/{,*/}*.{webp}',
-            'languages/{,*/}*.json',
+            'languages/{,*/}*.json'
+          ]
+        }, {
+          expand: true,
+          cwd: '<%= yeoman.app %>/ckeditor',
+          dest: '<%= yeoman.dist %>/ckeditor',
+          src: [
+            '**'
           ]
         }, {
           expand: true,
@@ -190,6 +197,13 @@ module.exports = function (grunt) {
           dest: '<%= yeoman.dist %>/styles',
           src: [
             '*.png'
+          ]
+        }, {
+          expand: true,
+          cwd: '<%= yeoman.app %>/bower_components/ckeditor',
+          dest: '<%= yeoman.dist %>/bower_components/ckeditor',
+          src: [
+            '**'
           ]
         }]
       },
