@@ -30,9 +30,14 @@ describe('controllers events', function() {
         beforeEach(inject(function(_$httpBackend_, $controller, $rootScope) {
 
             $httpBackend = _$httpBackend_;
-            $httpBackend.expectGET('http://localhost:8080/events/countries').respond({
-                countries: [
-                    'AQ'
+            $httpBackend.expectGET('http://localhost:8080/org/countries').respond({
+                country_list: [
+                    {
+                        code: 'AQ',
+                        name: {
+                            text: 'Antarctica'
+                        }
+                    }
                 ]
             });
             $httpBackend.expectGET('http://localhost:8080/auth/ws_entities?limit=100').respond({
@@ -170,9 +175,14 @@ describe('controllers events', function() {
         beforeEach(inject(function(_$httpBackend_, $controller, _$state_, $rootScope, Event) {
 
             $httpBackend = _$httpBackend_;
-            $httpBackend.expectGET('http://localhost:8080/events/countries').respond({
-                countries: [
-                    'AQ'
+            $httpBackend.expectGET('http://localhost:8080/org/countries').respond({
+                country_list: [
+                    {
+                        code: 'AQ',
+                        name: {
+                            text: 'Antarctica'
+                        }
+                    }
                 ]
             });
             $httpBackend.expectGET('http://localhost:8080/auth/ws_entities?limit=100&role=EditEvents&roleApp=400').respond({

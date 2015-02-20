@@ -9,7 +9,7 @@
         };
     });
 
-    angular.module('eventsApp').controller('EventsListCtrl', function($scope, $stateParams, Event, $http, WORLDSKILLS_API_EVENTS, WORLDSKILLS_API_AUTH, $translate, $filter, $location) {
+    angular.module('eventsApp').controller('EventsListCtrl', function($scope, $stateParams, Event, $http, WORLDSKILLS_API_EVENTS, WORLDSKILLS_API_ORGANIZATIONS, WORLDSKILLS_API_AUTH, $translate, $filter, $location) {
         var page = parseInt($stateParams.page, 10);
         var sort = $stateParams.sort;
         if (page) {
@@ -36,12 +36,10 @@
                 $scope.pagination.currentPage = page;
             });
         };
-        $http({method: 'GET', url: WORLDSKILLS_API_EVENTS + '/countries'}).success(function(data, status, headers, config) {
+        $http({method: 'GET', url: WORLDSKILLS_API_ORGANIZATIONS + '/countries'}).success(function(data, status, headers, config) {
             $scope.countries = [];
-            angular.forEach(data.countries, function (code) {
-                $translate(code).then(function (name) {
-                    $scope.countries.push({code: code, name: name});
-                });
+            angular.forEach(data.country_list, function (country) {
+                $scope.countries.push({code: country.code, name: country.name.text});
             });
         });
         $http({
@@ -98,13 +96,11 @@
         $scope.event.code = '';
         $scope.event.town = '';
     });
-    angular.module('eventsApp').controller('EventFormCtrl', function($scope, $stateParams, Event, $http, WORLDSKILLS_API_EVENTS, WORLDSKILLS_API_AUTH, $translate, $state, alert) {
-        $http({method: 'GET', url: WORLDSKILLS_API_EVENTS + '/countries'}).success(function(data, status, headers, config) {
+    angular.module('eventsApp').controller('EventFormCtrl', function($scope, $stateParams, Event, $http, WORLDSKILLS_API_EVENTS, WORLDSKILLS_API_ORGANIZATIONS, WORLDSKILLS_API_AUTH, $translate, $state, alert) {
+        $http({method: 'GET', url: WORLDSKILLS_API_ORGANIZATIONS + '/countries'}).success(function(data, status, headers, config) {
             $scope.countries = [];
-            angular.forEach(data.countries, function (code) {
-                $translate(code).then(function (name) {
-                    $scope.countries.push({code: code, name: name});
-                });
+            angular.forEach(data.country_list, function (country) {
+                $scope.countries.push({code: country.code, name: country.name.text});
             });
         });
         var ROLE_EDIT_EVENTS = 'EditEvents';

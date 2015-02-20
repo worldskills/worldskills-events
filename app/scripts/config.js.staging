@@ -4,6 +4,7 @@
     var eventsApp = angular.module('eventsApp'); 
     eventsApp.constant('WORLDSKILLS_API_EVENTS', 'https://staging-api.worldskills.org/events');
     eventsApp.constant('WORLDSKILLS_API_IMAGES', 'https://staging-api.worldskills.org/images');
+    eventsApp.constant('WORLDSKILLS_API_ORGANIZATIONS', 'https://staging-api.worldskills.org/org');
     eventsApp.constant('WORLDSKILLS_CLIENT_ID', '269f5d2');
     eventsApp.constant('WORLDSKILLS_API_AUTH', 'https://staging-api.worldskills.org/auth');
     eventsApp.constant('WORLDSKILLS_AUTHORIZE_URL', 'https://staging-auth.worldskills.org/oauth/authorize');
