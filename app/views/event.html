@@ -6,7 +6,8 @@
 <alerts></alerts>
 
 <p class="pull-right">
-    <button ng-click="deleteEvent()" class="btn btn-danger" id="deleteEntry">Delete Event<ws-text-spinner ng-show="deleteLoading" class="ng-hide"></ws-text-spinner></button>
+    <button ng-click="cloneEvent()" class="btn btn-default">Duplicate<span class="visible-lg-inline"> Event</span><ws-text-spinner ng-show="cloneLoading" class="ng-hide"></ws-text-spinner></button>
+    <button ng-click="deleteEvent()" class="btn btn-danger">Delete<span class="visible-lg-inline"> Event</span><ws-text-spinner ng-show="deleteLoading" class="ng-hide"></ws-text-spinner></button>
 </p>
 
 <h1>{{title || " "}}</h1>

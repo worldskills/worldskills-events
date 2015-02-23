@@ -33,6 +33,10 @@
             update: {
                 method: 'PUT',
                 transformRequest: convertDate
+            },
+            clone: {
+                method: 'POST',
+                url: WORLDSKILLS_API_EVENTS + '/:id/clone'
             }
         });
     });

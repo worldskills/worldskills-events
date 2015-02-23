@@ -81,14 +81,23 @@
             $scope.title = event.name;
             $scope.type = event.type;
         });
+        $scope.cloneEvent = function() {
+            if (alert.confirm('Duplicating the Event will create a copy with all data associated (Sponsors, Skills, etc.). Click OK to proceed.')) {
+                $scope.cloneLoading = true;
+                Event.clone({id: $scope.id}, function (cloneEvent) {
+                    alert.success('The Event has been duplicated successfully. Please edit the information of the duplicate below.');
+                    $state.go('events.event.form', { id: cloneEvent.id });
+                });
+            }
+        };
         $scope.deleteEvent = function() {
-        	if (alert.confirm('Deleting the Event will also delete all data associated with this Event. Click OK to proceed.')) {
-	            $scope.deleteLoading = true;
-	            $scope.event.$delete(function () {
-	                alert.success('The Event has been deleted successfully.');
-	                $state.go('events.list');
-	            });
-        	}
+            if (alert.confirm('Deleting the Event will also delete all data associated with this Event. Click OK to proceed.')) {
+                $scope.deleteLoading = true;
+                $scope.event.$delete(function () {
+                    alert.success('The Event has been deleted successfully.');
+                    $state.go('events.list');
+                });
+            }
         };
     });
     angular.module('eventsApp').controller('EventCreateCtrl', function($scope, Event) {
