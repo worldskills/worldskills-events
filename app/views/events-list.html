@@ -84,7 +84,7 @@
                         <div class="form-group">
                             <label for="country">Country</label>
                             <select ui-select2 class="form-control" id="country" name="country" required ng-model="filters.country">
-                                <option ng-repeat="country in countries|orderBy:'name'" value="{{country.code}}">{{country.code|translate}}</option>
+                                <option ng-repeat="country in countries|orderBy:'name'" value="{{country.code}}">{{country.name}}</option>
                             </select>
                         </div>
                         <div class="form-group">

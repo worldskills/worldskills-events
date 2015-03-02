@@ -82,7 +82,7 @@
         <label for="country" class="col-sm-3 control-label">Country <span class="required">*</span></label>
         <div class="col-sm-4">
             <select ui-select2 class="form-control" id="country" name="country" required ng-model="event.country">
-                <option ng-repeat="country in countries|orderBy:'name'" value="{{country.code}}">{{country.code|translate}}</option>
+                <option ng-repeat="country in countries|orderBy:'name'" value="{{country.code}}">{{country.name}}</option>
             </select>
         </div>
         <div class="col-sm-5">
