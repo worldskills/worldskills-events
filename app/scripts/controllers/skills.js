@@ -5,6 +5,9 @@
         $scope.skill = new Skill();
         $scope.skill.name = {text: '', lang_code: 'en'};
         $scope.skill.description = {text: '', lang_code: 'en'};
+        $scope.skill.description_industry_action = {text: '', lang_code: 'en'};
+        $scope.skill.description_required_skills = {text: '', lang_code: 'en'};
+        $scope.skill.description_competition_action = {text: '', lang_code: 'en'};
         $scope.skill.event = Event.get({id: $stateParams.eventId});
     });
 
