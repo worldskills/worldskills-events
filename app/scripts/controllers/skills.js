@@ -16,6 +16,18 @@
         $scope.translations = [];
         $scope.skill = Skill.get({id: $scope.id}, function (skill) {
             $scope.title = skill.name.text;
+            if (!$scope.skill.description) {
+                $scope.skill.description = {text: '', lang_code: 'en'};
+            }
+            if (!$scope.skill.description_industry_action) {
+                $scope.skill.description_industry_action = {text: '', lang_code: 'en'};
+            }
+            if (!$scope.skill.description_required_skills) {
+                $scope.skill.description_required_skills = {text: '', lang_code: 'en'};
+            }
+            if (!$scope.skill.description_competition_action) {
+                $scope.skill.description_competition_action = {text: '', lang_code: 'en'};
+            }
             var url = WorldSkills.getLink(skill.event.links, 'sectors');
             $http({method: 'GET', url: url}).success(function(data, status, headers, config) {
                 $scope.sectors = data.sectors;
