@@ -178,6 +178,7 @@
         };
         $scope.event.$promise.then(function(data) {
             var url = WorldSkills.getLink(data.links, 'skills');
+            url += '?limit=50';
             getSkills(url);
         });
     });
