@@ -11,9 +11,10 @@
         $scope.skill.event = Event.get({id: $stateParams.eventId});
     });
 
-    angular.module('eventsApp').controller('SkillCtrl', function($scope, $stateParams, Skill, $http, WORLDSKILLS_API_EVENTS, $translate, $state, WorldSkills, alert) {
+    angular.module('eventsApp').controller('SkillCtrl', function($scope, $stateParams, Skill, $http, $q, WORLDSKILLS_API_EVENTS, $translate, $state, WorldSkills, alert) {
         $scope.id = $stateParams.id;
         $scope.translations = [];
+        $scope.translationsLoading = true;
         $scope.skill = Skill.get({id: $scope.id}, function (skill) {
             $scope.title = skill.name.text;
             if (!$scope.skill.description) {
@@ -32,12 +33,16 @@
             $http({method: 'GET', url: url}).success(function(data, status, headers, config) {
                 $scope.sectors = data.sectors;
             });
+            var translationPromises = [];
             angular.forEach($scope.skill.links, function (link) {
                 if (link.rel == 'i18n') {
-                    $http({method: 'GET', url: link.href}).success(function(data, status, headers, config) {
+                    translationPromises.push($http({method: 'GET', url: link.href}).success(function(data, status, headers, config) {
                         $scope.translations.push(new Skill(data));
-                    });
+                    }));
                 }
+            });
+            $q.all(translationPromises).then(function() {
+                $scope.translationsLoading = false;
             });
         });
         $scope.setStatusRemoved = function() {
