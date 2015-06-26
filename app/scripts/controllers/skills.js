@@ -206,11 +206,12 @@
             $scope.submitted = true;
             if ($scope.form.$valid) {
                 $scope.loading = true;
-                $scope.translation.description.lang_code = $scope.translation.name.lang_code;
-                $scope.translation.description_industry_action.lang_code = $scope.translation.name.lang_code;
-                $scope.translation.description_required_skills.lang_code = $scope.translation.name.lang_code;
-                $scope.translation.description_competition_action.lang_code = $scope.translation.name.lang_code;
-                $scope.translation.$update(function () {
+                var langCode = $scope.translation.name.lang_code;
+                $scope.translation.description.lang_code = langCode;
+                $scope.translation.description_industry_action.lang_code = langCode;
+                $scope.translation.description_required_skills.lang_code = langCode;
+                $scope.translation.description_competition_action.lang_code = langCode;
+                $scope.translation.$update({l: langCode}, function () {
                     alert.success('The translation has been updated successfully.');
                     $state.go('events.skill.translations', {id: $scope.skill.id});
                 });
