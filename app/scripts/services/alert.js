@@ -14,6 +14,7 @@
         this.messages = [];
         this.success = addMessage('success');
         this.warning = addMessage('warning');
+        this.error = addMessage('danger');
         this.info = addMessage('info');
         this.setAllDisplayed = function () {
             angular.forEach(this.messages, function (message) {
