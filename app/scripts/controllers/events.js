@@ -87,6 +87,9 @@
                 Event.clone({id: $scope.id}, function (cloneEvent) {
                     alert.success('The Event has been duplicated successfully. Please edit the information of the duplicate below.');
                     $state.go('events.event.form', { id: cloneEvent.id });
+                }, function (response) {
+                    alert.warning('Error duplicating Event - ' + response.data.code + ': ' + response.data.user_msg);
+                    $state.go('events.list');
                 });
             }
         };
