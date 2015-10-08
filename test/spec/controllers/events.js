@@ -390,10 +390,11 @@ describe('controllers events', function() {
 
         it('should initialize an event', function() {
 
-            expect($scope.event).toEqualData({
-                code: '',
-                town: ''
-            });
+            expect($scope.event).toEqual(jasmine.any(Object));
+            expect($scope.event.start_date).toEqual(jasmine.any(Date));
+            expect($scope.event.end_date).toEqual(jasmine.any(Date));
+            expect($scope.event.code).toBe('');
+            expect($scope.event.town).toBe('');
         });
     });
 });
