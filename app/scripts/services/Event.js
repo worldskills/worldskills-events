@@ -20,23 +20,40 @@
             return angular.toJson(event);
         }
 
+        function convertResponseDate(data) {
+            if (angular.isString(data)) {
+                data = angular.fromJson(data);
+                data.start_date = new Date($filter('date')(data.start_date, 'medium'));
+                data.end_date = new Date($filter('date')(data.end_date, 'medium'));
+            }
+            return data;
+        }
+
         return $resource(WORLDSKILLS_API_EVENTS + '/:id', {
             id: '@id'
         }, {
+            get: {
+                method: 'GET',
+                transformResponse: convertResponseDate
+            },
             query: {
-                method: 'GET'
+                method: 'GET',
+                transformResponse: convertResponseDate
             },
             save: {
                 method: 'POST',
-                transformRequest: convertDate
+                transformRequest: convertDate,
+                transformResponse: convertResponseDate
             },
             update: {
                 method: 'PUT',
-                transformRequest: convertDate
+                transformRequest: convertDate,
+                transformResponse: convertResponseDate
             },
             clone: {
                 method: 'POST',
-                url: WORLDSKILLS_API_EVENTS + '/:id/clone'
+                url: WORLDSKILLS_API_EVENTS + '/:id/clone',
+                transformResponse: convertResponseDate
             }
         });
     });
