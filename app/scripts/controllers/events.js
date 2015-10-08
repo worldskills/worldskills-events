@@ -110,7 +110,7 @@
         $scope.event.code = '';
         $scope.event.town = '';
     });
-    angular.module('eventsApp').controller('EventFormCtrl', function($scope, $stateParams, Event, $http, WORLDSKILLS_API_EVENTS, WORLDSKILLS_API_ORGANIZATIONS, WORLDSKILLS_API_AUTH, $translate, $state, alert) {
+    angular.module('eventsApp').controller('EventFormCtrl', function($scope, $stateParams, Event, $http, $filter, WORLDSKILLS_API_EVENTS, WORLDSKILLS_API_ORGANIZATIONS, WORLDSKILLS_API_AUTH, $translate, $state, alert) {
         $http({method: 'GET', url: WORLDSKILLS_API_ORGANIZATIONS + '/countries'}).success(function(data, status, headers, config) {
             $scope.countries = [];
             angular.forEach(data.country_list, function (country) {
@@ -139,8 +139,12 @@
         }).success(function(data, status, headers, config) {
             $scope.organizers = data.ws_entity_list;
         });
-        $scope.updateStartDate = function () {
-            if (typeof $scope.event.end_date == 'undefined') {
+        $scope.updateStartDate = function (before) {
+            var diff = $scope.event.start_date.getTime() - parseInt(before, 10);
+            var endDate = $scope.event.end_date;
+            if (angular.isDate(endDate)) {
+                $scope.event.end_date = new Date(endDate.getTime() + diff);
+            } else {
                 $scope.event.end_date = $scope.event.start_date;
             }
         };

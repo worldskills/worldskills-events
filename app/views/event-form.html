@@ -50,7 +50,7 @@
     <div class="form-group" ng-class="{'has-error': submitted && form.start_date.$invalid}">
         <label for="start_date" class="col-sm-3 control-label">Start date <span class="required">*</span></label>
         <div class="col-sm-3">
-            <input type="text" datepicker-popup class="form-control" id="start_date" name="start_date" required ng-model="event.start_date" ng-change="updateStartDate()">
+            <input type="text" datepicker-popup class="form-control" id="start_date" name="start_date" required ng-model="event.start_date" ng-change="updateStartDate('{{ event.start_date.getTime() }}')">
         </div>
         <div class="col-sm-offset-1 col-sm-5">
             <span class="help-block" ng-show="submitted && form.start_date.$error.required">Please enter a start date!</span>
