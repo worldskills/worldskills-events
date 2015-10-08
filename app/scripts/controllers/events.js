@@ -105,6 +105,8 @@
     });
     angular.module('eventsApp').controller('EventCreateCtrl', function($scope, Event) {
         $scope.event = new Event();
+        $scope.event.start_date = new Date();
+        $scope.event.end_date = new Date();
         $scope.event.code = '';
         $scope.event.town = '';
     });
