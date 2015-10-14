@@ -75,11 +75,14 @@
         $scope.clear();
     });
 
-    angular.module('eventsApp').controller('EventCtrl', function($scope, $stateParams, Event, $http, $translate, $state, alert) {
+    angular.module('eventsApp').controller('EventCtrl', function($scope, $stateParams, Event, auth, EVENTS_APP_CODE, $http, $translate, $state, alert) {
         $scope.id = $stateParams.id;
         $scope.event = Event.get({id: $scope.id}, function (event) {
             $scope.title = event.name;
             $scope.type = event.type;
+            auth.hasUserRole(EVENTS_APP_CODE, ['Admin', 'DeleteEvent'], $scope.event.ws_entity.id).then(function (hasUserRole) {
+                $scope.canDelete = hasUserRole;
+            });
         });
         $scope.cloneEvent = function() {
             if (alert.confirm('Duplicating the Event will create a copy with all data associated (Sponsors, Skills, etc.). Click OK to proceed.')) {
@@ -110,22 +113,20 @@
         $scope.event.code = '';
         $scope.event.town = '';
     });
-    angular.module('eventsApp').controller('EventFormCtrl', function($scope, $stateParams, Event, $http, $filter, WORLDSKILLS_API_EVENTS, WORLDSKILLS_API_ORGANIZATIONS, WORLDSKILLS_API_AUTH, $translate, $state, alert) {
+    angular.module('eventsApp').controller('EventFormCtrl', function($scope, $stateParams, Event, $http, $filter, WORLDSKILLS_API_EVENTS, WORLDSKILLS_API_ORGANIZATIONS, WORLDSKILLS_API_AUTH, EVENTS_APP_CODE, $translate, $state, alert) {
         $http({method: 'GET', url: WORLDSKILLS_API_ORGANIZATIONS + '/countries'}).success(function(data, status, headers, config) {
             $scope.countries = [];
             angular.forEach(data.country_list, function (country) {
                 $scope.countries.push({code: country.code, name: country.name.text});
             });
         });
-        var ROLE_EDIT_EVENTS = 'EditEvents';
-        var ROLE_APP_EVENTS = '400';
         $http({
             method: 'GET',
             url: WORLDSKILLS_API_AUTH + '/ws_entities',
             params: {
                 limit: 100,
-                role: ROLE_EDIT_EVENTS,
-                roleApp: ROLE_APP_EVENTS
+                role: 'EditEvents',
+                roleApp: EVENTS_APP_CODE
             }
         }).success(function(data, status, headers, config) {
             $scope.entities = data.ws_entity_list;

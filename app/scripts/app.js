@@ -5,6 +5,8 @@
         'ngResource', 'ngSanitize', 'ui.router', 'ui.bootstrap', 'ui.select2', 'pascalprecht.translate', 'angularFileUpload', 'worldskills.utils'
     ]);
 
+    eventsApp.constant('EVENTS_APP_CODE', '400');
+
     eventsApp.config(function($stateProvider, $urlRouterProvider) {
         $urlRouterProvider.otherwise(function ($injector, $location) {
             // check for existing redirect
