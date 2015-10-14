@@ -80,7 +80,7 @@
         $scope.event = Event.get({id: $scope.id}, function (event) {
             $scope.title = event.name;
             $scope.type = event.type;
-            auth.hasUserRole(EVENTS_APP_CODE, ['Admin', 'DeleteEvent'], $scope.event.ws_entity.id).then(function (hasUserRole) {
+            auth.hasUserRole(EVENTS_APP_CODE, ['Admin', 'DeleteEvents'], $scope.event.ws_entity.id).then(function (hasUserRole) {
                 $scope.canDelete = hasUserRole;
             });
         });

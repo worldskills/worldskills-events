@@ -41,7 +41,7 @@
             if (sponsor.logo != null) {
                 $scope.logoImage = WorldSkills.getLink(sponsor.logo.links, 'alternate') + '_small';
             }
-            auth.hasUserRole(EVENTS_APP_CODE, ['Admin', 'DeleteEvent'], $scope.sponsor.event.ws_entity.id).then(function (hasUserRole) {
+            auth.hasUserRole(EVENTS_APP_CODE, ['Admin', 'DeleteEvents'], $scope.sponsor.event.ws_entity.id).then(function (hasUserRole) {
                 $scope.canDelete = hasUserRole;
             });
         });
