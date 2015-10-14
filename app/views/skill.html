@@ -9,7 +9,7 @@
 
 <p class="pull-right" ng-show="id">
     <button ng-click="setStatusRemoved()" class="btn btn-danger" title="Set status of Skill to removed, will prevent it from appearing in lists">Mark Skill as Removed<ws-text-spinner ng-show="setStatusRemovedLoading" class="ng-hide"></ws-text-spinner></button>
-    <button ng-click="deleteSkill()" class="btn btn-default" title="Permanently delete Skill and all its data"><span class="text-danger">Delete Skill</span><ws-text-spinner ng-show="deleteLoading" class="ng-hide"></ws-text-spinner></button>
+    <button ng-click="deleteSkill()" class="btn btn-default" title="Permanently delete Skill and all its data" ng-show="canDelete"><span class="text-danger">Delete Skill</span><ws-text-spinner ng-show="deleteLoading" class="ng-hide"></ws-text-spinner></button>
 </p>
 
 <h1>{{id ? (title || " ") : "Add Skill"}}</h1>

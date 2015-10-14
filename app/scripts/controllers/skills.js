@@ -11,7 +11,7 @@
         $scope.skill.event = Event.get({id: $stateParams.eventId});
     });
 
-    angular.module('eventsApp').controller('SkillCtrl', function($scope, $stateParams, Skill, $http, $q, WORLDSKILLS_API_EVENTS, $translate, $state, WorldSkills, alert) {
+    angular.module('eventsApp').controller('SkillCtrl', function($scope, $stateParams, Skill, auth, $http, $q, WORLDSKILLS_API_EVENTS, EVENTS_APP_CODE, $translate, $state, WorldSkills, alert) {
         $scope.id = $stateParams.id;
         $scope.translations = [];
         $scope.translationsLoading = true;
@@ -43,6 +43,9 @@
             });
             $q.all(translationPromises).then(function() {
                 $scope.translationsLoading = false;
+            });
+            auth.hasUserRole(EVENTS_APP_CODE, ['Admin', 'DeleteEvent'], $scope.skill.event.ws_entity.id).then(function (hasUserRole) {
+                $scope.canDelete = hasUserRole;
             });
         });
         $scope.setStatusRemoved = function() {
