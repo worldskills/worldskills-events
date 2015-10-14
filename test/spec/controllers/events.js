@@ -125,9 +125,27 @@ describe('controllers events', function() {
         beforeEach(inject(function(_$httpBackend_, $controller, _$state_, alert, $rootScope) {
 
             $httpBackend = _$httpBackend_;
+            $httpBackend.expectGET('http://localhost:8080/auth/users/loggedIn').respond({
+                'id': 1,
+                'person_id': 2,
+                'first_name': 'Bat',
+                'last_name': 'Man',
+                'username': 'batman@batcave.com',
+                'roles': [{
+                    'id': 1,
+                    'name': 'Admin',
+                    'apply_per_entity': false,
+                    'role_application': {
+                        'application_code': 100
+                    }
+                }],
+            });
             $httpBackend.expectGET('http://localhost:8080/events/1').respond({
                 id: 1,
-                name: 'WorldSkills São Paulo 2015'
+                name: 'WorldSkills São Paulo 2015',
+                ws_entity: {
+                    id: 1
+                }
             });
 
             $scope = $rootScope.$new();
