@@ -33,14 +33,17 @@
         };
     });
 
-    angular.module('eventsApp').controller('SponsorCtrl', function($scope, $stateParams, Sponsor, $http, WORLDSKILLS_API_EVENTS, WORLDSKILLS_API_IMAGES, $translate, $state, WorldSkills, $upload, $q) {
+    angular.module('eventsApp').controller('SponsorCtrl', function($scope, $stateParams, Sponsor, auth, $http, WORLDSKILLS_API_EVENTS, WORLDSKILLS_API_IMAGES, EVENTS_APP_CODE, $translate, $state, WorldSkills, $upload, $q) {
         var logo = $q.when();
         $scope.id = $stateParams.id;
         $scope.sponsor = Sponsor.get({id: $scope.id}, function (sponsor) {
             $scope.title = sponsor.name;
-            if (typeof sponsor.logo != 'undefined') {
+            if (sponsor.logo != null) {
                 $scope.logoImage = WorldSkills.getLink(sponsor.logo.links, 'alternate') + '_small';
             }
+            auth.hasUserRole(EVENTS_APP_CODE, ['Admin', 'DeleteEvent'], $scope.sponsor.event.ws_entity.id).then(function (hasUserRole) {
+                $scope.canDelete = hasUserRole;
+            });
         });
         $scope.removeLogo = false;
         $scope.onFileSelect = function($files) {

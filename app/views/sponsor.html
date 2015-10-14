@@ -6,7 +6,7 @@
 </ol>
 
 <p class="pull-right">
-    <button ng-click="deleteSponsor()" class="btn btn-danger" id="deleteEntry">Delete Sponsor<ws-text-spinner ng-show="deleteLoading" class="ng-hide"></ws-text-spinner></button>
+    <button ng-click="deleteSponsor()" class="btn btn-danger" id="deleteEntry" ng-show="canDelete">Delete Sponsor<ws-text-spinner ng-show="deleteLoading" class="ng-hide"></ws-text-spinner></button>
 </p>
 
 <h1>{{id ? (title || " ") : "Add Sponsor"}}</h1>
