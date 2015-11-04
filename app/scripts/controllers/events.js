@@ -3,37 +3,54 @@
 
     angular.module('eventsApp').controller('EventsCtrl', function($scope) {
         $scope.pagination = {
-            currentPage: 1,
-            itemsPerPage: 15,
-            sort: 'start_date_desc'
+            itemsPerPage: 15
         };
+        $scope.filters = {};
     });
 
-    angular.module('eventsApp').controller('EventsListCtrl', function($scope, $stateParams, Event, $http, WORLDSKILLS_API_EVENTS, WORLDSKILLS_API_ORGANIZATIONS, WORLDSKILLS_API_AUTH, $translate, $filter, $location) {
-        var page = parseInt($stateParams.page, 10);
-        var sort = $stateParams.sort;
-        if (page) {
-            $scope.pagination.currentPage = page;
-        } else {
-            $location.search('page', $scope.pagination.currentPage);
-        }
-        if (sort) {
-            $scope.pagination.sort = sort;
-        } else {
-            $location.search('sort', $scope.pagination.sort);
-        }
+    angular.module('eventsApp').controller('EventsListCtrl', function($scope, $state, $stateParams, Event, $http, WORLDSKILLS_API_EVENTS, WORLDSKILLS_API_ORGANIZATIONS, WORLDSKILLS_API_AUTH, $translate, $filter, $location) {
+        angular.forEach($stateParams, function (value, key) {
+            if (value) {
+                $scope.filters[key] = value;
+            }
+        });
+        $scope.init = function () {
+            if ($scope.filters.page) {
+                $scope.filters.page = parseInt($scope.filters.page, 10);
+            } else {
+                $scope.filters.page = 1;
+            }
+            if (!$scope.filters.sort) {
+                $scope.filters.sort = 'start_date_desc';
+            }
+            if ($scope.filters.before) {
+                $scope.filters.before = new Date($filter('date')($scope.filters.before, 'medium'));
+            }
+            if ($scope.filters.after) {
+                $scope.filters.after = new Date($filter('date')($scope.filters.after, 'medium'));
+            }
+        };
         $scope.load = function (page) {
             $scope.loading = true;
             $scope.events.events = [];
+
+            var params = angular.copy($scope.filters);
+            params.before = $filter('date')(params.before, 'yyyy-MM-dd');
+            params.after = $filter('date')(params.after, 'yyyy-MM-dd');
+            $location.search(params);
+            $location.search('page', page);
+
             var filters = angular.copy($scope.filters);
-            filters.sort = $scope.pagination.sort;
             filters.before = $filter('date')(filters.before, 'yyyy-MM-dd');
             filters.after = $filter('date')(filters.after, 'yyyy-MM-dd');
-            filters.offset = $scope.pagination.itemsPerPage * (page - 1); 
+            filters.offset = $scope.pagination.itemsPerPage * (page - 1);
+            filters.limit = $scope.pagination.itemsPerPage;
+            delete filters.page;
+
             Event.query(filters, function (data) {
                 $scope.loading = false;
                 $scope.events = data;
-                $scope.pagination.currentPage = page;
+                $scope.filters.page = page;
             });
         };
         $http({method: 'GET', url: WORLDSKILLS_API_ORGANIZATIONS + '/countries'}).success(function(data, status, headers, config) {
@@ -55,26 +72,21 @@
             events: []
         };
         $scope.search = function () {
-            $scope.load($scope.pagination.currentPage);
+            $scope.load($scope.filters.page);
         };
         $scope.changePage = function (page) {
-            $location.search('page', page);
             $scope.load(page);
         };
         $scope.changeSort = function (sort) {
-            $location.search('sort', sort);
-            $scope.pagination.sort = sort;
-            $scope.load($scope.pagination.currentPage);
-        }
-        $scope.clear = function () {
-            $scope.filters = {
-                limit: $scope.pagination.itemsPerPage
-            };
-            $scope.load($scope.pagination.currentPage);
+            $scope.filters.sort = sort;
+            $scope.search();
         };
-        $scope.clear();
+        $scope.clear = function () {
+            $state.go('.', {}, {inherit: false, reload: true});
+        };
+        $scope.init();
+        $scope.search();
     });
-
     angular.module('eventsApp').controller('EventCtrl', function($scope, $stateParams, Event, auth, EVENTS_APP_CODE, $http, $translate, $state, alert) {
         $scope.id = $stateParams.id;
         $scope.event = Event.get({id: $scope.id}, function (event) {

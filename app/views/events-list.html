@@ -26,9 +26,9 @@
                     <tr>
                         <th>ID</th>
                         <th>Name</th>
-                        <th ng-class="{'ws-table-sort': true, dropup: pagination.sort == 'start_date_asc'}" class="ws-table-sort" ng-click="changeSort(pagination.sort == 'start_date_desc' ? 'start_date_asc' : 'start_date_desc')">
+                        <th ng-class="{'ws-table-sort': true, dropup: filters.sort == 'start_date_asc'}" class="ws-table-sort" ng-click="changeSort(filters.sort == 'start_date_desc' ? 'start_date_asc' : 'start_date_desc')">
                             Date
-                            <span class="caret" ng-show="pagination.sort.indexOf('start_date_') == 0"></span>
+                            <span class="caret" ng-show="filters.sort.indexOf('start_date_') == 0"></span>
                         </th>
                         <th>Country</th>
                     </tr>
@@ -108,4 +108,4 @@
     </div>
 </div>
 
-<pagination items-per-page="pagination.itemsPerPage" total-items="events.total_count || pagination.currentPage * pagination.itemsPerPage" page="pagination.currentPage" on-select-page="changePage(page)" max-size="10" boundary-links="true" rotate="false"></pagination>
+<pagination items-per-page="pagination.itemsPerPage" total-items="events.total_count || filters.page * pagination.itemsPerPage" page="filters.page" on-select-page="changePage(page)" max-size="10" boundary-links="true" rotate="false"></pagination>

@@ -55,8 +55,9 @@ describe('controllers events', function() {
 
             $scope = $rootScope.$new();
             $scope.pagination = {
-                currentPage: 1,
                 itemsPerPage: 15
+            };
+            $scope.filters = {
             };
 
             EventsListCtrl = function(stateParams) {
@@ -71,7 +72,7 @@ describe('controllers events', function() {
 
             EventsListCtrl();
 
-            $httpBackend.expectGET('http://localhost:8080/events?limit=15&offset=0').respond({
+            $httpBackend.expectGET('http://localhost:8080/events?limit=15&offset=0&sort=start_date_desc').respond({
                 events: [
                     {
                         name: 'WorldSkills São Paulo 2015'
@@ -86,7 +87,7 @@ describe('controllers events', function() {
 
             $scope.changePage(2);
 
-            $httpBackend.expectGET('http://localhost:8080/events?limit=15&offset=15').respond({
+            $httpBackend.expectGET('http://localhost:8080/events?limit=15&offset=15&sort=start_date_desc').respond({
                 events: [
                     {
                         name: 'WorldSkills London 2011'
@@ -104,7 +105,7 @@ describe('controllers events', function() {
                 page: '2'
             });
 
-            $httpBackend.expectGET('http://localhost:8080/events?limit=15&offset=15').respond({
+            $httpBackend.expectGET('http://localhost:8080/events?limit=15&offset=15&sort=start_date_desc').respond({
                 events: [
                     {
                         name: 'WorldSkills London 2011'

@@ -8,7 +8,7 @@
         });
         $scope.date = new Date();
         $scope.search = function () {
-            $state.go('events.list', {name: $scope.searchText}, {reload: true});
+            $state.go('events.list', {name: $scope.searchText}, {inherit: false, reload: true});
         };
     });
 })();

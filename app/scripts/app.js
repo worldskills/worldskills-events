@@ -15,7 +15,7 @@
             var redirectToParams = sessionStorage.getItem('redirect_to_params');
             sessionStorage.removeItem('redirect_to_state');
             sessionStorage.removeItem('redirect_to_params');
-            if (redirectToState) {
+            if (redirectToState) {  
                 if (redirectToParams) {
                     redirectToParams = angular.fromJson(redirectToParams);
                 } else {
@@ -32,7 +32,7 @@
             controller: 'EventsCtrl',
             abstract: true
         }).state('events.list', {
-            url: '?page&sort',
+            url: '?page&sort&name&before&after&type&country&ws_entity',
             templateUrl: 'views/events-list.html',
             controller: 'EventsListCtrl',
             data: {
