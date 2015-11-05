@@ -303,7 +303,7 @@ describe('controllers events', function() {
                 ]
             });
 
-            $httpBackend.expectGET('http://localhost:8080/events/skills?limit=50').respond({
+            $httpBackend.expectGET('http://localhost:8080/events/skills?l=en&limit=50').respond({
                 skills: [
                     {
                         name: 'Web Design'

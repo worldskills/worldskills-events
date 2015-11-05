@@ -179,11 +179,16 @@
             }
         };
     });
-    angular.module('eventsApp').controller('EventSkillsCtrl', function($scope, $stateParams, Event, $http, $translate, $state, WorldSkills) {
+    angular.module('eventsApp').controller('EventSkillsCtrl', function($scope, $stateParams, Event, $http, $translate, $state, $timeout, WorldSkills) {
         $scope.loading = true;
         $scope.skills = [];
-        var getSkills = function (url) {
-            $http({method: 'GET', url: url}).success(function(data, status, headers, config) {
+        $scope.skillsFilter = {};
+        $scope.skillsFilter.limit = 50;
+        $scope.skillsFilter.l = 'en';
+        var url = '';
+        var searchTimeout;
+        var getSkills = function (url, params) {
+            $http({method: 'GET', url: url, params: params}).success(function(data, status, headers, config) {
                 angular.forEach(data.skills, function (skill) {
                     $scope.skills.push(skill);
                 });
@@ -199,10 +204,18 @@
             });
         };
         $scope.event.$promise.then(function(data) {
-            var url = WorldSkills.getLink(data.links, 'skills');
-            url += '?limit=50';
-            getSkills(url);
+            url = WorldSkills.getLink(data.links, 'skills');
+            getSkills(url, $scope.skillsFilter);
         });
+        var searchSkills = function () {
+            $scope.loading = true;
+            $scope.skills = [];
+            getSkills(url, $scope.skillsFilter);
+        };
+        $scope.search = function () {
+            $timeout.cancel(searchTimeout);
+            searchTimeout = $timeout(searchSkills, 300);
+        };
     });
     angular.module('eventsApp').controller('EventSponsorsCtrl', function($scope, $stateParams, Event, $http, $translate, $state, WorldSkills) {
         $scope.sponsors = [];

@@ -1,6 +1,8 @@
-<p>
+<p class="pull-right">
     <a ui-sref="events.skill_create.form({eventId: event.id})" class="btn btn-success">Add Skill</a>
 </p>
+
+<h2 class="clearfix">Skills</h2>
 
 <div class="table-responsive">
     <table class="table table-striped">
@@ -14,6 +16,23 @@
                 <th>Number</th>
                 <th>Name</th>
                 <th>Type</th>
+            </tr>
+            <tr class="active">
+                <td>
+                    <input type="text" class="form-control input-sm" ng-change="search()" ng-model="skillsFilter.number" />
+                </td>
+                <td>
+                    <input type="text" class="form-control input-sm" ng-change="search()" ng-model="skillsFilter.name" />
+                </td>
+                <td>
+                    <select class="form-control input-sm" ng-change="search()" ng-model="skillsFilter.type">
+                        <option></option>
+                        <option value="official">{{"skill_type_official"|translate}}</option>
+                        <option value="demo">{{"skill_type_demo"|translate}}</option>
+                        <option value="presentation">{{"skill_type_presentation"|translate}}</option>
+                        <option value="multi">{{"skill_type_multi"|translate}}</option>
+                    </select>
+                </td>
             </tr>
         </thead>
         <tfoot>
