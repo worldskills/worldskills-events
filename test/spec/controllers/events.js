@@ -126,7 +126,7 @@ describe('controllers events', function() {
         beforeEach(inject(function(_$httpBackend_, $controller, _$state_, alert, $rootScope) {
 
             $httpBackend = _$httpBackend_;
-            $httpBackend.expectGET('http://localhost:8080/auth/users/loggedIn').respond({
+            $httpBackend.expectGET('http://localhost:8080/auth/users/loggedIn?show_child_roles=true&app_code=400').respond({
                 'id': 1,
                 'person_id': 2,
                 'first_name': 'Bat',
@@ -137,7 +137,7 @@ describe('controllers events', function() {
                     'name': 'Admin',
                     'apply_per_entity': false,
                     'role_application': {
-                        'application_code': 100
+                        'application_code': 400
                     }
                 }],
             });

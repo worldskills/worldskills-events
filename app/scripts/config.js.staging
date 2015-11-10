@@ -8,5 +8,7 @@
     eventsApp.constant('WORLDSKILLS_CLIENT_ID', '269f5d2');
     eventsApp.constant('WORLDSKILLS_API_AUTH', 'https://staging-api.worldskills.org/auth');
     eventsApp.constant('WORLDSKILLS_AUTHORIZE_URL', 'https://staging-auth.worldskills.org/oauth/authorize');
+    eventsApp.constant('LOAD_CHILD_ENTITY_ROLES', true);
+    eventsApp.constant('FILTER_AUTH_ROLES', [400]); // Events
 
 })();
