@@ -110,7 +110,7 @@
     angular.module('eventsApp').controller('SkillPhotosCtrl', function($scope, $stateParams, Skill, SkillPhoto, $http, WORLDSKILLS_API_EVENTS, WORLDSKILLS_API_IMAGES, $q, $upload, $state, WorldSkills, alert) {
         var photo = $q.when();
         $scope.thumbnail = function (photo) {
-            return WorldSkills.getLink(photo.links, 'alternate') + '_small';
+            return WorldSkills.getLink(photo.links, 'thumbnail') + '_small';
         };
         $scope.onFileSelect = function($files) {
             var deferred = $q.defer();
