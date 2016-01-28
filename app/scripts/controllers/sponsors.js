@@ -39,7 +39,7 @@
         $scope.sponsor = Sponsor.get({id: $scope.id}, function (sponsor) {
             $scope.title = sponsor.name;
             if (sponsor.logo != null) {
-                $scope.logoImage = WorldSkills.getLink(sponsor.logo.links, 'alternate') + '_small';
+                $scope.logoImage = sponsor.logo.thumbnail + '_small';
             }
             auth.hasUserRole(EVENTS_APP_CODE, ['Admin', 'DeleteEvents'], $scope.sponsor.event.ws_entity.id).then(function (hasUserRole) {
                 $scope.canDelete = hasUserRole;
