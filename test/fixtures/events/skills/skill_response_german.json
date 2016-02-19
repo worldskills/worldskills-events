@@ -1,0 +1,217 @@
+{
+  "id" : 1,
+  "event" : {
+    "id" : 1,
+    "legacy_id" : 43,
+    "name" : "WorldSkills São Paulo 2015",
+    "type" : "competition",
+    "organizer" : {
+      "id" : 1,
+      "name" : {
+        "lang_code" : "en",
+        "text" : "WorldSkills International"
+      },
+      "links" : [ {
+        "rel" : "self",
+        "href" : "https://api.worldskills.org/auth/ws_entities/1",
+        "content_type" : null,
+        "description" : null
+      } ]
+    },
+    "start_date" : "2015-08-01",
+    "end_date" : "2015-08-31",
+    "competition_start_date" : "2015-08-11",
+    "competition_end_date" : "2015-08-16",
+    "venue" : "Anhembi",
+    "town" : "São Paulo",
+    "code" : "WSSP",
+    "country" : "BR",
+    "url" : "http://www.worldskillssaopaulo2015.com/",
+    "description" : "43rd WorldSkills Competition",
+    "ws_entity" : {
+      "id" : 1,
+      "name" : {
+        "lang_code" : "en",
+        "text" : "WorldSkills International"
+      },
+      "links" : [ {
+        "rel" : "self",
+        "href" : "https://api.worldskills.org/auth/ws_entities/1",
+        "content_type" : null,
+        "description" : null
+      } ]
+    },
+    "links" : [ {
+      "rel" : "self",
+      "href" : "http://localhost:9090/events/1",
+      "content_type" : null,
+      "description" : null
+    }, {
+      "rel" : "skills",
+      "href" : "http://localhost:9090/events/1/skills",
+      "content_type" : null,
+      "description" : null
+    }, {
+      "rel" : "sponsors",
+      "href" : "http://localhost:9090/events/1/sponsors",
+      "content_type" : null,
+      "description" : null
+    }, {
+      "rel" : "sectors",
+      "href" : "http://localhost:9090/events/1/sectors",
+      "content_type" : null,
+      "description" : null
+    } ]
+  },
+  "type" : "official",
+  "base_id" : 1,
+  "number" : "17",
+  "status" : "active",
+  "sort" : 0,
+  "name" : {
+    "lang_code" : "de",
+    "text" : "Webdesign"
+  },
+  "description" : {
+    "lang_code" : "en",
+    "text" : "Web Design encompasses many different skills and disciplines in the production, maintenance of websites. The diversity of the skills required by a web developer is quite large, often to the point it is difficult for a web designer to excel in all aspects. As a result, a team may cover the Web Design process, with each member of the team having their own strengths, specialties and role in the development process."
+  },
+  "description_required_skills" : null,
+  "description_industry_action" : null,
+  "description_competition_action" : null,
+  "group" : {
+    "id" : 1,
+    "name" : {
+      "lang_code" : "en",
+      "text" : "Group 1"
+    },
+    "sort" : 1,
+    "links" : [ {
+      "rel" : "self",
+      "href" : "http://localhost:9090/events/sectors/1/groups/1",
+      "content_type" : null,
+      "description" : null
+    }, {
+      "rel" : "sponsors",
+      "href" : "http://localhost:9090/events/groups/1/sponsors",
+      "content_type" : null,
+      "description" : null
+    } ]
+  },
+  "sector" : {
+    "id" : 1,
+    "name" : {
+      "lang_code" : "en",
+      "text" : "Information and Communication Technology"
+    },
+    "sort" : 1,
+    "event" : {
+      "id" : 1,
+      "legacy_id" : 43,
+      "name" : "WorldSkills São Paulo 2015",
+      "type" : "competition",
+      "organizer" : {
+        "id" : 1,
+        "name" : {
+          "lang_code" : "en",
+          "text" : "WorldSkills International"
+        },
+        "links" : [ {
+          "rel" : "self",
+          "href" : "https://api.worldskills.org/auth/ws_entities/1",
+          "content_type" : null,
+          "description" : null
+        } ]
+      },
+      "start_date" : "2015-08-01",
+      "end_date" : "2015-08-31",
+      "competition_start_date" : "2015-08-11",
+      "competition_end_date" : "2015-08-16",
+      "venue" : "Anhembi",
+      "town" : "São Paulo",
+      "code" : "WSSP",
+      "country" : "BR",
+      "url" : "http://www.worldskillssaopaulo2015.com/",
+      "description" : "43rd WorldSkills Competition",
+      "ws_entity" : {
+        "id" : 1,
+        "name" : {
+          "lang_code" : "en",
+          "text" : "WorldSkills International"
+        },
+        "links" : [ {
+          "rel" : "self",
+          "href" : "https://api.worldskills.org/auth/ws_entities/1",
+          "content_type" : null,
+          "description" : null
+        } ]
+      },
+      "links" : [ {
+        "rel" : "self",
+        "href" : "http://localhost:9090/events/1",
+        "content_type" : null,
+        "description" : null
+      }, {
+        "rel" : "skills",
+        "href" : "http://localhost:9090/events/1/skills",
+        "content_type" : null,
+        "description" : null
+      }, {
+        "rel" : "sponsors",
+        "href" : "http://localhost:9090/events/1/sponsors",
+        "content_type" : null,
+        "description" : null
+      }, {
+        "rel" : "sectors",
+        "href" : "http://localhost:9090/events/1/sectors",
+        "content_type" : null,
+        "description" : null
+      } ]
+    },
+    "links" : [ {
+      "rel" : "self",
+      "href" : "http://localhost:9090/events/sectors/1",
+      "content_type" : null,
+      "description" : null
+    }, {
+      "rel" : "groups",
+      "href" : "http://localhost:9090/events/sectors/1/groups",
+      "content_type" : null,
+      "description" : null
+    }, {
+      "rel" : "sponsors",
+      "href" : "http://localhost:9090/events/sectors/1/sponsors",
+      "content_type" : null,
+      "description" : null
+    } ]
+  },
+  "min_teams" : 4,
+  "team_size" : 0,
+  "identify_judges" : false,
+  "group_competitors" : false,
+  "compatriot_marking" : false,
+  "generate_500_scale" : false,
+  "landscape_marking" : false,
+  "photos" : [ {
+    "id" : 321,
+    "thumbnail_hash" : "ab42cdef",
+    "thumbnail" : "http://worldskills-images.org/wsab/ws42/321/wsab42cdef",
+    "links" : [ {
+      "rel" : "self",
+      "href" : "https://api.worldskills.org/images/321",
+      "content_type" : null,
+      "description" : null
+    } ]
+  } ],
+  "links" : [ {
+    "rel" : "self",
+    "href" : "http://localhost:9090/events/skills/1",
+    "content_type" : null,
+    "description" : null
+  }, {
+    "rel" : "i18n",
+    "href" : "http://localhost:9090/events/skills/1?l=en",
+    "content_type" : null,
+    "description" : "Englisch"
+  } ]
+}

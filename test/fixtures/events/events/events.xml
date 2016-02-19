@@ -1,0 +1,112 @@
+<events>
+  <event>
+    <id>3</id>
+    <name>WorldSkills Abu Dhabi 2017</name>
+    <type>competition</type>
+    <organizer>
+      <id>1</id>
+      <name>
+        <lang_code>en</lang_code>
+        <text>WorldSkills International</text>
+      </name>
+      <link href="https://api.worldskills.org/auth/ws_entities/1" rel="self"/>
+    </organizer>
+    <start_date>2017-09-01</start_date>
+    <end_date>2017-09-30</end_date>
+    <competition_start_date>2017-09-05</competition_start_date>
+    <competition_end_date>2017-09-10</competition_end_date>
+    <venue>Abu Dhabi National Exhibition Centre</venue>
+    <town>Abu Dhabi</town>
+    <code>WSAD</code>
+    <country>AE</country>
+    <url/>
+    <description/>
+    <ws_entity>
+      <id>1</id>
+      <name>
+        <lang_code>en</lang_code>
+        <text>WorldSkills International</text>
+      </name>
+      <link href="https://api.worldskills.org/auth/ws_entities/1" rel="self"/>
+    </ws_entity>
+    <link href="http://localhost:9090/events/3" rel="self"/>
+    <link href="http://localhost:9090/events/3/skills" rel="skills"/>
+    <link href="http://localhost:9090/events/3/sponsors" rel="sponsors"/>
+    <link href="http://localhost:9090/events/3/sectors" rel="sectors"/>
+  </event>
+  <event>
+    <id>2</id>
+    <legacy_id>43</legacy_id>
+    <name>WorldSkills São Paulo 2015</name>
+    <type>competition</type>
+    <organizer>
+      <id>1</id>
+      <name>
+        <lang_code>en</lang_code>
+        <text>WorldSkills International</text>
+      </name>
+      <link href="https://api.worldskills.org/auth/ws_entities/1" rel="self"/>
+    </organizer>
+    <start_date>2015-08-01</start_date>
+    <end_date>2015-08-31</end_date>
+    <competition_start_date>2015-08-11</competition_start_date>
+    <competition_end_date>2015-08-16</competition_end_date>
+    <venue>Anhembi</venue>
+    <town>São Paulo</town>
+    <code>WSSP</code>
+    <country>BR</country>
+    <url>http://www.worldskillssaopaulo2015.com/</url>
+    <description>43rd WorldSkills Competition</description>
+    <ws_entity>
+      <id>1</id>
+      <name>
+        <lang_code>en</lang_code>
+        <text>WorldSkills International</text>
+      </name>
+      <link href="https://api.worldskills.org/auth/ws_entities/1" rel="self"/>
+    </ws_entity>
+    <link href="http://localhost:9090/events/2" rel="self"/>
+    <link href="http://localhost:9090/events/2/skills" rel="skills"/>
+    <link href="http://localhost:9090/events/2/sponsors" rel="sponsors"/>
+    <link href="http://localhost:9090/events/2/sectors" rel="sectors"/>
+  </event>
+  <event>
+    <id>1</id>
+    <name>WorldSkills General Assembly 2014</name>
+    <type>general_assembly</type>
+    <organizer>
+      <id>1</id>
+      <name>
+        <lang_code>en</lang_code>
+        <text>WorldSkills International</text>
+      </name>
+      <link href="https://api.worldskills.org/auth/ws_entities/1" rel="self"/>
+    </organizer>
+    <start_date>2014-09-13</start_date>
+    <end_date>2014-09-18</end_date>
+    <venue>Swiss Museum of Transport</venue>
+    <town>Lucerne</town>
+    <code>WSGA2014</code>
+    <country>CH</country>
+    <url/>
+    <description/>
+    <ws_entity>
+      <id>1</id>
+      <name>
+        <lang_code>en</lang_code>
+        <text>WorldSkills International</text>
+      </name>
+      <link href="https://api.worldskills.org/auth/ws_entities/1" rel="self"/>
+    </ws_entity>
+    <link href="http://localhost:9090/events/1" rel="self"/>
+    <link href="http://localhost:9090/events/1/skills" rel="skills"/>
+    <link href="http://localhost:9090/events/1/sponsors" rel="sponsors"/>
+    <link href="http://localhost:9090/events/1/sectors" rel="sectors"/>
+  </event>
+  <total_count>3</total_count>
+  <link href="http://localhost:9090/events?offset=0&amp;limit=10&amp;sort=start_date_desc" rel="self"/>
+  <link description="Competition Skills" href="http://localhost:9090/events/skills" rel="skills"/>
+  <link description="Skill Sectors" href="http://localhost:9090/events/sectors" rel="sectors"/>
+  <link description="Sponsors" href="http://localhost:9090/events/sponsors" rel="sponsors"/>
+  <link description="WorldSkills Entities" href="https://api.worldskills.org/auth/ws_entities" rel="ws_entities"/>
+</events>

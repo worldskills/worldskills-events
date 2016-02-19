@@ -1,0 +1,6 @@
+{
+  "code" : "100-404",
+  "user_msg" : "Not found",
+  "dev_msg" : "Event not found",
+  "errors" : null
+}

@@ -1,0 +1,130 @@
+<skills>
+  <skill>
+    <id>1</id>
+    <event>
+      <id>1</id>
+      <legacy_id>43</legacy_id>
+      <name>WorldSkills São Paulo 2015</name>
+      <type>competition</type>
+      <organizer>
+        <id>1</id>
+        <name>
+          <lang_code>en</lang_code>
+          <text>WorldSkills International</text>
+        </name>
+        <link href="https://api.worldskills.org/auth/ws_entities/1" rel="self"/>
+      </organizer>
+      <start_date>2015-08-01</start_date>
+      <end_date>2015-08-31</end_date>
+      <competition_start_date>2015-08-11</competition_start_date>
+      <competition_end_date>2015-08-16</competition_end_date>
+      <venue>Anhembi</venue>
+      <town>São Paulo</town>
+      <code>WSSP</code>
+      <country>BR</country>
+      <url>http://www.worldskillssaopaulo2015.com/</url>
+      <description>43rd WorldSkills Competition</description>
+      <ws_entity>
+        <id>1</id>
+        <name>
+          <lang_code>en</lang_code>
+          <text>WorldSkills International</text>
+        </name>
+        <link href="https://api.worldskills.org/auth/ws_entities/1" rel="self"/>
+      </ws_entity>
+      <link href="http://localhost:9090/events/1" rel="self"/>
+      <link href="http://localhost:9090/events/1/skills" rel="skills"/>
+      <link href="http://localhost:9090/events/1/sponsors" rel="sponsors"/>
+      <link href="http://localhost:9090/events/1/sectors" rel="sectors"/>
+    </event>
+    <type>official</type>
+    <base_id>1</base_id>
+    <number>17</number>
+    <status>active</status>
+    <sort>0</sort>
+    <name>
+      <lang_code>en</lang_code>
+      <text>Web Design</text>
+    </name>
+    <description>
+      <lang_code>en</lang_code>
+      <text>Web Design encompasses many different skills and disciplines in the production, maintenance of websites. The diversity of the skills required by a web developer is quite large, often to the point it is difficult for a web designer to excel in all aspects. As a result, a team may cover the Web Design process, with each member of the team having their own strengths, specialties and role in the development process.</text>
+    </description>
+    <group>
+      <id>1</id>
+      <name>
+        <lang_code>en</lang_code>
+        <text>Group 1</text>
+      </name>
+      <sort>1</sort>
+      <link href="http://localhost:9090/events/sectors/1/groups/1" rel="self"/>
+      <link href="http://localhost:9090/events/groups/1/sponsors" rel="sponsors"/>
+    </group>
+    <sector>
+      <id>1</id>
+      <name>
+        <lang_code>en</lang_code>
+        <text>Information and Communication Technology</text>
+      </name>
+      <sort>1</sort>
+      <event>
+        <id>1</id>
+        <legacy_id>43</legacy_id>
+        <name>WorldSkills São Paulo 2015</name>
+        <type>competition</type>
+        <organizer>
+          <id>1</id>
+          <name>
+            <lang_code>en</lang_code>
+            <text>WorldSkills International</text>
+          </name>
+          <link href="https://api.worldskills.org/auth/ws_entities/1" rel="self"/>
+        </organizer>
+        <start_date>2015-08-01</start_date>
+        <end_date>2015-08-31</end_date>
+        <competition_start_date>2015-08-11</competition_start_date>
+        <competition_end_date>2015-08-16</competition_end_date>
+        <venue>Anhembi</venue>
+        <town>São Paulo</town>
+        <code>WSSP</code>
+        <country>BR</country>
+        <url>http://www.worldskillssaopaulo2015.com/</url>
+        <description>43rd WorldSkills Competition</description>
+        <ws_entity>
+          <id>1</id>
+          <name>
+            <lang_code>en</lang_code>
+            <text>WorldSkills International</text>
+          </name>
+          <link href="https://api.worldskills.org/auth/ws_entities/1" rel="self"/>
+        </ws_entity>
+        <link href="http://localhost:9090/events/1" rel="self"/>
+        <link href="http://localhost:9090/events/1/skills" rel="skills"/>
+        <link href="http://localhost:9090/events/1/sponsors" rel="sponsors"/>
+        <link href="http://localhost:9090/events/1/sectors" rel="sectors"/>
+      </event>
+      <link href="http://localhost:9090/events/sectors/1" rel="self"/>
+      <link href="http://localhost:9090/events/sectors/1/groups" rel="groups"/>
+      <link href="http://localhost:9090/events/sectors/1/sponsors" rel="sponsors"/>
+    </sector>
+    <min_teams>4</min_teams>
+    <team_size>0</team_size>
+    <identify_judges>false</identify_judges>
+    <group_competitors>false</group_competitors>
+    <compatriot_marking>false</compatriot_marking>
+    <generate_500_scale>false</generate_500_scale>
+    <landscape_marking>false</landscape_marking>
+    <photos>
+      <photo>
+        <id>321</id>
+        <thumbnail_hash>ab42cdef</thumbnail_hash>
+        <thumbnail>http://worldskills-images.org/wsab/ws42/321/wsab42cdef</thumbnail>
+        <link href="https://api.worldskills.org/images/321" rel="self"/>
+      </photo>
+    </photos>
+    <link href="http://localhost:9090/events/skills/1" rel="self"/>
+    <link description="German" href="http://localhost:9090/events/skills/1?l=de" rel="i18n"/>
+  </skill>
+  <total_count>1</total_count>
+  <link href="http://localhost:9090/events/skills?offset=0&amp;limit=10&amp;sort=sort_asc&amp;l=en" rel="self"/>
+</skills>

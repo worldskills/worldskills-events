@@ -1,0 +1,51 @@
+<sectors>
+  <sector>
+    <id>1</id>
+    <name>
+      <lang_code>en</lang_code>
+      <text>Information and Communication Technology</text>
+    </name>
+    <sort>1</sort>
+    <event>
+      <id>1</id>
+      <legacy_id>43</legacy_id>
+      <name>WorldSkills São Paulo 2015</name>
+      <type>competition</type>
+      <organizer>
+        <id>1</id>
+        <name>
+          <lang_code>en</lang_code>
+          <text>WorldSkills International</text>
+        </name>
+        <link href="https://api.worldskills.org/auth/ws_entities/1" rel="self"/>
+      </organizer>
+      <start_date>2015-08-01</start_date>
+      <end_date>2015-08-31</end_date>
+      <competition_start_date>2015-08-11</competition_start_date>
+      <competition_end_date>2015-08-16</competition_end_date>
+      <venue>Anhembi</venue>
+      <town>São Paulo</town>
+      <code>WSSP</code>
+      <country>BR</country>
+      <url>http://www.worldskillssaopaulo2015.com/</url>
+      <description>43rd WorldSkills Competition</description>
+      <ws_entity>
+        <id>1</id>
+        <name>
+          <lang_code>en</lang_code>
+          <text>WorldSkills International</text>
+        </name>
+        <link href="https://api.worldskills.org/auth/ws_entities/1" rel="self"/>
+      </ws_entity>
+      <link href="http://localhost:9090/events/1" rel="self"/>
+      <link href="http://localhost:9090/events/1/skills" rel="skills"/>
+      <link href="http://localhost:9090/events/1/sponsors" rel="sponsors"/>
+      <link href="http://localhost:9090/events/1/sectors" rel="sectors"/>
+    </event>
+    <link href="http://localhost:9090/events/sectors/1" rel="self"/>
+    <link href="http://localhost:9090/events/sectors/1/groups" rel="groups"/>
+    <link href="http://localhost:9090/events/sectors/1/sponsors" rel="sponsors"/>
+  </sector>
+  <total_count>1</total_count>
+  <link href="http://localhost:9090/events/sectors?offset=0&amp;limit=10" rel="self"/>
+</sectors>

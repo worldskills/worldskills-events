@@ -1,0 +1,25 @@
+{
+    "ws_entity_list": [{
+        "id": 1,
+        "name": {
+            "lang_code": "en",
+            "text": "WorldSkills International"
+        },
+        "children": [{
+            "id": 78,
+            "name": {
+                "lang_code": "en",
+                "text": "WorldSkills public resources"
+            },
+            "links": [{
+                "rel": "self",
+                "href": "https://api.worldskills.org/auth/ws_entities/78",
+                "content_type": null,
+                "description": null
+            }
+            ]
+        }],
+    }],
+    "total_count": 1,
+    "links": []
+}

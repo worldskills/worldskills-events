@@ -1,0 +1,18 @@
+{
+  "action" : "CREATE",
+  "id" : 1,
+  "ws_entity_id" : 1,
+  "organizer" : 1,
+  "name" : "WorldSkills Abu Dhabi 2017",
+  "type" : "competition",
+  "start_date" : "2017-09-01",
+  "end_date" : "2017-09-30",
+  "town" : "Abu Dhabi",
+  "venue" : "Abu Dhabi National Exhibition Centre",
+  "code" : "WSAD",
+  "country" : "AE",
+  "url" : "",
+  "description" : "",
+  "competition_start_date" : "2017-09-05",
+  "competition_end_date" : "2017-09-10"
+}

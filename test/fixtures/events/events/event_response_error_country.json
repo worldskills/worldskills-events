@@ -1,0 +1,6 @@
+{
+  "code" : "400-111",
+  "user_msg" : "event.country must be a valid country ISO code",
+  "dev_msg" : "Country with ISO code \"QQ\" not found",
+  "errors" : null
+}

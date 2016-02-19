@@ -1,0 +1,63 @@
+{
+  "id" : 1,
+  "legacy_id" : null,
+  "name" : "WorldSkills Abu Dhabi 2017",
+  "type" : "competition",
+  "organizer" : {
+    "id" : 1,
+    "name" : {
+      "lang_code" : "en",
+      "text" : "WorldSkills International"
+    },
+    "links" : [ {
+      "rel" : "self",
+      "href" : "https://api.worldskills.org/auth/ws_entities/1",
+      "content_type" : null,
+      "description" : null
+    } ]
+  },
+  "start_date" : "2017-09-01",
+  "end_date" : "2017-09-30",
+  "competition_start_date" : "2017-09-05",
+  "competition_end_date" : "2017-09-10",
+  "venue" : "Abu Dhabi National Exhibition Centre",
+  "town" : "Abu Dhabi",
+  "code" : "WSAD",
+  "country" : "AE",
+  "url" : "",
+  "description" : "",
+  "ws_entity" : {
+    "id" : 1,
+    "name" : {
+      "lang_code" : "en",
+      "text" : "WorldSkills International"
+    },
+    "links" : [ {
+      "rel" : "self",
+      "href" : "https://api.worldskills.org/auth/ws_entities/1",
+      "content_type" : null,
+      "description" : null
+    } ]
+  },
+  "links" : [ {
+    "rel" : "self",
+    "href" : "http://localhost:9090/events/1",
+    "content_type" : null,
+    "description" : null
+  }, {
+    "rel" : "skills",
+    "href" : "http://localhost:9090/events/1/skills",
+    "content_type" : null,
+    "description" : null
+  }, {
+    "rel" : "sponsors",
+    "href" : "http://localhost:9090/events/1/sponsors",
+    "content_type" : null,
+    "description" : null
+  }, {
+    "rel" : "sectors",
+    "href" : "http://localhost:9090/events/1/sectors",
+    "content_type" : null,
+    "description" : null
+  } ]
+}

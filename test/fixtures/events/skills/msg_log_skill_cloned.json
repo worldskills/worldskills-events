@@ -1,0 +1,14 @@
+{
+  "code" : 304,
+  "message" : "Skill cloned.",
+  "occured" : "2014-07-03T10:33:12.000+0000",
+  "web_service_code" : 400,
+  "user_id" : 1,
+  "person_id" : 123,
+  "data" : {
+    "parent_skill_id" : "1",
+    "skill_name" : "Web Design",
+    "skill_id" : "2"
+  },
+  "ws_entity_id" : 1
+}

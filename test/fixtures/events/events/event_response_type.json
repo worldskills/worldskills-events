@@ -1,0 +1,51 @@
+{
+  "id" : 1,
+  "legacy_id" : null,
+  "name" : "WorldSkills General Assembly 2014",
+  "type" : "general_assembly",
+  "organizer" : null,
+  "start_date" : "2014-09-13",
+  "end_date" : "2014-09-18",
+  "competition_start_date" : null,
+  "competition_end_date" : null,
+  "venue" : "Swiss Museum of Transport",
+  "town" : "Lucerne",
+  "code" : "WSGA2014",
+  "country" : "CH",
+  "url" : "",
+  "description" : "",
+  "ws_entity" : {
+    "id" : 1,
+    "name" : {
+      "lang_code" : "en",
+      "text" : "WorldSkills International"
+    },
+    "links" : [ {
+      "rel" : "self",
+      "href" : "https://api.worldskills.org/auth/ws_entities/1",
+      "content_type" : null,
+      "description" : null
+    } ]
+  },
+  "links" : [ {
+    "rel" : "self",
+    "href" : "http://localhost:9090/events/1",
+    "content_type" : null,
+    "description" : null
+  }, {
+    "rel" : "skills",
+    "href" : "http://localhost:9090/events/1/skills",
+    "content_type" : null,
+    "description" : null
+  }, {
+    "rel" : "sponsors",
+    "href" : "http://localhost:9090/events/1/sponsors",
+    "content_type" : null,
+    "description" : null
+  }, {
+    "rel" : "sectors",
+    "href" : "http://localhost:9090/events/1/sectors",
+    "content_type" : null,
+    "description" : null
+  } ]
+}

@@ -1,0 +1,13 @@
+{
+  "action" : "CREATE",
+  "id" : 80,
+  "code" : "DE",
+  "name" : [ {
+    "lang_code" : "en",
+    "text" : "Germany"
+  }, {
+    "lang_code" : "de",
+    "text" : "Deutschland"
+  } ],
+  "phone_prefix" : "49"
+}

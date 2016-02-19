@@ -1,0 +1,6 @@
+{
+  "code" : "400-416",
+  "user_msg" : "Insufficient permissions for event.ws_entity",
+  "dev_msg" : "User needs edit permission for entity 3",
+  "errors" : null
+}

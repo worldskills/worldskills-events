@@ -1,0 +1,92 @@
+{
+  "events" : [ {
+    "id" : 2,
+    "legacy_id" : null,
+    "name" : "SwissSkills Bern 2014",
+    "type" : "competition",
+    "organizer" : {
+      "id" : 2,
+      "name" : {
+        "lang_code" : "en",
+        "text" : "Switzerland"
+      },
+      "links" : [ {
+        "rel" : "self",
+        "href" : "https://api.worldskills.org/auth/ws_entities/2",
+        "content_type" : null,
+        "description" : null
+      } ]
+    },
+    "start_date" : "2014-09-17",
+    "end_date" : "2014-09-21",
+    "competition_start_date" : "2014-09-17",
+    "competition_end_date" : "2014-09-21",
+    "venue" : "",
+    "town" : "Bern",
+    "code" : "",
+    "country" : "CH",
+    "url" : "http://www.swissskillsbern2014.ch/",
+    "description" : "",
+    "ws_entity" : {
+      "id" : 2,
+      "name" : {
+        "lang_code" : "en",
+        "text" : "Switzerland"
+      },
+      "links" : [ {
+        "rel" : "self",
+        "href" : "https://api.worldskills.org/auth/ws_entities/2",
+        "content_type" : null,
+        "description" : null
+      } ]
+    },
+    "links" : [ {
+      "rel" : "self",
+      "href" : "http://localhost:9090/events/2",
+      "content_type" : null,
+      "description" : null
+    }, {
+      "rel" : "skills",
+      "href" : "http://localhost:9090/events/2/skills",
+      "content_type" : null,
+      "description" : null
+    }, {
+      "rel" : "sponsors",
+      "href" : "http://localhost:9090/events/2/sponsors",
+      "content_type" : null,
+      "description" : null
+    }, {
+      "rel" : "sectors",
+      "href" : "http://localhost:9090/events/2/sectors",
+      "content_type" : null,
+      "description" : null
+    } ]
+  } ],
+  "total_count" : 1,
+  "links" : [ {
+    "rel" : "self",
+    "href" : "http://localhost:9090/events?offset=0&limit=1&sort=end_date_desc&type=competition&ws_entity=2&country=CH&after=2014-01-01&before=2014-12-31",
+    "content_type" : null,
+    "description" : null
+  }, {
+    "rel" : "skills",
+    "href" : "http://localhost:9090/events/skills",
+    "content_type" : null,
+    "description" : "Competition Skills"
+  }, {
+    "rel" : "sectors",
+    "href" : "http://localhost:9090/events/sectors",
+    "content_type" : null,
+    "description" : "Skill Sectors"
+  }, {
+    "rel" : "sponsors",
+    "href" : "http://localhost:9090/events/sponsors",
+    "content_type" : null,
+    "description" : "Sponsors"
+  }, {
+    "rel" : "ws_entities",
+    "href" : "https://api.worldskills.org/auth/ws_entities",
+    "content_type" : null,
+    "description" : "WorldSkills Entities"
+  } ]
+}

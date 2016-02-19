@@ -1,0 +1,9 @@
+{
+  "action" : "CREATE",
+  "id" : 4,
+  "foo" : "bar",
+  "name" : [ {
+    "lang_code" : "en",
+    "text" : "Finland"
+  } ]
+}

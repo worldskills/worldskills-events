@@ -1,0 +1,113 @@
+{
+  "id" : 2,
+  "event" : {
+    "id" : 2,
+    "legacy_id" : null,
+    "name" : "WorldSkills Abu Dhabi 2017",
+    "type" : "competition",
+    "organizer" : {
+      "id" : 1,
+      "name" : {
+        "lang_code" : "en",
+        "text" : "WorldSkills International"
+      },
+      "links" : [ {
+        "rel" : "self",
+        "href" : "https://api.worldskills.org/auth/ws_entities/1",
+        "content_type" : null,
+        "description" : null
+      } ]
+    },
+    "start_date" : "2017-09-01",
+    "end_date" : "2017-09-30",
+    "competition_start_date" : "2017-09-05",
+    "competition_end_date" : "2017-09-10",
+    "venue" : "Abu Dhabi National Exhibition Centre",
+    "town" : "Abu Dhabi",
+    "code" : "WSAD",
+    "country" : "AE",
+    "url" : "",
+    "description" : "",
+    "ws_entity" : {
+      "id" : 1,
+      "name" : {
+        "lang_code" : "en",
+        "text" : "WorldSkills International"
+      },
+      "links" : [ {
+        "rel" : "self",
+        "href" : "https://api.worldskills.org/auth/ws_entities/1",
+        "content_type" : null,
+        "description" : null
+      } ]
+    },
+    "links" : [ {
+      "rel" : "self",
+      "href" : "http://localhost:9090/events/2",
+      "content_type" : null,
+      "description" : null
+    }, {
+      "rel" : "skills",
+      "href" : "http://localhost:9090/events/2/skills",
+      "content_type" : null,
+      "description" : null
+    }, {
+      "rel" : "sponsors",
+      "href" : "http://localhost:9090/events/2/sponsors",
+      "content_type" : null,
+      "description" : null
+    }, {
+      "rel" : "sectors",
+      "href" : "http://localhost:9090/events/2/sectors",
+      "content_type" : null,
+      "description" : null
+    } ]
+  },
+  "type" : "official",
+  "base_id" : 1,
+  "number" : "17",
+  "status" : "active",
+  "sort" : 0,
+  "name" : {
+    "lang_code" : "en",
+    "text" : "Web Design"
+  },
+  "description" : {
+    "lang_code" : "en",
+    "text" : "Web Design encompasses many different skills and disciplines in the production, maintenance of websites. The diversity of the skills required by a web developer is quite large, often to the point it is difficult for a web designer to excel in all aspects. As a result, a team may cover the Web Design process, with each member of the team having their own strengths, specialties and role in the development process."
+  },
+  "description_required_skills" : null,
+  "description_industry_action" : null,
+  "description_competition_action" : null,
+  "group" : null,
+  "sector" : null,
+  "min_teams" : 4,
+  "team_size" : 0,
+  "identify_judges" : false,
+  "group_competitors" : false,
+  "compatriot_marking" : false,
+  "generate_500_scale" : false,
+  "landscape_marking" : false,
+  "photos" : [ {
+    "id" : 321,
+    "thumbnail_hash" : "ab42cdef",
+    "thumbnail" : "http://worldskills-images.org/wsab/ws42/321/wsab42cdef",
+    "links" : [ {
+      "rel" : "self",
+      "href" : "https://api.worldskills.org/images/321",
+      "content_type" : null,
+      "description" : null
+    } ]
+  } ],
+  "links" : [ {
+    "rel" : "self",
+    "href" : "http://localhost:9090/events/skills/2",
+    "content_type" : null,
+    "description" : null
+  }, {
+    "rel" : "i18n",
+    "href" : "http://localhost:9090/events/skills/2?l=de",
+    "content_type" : null,
+    "description" : "German"
+  } ]
+}

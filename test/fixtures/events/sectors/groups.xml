@@ -1,0 +1,14 @@
+<groups>
+  <group>
+    <id>1</id>
+    <name>
+      <lang_code>en</lang_code>
+      <text>Group 1</text>
+    </name>
+    <sort>1</sort>
+    <link href="http://localhost:9090/events/sectors/1/groups/1" rel="self"/>
+    <link href="http://localhost:9090/events/groups/1/sponsors" rel="sponsors"/>
+  </group>
+  <total_count>1</total_count>
+  <link href="http://localhost:9090/events/sectors/1/groups?offset=0&amp;limit=10" rel="self"/>
+</groups>

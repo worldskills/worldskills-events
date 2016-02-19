@@ -1,0 +1,21 @@
+{
+  "code" : "400-400",
+  "user_msg" : "Validation error",
+  "dev_msg" : null,
+  "errors" : [ {
+    "code" : "400-108",
+    "user_msg" : "event.name may not be longer than 255 characters",
+    "dev_msg" : "Error path createEvent.arg0.name",
+    "errors" : null
+  }, {
+    "code" : "400-109",
+    "user_msg" : "event.town may not be longer than 255 characters",
+    "dev_msg" : "Error path createEvent.arg0.town",
+    "errors" : null
+  }, {
+    "code" : "400-110",
+    "user_msg" : "event.code may not be longer than 255 characters",
+    "dev_msg" : "Error path createEvent.arg0.code",
+    "errors" : null
+  } ]
+}

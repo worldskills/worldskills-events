@@ -1,0 +1,16 @@
+{
+  "code" : "400-400",
+  "user_msg" : "Validation error",
+  "dev_msg" : null,
+  "errors" : [ {
+    "code" : "400-120",
+    "user_msg" : "lang_code may not be null",
+    "dev_msg" : "Error path createSkill.arg0.name.langCode",
+    "errors" : null
+  }, {
+    "code" : "400-121",
+    "user_msg" : "text may not be null",
+    "dev_msg" : "Error path createSkill.arg0.name.text",
+    "errors" : null
+  } ]
+}

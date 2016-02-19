@@ -1,0 +1,10 @@
+{
+  "action" : "CREATE",
+  "id" : 1,
+  "eventId" : 1,
+  "name" : [ {
+    "lang_code" : "en",
+    "text" : "Information and Communication Technology"
+  } ],
+  "sort" : 1
+}

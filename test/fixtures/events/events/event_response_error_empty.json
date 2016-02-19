@@ -1,0 +1,11 @@
+{
+  "code" : "400-400",
+  "user_msg" : "Validation error",
+  "dev_msg" : null,
+  "errors" : [ {
+    "code" : "400-107",
+    "user_msg" : "event.name must have at least 1 character",
+    "dev_msg" : "Error path createEvent.arg0.name",
+    "errors" : null
+  } ]
+}

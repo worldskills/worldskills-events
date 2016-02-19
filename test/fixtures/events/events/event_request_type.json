@@ -1,0 +1,15 @@
+{
+  "name" : "WorldSkills General Assembly 2014",
+  "type" : "general_assembly",
+  "start_date" : "2014-09-13",
+  "end_date" : "2014-09-18",
+  "venue" : "Swiss Museum of Transport",
+  "town" : "Lucerne",
+  "code" : "WSGA2014",
+  "country" : "CH",
+  "url" : "",
+  "description" : "",
+  "ws_entity" : {
+    "id": 1
+  }
+}

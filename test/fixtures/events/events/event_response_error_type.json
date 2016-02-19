@@ -1,0 +1,6 @@
+{
+  "code" : "400-403",
+  "user_msg" : "event.type is invalid",
+  "dev_msg" : "Event type \"foobar\" is invalid",
+  "errors" : null
+}

@@ -1,0 +1,31 @@
+{
+  "code" : "400-400",
+  "user_msg" : "Validation error",
+  "dev_msg" : null,
+  "errors" : [ {
+    "code" : "400-112",
+    "user_msg" : "skill.name may not be null",
+    "dev_msg" : "Error path createSkill.arg0.name",
+    "errors" : null
+  }, {
+    "code" : "400-113",
+    "user_msg" : "skill.description may not be null",
+    "dev_msg" : "Error path createSkill.arg0.description",
+    "errors" : null
+  }, {
+    "code" : "400-114",
+    "user_msg" : "skill.type may not be null",
+    "dev_msg" : "Error path createSkill.arg0.type",
+    "errors" : null
+  }, {
+    "code" : "400-115",
+    "user_msg" : "skill.number may not be null",
+    "dev_msg" : "Error path createSkill.arg0.number",
+    "errors" : null
+  }, {
+    "code" : "400-116",
+    "user_msg" : "skill.event may not be null",
+    "dev_msg" : "Error path createSkill.arg0.event",
+    "errors" : null
+  } ]
+}

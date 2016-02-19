@@ -1,0 +1,11 @@
+{
+  "code" : "400-400",
+  "user_msg" : "Validation error",
+  "dev_msg" : null,
+  "errors" : [ {
+    "code" : "400-118",
+    "user_msg" : "group.name may not be null",
+    "dev_msg" : "Error path createGroup.arg1.name",
+    "errors" : null
+  } ]
+}

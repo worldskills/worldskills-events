@@ -1,0 +1,6 @@
+{
+  "code" : "400-405",
+  "user_msg" : "event.ws_entity is invalid",
+  "dev_msg" : "Entity with ID \"999\" not found",
+  "errors" : null
+}
