@@ -7,6 +7,7 @@ git clone git@github.com:worldskills/worldskills-events.git
 cd worldskills-events
 npm install -g grunt-cli
 npm install
+webdriver-manager update
 ./node_modules/bower/bin/bower install
 cp app/scripts/config.js.dev app/scripts/config.js
 ```
@@ -27,4 +28,12 @@ To generate the documentation install [Pandoc](http://johnmacfarlane.net/pandoc/
 cd docs
 pandoc --toc index.md -oworldskills-events.pdf
 open worldskills-events.pdf
+```
+
+## Tests
+
+```
+npm test
+grunt server
+npm run protractor
 ```
