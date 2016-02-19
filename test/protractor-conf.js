@@ -6,14 +6,22 @@ exports.config = {
   ],
 
   capabilities: {
-    'browserName': 'firefox'
+    'browserName': 'chrome'
   },
 
-  baseUrl: 'http://localhost:9000/',
+  chromeOnly: true,
+
+  baseUrl: 'http://localhost:10400/',
 
   framework: 'jasmine',
 
   jasmineNodeOpts: {
     defaultTimeoutInterval: 30000
-  }
+  },
+
+  beforeLaunch: function() {
+
+    require('./apiMock');
+
+  },
 };
