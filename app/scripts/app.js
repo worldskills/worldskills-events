@@ -15,7 +15,7 @@
             var redirectToParams = sessionStorage.getItem('redirect_to_params');
             sessionStorage.removeItem('redirect_to_state');
             sessionStorage.removeItem('redirect_to_params');
-            if (redirectToState) {  
+            if (redirectToState) {
                 if (redirectToParams) {
                     redirectToParams = angular.fromJson(redirectToParams);
                 } else {
@@ -169,6 +169,8 @@
 
     eventsApp.config(function($translateProvider) {
 
+        $translateProvider.useSanitizeValueStrategy('sanitize');
+
         $translateProvider.useStaticFilesLoader({
             prefix: 'languages/',
             suffix: '.json'
@@ -177,7 +179,7 @@
         $translateProvider.preferredLanguage('en');
         $translateProvider.fallbackLanguage('en');
     });
-    
+
     eventsApp.run(function ($rootScope, $state, $stateParams) {
         $rootScope.$state = $state;
         $rootScope.$stateParams = $stateParams;
