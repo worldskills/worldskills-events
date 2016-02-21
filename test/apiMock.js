@@ -10,13 +10,6 @@ app.use(function(req, res, next) {
   next();
 });
 
-app.use(function(req, res, next) {
-  console.log("Mock server request: " + req.url);
-  res.header("Access-Control-Allow-Origin", "*");
-  res.header("Access-Control-Allow-Headers", "Authorization, Origin, X-Requested-With, Content-Type, Accept");
-  next();
-});
-
 app.get('/auth/users/loggedIn', function (req, res) {
   res.sendFile(__dirname + '/fixtures/auth/users/user.json');
 });
