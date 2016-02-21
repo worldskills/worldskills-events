@@ -19,9 +19,5 @@ exports.config = {
     defaultTimeoutInterval: 30000
   },
 
-  beforeLaunch: function() {
-
-    require('./apiMock');
-
-  },
+  onPrepare: 'apiMock.js'
 };
