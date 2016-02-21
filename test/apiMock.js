@@ -26,6 +26,10 @@ app.get('/events', function (req, res) {
   res.sendFile(__dirname + '/fixtures/events/events/events.json');
 });
 
+app.get('/events/[0-9]+', function (req, res) {
+  res.sendFile(__dirname + '/fixtures/events/events/event_response.json');
+});
+
 app.use(function(req, res, next) {
   console.log('Mock server request without response!')
   res.status(404).send('Sorry cant find that!');
