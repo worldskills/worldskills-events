@@ -7,9 +7,7 @@
     <div class="form-group" ng-class="{'has-error': submitted && form.event.$invalid}">
         <label for="event" class="col-sm-3 control-label">Event <span class="required">*</span></label>
         <div class="col-sm-4">
-            <select ui-select2 class="form-control" id="event" name="event" required ng-model="clonedSkill.event.id">
-                <option ng-repeat="event in events.events" value="{{event.id}}">{{event.name}}</option>
-            </select>
+            <select class="form-control" id="event" name="event" required ng-model="clonedSkill.event"  ng-options="event.name for event in events.events track by event.id"></select>
         </div>
         <div class="col-sm-5">
             <span class="help-block" ng-show="submitted && form.event.$error.required">Please select an event!</span>

@@ -20,7 +20,7 @@
     <div class="form-group" ng-class="{'has-error': submitted && form.type.$invalid}">
         <label for="type" class="col-sm-3 control-label">Type <span class="required">*</span></label>
         <div class="col-sm-4">
-            <select ui-select2 class="form-control" id="type" name="type" required ng-model="skill.type">
+            <select class="form-control" id="type" name="type" required ng-model="skill.type">
                 <option value="official">{{"skill_type_official"|translate}}</option>
                 <option value="demo">{{"skill_type_demo"|translate}}</option>
                 <option value="presentation">{{"skill_type_presentation"|translate}}</option>
@@ -34,7 +34,7 @@
     <div class="form-group" ng-class="{'has-error': submitted && form.status.$invalid}">
         <label for="status" class="col-sm-3 control-label">Status <span class="required">*</span></label>
         <div class="col-sm-4">
-            <select ui-select2 class="form-control" id="status" name="status" required ng-model="skill.status">
+            <select class="form-control" id="status" name="status" required ng-model="skill.status">
                 <option value="active">Active</option>
                 <option value="on_notice">On notice</option>
                 <option value="removed">Removed</option>
@@ -47,8 +47,8 @@
     <div class="form-group" ng-class="{'has-error': submitted && form.sector.$invalid}">
         <label for="sector" class="col-sm-3 control-label">Sector</label>
         <div class="col-sm-4">
-            <select ui-select2 class="form-control" id="sector" name="sector" ng-model="skill.sector.id">
-                <option ng-repeat="sector in sectors" value="{{sector.id}}">{{sector.name.text}}</option>
+            <select class="form-control" id="sector" name="sector" ng-model="skill.sector" ng-options="sector.name.text for sector in sectors track by sector.id">
+                <option></option>
             </select>
         </div>
     </div>

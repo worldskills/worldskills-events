@@ -76,7 +76,7 @@
                         </div>
                         <div class="form-group">
                             <label for="type">Type</label>
-                            <select ui-select2="{allowClear: true}" class="form-control" id="type" name="type" required ng-model="filters.type">
+                            <select class="form-control" id="type" name="type" required ng-model="filters.type">
                                 <option></option>
                                 <option value="meeting">Board meeting or other meeting</option>
                                 <option value="champions_forum">Champions Forum</option>
@@ -88,14 +88,14 @@
                         </div>
                         <div class="form-group">
                             <label for="country">Country</label>
-                            <select ui-select2="{allowClear: true}" class="form-control" id="country" name="country" required ng-model="filters.country">
+                            <select class="form-control" id="country" name="country" required ng-model="filters.country">
                                 <option></option>
                                 <option ng-repeat="country in countries|orderBy:'name'" value="{{country.code}}">{{country.name}}</option>
                             </select>
                         </div>
                         <div class="form-group">
                             <label for="country">Entity</label>
-                            <select ui-select2="{allowClear: true}" class="form-control" id="ws_entity" name="ws_entity" required ng-model="filters.ws_entity">
+                            <select class="form-control" id="ws_entity" name="ws_entity" required ng-model="filters.ws_entity">
                                 <option></option>
                                 <option ng-repeat="entity in entities" value="{{entity.id}}">{{entity.name.text}}</option>
                             </select>

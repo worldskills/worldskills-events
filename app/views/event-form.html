@@ -11,9 +11,7 @@
     <div class="form-group" ng-class="{'has-error': submitted && form.ws_entity.$invalid}">
         <label for="ws_entity" class="col-sm-3 control-label">Entity <span class="required">*</span></label>
         <div class="col-sm-4">
-            <select ui-select2 class="form-control" id="ws_entity" name="ws_entity" required ng-model="event.ws_entity.id">
-                <option ng-repeat="entity in entities" value="{{entity.id}}">{{entity.name.text}}</option>
-            </select>
+            <select class="form-control" id="ws_entity" name="ws_entity" required ng-model="event.ws_entity" ng-options="entity.name.text for entity in entities track by entity.id"></select>
         </div>
         <div class="col-sm-5">
             <span class="help-block"><span ng-show="submitted && form.ws_entity.$error.required">Please select an entity!</span> Owner of the entry, select the organization you are working for.</span>
@@ -22,9 +20,8 @@
     <div class="form-group" ng-class="{'has-error': submitted && form.organizer.$invalid}">
         <label for="organizer" class="col-sm-3 control-label">Organizer</label>
         <div class="col-sm-4">
-            <select ui-select2="{allowClear: true}" class="form-control" id="organizer" name="organizer" ng-model="event.organizer.id">
+            <select class="form-control" id="organizer" name="organizer" ng-model="event.organizer" ng-options="entity.name.text for entity in organizers track by entity.id">
                 <option></option>
-                <option ng-repeat="entity in organizers" value="{{entity.id}}">{{entity.name.text}}</option>
             </select>
         </div>
         <div class="col-sm-5">
@@ -34,7 +31,7 @@
     <div class="form-group" ng-class="{'has-error': submitted && form.type.$invalid}">
         <label for="type" class="col-sm-3 control-label">Type <span class="required">*</span></label>
         <div class="col-sm-4">
-            <select ui-select2 class="form-control" id="type" name="type" required ng-model="event.type">
+            <select class="form-control" id="type" name="type" required ng-model="event.type">
                 <option value="meeting">Board meeting or other meeting</option>
                 <option value="champions_forum">Champions Forum</option>
                 <option value="competition">Competition</option>
@@ -81,7 +78,7 @@
     <div class="form-group" ng-class="{'has-error': submitted && form.country.$invalid}">
         <label for="country" class="col-sm-3 control-label">Country <span class="required">*</span></label>
         <div class="col-sm-4">
-            <select ui-select2 class="form-control" id="country" name="country" required ng-model="event.country">
+            <select class="form-control" id="country" name="country" required ng-model="event.country">
                 <option ng-repeat="country in countries|orderBy:'name'" value="{{country.code}}">{{country.name}}</option>
             </select>
         </div>
