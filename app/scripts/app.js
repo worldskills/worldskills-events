@@ -104,7 +104,7 @@
                 requireLoggedIn: true
             }
         }).state('events.skill', {
-            url: '/skills/{id}',
+            url: '/{eventId}/skills/{id}',
             templateUrl: 'views/skill.html',
             controller: 'SkillCtrl',
             abstract: true
@@ -137,7 +137,7 @@
                 requireLoggedIn: true
             }
         }).state('events.translation_create', {
-            url: '/skills/{skillId}/translations/create',
+            url: '/{eventId}/skills/{skillId}/translations/create',
             templateUrl: 'views/translation-create.html',
             controller: 'TranslationCreateCtrl',
             abstract: true
@@ -149,7 +149,7 @@
                 requireLoggedIn: true
             }
         }).state('events.translation', {
-            url: '/skills/{skillId}/translations/{locale}',
+            url: '/{eventId}/skills/{skillId}/translations/{locale}',
             templateUrl: 'views/translation.html',
             controller: 'TranslationCtrl',
             abstract: true

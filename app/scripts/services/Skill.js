@@ -2,7 +2,8 @@
     'use strict';
 
     angular.module('eventsApp').service('Skill', function($resource, WORLDSKILLS_API_EVENTS) {
-        return $resource(WORLDSKILLS_API_EVENTS + '/skills/:id', {
+        return $resource(WORLDSKILLS_API_EVENTS + '/:eventId/skills/:id', {
+            eventId: '@event.id',
             id: '@id'
         }, {
             query: {
@@ -18,7 +19,7 @@
     });
 
     angular.module('eventsApp').service('SkillPhoto', function($resource, WORLDSKILLS_API_EVENTS) {
-        return $resource(WORLDSKILLS_API_EVENTS + '/skills/:id/photos/:photo', {
+        return $resource(WORLDSKILLS_API_EVENTS + '/:eventId/skills/:id/photos/:photo', {
         }, {
             update: {
                 method: 'PUT'
@@ -27,14 +28,15 @@
     });
 
     angular.module('eventsApp').service('SkillTranslation', function($resource, $http, WORLDSKILLS_API_EVENTS) {
-        return $resource(WORLDSKILLS_API_EVENTS + '/skills/:id/translations/:locale', {
+        return $resource(WORLDSKILLS_API_EVENTS + '/:eventId/skills/:id/translations/:locale', {
+            eventId: '@event.id',
             id: '@id',
             locale: '@locale'
         });
     });
 
     angular.module('eventsApp').service('SkillClone', function($resource, WORLDSKILLS_API_EVENTS) {
-        return $resource(WORLDSKILLS_API_EVENTS + '/skills/:id/clone', {
+        return $resource(WORLDSKILLS_API_EVENTS + '/:eventId/skills/:id/clone', {
         }, {
             clone: {
                 method: 'POST'

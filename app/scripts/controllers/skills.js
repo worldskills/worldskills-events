@@ -12,10 +12,11 @@
     });
 
     angular.module('eventsApp').controller('SkillCtrl', function($scope, $stateParams, Skill, auth, $http, $q, WORLDSKILLS_API_EVENTS, EVENTS_APP_CODE, $translate, $state, WorldSkills, alert) {
+        $scope.eventId = $stateParams.eventId;
         $scope.id = $stateParams.id;
         $scope.translations = [];
         $scope.translationsLoading = true;
-        $scope.skill = Skill.get({id: $scope.id}, function (skill) {
+        $scope.skill = Skill.get({eventId: $scope.eventId, id: $scope.id}, function (skill) {
             $scope.title = skill.name.text;
             if (!$scope.skill.description) {
                 $scope.skill.description = {text: '', lang_code: 'en'};
@@ -100,9 +101,9 @@
             $scope.submitted = true;
             if ($scope.form.$valid) {
                 $scope.loading = true;
-                SkillClone.clone({id: $scope.skill.id}, $scope.clonedSkill, function (skill) {
+                SkillClone.clone({eventId: $scope.skill.event.id, id: $scope.skill.id}, $scope.clonedSkill, function (skill) {
                     alert.success('The Skill has been copied successfully. Please edit the copy of the Skill below.');
-                    $state.go('events.skill.form', {id: skill.id});
+                    $state.go('events.skill.form', {eventId: skill.event.id, id: skill.id});
                 });
             }
         };
@@ -126,7 +127,7 @@
             var notRemoved = [];
             angular.forEach($scope.skill.photos, function (photo) {
                 if (photo.checked) {
-                    SkillPhoto.remove({id: $scope.skill.id, photo: photo.id});
+                    SkillPhoto.remove({eventId: $scope.skill.event.id, id: $scope.skill.id, photo: photo.id});
                 } else {
                     notRemoved.push(photo);
                 }
@@ -141,24 +142,25 @@
                     angular.element($scope.form).find('.ng-invalid' ).focus();
                     return;
                 }
-                SkillPhoto.update({id: $scope.skill.id, photo: photo.id}, {thumbnail_hash: photo.thumbnail_hash}, function () {
-                    $state.go('events.skill.photos', {id: $scope.skill.id}, {reload: true});
+                SkillPhoto.update({eventId: $scope.skill.event.id, id: $scope.skill.id, photo: photo.id}, {thumbnail_hash: photo.thumbnail_hash}, function () {
+                    $state.go('events.skill.photos', {eventId: $scope.skill.event.id, id: $scope.skill.id}, {reload: true});
                 });
             });
         };
     });
     angular.module('eventsApp').controller('SkillTranslationsCtrl', function($scope, $stateParams, Skill, SkillPhoto, $http, WORLDSKILLS_API_EVENTS, WORLDSKILLS_API_IMAGES, $q, $upload, $state, WorldSkills, alert) {
-        
+
     });
     angular.module('eventsApp').controller('TranslationCtrl', function($scope, $stateParams, Skill, SkillTranslation, $http, WORLDSKILLS_API_EVENTS, WORLDSKILLS_API_IMAGES, $q, $upload, $translate, $state, WorldSkills, alert) {
+        $scope.eventId = $stateParams.eventId;
         $scope.skillId = $stateParams.skillId;
         $scope.locale = $stateParams.locale;
-        $scope.skill = Skill.get({id: $scope.skillId}, function (skill) {
+        $scope.skill = Skill.get({eventId: $scope.eventId, id: $scope.skillId}, function (skill) {
             $translate($scope.locale).then(function (language) {
                 $scope.title = language + ' Tanslation ' + skill.name.text;
            });
         });
-        $scope.translation = Skill.get({id: $scope.skillId, l: $scope.locale}, function (translation) {
+        $scope.translation = Skill.get({eventId: $scope.eventId, id: $scope.skillId, l: $scope.locale}, function (translation) {
             if (!$scope.translation.description) {
                 $scope.translation.description = {text: '', lang_code: ''};
             }
@@ -174,15 +176,16 @@
         });
         $scope.deleteTranslation = function() {
             $scope.deleteLoading = true;
-            SkillTranslation.remove({id: $scope.skill.id, locale: $scope.locale}, function () {
+            SkillTranslation.remove({eventId: $scope.skill.event.id, id: $scope.skill.id, locale: $scope.locale}, function () {
                 alert.success('The translation has been deleted successfully.');
-                $state.go('events.skill.translations', {id: $scope.skill.id});
+                $state.go('events.skill.translations', {eventId: $scope.eventId, id: $scope.skill.id});
             });
         };
     });
     angular.module('eventsApp').controller('TranslationCreateCtrl', function($scope, $stateParams, Skill, $http, WORLDSKILLS_API_EVENTS, WORLDSKILLS_API_IMAGES, $q, $upload, $state, WorldSkills, alert) {
+        $scope.eventId = $stateParams.eventId;
         $scope.skillId = $stateParams.skillId;
-        $scope.skill = Skill.get({id: $scope.skillId}, function (skill) {
+        $scope.skill = Skill.get({eventId: $scope.eventId, id: $scope.skillId}, function (skill) {
             $scope.translation = angular.copy(skill);
             $scope.translation.name.lang_code = '';
             $scope.translation.name.text = '';
@@ -216,7 +219,7 @@
                 $scope.translation.description_competition_action.lang_code = langCode;
                 $scope.translation.$update({l: langCode}, function () {
                     alert.success('The translation has been updated successfully.');
-                    $state.go('events.skill.translations', {id: $scope.skill.id});
+                    $state.go('events.skill.translations', {eventId: $scope.skill.event.id, id: $scope.skill.id});
                 });
             }
         };

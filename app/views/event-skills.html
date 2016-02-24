@@ -40,8 +40,8 @@
         </tfoot>
         <tbody>
             <tr ng-repeat="skill in skills">
-                <td><a ui-sref="events.skill.form({id: skill.id})">{{skill.number}}</a></td>
-                <td><a ui-sref="events.skill.form({id: skill.id})">{{skill.name.text}}</a></td>
+                <td><a ui-sref="events.skill.form({eventId: skill.event.id, id: skill.id})">{{skill.number}}</a></td>
+                <td><a ui-sref="events.skill.form({eventId: skill.event.id, id: skill.id})">{{skill.name.text}}</a></td>
                 <td>{{("skill_type_" + skill.type)|translate}}</td>
             </tr>
             <tr ng-show="skills == null">
