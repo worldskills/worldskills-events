@@ -52,7 +52,7 @@
         $scope.setStatusRemoved = function() {
            if (alert.confirm('Setting the status of the Skill to Removed will hide it from all Skill lists. The data associated with it will not be deleted. Click OK to proceed.')) {
                $scope.setStatusRemovedLoading = true;
-               Skill.get({id: $scope.id}, function (skill) {
+               Skill.get({eventId: $scope.eventId, id: $scope.id}, function (skill) {
                   skill.status = 'removed';
                   skill.$update(function () {
                        alert.success('The status of the Skill has been successfully set to Removed.');
