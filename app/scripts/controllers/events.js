@@ -163,6 +163,11 @@
                 }
             }
         });
+        $scope.checkUrl = function() {
+            if (!/^http/i.test($scope.event.url)) {
+                $scope.event.url = 'http://' + $scope.event.url;
+            }
+        };
         $scope.save = function() {
             $scope.submitted = true;
             if ($scope.form.$valid) {

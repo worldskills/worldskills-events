@@ -128,9 +128,9 @@
         </div>
     </div>
     <div class="form-group" ng-class="{'has-error': submitted && form.url.$invalid}">
-        <label for="town" class="col-sm-3 control-label">Website</label>
+        <label for="url" class="col-sm-3 control-label">Website</label>
         <div class="col-sm-4">
-            <input type="url" class="form-control" id="url" name="url" ng-maxlength="255" ng-model="event.url">
+            <input type="text" class="form-control" id="url" name="url" ng-maxlength="255" ng-model="event.url" ng-blur="checkUrl()" placeholder="http://www.example.org">
         </div>
         <div class="col-sm-5">
             <span class="help-block" ng-show="submitted && form.url.$error.maxlength">Website address must be less than 255 characters!</span>
