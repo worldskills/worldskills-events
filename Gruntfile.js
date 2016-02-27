@@ -75,7 +75,7 @@ module.exports = function (grunt) {
       }
     },
 
-    
+
 
     // Renames files for browser caching purposes
     rev: {
@@ -190,13 +190,6 @@ module.exports = function (grunt) {
           dest: '<%= yeoman.dist %>/images',
           src: [
             'generated/*'
-          ]
-        }, {
-          expand: true,
-          cwd: '<%= yeoman.app %>/bower_components/select2',
-          dest: '<%= yeoman.dist %>/styles',
-          src: [
-            '*.png'
           ]
         }, {
           expand: true,
