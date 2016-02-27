@@ -74,9 +74,6 @@
         $scope.search = function () {
             $scope.load($scope.filters.page);
         };
-        $scope.changePage = function (page) {
-            $scope.load(page);
-        };
         $scope.changeSort = function (sort) {
             $scope.filters.sort = sort;
             $scope.search();
@@ -152,15 +149,20 @@
         }).success(function(data, status, headers, config) {
             $scope.organizers = data.ws_entity_list;
         });
-        $scope.updateStartDate = function (before) {
-            var diff = $scope.event.start_date.getTime() - parseInt(before, 10);
-            var endDate = $scope.event.end_date;
-            if (angular.isDate(endDate)) {
-                $scope.event.end_date = new Date(endDate.getTime() + diff);
-            } else {
-                $scope.event.end_date = $scope.event.start_date;
+        $scope.$watch('event.start_date', function(newValue, oldValue) {
+            if (angular.isDate(newValue)) {
+                if (angular.isDate(oldValue)) {
+                    var diff = newValue.getTime() - oldValue.getTime();
+                    var endDate = $scope.event.end_date;
+                    if (angular.isDate(endDate)) {
+                        $scope.event.end_date = new Date(endDate.getTime() + diff);
+                    }
+                }
+                if (!angular.isDate($scope.event.end_date)) {
+                    $scope.event.end_date = new Date(newValue.getTime());
+                }
             }
-        };
+        });
         $scope.save = function() {
             $scope.submitted = true;
             if ($scope.form.$valid) {

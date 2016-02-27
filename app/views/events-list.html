@@ -68,11 +68,21 @@
                         </div>
                         <div class="form-group">
                             <label for="before">Before</label>
-                            <input type="text" datepicker-popup class="form-control" id="before" name="before" ng-model="filters.before">
+                            <p class="input-group">
+                                <input type="text" uib-datepicker-popup is-open="beforeOpened"class="form-control" id="before" name="before" ng-model="filters.before">
+                                <span class="input-group-btn">
+                                    <button type="button" class="btn btn-default" ng-click="beforeOpened = true"><i class="glyphicon glyphicon-calendar"></i></button>
+                                </span>
+                            </p>
                         </div>
                         <div class="form-group">
                             <label for="end_date">After</label>
-                            <input type="text" datepicker-popup class="form-control" id="after" name="after" ng-model="filters.after">
+                            <p class="input-group">
+                                <input type="text" uib-datepicker-popup is-open="afterOpened" class="form-control" id="after" name="after" ng-model="filters.after">
+                                <span class="input-group-btn">
+                                    <button type="button" class="btn btn-default" ng-click="afterOpened = true"><i class="glyphicon glyphicon-calendar"></i></button>
+                                </span>
+                            </p>
                         </div>
                         <div class="form-group">
                             <label for="type">Type</label>
@@ -108,4 +118,4 @@
     </div>
 </div>
 
-<pagination items-per-page="pagination.itemsPerPage" total-items="events.total_count || filters.page * pagination.itemsPerPage" page="filters.page" on-select-page="changePage(page)" max-size="10" boundary-links="true" rotate="false"></pagination>
+<uib-pagination items-per-page="pagination.itemsPerPage" total-items="events.total_count || filters.page * pagination.itemsPerPage" ng-model="filters.page" ng-change="search()" max-size="10" boundary-links="true" rotate="false"></pagination>

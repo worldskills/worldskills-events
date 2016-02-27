@@ -47,7 +47,12 @@
     <div class="form-group" ng-class="{'has-error': submitted && form.start_date.$invalid}">
         <label for="start_date" class="col-sm-3 control-label">Start date <span class="required">*</span></label>
         <div class="col-sm-3">
-            <input type="text" datepicker-popup class="form-control" id="start_date" name="start_date" required ng-model="event.start_date" ng-change="updateStartDate('{{ event.start_date.getTime() }}')">
+            <p class="input-group">
+                <input type="text" uib-datepicker-popup is-open="startDateOpened" class="form-control" id="start_date" name="start_date" required ng-model="event.start_date">
+                <span class="input-group-btn">
+                    <button type="button" class="btn btn-default" ng-click="startDateOpened = true"><i class="glyphicon glyphicon-calendar"></i></button>
+                </span>
+            </p>
         </div>
         <div class="col-sm-offset-1 col-sm-5">
             <span class="help-block" ng-show="submitted && form.start_date.$error.required">Please enter a start date!</span>
@@ -56,7 +61,12 @@
     <div class="form-group" ng-class="{'has-error': submitted && form.end_date.$invalid}">
         <label for="end_date" class="col-sm-3 control-label">End date <span class="required">*</span></label>
         <div class="col-sm-3">
-            <input type="text" datepicker-popup class="form-control" id="end_date" name="end_date" required ng-model="event.end_date">
+            <p class="input-group">
+                <input type="text" uib-datepicker-popup is-open="endDateOpened" class="form-control" id="end_date" name="end_date" required ng-model="event.end_date">
+                <span class="input-group-btn">
+                    <button type="button" class="btn btn-default" ng-click="endDateOpened = true"><i class="glyphicon glyphicon-calendar"></i></button>
+                </span>
+            </p>
         </div>
         <div class="col-sm-offset-1 col-sm-5">
             <span class="help-block" ng-show="submitted && form.end_date.$error.required">Please enter an end date!</span>
@@ -65,13 +75,23 @@
     <div class="form-group" ng-class="{'has-error': submitted && form.competition_start_date.$invalid}" ng-if="event.type == 'competition'">
         <label for="competition_start_date" class="col-sm-3 control-label">Competition Start date</label>
         <div class="col-sm-3">
-            <input type="text" datepicker-popup class="form-control" id="competition_start_date" name="competition_start_date" ng-model="event.competition_start_date">
+            <p class="input-group">
+                <input type="text" uib-datepicker-popup is-open="competitionStartDateOpened" class="form-control" id="competition_start_date" name="competition_start_date" ng-model="event.competition_start_date">
+                <span class="input-group-btn">
+                    <button type="button" class="btn btn-default" ng-click="competitionStartDateOpened = true"><i class="glyphicon glyphicon-calendar"></i></button>
+                </span>
+            </p>
         </div>
     </div>
     <div class="form-group" ng-class="{'has-error': submitted && form.competition_end_date.$invalid}" ng-if="event.type == 'competition'">
         <label for="competition_end_date" class="col-sm-3 control-label">Competition End date</label>
         <div class="col-sm-3">
-            <input type="text" datepicker-popup class="form-control" id="competition_end_date" name="competition_end_date" ng-model="event.competition_end_date">
+            <p class="input-group">
+                <input type="text" uib-datepicker-popup is-open="competitionEndDateOpened" class="form-control" id="competition_end_date" name="competition_end_date" ng-model="event.competition_end_date">
+                <span class="input-group-btn">
+                    <button type="button" class="btn btn-default" ng-click="competitionEndDateOpened = true"><i class="glyphicon glyphicon-calendar"></i></button>
+                </span>
+            </p>
         </div>
     </div>
     <hr/>
@@ -110,7 +130,7 @@
     <div class="form-group" ng-class="{'has-error': submitted && form.url.$invalid}">
         <label for="town" class="col-sm-3 control-label">Website</label>
         <div class="col-sm-4">
-            <input type="text" class="form-control" id="url" name="url" ng-maxlength="255" ng-model="event.url">
+            <input type="url" class="form-control" id="url" name="url" ng-maxlength="255" ng-model="event.url">
         </div>
         <div class="col-sm-5">
             <span class="help-block" ng-show="submitted && form.url.$error.maxlength">Website address must be less than 255 characters!</span>
