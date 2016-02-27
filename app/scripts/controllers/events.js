@@ -164,8 +164,10 @@
             }
         });
         $scope.checkUrl = function() {
-            if (!/^http/i.test($scope.event.url)) {
-                $scope.event.url = 'http://' + $scope.event.url;
+            if ($scope.event.url != '') {
+                if (!/^http/i.test($scope.event.url)) {
+                    $scope.event.url = 'http://' + $scope.event.url;
+                }
             }
         };
         $scope.save = function() {
