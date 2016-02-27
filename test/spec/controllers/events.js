@@ -85,7 +85,8 @@ describe('controllers events', function() {
 
             expect($scope.events.events.length).toBe(2);
 
-            $scope.changePage(2);
+            $scope.filters.page = 2;
+            $scope.search();
 
             $httpBackend.expectGET('http://localhost:8080/events?limit=15&offset=15&sort=start_date_desc').respond({
                 events: [
