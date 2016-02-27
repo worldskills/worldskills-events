@@ -4,7 +4,7 @@
     angular.module('eventsApp').service('Event', function($resource, $filter, WORLDSKILLS_API_EVENTS) {
 
         function convertDate(data) {
-            var event = data;
+            var event = angular.copy(data);
             if (angular.isDate(event.start_date)) {
                 event.start_date = $filter('date')(event.start_date, 'yyyy-MM-dd');
             }
