@@ -15,7 +15,7 @@
                 event.competition_start_date = $filter('date')(event.competition_start_date, 'yyyy-MM-dd');
             }
             if (angular.isDate(event.competition_end_date)) {
-                event.competition_start_date = $filter('date')(event.competition_end_date, 'yyyy-MM-dd');
+                event.competition_end_date = $filter('date')(event.competition_end_date, 'yyyy-MM-dd');
             }
             return angular.toJson(event);
         }
