@@ -3,6 +3,7 @@
     "person_id": 2,
     "first_name": "Bat",
     "last_name": "Man",
+    "puppeteer": null,
     "username": "batman@batcave.com",
     "roles": [{
         "id": 1,
