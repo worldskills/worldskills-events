@@ -73,7 +73,21 @@ module.exports = function (grunt) {
       }
     },
 
-
+    // Automatically inject Bower components into the app
+    bowerInstall: {
+      app: {
+        src: ['<%= yeoman.app %>/index.html'],
+        ignorePath: '<%= yeoman.app %>/',
+        exclude: [
+          '<%= yeoman.app %>/bower_components/bootstrap/dist/js/bootstrap.js',
+          '<%= yeoman.app %>/bower_components/xdomain/dist/xdomain.js'
+        ]
+      },
+      sass: {
+        src: ['<%= yeoman.app %>/styles/{,*/}*.{scss,sass}'],
+        ignorePath: '<%= yeoman.app %>/bower_components/'
+      }
+    },
 
     // Renames files for browser caching purposes
     rev: {
@@ -249,6 +263,7 @@ module.exports = function (grunt) {
   ]);
 
   grunt.registerTask('build', [
+    'bowerInstall',
     'clean:dist',
     'copy:config',
     'useminPrepare',
