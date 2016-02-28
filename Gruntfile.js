@@ -8,8 +8,6 @@ module.exports = function (grunt) {
   // Time how long tasks take. Can help when optimizing build times
   require('time-grunt')(grunt);
 
-  var env = grunt.option('env') || 'staging';
-
   // Define the configuration for all the tasks
   grunt.initConfig({
 
@@ -229,8 +227,8 @@ module.exports = function (grunt) {
         src: '{,*/}*.css'
       },
       config: {
-        src: '<%= yeoman.app %>/scripts/config.js.' + env,
-        dest: '<%= yeoman.app %>/scripts/config.js'
+        src: '<%= yeoman.app %>/scripts/config.js',
+        dest: '<%= yeoman.dist %>/scripts/config.js'
       }
     },
 
