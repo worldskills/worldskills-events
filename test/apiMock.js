@@ -31,6 +31,10 @@ app.get('/events', function (req, res) {
   res.sendFile(__dirname + '/fixtures/events/events/events.json');
 });
 
+app.post('/events', function (req, res) {
+  res.sendFile(__dirname + '/fixtures/events/events/event_response.json');
+});
+
 app.get('/events/[0-9]+', function (req, res) {
   res.sendFile(__dirname + '/fixtures/events/events/event_response.json');
 });
