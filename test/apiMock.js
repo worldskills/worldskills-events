@@ -4,11 +4,14 @@ var cors = require('cors');
 var bodyParser = require('body-parser');
 var app = express();
 
+global.apiMockRequests = {};
+
 app.use(cors());
 app.use(bodyParser.json());
 
 app.use(function(req, res, next) {
-  console.log("Mock server request: " + req.url);
+  console.log("Mock server request: " + req.method + " " + req.url);
+  apiMockRequests[req.method + " " + req.path] = req;
   next();
 });
 
