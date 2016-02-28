@@ -185,6 +185,7 @@
     angular.module('eventsApp').controller('TranslationCreateCtrl', function($scope, $stateParams, Skill, $http, WORLDSKILLS_API_EVENTS, WORLDSKILLS_API_IMAGES, $q, $upload, $state, WorldSkills, alert) {
         $scope.eventId = $stateParams.eventId;
         $scope.skillId = $stateParams.skillId;
+        $scope.translation = new Skill();
         $scope.skill = Skill.get({eventId: $scope.eventId, id: $scope.skillId}, function (skill) {
             $scope.translation = angular.copy(skill);
             $scope.translation.name.lang_code = '';
