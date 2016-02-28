@@ -72,12 +72,7 @@
     "rel" : "skills",
     "href" : "http://localhost:9090/events/skills",
     "content_type" : null,
-    "description" : "Competition Skills"
-  }, {
-    "rel" : "sectors",
-    "href" : "http://localhost:9090/events/sectors",
-    "content_type" : null,
-    "description" : "Skill Sectors"
+    "description" : "Skills"
   }, {
     "rel" : "sponsors",
     "href" : "http://localhost:9090/events/sponsors",

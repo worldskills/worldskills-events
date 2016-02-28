@@ -5,7 +5,7 @@
   "errors" : [ {
     "code" : "400-130",
     "user_msg" : "skill.status must be \"active\", \"on_notice\" or \"removed\"",
-    "dev_msg" : "Error path updateSkill.arg1.status",
+    "dev_msg" : "Error path updateSkill.arg2.status",
     "errors" : null
   } ]
 }

@@ -88,12 +88,12 @@
     "sort" : 1,
     "links" : [ {
       "rel" : "self",
-      "href" : "http://localhost:9090/events/sectors/1/groups/1",
+      "href" : "http://localhost:9090/events/1/sectors/1/groups/1",
       "content_type" : null,
       "description" : null
     }, {
       "rel" : "sponsors",
-      "href" : "http://localhost:9090/events/groups/1/sponsors",
+      "href" : "http://localhost:9090/events/1/sectors/1/groups/1/sponsors",
       "content_type" : null,
       "description" : null
     } ]
@@ -170,17 +170,17 @@
     },
     "links" : [ {
       "rel" : "self",
-      "href" : "http://localhost:9090/events/sectors/1",
+      "href" : "http://localhost:9090/events/1/sectors/1",
       "content_type" : null,
       "description" : null
     }, {
       "rel" : "groups",
-      "href" : "http://localhost:9090/events/sectors/1/groups",
+      "href" : "http://localhost:9090/events/1/sectors/1/groups",
       "content_type" : null,
       "description" : null
     }, {
       "rel" : "sponsors",
-      "href" : "http://localhost:9090/events/sectors/1/sponsors",
+      "href" : "http://localhost:9090/events/1/sectors/1/sponsors",
       "content_type" : null,
       "description" : null
     } ]
@@ -205,17 +205,17 @@
   } ],
   "links" : [ {
     "rel" : "self",
-    "href" : "http://localhost:9090/events/skills/1",
+    "href" : "http://localhost:9090/events/1/skills/1",
     "content_type" : null,
     "description" : null
   }, {
     "rel" : "i18n",
-    "href" : "http://localhost:9090/events/skills/1?l=en",
+    "href" : "http://localhost:9090/events/1/skills/1?l=en",
     "content_type" : null,
     "description" : "englanti"
   }, {
     "rel" : "i18n",
-    "href" : "http://localhost:9090/events/skills/1?l=de",
+    "href" : "http://localhost:9090/events/1/skills/1?l=de",
     "content_type" : null,
     "description" : "saksa"
   } ]

@@ -8,12 +8,12 @@
     "sort" : 1,
     "links" : [ {
       "rel" : "self",
-      "href" : "http://localhost:9090/events/sectors/1/groups/1",
+      "href" : "http://localhost:9090/events/1/sectors/1/groups/1",
       "content_type" : null,
       "description" : null
     }, {
       "rel" : "sponsors",
-      "href" : "http://localhost:9090/events/groups/1/sponsors",
+      "href" : "http://localhost:9090/events/1/sectors/1/groups/1/sponsors",
       "content_type" : null,
       "description" : null
     } ]
@@ -21,7 +21,7 @@
   "total_count" : 1,
   "links" : [ {
     "rel" : "self",
-    "href" : "http://localhost:9090/events/sectors/1/groups?offset=0&limit=10",
+    "href" : "http://localhost:9090/events/1/sectors/1/groups?offset=0&limit=10",
     "content_type" : null,
     "description" : null
   } ]

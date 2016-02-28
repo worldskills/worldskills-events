@@ -5,12 +5,12 @@
   "errors" : [ {
     "code" : "400-117",
     "user_msg" : "sector.name may not be null",
-    "dev_msg" : "Error path createSector.arg0.name",
+    "dev_msg" : "Error path createSector.arg1.name",
     "errors" : null
   }, {
     "code" : "400-119",
     "user_msg" : "sector.event may not be null",
-    "dev_msg" : "Error path createSector.arg0.event",
+    "dev_msg" : "Error path createSector.arg1.event",
     "errors" : null
   } ]
 }

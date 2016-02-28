@@ -5,7 +5,7 @@
   "errors" : [ {
     "code" : "400-118",
     "user_msg" : "group.name may not be null",
-    "dev_msg" : "Error path createGroup.arg1.name",
+    "dev_msg" : "Error path createGroup.arg2.name",
     "errors" : null
   } ]
 }

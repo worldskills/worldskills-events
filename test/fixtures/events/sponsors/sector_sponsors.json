@@ -87,7 +87,7 @@
   "total_count" : 1,
   "links" : [ {
     "rel" : "self",
-    "href" : "http://localhost:9090/events/sectors/1/sponsors?offset=0&limit=10",
+    "href" : "http://localhost:9090/events/2/sectors/1/sponsors?offset=0&limit=10",
     "content_type" : null,
     "description" : null
   } ]

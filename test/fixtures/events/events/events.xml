@@ -105,8 +105,7 @@
   </event>
   <total_count>3</total_count>
   <link href="http://localhost:9090/events?offset=0&amp;limit=10&amp;sort=start_date_desc" rel="self"/>
-  <link description="Competition Skills" href="http://localhost:9090/events/skills" rel="skills"/>
-  <link description="Skill Sectors" href="http://localhost:9090/events/sectors" rel="sectors"/>
+  <link description="Skills" href="http://localhost:9090/events/skills" rel="skills"/>
   <link description="Sponsors" href="http://localhost:9090/events/sponsors" rel="sponsors"/>
   <link description="WorldSkills Entities" href="https://api.worldskills.org/auth/ws_entities" rel="ws_entities"/>
 </events>

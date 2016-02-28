@@ -5,12 +5,12 @@
   "errors" : [ {
     "code" : "400-120",
     "user_msg" : "lang_code may not be null",
-    "dev_msg" : "Error path createSkill.arg0.name.langCode",
+    "dev_msg" : "Error path createSkill.arg1.name.langCode",
     "errors" : null
   }, {
     "code" : "400-121",
     "user_msg" : "text may not be null",
-    "dev_msg" : "Error path createSkill.arg0.name.text",
+    "dev_msg" : "Error path createSkill.arg1.name.text",
     "errors" : null
   } ]
 }

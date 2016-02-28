@@ -5,10 +5,12 @@
   "web_service_code" : 400,
   "user_id" : 1,
   "person_id" : 123,
+  "puppeteer_id" : null,
   "data" : {
-    "parent_skill_id" : "1",
-    "skill_name" : "Web Design",
-    "skill_id" : "2"
+    "parent_competition_skill_id" : "1",
+    "skill_id" : "1",
+    "competition_skill_id" : "2",
+    "competition_skill_name" : "Web Design"
   },
   "ws_entity_id" : 1
 }

@@ -70,17 +70,17 @@
   },
   "links" : [ {
     "rel" : "self",
-    "href" : "http://localhost:9090/events/sectors/1",
+    "href" : "http://localhost:9090/events/1/sectors/1",
     "content_type" : null,
     "description" : null
   }, {
     "rel" : "groups",
-    "href" : "http://localhost:9090/events/sectors/1/groups",
+    "href" : "http://localhost:9090/events/1/sectors/1/groups",
     "content_type" : null,
     "description" : null
   }, {
     "rel" : "sponsors",
-    "href" : "http://localhost:9090/events/sectors/1/sponsors",
+    "href" : "http://localhost:9090/events/1/sectors/1/sponsors",
     "content_type" : null,
     "description" : null
   } ]

@@ -5,6 +5,7 @@
   "web_service_code" : 400,
   "user_id" : 1,
   "person_id" : 123,
+  "puppeteer_id" : null,
   "data" : {
     "event_id" : "2",
     "parent_event_id" : "1",

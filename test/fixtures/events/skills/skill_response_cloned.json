@@ -101,12 +101,12 @@
   } ],
   "links" : [ {
     "rel" : "self",
-    "href" : "http://localhost:9090/events/skills/2",
+    "href" : "http://localhost:9090/events/2/skills/2",
     "content_type" : null,
     "description" : null
   }, {
     "rel" : "i18n",
-    "href" : "http://localhost:9090/events/skills/2?l=de",
+    "href" : "http://localhost:9090/events/2/skills/2?l=de",
     "content_type" : null,
     "description" : "German"
   } ]
