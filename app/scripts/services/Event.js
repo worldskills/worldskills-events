@@ -25,6 +25,12 @@
                 data = angular.fromJson(data);
                 data.start_date = new Date($filter('date')(data.start_date, 'medium'));
                 data.end_date = new Date($filter('date')(data.end_date, 'medium'));
+                if (data.competition_start_date) {
+                    data.competition_start_date = new Date($filter('date')(data.competition_start_date, 'medium'));
+                }
+                if (data.competition_end_date) {
+                    data.competition_end_date = new Date($filter('date')(data.competition_end_date, 'medium'));
+                }
             }
             return data;
         }
