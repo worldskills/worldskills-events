@@ -45,6 +45,7 @@
     "node": ">=0.8.0"
   },
   "scripts": {
+    "update-fixtures": "cp -R ../API-Events/src/test/resources/fixtures/ test/fixtures/events",
     "test": "grunt test",
     "protractor": "protractor test/protractor-conf.js"
   }
