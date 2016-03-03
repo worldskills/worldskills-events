@@ -95,7 +95,7 @@
             $scope.events = data;
         });
         $scope.clonedSkill = {
-           event: {id: null}
+           event: null
         };
         $scope.clone = function() {
             $scope.submitted = true;
