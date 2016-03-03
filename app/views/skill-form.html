@@ -5,7 +5,9 @@
             <input type="text" class="form-control" id="name" name="name" required ng-model="skill.name.text">
         </div>
         <div class="col-sm-5">
-            <span class="help-block" ng-show="submitted && form.name.$error.required">Please enter a name!</span>
+            <span class="help-block" ng-show="submitted" ng-messages="form.name.$error">
+                <span ng-message="required">Please enter a name!</span>
+            </span>
         </div>
     </div>
     <div class="form-group" ng-class="{'has-error': submitted && form.number.$invalid}">
@@ -14,7 +16,9 @@
             <input type="text" class="form-control" id="number" name="number" required ng-model="skill.number">
         </div>
         <div class="col-sm-offset-1 col-sm-5">
-            <span class="help-block" ng-show="submitted && form.number.$error.required">Please enter a number!</span>
+            <span class="help-block" ng-show="submitted" ng-messages="form.number.$error">
+                <span ng-message="required">Please enter a number!</span>
+            </span>
         </div>
     </div>
     <div class="form-group" ng-class="{'has-error': submitted && form.type.$invalid}">
@@ -28,7 +32,9 @@
             </select>
         </div>
         <div class="col-sm-5">
-            <span class="help-block" ng-show="submitted && form.type.$error.required">Please select a type!</span>
+            <span class="help-block" ng-show="submitted" ng-messages="form.type.$error">
+                <span ng-message="required">Please select a type!</span>
+            </span>
         </div>
     </div>
     <div class="form-group" ng-class="{'has-error': submitted && form.status.$invalid}">
@@ -41,7 +47,9 @@
             </select>
         </div>
         <div class="col-sm-5">
-            <span class="help-block" ng-show="submitted && form.status.$error.required">Please select a status!</span>
+            <span class="help-block" ng-show="submitted" ng-messages="form.status.$error">
+                <span ng-message="required">Please select a status!</span>
+            </span>
         </div>
     </div>
     <div class="form-group" ng-class="{'has-error': submitted && form.sector.$invalid}">
