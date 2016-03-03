@@ -21,7 +21,9 @@
                 <input type="text" class="form-control" id="name" name="name" required ng-model="sponsor.name">
             </div>
             <div class="col-sm-5">
-                <span class="help-block" ng-show="submitted && form.name.$error.required">Please enter a name!</span>
+                <span class="help-block" ng-show="submitted" ng-messages="form.name.$error">
+                    <span ng-message="required">Please enter a name!</span>
+                </span>
             </div>
         </div>
         <div class="form-group" ng-class="{'has-error': submitted && form.logo.$invalid}">
