@@ -5,7 +5,9 @@
             <input type="text" class="form-control" id="name" name="name" required ng-model="event.name">
         </div>
         <div class="col-sm-5">
-            <span class="help-block" ng-show="submitted && form.name.$error.required">Please enter a name!</span>
+            <span class="help-block" ng-show="submitted" ng-messages="form.name.$error">
+                <span ng-message="required">Please enter a name!</span>
+            </span>
         </div>
     </div>
     <div class="form-group" ng-class="{'has-error': submitted && form.ws_entity.$invalid}">
@@ -14,7 +16,12 @@
             <select class="form-control" id="ws_entity" name="ws_entity" required ng-model="event.ws_entity" ng-options="entity.name.text for entity in entities track by entity.id"></select>
         </div>
         <div class="col-sm-5">
-            <span class="help-block"><span ng-show="submitted && form.ws_entity.$error.required">Please select an entity!</span> Owner of the entry, select the organization you are working for.</span>
+            <span class="help-block">
+                <span ng-show="submitted" ng-messages="form.ws_entity.$error">
+                  <span ng-message="required">Please select an entity!</span>
+                </span>
+                Owner of the entry, select the organization you are working for.
+            </span>
         </div>
     </div>
     <div class="form-group" ng-class="{'has-error': submitted && form.organizer.$invalid}">
@@ -41,7 +48,9 @@
             </select>
         </div>
         <div class="col-sm-5">
-            <span class="help-block" ng-show="submitted && form.type.$error.required">Please select a type!</span>
+            <span class="help-block" ng-show="submitted" ng-messages="form.type.$error">
+                <span ng-message="required">Please select a type!</span>
+            </span>
         </div>
     </div>
     <div class="form-group" ng-class="{'has-error': submitted && form.start_date.$invalid}">
@@ -55,7 +64,9 @@
             </p>
         </div>
         <div class="col-sm-offset-1 col-sm-5">
-            <span class="help-block" ng-show="submitted && form.start_date.$error.required">Please enter a start date!</span>
+            <span class="help-block" ng-show="submitted" ng-messages="form.start_date.$error">
+                <span ng-message="required">Please enter a start date!</span>
+            </span>
         </div>
     </div>
     <div class="form-group" ng-class="{'has-error': submitted && form.end_date.$invalid}">
@@ -69,7 +80,9 @@
             </p>
         </div>
         <div class="col-sm-offset-1 col-sm-5">
-            <span class="help-block" ng-show="submitted && form.end_date.$error.required">Please enter an end date!</span>
+            <span class="help-block" ng-show="submitted" ng-messages="form.end_date.$error">
+                <span ng-message="required">Please enter an end date!</span>
+            </span>
         </div>
     </div>
     <div class="form-group" ng-class="{'has-error': submitted && form.competition_start_date.$invalid}" ng-if="event.type == 'competition'">
@@ -103,7 +116,9 @@
             </select>
         </div>
         <div class="col-sm-5">
-            <span class="help-block" ng-show="submitted && form.country.$error.required">Please select a country!</span>
+            <span class="help-block" ng-show="submitted" ng-messages="form.country.$error">
+                <span ng-message="required">Please select a country!</span>
+            </span>
         </div>
     </div>
     <div class="form-group" ng-class="{'has-error': submitted && form.town.$invalid}">
