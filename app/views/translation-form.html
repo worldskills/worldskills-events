@@ -10,7 +10,9 @@
             </select>
         </div>
         <div class="col-sm-5">
-            <span class="help-block" ng-show="submitted && form.locale.$error.required">Please select a language!</span>
+            <span class="help-block" ng-show="submitted" ng-messages="form.locale.$error">
+                <span ng-message="required">Please select a language!</span>
+            </span>
         </div>
     </div>
     <div class="form-group" ng-class="{'has-error': submitted && form.name.$invalid}">
@@ -19,7 +21,9 @@
             <input type="text" class="form-control" id="name" name="name" required ng-model="translation.name.text">
         </div>
         <div class="col-sm-5">
-            <span class="help-block" ng-show="submitted && form.name.$error.required">Please enter a name!</span>
+            <span class="help-block" ng-show="submitted" ng-messages="form.name.$error">
+                <span ng-message="required">Please enter a name!</span>
+            </span>
         </div>
     </div>
     <div class="form-group" ng-class="{'has-error': submitted && form.description.$invalid}">
