@@ -109,13 +109,18 @@
         };
     });
     angular.module('eventsApp').controller('SkillPhotosCtrl', function($scope, $stateParams, Skill, SkillPhoto, $http, WORLDSKILLS_API_EVENTS, WORLDSKILLS_API_IMAGES, $q, $upload, $state, WorldSkills, alert) {
-        var photo = $q.when();
+        var image = $q.when();
+        $scope.imageLoading = false;
+        $scope.photo = new SkillPhoto();
+        $scope.photo.skill = $scope.skill;
+        $scope.photo.description = {text: '', lang_code: 'en'};
         $scope.thumbnail = function (photo) {
             return photo.thumbnail + '_small';
         };
         $scope.onFileSelect = function($files) {
             var deferred = $q.defer();
-            photo = deferred.promise;
+            image = deferred.promise;
+            $scope.imageLoading = true;
             $scope.upload = $upload.upload({
                 url: WORLDSKILLS_API_IMAGES,
                 file: $files[0],
@@ -127,7 +132,7 @@
             var notRemoved = [];
             angular.forEach($scope.skill.photos, function (photo) {
                 if (photo.checked) {
-                    SkillPhoto.remove({eventId: $scope.skill.event.id, id: $scope.skill.id, photo: photo.id});
+                    SkillPhoto.remove({eventId: $scope.skill.event.id, skillId: $scope.skill.id, id: photo.id});
                 } else {
                     notRemoved.push(photo);
                 }
@@ -137,14 +142,14 @@
         };
         $scope.addPhoto = function() {
             $scope.submitted = true;
-            photo.then(function (photo) {
-                if ($scope.form.$invalid) {
-                    angular.element($scope.form).find('.ng-invalid' ).focus();
-                    return;
+            image.then(function (image) {
+                if ($scope.form.$valid) {
+                    $scope.photo.image_id = image.id;
+                    $scope.photo.thumbnail_hash = image.thumbnail_hash;
+                    $scope.photo.$save({eventId: $scope.skill.event.id, skillId: $scope.skill.id}, function () {
+                        $state.go('events.skill.photos', {eventId: $scope.skill.event.id, id: $scope.skill.id}, {reload: true});
+                    });
                 }
-                SkillPhoto.update({eventId: $scope.skill.event.id, id: $scope.skill.id, photo: photo.id}, {thumbnail_hash: photo.thumbnail_hash}, function () {
-                    $state.go('events.skill.photos', {eventId: $scope.skill.event.id, id: $scope.skill.id}, {reload: true});
-                });
             });
         };
     });
