@@ -5,14 +5,6 @@ describe('controllers events', function() {
     // load the module
     beforeEach(module('eventsApp'));
 
-    beforeEach(function() {
-        this.addMatchers({
-            toEqualData: function(expected) {
-                return angular.equals(this.actual, expected);
-            }
-        });
-    });
-
     // catch views and languages requests
     beforeEach(inject(function($httpBackend) {
 
@@ -250,7 +242,7 @@ describe('controllers events', function() {
 
         it('should load countries and entities', function() {
 
-            expect($scope.countries).toEqualData([
+            expect($scope.countries).toEqual([
                 {
                     code: 'AQ',
                     name: 'Antarctica'
