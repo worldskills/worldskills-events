@@ -34,6 +34,9 @@ describe('Events app', function() {
       element(by.model('event.country')).sendKeys("AFGHANISTAN");
 
       element(by.partialButtonText('Save')).click();
+
+      var messages = element.all(by.repeater('message in alert.messages'));
+      expect(messages.first().getText()).toContain('The Event has been added successfully.');
     });
 
     afterEach(function () {
