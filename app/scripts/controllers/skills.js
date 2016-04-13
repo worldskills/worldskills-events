@@ -213,17 +213,23 @@
             $scope.translation.description_competition_action.text = '';
         });
     });
-    angular.module('eventsApp').controller('TranslationFormCtrl', function($scope, $stateParams, Skill, $http, WORLDSKILLS_API_EVENTS, WORLDSKILLS_API_IMAGES, $q, $upload, $state, WorldSkills, alert) {
+    angular.module('eventsApp').controller('TranslationFormCtrl', function($scope, $stateParams, Skill, SkillPhoto, $http, WORLDSKILLS_API_EVENTS, WORLDSKILLS_API_IMAGES, $q, $upload, $state, WorldSkills, alert) {
         $scope.save = function() {
             $scope.submitted = true;
             if ($scope.form.$valid) {
                 $scope.loading = true;
                 var langCode = $scope.translation.name.lang_code;
+                var savePromises = [];
+                angular.forEach($scope.translation.photos, function (photo) {
+                    photo.description.lang_code = langCode;
+                    savePromises.push(SkillPhoto.update({eventId: $scope.translation.event.id, skillId: $scope.translation.id, l: langCode}, photo));
+                });
                 $scope.translation.description.lang_code = langCode;
                 $scope.translation.description_industry_action.lang_code = langCode;
                 $scope.translation.description_required_skills.lang_code = langCode;
                 $scope.translation.description_competition_action.lang_code = langCode;
-                $scope.translation.$update({l: langCode}, function () {
+                savePromises.push($scope.translation.$update({l: langCode}));
+                $q.all(savePromises).then(function() {
                     alert.success('The translation has been updated successfully.');
                     $state.go('events.skill.translations', {eventId: $scope.skill.event.id, id: $scope.skill.id});
                 });
