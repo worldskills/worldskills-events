@@ -214,6 +214,9 @@
         });
     });
     angular.module('eventsApp').controller('TranslationFormCtrl', function($scope, $stateParams, Skill, SkillPhoto, $http, WORLDSKILLS_API_EVENTS, WORLDSKILLS_API_IMAGES, $q, $upload, $state, WorldSkills, alert) {
+        $scope.thumbnail = function (photo) {
+            return photo.thumbnail + '_small';
+        };
         $scope.save = function() {
             $scope.submitted = true;
             if ($scope.form.$valid) {
