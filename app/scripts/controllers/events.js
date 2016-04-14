@@ -121,6 +121,7 @@
         $scope.event.end_date = new Date();
         $scope.event.code = '';
         $scope.event.town = '';
+        $scope.event.country = 'ZZ';
     });
     angular.module('eventsApp').controller('EventFormCtrl', function($scope, $stateParams, Event, $http, $filter, WORLDSKILLS_API_EVENTS, WORLDSKILLS_API_ORGANIZATIONS, WORLDSKILLS_API_AUTH, EVENTS_APP_CODE, $translate, $state, alert) {
         $http({method: 'GET', url: WORLDSKILLS_API_ORGANIZATIONS + '/countries'}).success(function(data, status, headers, config) {

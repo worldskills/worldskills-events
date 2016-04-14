@@ -111,13 +111,15 @@
     <div class="form-group" ng-class="{'has-error': submitted && form.country.$invalid}">
         <label for="country" class="col-sm-3 control-label">Country <span class="required">*</span></label>
         <div class="col-sm-4">
-            <select class="form-control" id="country" name="country" required ng-model="event.country">
+            <select class="form-control" id="country" name="country" pattern="([A-Y][A-Z])|([A-Z][A-Y])" ng-model="event.country">
+                <option value="ZZ"></option>
                 <option ng-repeat="country in countries|orderBy:'name'" value="{{country.code}}">{{country.name}}</option>
+                <option value="">Global</option>
             </select>
         </div>
         <div class="col-sm-5">
             <span class="help-block" ng-show="submitted" ng-messages="form.country.$error">
-                <span ng-message="required">Please select a country!</span>
+                <span ng-message="pattern">Please select a country!</span>
             </span>
         </div>
     </div>
