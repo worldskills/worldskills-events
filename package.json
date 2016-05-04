@@ -32,7 +32,7 @@
     "karma-html2js-preprocessor": "~1.0.0",
     "karma-phantomjs-launcher": "~1.0.0",
     "karma-requirejs": "~1.0.0",
-    "karma-script-launcher": "~0.1.0",
+    "karma-script-launcher": "~1.0.0",
     "load-grunt-tasks": "~3.5.0",
     "phantomjs-prebuilt": "^2.1.4",
     "protractor": "^3.2.1",
