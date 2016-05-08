@@ -11,4 +11,8 @@
     eventsApp.constant('LOAD_CHILD_ENTITY_ROLES', true);
     eventsApp.constant('FILTER_AUTH_ROLES', [400]); // Events
 
+    eventsApp.config(['$compileProvider', function ($compileProvider) {
+        $compileProvider.debugInfoEnabled(false);
+    }]);
+
 })();
