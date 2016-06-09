@@ -68,16 +68,16 @@
             <textarea class="form-control" id="description" name="description" rows="9" ng-model="skill.description.text" ck-editor></textarea>
         </div>
     </div>
-    <div class="form-group" ng-class="{'has-error': submitted && form.description_required_skills.$invalid}">
-        <label for="description_required_skills" class="col-sm-3 control-label">Required skills</label>
-        <div class="col-sm-6">
-            <textarea class="form-control" id="description_required_skills" name="description_required_skills" rows="9" ng-model="skill.description_required_skills.text" ck-editor></textarea>
-        </div>
-    </div>
     <div class="form-group" ng-class="{'has-error': submitted && form.description_industry_action.$invalid}">
         <label for="description_industry_action" class="col-sm-3 control-label">Career info</label>
         <div class="col-sm-6">
             <textarea class="form-control" id="description_industry_action" name="description_industry_action" rows="9" ng-model="skill.description_industry_action.text" ck-editor></textarea>
+        </div>
+    </div>
+    <div class="form-group" ng-class="{'has-error': submitted && form.description_required_skills.$invalid}">
+        <label for="description_required_skills" class="col-sm-3 control-label">Required skills</label>
+        <div class="col-sm-6">
+            <textarea class="form-control" id="description_required_skills" name="description_required_skills" rows="9" ng-model="skill.description_required_skills.text" ck-editor></textarea>
         </div>
     </div>
     <div class="form-group" ng-class="{'has-error': submitted && form.description_competition_action.$invalid}">
