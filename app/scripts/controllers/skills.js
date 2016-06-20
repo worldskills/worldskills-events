@@ -211,6 +211,9 @@
             $scope.translation.description_industry_action.text = '';
             $scope.translation.description_required_skills.text = '';
             $scope.translation.description_competition_action.text = '';
+            angular.forEach($scope.translation.photos, function (photo) {
+                photo.description = {text: '', lang_code: ''};
+            });
         });
     });
     angular.module('eventsApp').controller('TranslationFormCtrl', function($scope, $stateParams, Skill, SkillPhoto, $http, WORLDSKILLS_API_EVENTS, WORLDSKILLS_API_IMAGES, $q, $upload, $state, WorldSkills, alert) {
