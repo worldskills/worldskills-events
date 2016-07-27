@@ -5,21 +5,18 @@
 <div class="table-responsive">
     <table class="table table-striped">
         <colgroup>
-            <col width="10%" />
             <col width="30%" />
-            <col width="60%" />
+            <col width="70%" />
         </colgroup>
         <thead>
             <tr>
-                <th>ID</th>
                 <th>Photo</th>
                 <th>Description</th>
             </tr>
         </thead>
-        <tfoot><tr><td colspan="3"></td></tr></tfoot>
+        <tfoot><tr><td colspan="2"></td></tr></tfoot>
         <tbody>
             <tr ng-repeat="photo in skill.photos">
-                <td><a ui-sref="events.skill_photo({eventId: skill.event.id, skillId: skill.id, id: photo.id})">{{photo.id}}</a></td>
                 <td>
                     <a ui-sref="events.skill_photo({eventId: skill.event.id, skillId: skill.id, id: photo.id})">
                         <div class="ws-image-thumbnail">
@@ -30,7 +27,7 @@
                 <td>{{ photo.description.text }}</td>
             </tr>
             <tr ng-show="skill.photos.length == 0">
-                <td colspan="3">No photos found.</td>
+                <td colspan="2">No photos found.</td>
             </tr>
         </tbody>
     </table>
