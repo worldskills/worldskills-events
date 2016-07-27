@@ -1,59 +1,38 @@
-<div class="row">
-    <div class="col-sm-4 col-sm-push-8">
-        <form name="form" role="form" novalidate focus-error>
-            <div class="panel panel-default">
-                <div class="panel-heading">
-                    <h3 class="panel-title">Add new photo</h3>
-                </div>
-                <div class="panel-body">
-                    <div class="form-group" ng-class="{'has-error': submitted && !imageLoading}">
-                        <label for="photo" class="control-label">Photo</label>
-                        <input type="file" id="photo" name="photo" required ng-file-select="onFileSelect($files)">
-                        <p class="help-block" ng-show="submitted && !imageLoading">Please choose a photo!</p>
-                    </div>
-                    <div class="form-group">
-                        <label for="description" class="control-label">Description</label>
-                        <input type="text" class="form-control" id="description" name="description" ng-model="photo.description.text">
-                    </div>
-                    <button type="button" class="btn btn-success" ng-click="addPhoto()">Add Photo</button>
-                </div>
-            </div>
-        </form>
-    </div>
-    <div class="col-sm-8 col-sm-pull-4">
-        <hr class="visible-xs" />
-        <div class="table-responsive">
-            <table class="table table-striped">
-                <colgroup>
-                    <col width="5%" />
-                    <col width="55%" />
-                    <col width="40%" />
-                </colgroup>
-                <thead>
-                    <tr>
-                        <th>&nbsp;</th>
-                        <th>Photo</th>
-                        <th>Description</th>
-                    </tr>
-                </thead>
-                <tfoot><tr><td colspan="3"></td></tr></tfoot>
-                <tbody>
-                    <tr ng-repeat="photo in skill.photos">
-                        <td><input type="checkbox" ng-model="photo.checked" /></td>
-                        <td>
-                            <div class="ws-image-thumbnail">
-                                <img ng-src="{{thumbnail(photo)}}" />
-                            </div>
-                        </td>
-                        <td>{{ photo.description.text }}</td>
-                    </tr>
-                    <tr ng-show="skill.photos.length == 0">
-                        <th>&nbsp;</th>
-                        <td colspan="2">No photos found.</td>
-                    </tr>
-                </tbody>
-            </table>
-        </div>
-        <button type="button" class="btn btn-danger" ng-click="removePhotos()">Remove selected</button>
-    </div>
+<p>
+    <a ui-sref="events.skill_photo_create({eventId: skill.event.id, skillId: skill.id})" class="btn btn-success">Add Photo</a>
+</p>
+
+<div class="table-responsive">
+    <table class="table table-striped">
+        <colgroup>
+            <col width="10%" />
+            <col width="30%" />
+            <col width="60%" />
+        </colgroup>
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Photo</th>
+                <th>Description</th>
+            </tr>
+        </thead>
+        <tfoot><tr><td colspan="3"></td></tr></tfoot>
+        <tbody>
+            <tr ng-repeat="photo in skill.photos">
+                <td><a ui-sref="events.skill_photo({eventId: skill.event.id, skillId: skill.id, id: photo.id})">{{photo.id}}</a></td>
+                <td>
+                    <a ui-sref="events.skill_photo({eventId: skill.event.id, skillId: skill.id, id: photo.id})">
+                        <div class="ws-image-thumbnail">
+                            <img ng-src="{{thumbnail(photo)}}" />
+                        </div>
+                    </a>
+                </td>
+                <td>{{ photo.description.text }}</td>
+            </tr>
+            <tr ng-show="skill.photos.length == 0">
+                <td colspan="3">No photos found.</td>
+            </tr>
+        </tbody>
+    </table>
 </div>
+

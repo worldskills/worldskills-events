@@ -129,6 +129,20 @@
             data: {
                 requireLoggedIn: true
             }
+        }).state('events.skill_photo_create', {
+            url: '/{eventId}/skills/{skillId}/photos/create',
+            templateUrl: 'views/skill-photo.html',
+            controller: 'SkillPhotoCreateCtrl',
+            data: {
+                requireLoggedIn: true
+            }
+        }).state('events.skill_photo', {
+            url: '/{eventId}/skills/{skillId}/photos/{id}',
+            templateUrl: 'views/skill-photo.html',
+            controller: 'SkillPhotoCtrl',
+            data: {
+                requireLoggedIn: true
+            }
         }).state('events.skill.translations', {
             url: '/translations',
             templateUrl: 'views/skill-translations.html',

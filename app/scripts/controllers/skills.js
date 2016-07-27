@@ -109,14 +109,20 @@
         };
     });
     angular.module('eventsApp').controller('SkillPhotosCtrl', function($scope, $stateParams, Skill, SkillPhoto, $http, WORLDSKILLS_API_EVENTS, WORLDSKILLS_API_IMAGES, $q, $upload, $state, WorldSkills, alert) {
-        var image = $q.when();
-        $scope.imageLoading = false;
-        $scope.photo = new SkillPhoto();
-        $scope.photo.skill = $scope.skill;
-        $scope.photo.description = {text: '', lang_code: 'en'};
         $scope.thumbnail = function (photo) {
             return photo.thumbnail + '_small';
         };
+    });
+    angular.module('eventsApp').controller('SkillPhotoCreateCtrl', function($scope, $stateParams, Skill, SkillPhoto, $http, WORLDSKILLS_API_EVENTS, WORLDSKILLS_API_IMAGES, $q, $upload, $translate, $state, WorldSkills, alert) {
+        var image = $q.when();
+        $scope.imageLoading = false;
+        $scope.eventId = $stateParams.eventId;
+        $scope.skillId = $stateParams.skillId;
+        $scope.skill = Skill.get({eventId: $scope.eventId, id: $scope.skillId}, function (skill) {
+        });
+        $scope.photo = new SkillPhoto();
+        $scope.photo.skill = $scope.skill;
+        $scope.photo.description = {text: '', lang_code: 'en'};
         $scope.onFileSelect = function($files) {
             var deferred = $q.defer();
             image = deferred.promise;
@@ -128,31 +134,77 @@
                 deferred.resolve(data);
             });
         };
-        $scope.removePhotos = function() {
-            var notRemoved = [];
-            angular.forEach($scope.skill.photos, function (photo) {
-                if (photo.checked) {
-                    SkillPhoto.remove({eventId: $scope.skill.event.id, skillId: $scope.skill.id, id: photo.id});
-                } else {
-                    notRemoved.push(photo);
-                }
-            });
-            $scope.skill.photos = notRemoved;
-            alert.success('The selected photos have been removed.', true);
-        };
-        $scope.addPhoto = function() {
+        $scope.save = function() {
             $scope.submitted = true;
-            image.then(function (image) {
-                if ($scope.form.$valid) {
+            if ($scope.form.$valid && $scope.imageLoading) {
+                image.then(function (image) {
                     $scope.photo.image_id = image.id;
                     $scope.photo.thumbnail_hash = image.thumbnail_hash;
                     $scope.photo.$save({eventId: $scope.skill.event.id, skillId: $scope.skill.id}, function () {
-                        $state.go('events.skill.photos', {eventId: $scope.skill.event.id, id: $scope.skill.id}, {reload: true});
+                        alert.success('The photo has been added successfully.');
+                        $state.go('events.skill.photos', {eventId: $scope.skill.event.id, id: $scope.skill.id});
                     });
-                }
-            });
+                });
+            }
         };
     });
+    angular.module('eventsApp').controller('SkillPhotoCtrl', function($scope, $stateParams, Skill, SkillPhoto, $http, WORLDSKILLS_API_EVENTS, WORLDSKILLS_API_IMAGES, $q, $upload, $translate, $state, WorldSkills, alert) {
+        var image = $q.when();
+        $scope.imageLoading = false;
+        $scope.eventId = $stateParams.eventId;
+        $scope.skillId = $stateParams.skillId;
+        $scope.id = $stateParams.id;
+        $scope.skill = Skill.get({eventId: $scope.eventId, id: $scope.skillId}, function (skill) {
+        });
+        $scope.photo = SkillPhoto.get({eventId: $scope.eventId, skillId: $scope.skillId, id: $scope.id}, function (photo) {
+            if (!$scope.photo.description) {
+                $scope.photo.description = {text: '', lang_code: 'en'};
+            }
+            if (!$scope.photo.description.lang_code) {
+                $scope.photo.description.lang_code = 'en';
+            }
+            $scope.photoThumbnail = photo.thumbnail + '_small';
+        });
+        $scope.onFileSelect = function($files) {
+            var deferred = $q.defer();
+            image = deferred.promise;
+            $scope.imageLoading = true;
+            $scope.upload = $upload.upload({
+                url: WORLDSKILLS_API_IMAGES,
+                file: $files[0],
+            }).success(function(data, status, headers, config) {
+                deferred.resolve(data);
+            });
+        };
+        $scope.deletePhoto = function() {
+            $scope.deleteLoading = true;
+            $scope.photo.$delete({eventId: $scope.skill.event.id, skillId: $scope.skill.id}, function () {
+                alert.success('The photo has been deleted successfully.');
+                $state.go('events.skill.photos', {eventId: $scope.skill.event.id, id: $scope.skill.id});
+            });
+        };
+        $scope.save = function() {
+            $scope.submitted = true;
+            if ($scope.form.$valid) {
+                if ($scope.imageLoading) {
+                    image.then(function (image) {
+                        $scope.photo.image_id = image.id;
+                        $scope.photo.thumbnail_hash = image.thumbnail_hash;
+                        $scope.photo.$update({eventId: $scope.skill.event.id, skillId: $scope.skill.id}, function () {
+                            alert.success('The photo has been updated successfully.');
+                            $state.go('events.skill.photos', {eventId: $scope.skill.event.id, id: $scope.skill.id});
+                        });
+                    });
+                } else {
+                    $scope.photo.$update({eventId: $scope.skill.event.id, skillId: $scope.skill.id, id: $scope.id}, function () {
+                        alert.success('The photo has been updated successfully.');
+                        $state.go('events.skill.photos', {eventId: $scope.skill.event.id, id: $scope.skill.id});
+                    });
+                }
+            }
+        };
+    });
+
     angular.module('eventsApp').controller('SkillTranslationsCtrl', function($scope, $stateParams, Skill, SkillPhoto, $http, WORLDSKILLS_API_EVENTS, WORLDSKILLS_API_IMAGES, $q, $upload, $state, WorldSkills, alert) {
 
     });
