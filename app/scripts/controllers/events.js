@@ -248,5 +248,80 @@
             getSponsors(url);
         });
     });
+    angular.module('eventsApp').controller('EventTagsCtrl', function($scope, $stateParams, EventTag, alert) {
+        var getTags = function () {
+            $scope.tags = EventTag.query({eventId: $scope.id}, function () {
+                EventTag.query({eventId: $scope.id, l: 'ar_AE'}, function (arabicTags) {
+                    angular.forEach(arabicTags.tags, function (arabicTag) {
+                        angular.forEach($scope.tags.tags, function (tag) {
+                            if (tag.id === arabicTag.id && arabicTag.name.lang_code === 'ar_AE') {
+                                tag.arabic = arabicTag.name;
+                            }
+                        });
+                    });
+                });
+            });
+        };
+        getTags();
+        $scope.addTag = function() {
+            $scope.submitted = true;
+            if ($scope.tagName) {
+                $scope.loading = true;
+                EventTag.save({eventId: $scope.event.id}, {name: {text: $scope.tagName, lang_code: 'en'}}, function (tag) {
+                    if ($scope.tagNameArabic) {
+                        tag.name.text = $scope.tagNameArabic;
+                        tag.name.lang_code = 'ar_AE';
+                        EventTag.update({eventId: $scope.event.id}, tag, function () {
+                            $scope.loading = false;
+                            $scope.submitted = false;
+                            $scope.tagName = '';
+                            $scope.tagNameArabic = '';
+                            alert.success('The tag has been added successfully.');
+                            getTags();
+                        });
+                    } else {
+                        $scope.loading = false;
+                        $scope.submitted = false;
+                        $scope.tagName = '';
+                        alert.success('The tag has been added successfully.');
+                        getTags();
+                    }
+                });
+            }
+        };
+        $scope.saveTag = function(tag) {
+            tag.submitted = true;
+            if (tag.name.text && (!tag.arabic || tag.arabic.text)) {
+                tag.loading = true;
+                EventTag.update({eventId: $scope.event.id}, tag, function () {
+                    if (tag.arabic && tag.arabic.text) {
+                        EventTag.update({eventId: $scope.event.id, id: tag.id}, {name: {text: tag.arabic.text, lang_code: 'ar_AE'}}, function () {
+                            $scope.loading = false;
+                            $scope.submitted = false;
+                            tag.editing = false;
+                            alert.success('The tag has been updated successfully.');
+                        });
+                    } else {
+                        tag.loading = false;
+                        tag.submitted = false;
+                        tag.editing = false;
+                        alert.success('The tag has been updated successfully.');
+                    }
+                });
+            }
+        };
+        $scope.removeTags = function() {
+            var notRemoved = [];
+            angular.forEach($scope.tags.tags, function (tag) {
+                if (tag.checked) {
+                    EventTag.remove({eventId: $scope.event.id, id: tag.id});
+                } else {
+                    notRemoved.push(tag);
+                }
+            });
+            $scope.tags.tags = notRemoved;
+            alert.success('The selected tags have been removed.', true);
+        };
+    });
 
 })();

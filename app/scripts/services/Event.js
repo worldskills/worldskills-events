@@ -63,4 +63,18 @@
             }
         });
     });
+
+    angular.module('eventsApp').service('EventTag', function($resource, WORLDSKILLS_API_EVENTS) {
+        return $resource(WORLDSKILLS_API_EVENTS + '/:eventId/tags/:id', {
+            id: '@id'
+        }, {
+            query: {
+                method: 'GET'
+            },
+            update: {
+                method: 'PUT'
+            }
+        });
+    });
+
 })();

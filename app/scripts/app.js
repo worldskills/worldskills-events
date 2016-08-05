@@ -70,6 +70,13 @@
             data: {
                 requireLoggedIn: true
             }
+        }).state('events.event.tags', {
+            url: '/tags',
+            templateUrl: 'views/event-tags.html',
+            controller: 'EventTagsCtrl',
+            data: {
+                requireLoggedIn: true
+            }
         }).state('events.event.sponsors', {
             url: '/sponsors',
             templateUrl: 'views/event-sponsors.html',
