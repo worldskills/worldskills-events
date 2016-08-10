@@ -248,10 +248,10 @@
             getSponsors(url);
         });
     });
-    angular.module('eventsApp').controller('EventTagsCtrl', function($scope, $stateParams, EventTag, alert) {
+    angular.module('eventsApp').controller('EventSkillTagsCtrl', function($scope, $stateParams, EventSkillTag, alert) {
         var getTags = function () {
-            $scope.tags = EventTag.query({eventId: $scope.id}, function () {
-                EventTag.query({eventId: $scope.id, l: 'ar_AE'}, function (arabicTags) {
+            $scope.tags = EventSkillTag.query({eventId: $scope.id}, function () {
+                EventSkillTag.query({eventId: $scope.id, l: 'ar_AE'}, function (arabicTags) {
                     angular.forEach(arabicTags.tags, function (arabicTag) {
                         angular.forEach($scope.tags.tags, function (tag) {
                             if (tag.id === arabicTag.id && arabicTag.name.lang_code === 'ar_AE') {
@@ -267,11 +267,11 @@
             $scope.submitted = true;
             if ($scope.tagName) {
                 $scope.loading = true;
-                EventTag.save({eventId: $scope.event.id}, {name: {text: $scope.tagName, lang_code: 'en'}}, function (tag) {
+                EventSkillTag.save({eventId: $scope.event.id}, {name: {text: $scope.tagName, lang_code: 'en'}}, function (tag) {
                     if ($scope.tagNameArabic) {
                         tag.name.text = $scope.tagNameArabic;
                         tag.name.lang_code = 'ar_AE';
-                        EventTag.update({eventId: $scope.event.id}, tag, function () {
+                        EventSkillTag.update({eventId: $scope.event.id}, tag, function () {
                             $scope.loading = false;
                             $scope.submitted = false;
                             $scope.tagName = '';
@@ -293,9 +293,9 @@
             tag.submitted = true;
             if (tag.name.text && (!tag.arabic || tag.arabic.text)) {
                 tag.loading = true;
-                EventTag.update({eventId: $scope.event.id}, tag, function () {
+                EventSkillTag.update({eventId: $scope.event.id}, tag, function () {
                     if (tag.arabic && tag.arabic.text) {
-                        EventTag.update({eventId: $scope.event.id, id: tag.id}, {name: {text: tag.arabic.text, lang_code: 'ar_AE'}}, function () {
+                        EventSkillTag.update({eventId: $scope.event.id, id: tag.id}, {name: {text: tag.arabic.text, lang_code: 'ar_AE'}}, function () {
                             $scope.loading = false;
                             $scope.submitted = false;
                             tag.editing = false;
@@ -314,7 +314,7 @@
             var notRemoved = [];
             angular.forEach($scope.tags.tags, function (tag) {
                 if (tag.checked) {
-                    EventTag.remove({eventId: $scope.event.id, id: tag.id});
+                    EventSkillTag.remove({eventId: $scope.event.id, id: tag.id});
                 } else {
                     notRemoved.push(tag);
                 }

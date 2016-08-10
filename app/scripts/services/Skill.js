@@ -18,6 +18,19 @@
         });
     });
 
+    angular.module('eventsApp').service('EventSkillTag', function($resource, WORLDSKILLS_API_EVENTS) {
+        return $resource(WORLDSKILLS_API_EVENTS + '/:eventId/skill_tags/:id', {
+            id: '@id'
+        }, {
+            query: {
+                method: 'GET'
+            },
+            update: {
+                method: 'PUT'
+            }
+        });
+    });
+
     angular.module('eventsApp').service('SkillPhoto', function($resource, WORLDSKILLS_API_EVENTS) {
         return $resource(WORLDSKILLS_API_EVENTS + '/:eventId/skills/:skillId/photos/:id', {
             id: '@id'
