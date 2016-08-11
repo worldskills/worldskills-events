@@ -72,8 +72,8 @@
             }
         }).state('events.event.tags', {
             url: '/tags',
-            templateUrl: 'views/event-tags.html',
-            controller: 'EventTagsCtrl',
+            templateUrl: 'views/event-skill-tags.html',
+            controller: 'EventSkillTagsCtrl',
             data: {
                 requireLoggedIn: true
             }
