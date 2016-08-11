@@ -90,6 +90,42 @@
             }
         };
     });
+    angular.module('eventsApp').controller('SkillTagsCtrl', function($scope, $stateParams, EventSkillTag, SkillTag, Event, $http, WORLDSKILLS_API_EVENTS, $translate, $state, WorldSkills, alert) {
+        var getTags = function () {
+            $scope.tags = EventSkillTag.query({eventId: $stateParams.eventId}, function () {
+                $scope.skill.$promise.then(function () {
+                    angular.forEach($scope.skill.tags, function (skillTag) {
+                        angular.forEach($scope.tags.tags, function (tag) {
+                            if (tag.id === skillTag.id) {
+                                tag.used = true;
+                            }
+                        });
+                    });
+                });
+            });
+        };
+        getTags();
+        $scope.addTag = function (tag) {
+            SkillTag.update({eventId: $stateParams.eventId, skillId: $scope.skill.id, id: tag.id}, {});
+            $scope.skill.tags.push(tag);
+            getTags();
+            alert.success('The tag has been added.', true);
+            return false;
+        };
+        $scope.removeTags = function() {
+            var notRemoved = [];
+            angular.forEach($scope.skill.tags, function (tag) {
+                if (tag.checked) {
+                    SkillTag.remove({eventId: $stateParams.eventId, skillId: $scope.skill.id, id: tag.id}, {});
+                } else {
+                    notRemoved.push(tag);
+                }
+            });
+            $scope.skill.tags = notRemoved;
+            getTags();
+            alert.success('The selected tags have been removed.', true);
+        };
+    });
     angular.module('eventsApp').controller('SkillCloneCtrl', function($scope, $stateParams, Skill, SkillClone, Event, $http, WORLDSKILLS_API_EVENTS, $translate, $state, WorldSkills, alert) {
         Event.query({limit: 300, type: 'competition'}, function (data) {
             $scope.events = data;

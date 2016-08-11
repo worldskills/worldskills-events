@@ -122,6 +122,13 @@
             data: {
                 requireLoggedIn: true
             }
+        }).state('events.skill.tags', {
+            url: '/tags',
+            templateUrl: 'views/skill-tags.html',
+            controller: 'SkillTagsCtrl',
+            data: {
+                requireLoggedIn: true
+            }
         }).state('events.skill.clone', {
             url: '/copy',
             templateUrl: 'views/skill-clone.html',
