@@ -296,32 +296,18 @@ describe('controllers events', function() {
                 ]
             });
 
-            $httpBackend.expectGET('http://localhost:8080/events/skills?l=en&limit=50').respond({
+            $httpBackend.expectGET('http://localhost:8080/events/skills?l=en&limit=100').respond({
                 skills: [
                     {
                         name: 'Web Design'
                     }, {
                         name: 'Landscape Gardening'
                     }
-                ],
-                links: [
-                    {
-                        rel: 'next',
-                        href: 'http://localhost:8080/events/skills?offset=2'
-                    }
                 ]
-            });
-            $httpBackend.expectGET('http://localhost:8080/events/skills?offset=2').respond({
-                skills: [
-                    {
-                        name: 'Hairdressing'
-                    }
-                ],
-                links: []
             });
             $httpBackend.flush();
 
-            expect($scope.skills.length).toBe(3);
+            expect($scope.skills.length).toBe(2);
         });
     });
 

@@ -19,13 +19,13 @@
             </tr>
             <tr class="active">
                 <td>
-                    <input type="text" class="form-control input-sm" ng-change="search()" ng-model="skillsFilter.number" />
+                    <input type="text" class="form-control input-sm" ng-model="skillsFilterNumber" />
                 </td>
                 <td>
-                    <input type="text" class="form-control input-sm" ng-change="search()" ng-model="skillsFilter.name" />
+                    <input type="text" class="form-control input-sm" ng-model="skillsFilterName" />
                 </td>
                 <td>
-                    <select class="form-control input-sm" ng-change="search()" ng-model="skillsFilter.type">
+                    <select class="form-control input-sm" ng-model="skillsFilterType">
                         <option></option>
                         <option value="official">{{"skill_type_official"|translate}}</option>
                         <option value="demo">{{"skill_type_demo"|translate}}</option>
@@ -41,12 +41,12 @@
             <tr ng-show="!loading"><td colspan="3"></td></tr>
         </tfoot>
         <tbody>
-            <tr ng-repeat="skill in skills">
+            <tr ng-repeat="skill in filteredSkills = (skills | filter:{number:skillsFilterNumber, $:skillsFilterName, type:skillsFilterType})">
                 <td><a ui-sref="events.skill.form({eventId: skill.event.id, id: skill.id})">{{skill.number}}</a></td>
                 <td><a ui-sref="events.skill.form({eventId: skill.event.id, id: skill.id})">{{skill.name.text}}</a></td>
                 <td>{{("skill_type_" + skill.type)|translate}}</td>
             </tr>
-            <tr ng-show="skills == null">
+            <tr ng-show="!loading && filteredSkills.length == 0">
                 <td colspan="3">No Skills found.</td>
             </tr>
             <tr ng-show="loading">
