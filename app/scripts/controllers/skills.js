@@ -199,6 +199,9 @@
             if (!$scope.photo.description.lang_code) {
                 $scope.photo.description.lang_code = 'en';
             }
+            if (!$scope.photo.description.text) {
+                $scope.photo.description.text = '';
+            }
             $scope.photoThumbnail = photo.thumbnail + '_small';
         });
         $scope.onFileSelect = function($files) {
