@@ -107,6 +107,54 @@
             </p>
         </div>
     </div>
+    <div class="form-group" ng-class="{'has-error': submitted && form.utc_offset.$invalid}">
+        <label for="utc_offset" class="col-sm-3 control-label">Time zone</label>
+        <div class="col-sm-2">
+            <select class="form-control" id="utc_offset" name="utc_offset" ng-model="event.utc_offset" convert-to-number>
+                <!-- https://en.wikipedia.org/wiki/List_of_UTC_time_offsets -->
+                <option value="null"></option>
+                <option value="-43200">UTC−12:00</option>
+                <option value="-39600">UTC−11:00</option>
+                <option value="-36000">UTC−10:00</option>
+                <option value="-34200">UTC−09:30</option>
+                <option value="-32400">UTC−09:00</option>
+                <option value="-28800">UTC−08:00</option>
+                <option value="-25200">UTC−07:00</option>
+                <option value="-21600">UTC−06:00</option>
+                <option value="-18000">UTC−05:00</option>
+                <option value="-14400">UTC−04:00</option>
+                <option value="-12600">UTC−03:30</option>
+                <option value="-10800">UTC−03:00</option>
+                <option value="-7200">UTC−02:00</option>
+                <option value="-3600">UTC−01:00</option>
+                <option value="0">UTC+00:00</option>
+                <option value="3600">UTC+01:00</option>
+                <option value="7200">UTC+02:00</option>
+                <option value="10800">UTC+03:00</option>
+                <option value="12600">UTC+03:30</option>
+                <option value="14400">UTC+04:00</option>
+                <option value="16200">UTC+04:30</option>
+                <option value="18000">UTC+05:00</option>
+                <option value="19800">UTC+05:30</option>
+                <option value="20700">UTC+05:45</option>
+                <option value="21600">UTC+06:00</option>
+                <option value="23400">UTC+06:30</option>
+                <option value="25200">UTC+07:00</option>
+                <option value="28800">UTC+08:00</option>
+                <option value="30600">UTC+08:30</option>
+                <option value="31500">UTC+08:45</option>
+                <option value="32400">UTC+09:00</option>
+                <option value="34200">UTC+09:30</option>
+                <option value="36000">UTC+10:00</option>
+                <option value="37800">UTC+10:30</option>
+                <option value="39600">UTC+11:00</option>
+                <option value="43200">UTC+12:00</option>
+                <option value="43200">UTC+12:45</option>
+                <option value="46800">UTC+13:00</option>
+                <option value="50400">UTC+14:00</option>
+            </select>
+        </div>
+    </div>
     <hr/>
     <div class="form-group" ng-class="{'has-error': submitted && form.country.$invalid}">
         <label for="country" class="col-sm-3 control-label">Country <span class="required">*</span></label>
