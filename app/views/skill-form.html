@@ -92,10 +92,22 @@
             <input type="text" class="form-control" id="min_teams" name="min_teams" ng-model="skill.min_teams">
         </div>
     </div>
+    <div class="form-group" ng-class="{'has-error': submitted && form.max_teams.$invalid}">
+        <label for="max_teams" class="col-sm-3 control-label">Max. Teams</label>
+        <div class="col-sm-2">
+            <input type="text" class="form-control" id="max_teams" name="max_teams" ng-model="skill.max_teams">
+        </div>
+    </div>
     <div class="form-group" ng-class="{'has-error': submitted && form.team_size.$invalid}">
         <label for="team_size" class="col-sm-3 control-label">Team Size</label>
         <div class="col-sm-2">
             <input type="text" class="form-control" id="team_size" name="team_size" ng-model="skill.team_size">
+        </div>
+    </div>
+    <div class="form-group" ng-class="{'has-error': submitted && form.competitor_max_age.$invalid}">
+        <label for="competitor_max_age" class="col-sm-3 control-label">Competitor age limit</label>
+        <div class="col-sm-2">
+            <input type="text" class="form-control" id="competitor_max_age" name="competitor_max_age" ng-model="skill.competitor_max_age">
         </div>
     </div>
     <div class="form-group" ng-class="{'has-error': submitted && form.identify_judges.$invalid}">
