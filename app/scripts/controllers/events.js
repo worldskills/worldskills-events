@@ -63,7 +63,7 @@
             method: 'GET',
             url: WORLDSKILLS_API_AUTH + '/ws_entities',
             params: {
-                limit: 100
+                limit: 200
             }
         }).success(function(data, status, headers, config) {
             $scope.entities = data.ws_entity_list;
@@ -145,7 +145,7 @@
             method: 'GET',
             url: WORLDSKILLS_API_AUTH + '/ws_entities',
             params: {
-                limit: 100
+                limit: 200
             }
         }).success(function(data, status, headers, config) {
             $scope.organizers = data.ws_entity_list;
