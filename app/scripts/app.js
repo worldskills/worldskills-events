@@ -85,14 +85,14 @@
                 requireLoggedIn: true
             }
         }).state('events.sponsor_create', {
-            url: '/{eventId}/sponsors/create',
+            url: '/{eventId}/sponsors/create?skillId',
             templateUrl: 'views/sponsor.html',
             controller: 'SponsorCreateCtrl',
             data: {
                 requireLoggedIn: true
             }
         }).state('events.sponsor', {
-            url: '/sponsors/{id}',
+            url: '/sponsors/{id}?skillId',
             templateUrl: 'views/sponsor.html',
             controller: 'SponsorCtrl',
             data: {
@@ -126,6 +126,13 @@
             url: '/tags',
             templateUrl: 'views/skill-tags.html',
             controller: 'SkillTagsCtrl',
+            data: {
+                requireLoggedIn: true
+            }
+        }).state('events.skill.sponsors', {
+            url: '/sponsors',
+            templateUrl: 'views/skill-sponsors.html',
+            controller: 'SkillSponsorsCtrl',
             data: {
                 requireLoggedIn: true
             }

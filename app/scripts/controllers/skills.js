@@ -126,6 +126,68 @@
             alert.success('The selected tags have been removed.', true);
         };
     });
+    angular.module('eventsApp').controller('SkillSponsorsCtrl', function($scope, $stateParams, SkillSponsor, EventSponsor, Event, $http, WORLDSKILLS_API_EVENTS, $translate, $state, WorldSkills, alert) {
+        var getSponsors = function () {
+            $scope.sponsors = EventSponsor.query({eventId: $stateParams.eventId}, function () {
+                $scope.skill.$promise.then(function () {
+                    angular.forEach($scope.skill.sponsors, function (skillSponsor) {
+                        angular.forEach($scope.sponsors.sponsors, function (sponsor) {
+                            if (sponsor.id === skillSponsor.id) {
+                                sponsor.used = true;
+                            }
+                        });
+                    });
+                });
+            });
+        };
+        getSponsors();
+        $scope.addSponsor = function (sponsor) {
+            var maxSort = 1;
+            $scope.skill.sponsors.forEach(function (s) {
+                maxSort = Math.max(maxSort, s.sort);
+            });
+            SkillSponsor.update({eventId: $stateParams.eventId, skillId: $scope.skill.id, id: sponsor.id}, {sort: maxSort + 1});
+            $scope.skill.sponsors.push(sponsor);
+            getSponsors();
+            alert.success('The sponsor has been added.', true);
+            return false;
+        };
+        $scope.moveSponsorUp = function (sponsor) {
+            var index = $scope.skill.sponsors.indexOf(sponsor);
+            var prevSponsor = $scope.skill.sponsors[index - 1];
+            var prevSort = prevSponsor.sort;
+            $scope.skill.sponsors[index] = prevSponsor;
+            $scope.skill.sponsors[index - 1] = sponsor;
+            prevSponsor.sort = sponsor.sort;
+            sponsor.sort = prevSort;
+            SkillSponsor.update({eventId: $stateParams.eventId, skillId: $scope.skill.id}, sponsor);
+            SkillSponsor.update({eventId: $stateParams.eventId, skillId: $scope.skill.id}, prevSponsor);
+        };
+        $scope.moveSponsorDown = function (sponsor) {
+            var index = $scope.skill.sponsors.indexOf(sponsor);
+            var nextSponsor = $scope.skill.sponsors[index + 1];
+            var nextSort = nextSponsor.sort;
+            $scope.skill.sponsors[index] = nextSponsor;
+            $scope.skill.sponsors[index + 1] = sponsor;
+            nextSponsor.sort = sponsor.sort;
+            sponsor.sort = nextSort;
+            SkillSponsor.update({eventId: $stateParams.eventId, skillId: $scope.skill.id}, sponsor);
+            SkillSponsor.update({eventId: $stateParams.eventId, skillId: $scope.skill.id}, nextSponsor);
+        };
+        $scope.removeSponsors = function() {
+            var notRemoved = [];
+            angular.forEach($scope.skill.sponsors, function (sponsor) {
+                if (sponsor.checked) {
+                    SkillSponsor.remove({eventId: $stateParams.eventId, skillId: $scope.skill.id}, sponsor);
+                } else {
+                    notRemoved.push(sponsor);
+                }
+            });
+            $scope.skill.sponsors = notRemoved;
+            getSponsors();
+            alert.success('The selected sponsors have been removed.', true);
+        };
+    });
     angular.module('eventsApp').controller('SkillCloneCtrl', function($scope, $stateParams, Skill, SkillClone, Event, $http, WORLDSKILLS_API_EVENTS, $translate, $state, WorldSkills, alert) {
         Event.query({limit: 300, type: 'competition'}, function (data) {
             $scope.events = data;

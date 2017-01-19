@@ -3,6 +3,9 @@
 
     angular.module('eventsApp').controller('SponsorCreateCtrl', function($scope, $stateParams, Event, Sponsor, $http, WORLDSKILLS_API_EVENTS, WORLDSKILLS_API_IMAGES, $translate, $state, WorldSkills, $upload, $q) {
         var logo = $q.when();
+        if ($stateParams.skillId) {
+            $scope.skillId = $stateParams.skillId;
+        }
         $scope.sponsor = new Sponsor();
         $scope.sponsor.event = Event.get({id: $stateParams.eventId});
         $scope.onFileSelect = function($files) {
@@ -27,7 +30,11 @@
                     $scope.sponsor.logo = {id: logo.id, thumbnail_hash: logo.thumbnail_hash};
                 }
                 $scope.sponsor.$save(function () {
-                    $state.go('events.event.sponsors', {id: $scope.sponsor.event.id});
+                    if ($scope.skillId) {
+                        $state.go('events.skill.sponsors', {eventId: $scope.sponsor.event.id, id: $scope.skillId});
+                    } else {
+                        $state.go('events.event.sponsors', {id: $scope.sponsor.event.id});
+                    }
                 });
             });
         };
@@ -36,6 +43,9 @@
     angular.module('eventsApp').controller('SponsorCtrl', function($scope, $stateParams, Sponsor, auth, $http, WORLDSKILLS_API_EVENTS, WORLDSKILLS_API_IMAGES, EVENTS_APP_CODE, $translate, $state, WorldSkills, $upload, $q) {
         var logo = $q.when();
         $scope.id = $stateParams.id;
+        if ($stateParams.skillId) {
+            $scope.skillId = $stateParams.skillId;
+        }
         $scope.sponsor = Sponsor.get({id: $scope.id}, function (sponsor) {
             $scope.title = sponsor.name;
             if (sponsor.logo != null) {
@@ -70,7 +80,11 @@
                     delete $scope.sponsor.logo;
                 }
                 $scope.sponsor.$update(function () {
-                    $state.go('events.event.sponsors', {id: $scope.sponsor.event.id});
+                    if ($scope.skillId) {
+                        $state.go('events.skill.sponsors', {eventId: $scope.sponsor.event.id, id: $scope.skillId});
+                    } else {
+                        $state.go('events.event.sponsors', {id: $scope.sponsor.event.id});
+                    }
                 });
             });
         };
@@ -78,7 +92,11 @@
             $scope.deleteLoading = true;
             $scope.sponsor.$delete(function () {
                 alert('The Sponsor has been deleted successfully.');
-                $state.go('events.event.sponsors', {id: $scope.sponsor.event.id});
+                if ($scope.skillId) {
+                    $state.go('events.skill.sponsors', {eventId: $scope.sponsor.event.id, id: $scope.skillId});
+                } else {
+                    $state.go('events.event.sponsors', {id: $scope.sponsor.event.id});
+                }
             });
         };
     });

@@ -59,6 +59,16 @@
         });
     });
 
+    angular.module('eventsApp').service('SkillSponsor', function($resource, $http, WORLDSKILLS_API_EVENTS) {
+        return $resource(WORLDSKILLS_API_EVENTS + '/:eventId/skills/:skillId/sponsors/:id', {
+            id: '@id'
+        }, {
+            update: {
+                method: 'PUT'
+            }
+        });
+    });
+
     angular.module('eventsApp').service('SkillClone', function($resource, WORLDSKILLS_API_EVENTS) {
         return $resource(WORLDSKILLS_API_EVENTS + '/:eventId/skills/:id/clone', {
         }, {

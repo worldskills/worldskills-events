@@ -64,4 +64,13 @@
         });
     });
 
+    angular.module('eventsApp').service('EventSponsor', function($resource, $filter, WORLDSKILLS_API_EVENTS) {
+        return $resource(WORLDSKILLS_API_EVENTS + '/:eventId/sponsors', {
+            id: '@id'
+        }, {
+            query: {
+                method: 'GET'
+            }
+        });
+    });
 })();
