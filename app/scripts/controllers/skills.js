@@ -136,7 +136,7 @@
     });
     angular.module('eventsApp').controller('SkillSponsorsCtrl', function($scope, $stateParams, SkillSponsor, EventSponsor, Event, $http, WORLDSKILLS_API_EVENTS, $translate, $state, WorldSkills, alert) {
         var getSponsors = function () {
-            $scope.sponsors = EventSponsor.query({eventId: $stateParams.eventId}, function () {
+            $scope.sponsors = EventSponsor.query({eventId: $stateParams.eventId, limit: 100}, function () {
                 $scope.skill.$promise.then(function () {
                     angular.forEach($scope.skill.sponsors, function (skillSponsor) {
                         angular.forEach($scope.sponsors.sponsors, function (sponsor) {
