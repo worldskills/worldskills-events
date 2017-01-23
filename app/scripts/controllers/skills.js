@@ -48,6 +48,14 @@
             auth.hasUserRole(EVENTS_APP_CODE, ['Admin', 'DeleteEvents'], $scope.skill.event.ws_entity.id).then(function (hasUserRole) {
                 $scope.canDelete = hasUserRole;
             });
+            auth.hasUserRole(EVENTS_APP_CODE, ['Admin', 'EditEvents'], $scope.skill.event.ws_entity.id).then(function (hasUserRole) {
+                $scope.canEdit = hasUserRole;
+            });
+            if ($scope.skill.event.organizer) {
+                auth.hasUserRole(EVENTS_APP_CODE, ['Admin', 'OrganizerEditEvents'], $scope.skill.event.organizer.id).then(function (hasUserRole) {
+                    $scope.canOrganizerEdit = hasUserRole;
+                });
+            }
         });
         $scope.setStatusRemoved = function() {
            if (alert.confirm('Setting the status of the Skill to Removed will hide it from all Skill lists. The data associated with it will not be deleted. Click OK to proceed.')) {

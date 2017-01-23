@@ -1,4 +1,4 @@
-<form class="form-horizontal" name="form" novalidate focus-error ng-submit="save()">
+<form class="form-horizontal" name="form" novalidate focus-error ng-submit="save()" ng-show="canEdit">
     <div class="form-group" ng-class="{'has-error': submitted && form.name.$invalid}">
         <label for="name" class="col-sm-3 control-label">Name <span class="required">*</span></label>
         <div class="col-sm-4">
@@ -214,3 +214,30 @@
         </div>
     </div>
 </form>
+
+<div ng-show="!canEdit">
+    <div class="row">
+        <div class="col-sm-2">
+            <p>Name:</p>
+        </div>
+        <div class="col-sm-4">
+            <p>{{event.name}}</p>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-sm-2">
+            <p>Start date:</p>
+        </div>
+        <div class="col-sm-4">
+            <p>{{event.start_date|date:'d MMMM yyyy'}}</p>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-sm-2">
+            <p>End date:</p>
+        </div>
+        <div class="col-sm-4">
+            <p>{{event.end_date|date:'d MMMM yyyy'}}</p>
+        </div>
+    </div>
+</div>
