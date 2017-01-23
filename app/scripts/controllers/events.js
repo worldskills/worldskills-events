@@ -88,6 +88,9 @@
             $scope.filters.organizer = [];
 
             angular.forEach(auth.user.roles, function (r) {
+                if (r.role_application.application_code === EVENTS_APP_CODE && r.name === 'Admin') {
+                    $scope.canEdit = true;
+                }
                 if (r.role_application.application_code === EVENTS_APP_CODE && r.name === 'EditEvents') {
                     $scope.canEdit = true;
                     var wsEntityId = r.ws_entity.id;
