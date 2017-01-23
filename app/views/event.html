@@ -6,7 +6,7 @@
 <alerts></alerts>
 
 <p class="pull-right">
-    <button ng-click="cloneEvent()" class="btn btn-default">Duplicate<span class="visible-lg-inline"> Event</span><ws-text-spinner ng-show="cloneLoading" class="ng-hide"></ws-text-spinner></button>
+    <button ng-click="cloneEvent()" class="btn btn-default" ng-show="canEdit">Duplicate<span class="visible-lg-inline"> Event</span><ws-text-spinner ng-show="cloneLoading" class="ng-hide"></ws-text-spinner></button>
     <button ng-click="deleteEvent()" class="btn btn-danger" ng-show="canDelete">Delete<span class="visible-lg-inline"> Event</span><ws-text-spinner ng-show="deleteLoading" class="ng-hide"></ws-text-spinner></button>
 </p>
 
@@ -15,8 +15,8 @@
 <ul class="nav nav-tabs">
     <li ui-sref-active="active"><a ui-sref="events.event.form">Event</a></li>
     <li ng-show="type == 'competition'" ui-sref-active="active"><a ui-sref="events.event.skills">Skills</a></li>
-    <li ng-show="type == 'competition'" ui-sref-active="active"><a ui-sref="events.event.tags">Skill Tags</a></li>
-    <li ui-sref-active="active"><a ui-sref="events.event.sponsors">Sponsors</a></li>
+    <li ng-show="type == 'competition' && canEdit" ui-sref-active="active"><a ui-sref="events.event.tags">Skill Tags</a></li>
+    <li ng-show="canEdit || canOrganizerEdit" ui-sref-active="active"><a ui-sref="events.event.sponsors">Sponsors</a></li>
 </ul>
 
 <div id="content" ui-view>

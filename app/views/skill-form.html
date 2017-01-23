@@ -1,4 +1,4 @@
-<form class="form-horizontal" name="form" novalidate focus-error ng-submit="save()">
+<form class="form-horizontal" name="form" novalidate focus-error ng-submit="save()" ng-show="canEdit">
     <div class="form-group" ng-class="{'has-error': submitted && form.name.$invalid}">
         <label for="name" class="col-sm-3 control-label">Name <span class="required">*</span></label>
         <div class="col-sm-4">
@@ -151,3 +151,38 @@
         </div>
     </div>
 </form>
+
+<div ng-show="!canEdit">
+    <div class="row">
+        <div class="col-sm-2">
+            <p>Name:</p>
+        </div>
+        <div class="col-sm-4">
+            <p>{{skill.name.text}}</p>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-sm-2">
+            <p>Number:</p>
+        </div>
+        <div class="col-sm-4">
+            <p>{{skill.number}}</p>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-sm-2">
+            <p>Type:</p>
+        </div>
+        <div class="col-sm-4">
+            <p>{{("skill_type_" + skill.type)|translate}}</p>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-sm-2">
+            <p>Sector:</p>
+        </div>
+        <div class="col-sm-4">
+            <p>{{skill.sector.name.text}}</p>
+        </div>
+    </div>
+</div>

@@ -5,7 +5,7 @@
         'ngResource', 'ngSanitize', 'ngMessages', 'ui.router', 'ui.bootstrap', 'pascalprecht.translate', 'angularFileUpload', 'worldskills.utils'
     ]);
 
-    eventsApp.constant('EVENTS_APP_CODE', '400');
+    eventsApp.constant('EVENTS_APP_CODE', 400);
 
     eventsApp.config(function($stateProvider, $urlRouterProvider) {
         $urlRouterProvider.otherwise(function ($injector, $location) {

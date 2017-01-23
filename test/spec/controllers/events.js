@@ -22,6 +22,21 @@ describe('controllers events', function() {
         beforeEach(inject(function(_$httpBackend_, $controller, $rootScope) {
 
             $httpBackend = _$httpBackend_;
+            $httpBackend.expectGET('http://localhost:8080/auth/users/loggedIn?show_child_roles=true&app_code=400').respond({
+                'id': 1,
+                'person_id': 2,
+                'first_name': 'Bat',
+                'last_name': 'Man',
+                'username': 'batman@batcave.com',
+                'roles': [{
+                    'id': 1,
+                    'name': 'Admin',
+                    'apply_per_entity': false,
+                    'role_application': {
+                        'application_code': 400
+                    }
+                }],
+            });
             $httpBackend.expectGET('http://localhost:8080/org/countries').respond({
                 country_list: [
                     {

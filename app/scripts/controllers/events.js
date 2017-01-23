@@ -8,7 +8,7 @@
         $scope.filters = {};
     });
 
-    angular.module('eventsApp').controller('EventsListCtrl', function($scope, $state, $stateParams, Event, $http, WORLDSKILLS_API_EVENTS, WORLDSKILLS_API_ORGANIZATIONS, WORLDSKILLS_API_AUTH, $translate, $filter, $location) {
+    angular.module('eventsApp').controller('EventsListCtrl', function($scope, $state, $stateParams, Event, auth, $http, EVENTS_APP_CODE, WORLDSKILLS_API_EVENTS, WORLDSKILLS_API_ORGANIZATIONS, WORLDSKILLS_API_AUTH, $translate, $filter, $location) {
         angular.forEach($stateParams, function (value, key) {
             if (value) {
                 $scope.filters[key] = value;
@@ -82,7 +82,29 @@
             $state.go('.', {}, {inherit: false, reload: true});
         };
         $scope.init();
-        $scope.search();
+        auth.user.$promise.then(function () {
+
+            $scope.filters.ws_entity = [];
+            $scope.filters.organizer = [];
+
+            angular.forEach(auth.user.roles, function (r) {
+                if (r.role_application.application_code === EVENTS_APP_CODE && r.name === 'EditEvents') {
+                    $scope.canEdit = true;
+                    var wsEntityId = r.ws_entity.id;
+                    if ($scope.filters.ws_entity.indexOf(wsEntityId) === -1) {
+                        $scope.filters.ws_entity.push(wsEntityId);
+                    }
+                }
+                if (r.role_application.application_code === EVENTS_APP_CODE && r.name === 'OrganizerEditEvents') {
+                    var organizerId = r.ws_entity.id;
+                    if ($scope.filters.organizer.indexOf(organizerId) === -1) {
+                        $scope.filters.organizer.push(organizerId);
+                    }
+                }
+            });
+
+            $scope.search();
+        });
     });
     angular.module('eventsApp').controller('EventCtrl', function($scope, $stateParams, Event, auth, EVENTS_APP_CODE, $http, $translate, $state, alert) {
         $scope.id = $stateParams.id;
@@ -92,6 +114,14 @@
             auth.hasUserRole(EVENTS_APP_CODE, ['Admin', 'DeleteEvents'], $scope.event.ws_entity.id).then(function (hasUserRole) {
                 $scope.canDelete = hasUserRole;
             });
+            auth.hasUserRole(EVENTS_APP_CODE, ['Admin', 'EditEvents'], $scope.event.ws_entity.id).then(function (hasUserRole) {
+                $scope.canEdit = hasUserRole;
+            });
+            if ($scope.event.organizer) {
+                auth.hasUserRole(EVENTS_APP_CODE, ['Admin', 'OrganizerEditEvents'], $scope.event.organizer.id).then(function (hasUserRole) {
+                    $scope.canOrganizerEdit = hasUserRole;
+                });
+            }
         });
         $scope.cloneEvent = function() {
             if (alert.confirm('Duplicating the Event will create a copy with all data associated (Sponsors, Skills, etc.). Click OK to proceed.')) {
