@@ -150,11 +150,12 @@
         };
         getSponsors();
         $scope.addSponsor = function (sponsor) {
-            var maxSort = 1;
+            var maxSort = 0;
             $scope.skill.sponsors.forEach(function (s) {
                 maxSort = Math.max(maxSort, s.sort);
             });
-            SkillSponsor.update({eventId: $stateParams.eventId, skillId: $scope.skill.id, id: sponsor.id}, {sort: maxSort + 1});
+            sponsor.sort = maxSort + 1;
+            SkillSponsor.update({eventId: $stateParams.eventId, skillId: $scope.skill.id, id: sponsor.id}, sponsor);
             $scope.skill.sponsors.push(sponsor);
             getSponsors();
             alert.success('The sponsor has been added.', true);
@@ -181,6 +182,25 @@
             sponsor.sort = nextSort;
             SkillSponsor.update({eventId: $stateParams.eventId, skillId: $scope.skill.id}, sponsor);
             SkillSponsor.update({eventId: $stateParams.eventId, skillId: $scope.skill.id}, nextSponsor);
+        };
+        $scope.featureSponsor = function (sponsor) {
+            var index = $scope.skill.sponsors.indexOf(sponsor);
+            $scope.skill.sponsors.unshift($scope.skill.sponsors.splice(index, 1)[0]);
+            sponsor.sort = 0;
+            SkillSponsor.update({eventId: $stateParams.eventId, skillId: $scope.skill.id}, sponsor);
+        };
+        $scope.unfeatureSponsor = function (sponsor) {
+            var index = $scope.skill.sponsors.indexOf(sponsor);
+            $scope.skill.sponsors.push($scope.skill.sponsors.splice(index, 1)[0]);
+            var maxSort = 0;
+            $scope.skill.sponsors.forEach(function (s) {
+                maxSort = Math.max(maxSort, s.sort);
+            });
+            sponsor.sort = maxSort + 1;
+            SkillSponsor.update({eventId: $stateParams.eventId, skillId: $scope.skill.id}, sponsor);
+        };
+        $scope.isNot = function (actual, expected) {
+            return !angular.equals(actual, expected);
         };
         $scope.removeSponsors = function() {
             var notRemoved = [];

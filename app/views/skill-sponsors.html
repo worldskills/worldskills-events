@@ -21,13 +21,13 @@
         <thead>
             <tr>
                 <th>&nbsp;</th>
-                <th>Sponsor</th>
+                <th>Featured Sponsor</th>
                 <th>&nbsp;</th>
             </tr>
         </thead>
         <tfoot><tr><td colspan="3"></td></tr></tfoot>
         <tbody>
-            <tr ng-repeat="sponsor in skill.sponsors">
+            <tr ng-repeat="sponsor in featuredSponsors = (skill.sponsors | filter:{sort:0}:true)">
                 <td>
                     <input type="checkbox" ng-model="sponsor.checked">
                 </td>
@@ -35,6 +35,42 @@
                     <a ui-sref="events.sponsor({eventId: skill.event.id, id: sponsor.id, skillId: skill.id})">{{sponsor.name}}</a>
                 </td>
                 <td class="align-right">
+                    <button type="button" class="btn btn-default btn-xs" ng-click="unfeatureSponsor(sponsor)"><span class="glyphicon glyphicon-star-empty"></span></button>
+                </td>
+            </tr>
+            <tr ng-show="featuredSponsors.length == 0">
+                <td>&nbsp;</td>
+                <td colspan="2">No featured Sponsors.</td>
+            </tr>
+        </tbody>
+    </table>
+</div>
+
+<div class="table-responsive">
+    <table class="table table-striped">
+        <colgroup>
+            <col width="5%" />
+            <col width="85%" />
+            <col width="10%" />
+        </colgroup>
+        <thead>
+            <tr>
+                <th>&nbsp;</th>
+                <th>Sponsor</th>
+                <th>&nbsp;</th>
+            </tr>
+        </thead>
+        <tfoot><tr><td colspan="3"></td></tr></tfoot>
+        <tbody>
+            <tr ng-repeat="sponsor in notfeaturedSponsors = (skill.sponsors | filter:{sort:0}:isNot)">
+                <td>
+                    <input type="checkbox" ng-model="sponsor.checked">
+                </td>
+                <td>
+                    <a ui-sref="events.sponsor({eventId: skill.event.id, id: sponsor.id, skillId: skill.id})">{{sponsor.name}}</a>
+                </td>
+                <td class="align-right">
+                    <button type="button" class="btn btn-default btn-xs" ng-click="featureSponsor(sponsor)"><span class="glyphicon glyphicon-star"></span></button>
                     <div class="btn-group">
                         <button type="button" class="btn btn-primary btn-xs" ng-click="moveSponsorUp(sponsor)" ng-disabled="$first"><span class="glyphicon glyphicon-triangle-top"></span></button>
                         <button type="button" class="btn btn-primary btn-xs" ng-click="moveSponsorDown(sponsor)" ng-disabled="$last"><span class="glyphicon glyphicon-triangle-bottom"></span></button>
@@ -42,7 +78,8 @@
                 </td>
             </tr>
             <tr ng-show="skill.sponsors.length == 0">
-                <td colspan="3">No sponsors found.</td>
+                <td>&nbsp;</td>
+                <td colspan="2">No Sponsors found.</td>
             </tr>
         </tbody>
     </table>
