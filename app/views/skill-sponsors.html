@@ -62,7 +62,7 @@
         </thead>
         <tfoot><tr><td colspan="3"></td></tr></tfoot>
         <tbody>
-            <tr ng-repeat="sponsor in notfeaturedSponsors = (skill.sponsors | filter:{sort:0}:isNot)">
+            <tr ng-repeat="sponsor in notFeaturedSponsors = (skill.sponsors | filter:{sort:0}:isNot)">
                 <td>
                     <input type="checkbox" ng-model="sponsor.checked">
                 </td>
@@ -77,7 +77,7 @@
                     </div>
                 </td>
             </tr>
-            <tr ng-show="skill.sponsors.length == 0">
+            <tr ng-show="notFeaturedSponsors.length == 0">
                 <td>&nbsp;</td>
                 <td colspan="2">No Sponsors found.</td>
             </tr>
