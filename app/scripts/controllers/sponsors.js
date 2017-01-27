@@ -18,6 +18,13 @@
                 deferred.resolve(data);
             });
         };
+        $scope.checkUrl = function() {
+            if ($scope.sponsor.url != '') {
+                if (!/^http/i.test($scope.sponsor.url)) {
+                    $scope.sponsor.url = 'http://' + $scope.sponsor.url;
+                }
+            }
+        };
         $scope.save = function() {
             $scope.submitted = true;
             logo.then(function (logo) {
@@ -65,6 +72,13 @@
             }).success(function(data, status, headers, config) {
                 deferred.resolve(data);
             });
+        };
+        $scope.checkUrl = function() {
+            if ($scope.sponsor.url != '') {
+                if (!/^http/i.test($scope.sponsor.url)) {
+                    $scope.sponsor.url = 'http://' + $scope.sponsor.url;
+                }
+            }
         };
         $scope.save = function() {
             $scope.submitted = true;
