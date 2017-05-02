@@ -1,5 +1,7 @@
 # WorldSkills Events
 
+[![Greenkeeper badge](https://badges.greenkeeper.io/worldskills/worldskills-events.svg)](https://greenkeeper.io/)
+
 ## Installation
 
 ```
