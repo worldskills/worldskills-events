@@ -25,7 +25,15 @@
     "venue" : "Anhembi",
     "town" : "São Paulo",
     "code" : "WSSP",
-    "country" : "BR",
+    "country" : {
+      "id" : 5,
+      "code" : "BR",
+      "name" : {
+        "lang_code" : "en",
+        "text" : "Brazil"
+      }
+    },
+    "utc_offset" : -10800,
     "url" : "http://www.worldskillssaopaulo2015.com/",
     "description" : "43rd WorldSkills Competition",
     "ws_entity" : {
@@ -130,7 +138,15 @@
       "venue" : "Anhembi",
       "town" : "São Paulo",
       "code" : "WSSP",
-      "country" : "BR",
+      "country" : {
+        "id" : 5,
+        "code" : "BR",
+        "name" : {
+          "lang_code" : "en",
+          "text" : "Brazil"
+        }
+      },
+      "utc_offset" : -10800,
       "url" : "http://www.worldskillssaopaulo2015.com/",
       "description" : "43rd WorldSkills Competition",
       "ws_entity" : {
@@ -186,13 +202,17 @@
     } ]
   },
   "min_teams" : 4,
+  "max_teams" : 20,
   "team_size" : 0,
   "identify_judges" : false,
   "group_competitors" : false,
   "compatriot_marking" : false,
   "generate_500_scale" : false,
   "landscape_marking" : false,
+  "competitor_max_age" : 22,
   "photos" : [ ],
+  "tags" : [ ],
+  "sponsors" : [ ],
   "links" : [ {
     "rel" : "self",
     "href" : "http://localhost:9090/events/1/skills/1",

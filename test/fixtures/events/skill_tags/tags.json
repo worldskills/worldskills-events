@@ -1,0 +1,15 @@
+{
+  "tags" : [ {
+    "id" : 1,
+    "name" : {
+      "lang_code" : "en",
+      "text" : "Being creative"
+    }
+  }, {
+    "id" : 2,
+    "name" : {
+      "lang_code" : "en",
+      "text" : "Complex problems"
+    }
+  } ]
+}

@@ -24,7 +24,15 @@
     "venue" : "",
     "town" : "Bern",
     "code" : "",
-    "country" : "CH",
+    "country" : {
+      "id" : 6,
+      "code" : "CH",
+      "name" : {
+        "lang_code" : "en",
+        "text" : "Switzerland"
+      }
+    },
+    "utc_offset" : null,
     "url" : "http://www.swissskillsbern2014.ch/",
     "description" : "",
     "ws_entity" : {
@@ -65,7 +73,7 @@
   "total_count" : 1,
   "links" : [ {
     "rel" : "self",
-    "href" : "http://localhost:9090/events?offset=0&limit=1&sort=end_date_desc&type=competition&ws_entity=2&country=CH&after=2014-01-01&before=2014-12-31",
+    "href" : "http://localhost:9090/events?offset=0&limit=1&sort=end_date_desc&type=competition&ws_entity=2&country=6&after=2014-01-01&before=2014-12-31",
     "content_type" : null,
     "description" : null
   }, {

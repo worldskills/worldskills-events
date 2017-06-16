@@ -6,7 +6,9 @@
   "venue" : "Swiss Museum of Transport",
   "town" : "Lucerne",
   "code" : "WSGA2014",
-  "country" : "CH",
+  "country" : {
+    "id": 6
+  },
   "url" : "",
   "description" : "",
   "ws_entity" : {

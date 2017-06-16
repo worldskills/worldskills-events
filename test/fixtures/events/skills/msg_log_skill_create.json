@@ -8,9 +8,9 @@
   "puppeteer_id" : null,
   "data" : {
     "competition_skill_href" : "http://localhost:9090/events/1/skills/1",
-    "skill_id" : "1",
     "competition_skill_id" : "1",
-    "competition_skill_name" : "Web Design"
+    "competition_skill_name" : "Web Design",
+    "skill_id" : "1"
   },
   "ws_entity_id" : 1
 }

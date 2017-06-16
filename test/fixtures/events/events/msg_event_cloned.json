@@ -11,6 +11,7 @@
   "venue" : "Anhembi",
   "code" : "WSSP",
   "country" : "BR",
+  "utc_offset" : -10800,
   "url" : "http://www.worldskillssaopaulo2015.com/",
   "description" : "43rd WorldSkills Competition",
   "competition_start_date" : "2015-08-11",

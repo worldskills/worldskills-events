@@ -11,6 +11,7 @@
   "venue" : "Abu Dhabi National Exhibition Centre",
   "code" : "WSAD",
   "country" : "AE",
+  "utc_offset" : 14400,
   "url" : "",
   "description" : "",
   "competition_start_date" : "2017-09-05",

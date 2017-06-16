@@ -26,7 +26,15 @@
       "venue" : "Anhembi",
       "town" : "São Paulo",
       "code" : "WSSP",
-      "country" : "BR",
+      "country" : {
+        "id" : 5,
+        "code" : "BR",
+        "name" : {
+          "lang_code" : "en",
+          "text" : "Brazil"
+        }
+      },
+      "utc_offset" : -10800,
       "url" : "http://www.worldskillssaopaulo2015.com/",
       "description" : "43rd WorldSkills Competition",
       "ws_entity" : {
@@ -131,7 +139,15 @@
         "venue" : "Anhembi",
         "town" : "São Paulo",
         "code" : "WSSP",
-        "country" : "BR",
+        "country" : {
+          "id" : 5,
+          "code" : "BR",
+          "name" : {
+            "lang_code" : "en",
+            "text" : "Brazil"
+          }
+        },
+        "utc_offset" : -10800,
         "url" : "http://www.worldskillssaopaulo2015.com/",
         "description" : "43rd WorldSkills Competition",
         "ws_entity" : {
@@ -187,22 +203,65 @@
       } ]
     },
     "min_teams" : 4,
+    "max_teams" : 20,
     "team_size" : 0,
     "identify_judges" : false,
     "group_competitors" : false,
     "compatriot_marking" : false,
     "generate_500_scale" : false,
     "landscape_marking" : false,
+    "competitor_max_age" : 22,
     "photos" : [ {
-      "id" : 321,
+      "id" : 1,
+      "image_id" : 321,
       "thumbnail_hash" : "ab42cdef",
       "thumbnail" : "http://worldskills-images.org/wsab/ws42/321/wsab42cdef",
+      "description" : {
+        "lang_code" : "en",
+        "text" : "Web designer in action"
+      },
       "links" : [ {
         "rel" : "self",
+        "href" : "http://localhost:9090/events/1/skills/1/photos/1",
+        "content_type" : null,
+        "description" : null
+      }, {
+        "rel" : "image",
         "href" : "https://api.worldskills.org/images/321",
         "content_type" : null,
         "description" : null
       } ]
+    } ],
+    "tags" : [ {
+      "id" : 1,
+      "name" : {
+        "lang_code" : "en",
+        "text" : "Being creative"
+      }
+    }, {
+      "id" : 2,
+      "name" : {
+        "lang_code" : "en",
+        "text" : "Complex problems"
+      }
+    } ],
+    "sponsors" : [ {
+      "id" : 1,
+      "name" : "Autodesk",
+      "url" : "http://www.autodesk.com/",
+      "logo" : {
+        "id" : 321,
+        "thumbnail_hash" : "ab42cdef",
+        "thumbnail" : "http://worldskills-images.org/wsab/ws42/321/wsab42cdef",
+        "links" : [ {
+          "rel" : "self",
+          "href" : "https://api.worldskills.org/images/321",
+          "content_type" : null,
+          "description" : null
+        } ]
+      },
+      "sort" : 1,
+      "links" : [ ]
     } ],
     "links" : [ {
       "rel" : "self",

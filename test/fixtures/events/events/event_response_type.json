@@ -11,7 +11,15 @@
   "venue" : "Swiss Museum of Transport",
   "town" : "Lucerne",
   "code" : "WSGA2014",
-  "country" : "CH",
+  "country" : {
+    "id" : 6,
+    "code" : "CH",
+    "name" : {
+      "lang_code" : "en",
+      "text" : "Switzerland"
+    }
+  },
+  "utc_offset" : null,
   "url" : "",
   "description" : "",
   "ws_entity" : {

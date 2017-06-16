@@ -18,7 +18,15 @@
     <venue>Abu Dhabi National Exhibition Centre</venue>
     <town>Abu Dhabi</town>
     <code>WSAD</code>
-    <country>AE</country>
+    <country>
+      <id>7</id>
+      <code>AE</code>
+      <name>
+        <lang_code>en</lang_code>
+        <text>United Arab Emirates</text>
+      </name>
+    </country>
+    <utc_offset>14400</utc_offset>
     <url/>
     <description/>
     <ws_entity>
@@ -54,7 +62,15 @@
     <venue>Anhembi</venue>
     <town>São Paulo</town>
     <code>WSSP</code>
-    <country>BR</country>
+    <country>
+      <id>5</id>
+      <code>BR</code>
+      <name>
+        <lang_code>en</lang_code>
+        <text>Brazil</text>
+      </name>
+    </country>
+    <utc_offset>-10800</utc_offset>
     <url>http://www.worldskillssaopaulo2015.com/</url>
     <description>43rd WorldSkills Competition</description>
     <ws_entity>
@@ -87,7 +103,15 @@
     <venue>Swiss Museum of Transport</venue>
     <town>Lucerne</town>
     <code>WSGA2014</code>
-    <country>CH</country>
+    <country>
+      <id>6</id>
+      <code>CH</code>
+      <name>
+        <lang_code>en</lang_code>
+        <text>Switzerland</text>
+      </name>
+    </country>
+    <utc_offset>7200</utc_offset>
     <url/>
     <description/>
     <ws_entity>

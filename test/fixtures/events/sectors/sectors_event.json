@@ -31,7 +31,15 @@
       "venue" : "Anhembi",
       "town" : "São Paulo",
       "code" : "WSSP",
-      "country" : "BR",
+      "country" : {
+        "id" : 5,
+        "code" : "BR",
+        "name" : {
+          "lang_code" : "en",
+          "text" : "Brazil"
+        }
+      },
+      "utc_offset" : -10800,
       "url" : "http://www.worldskillssaopaulo2015.com/",
       "description" : "43rd WorldSkills Competition",
       "ws_entity" : {

@@ -23,7 +23,15 @@
   "venue" : "Abu Dhabi National Exhibition Centre",
   "town" : "Abu Dhabi",
   "code" : "WSAD",
-  "country" : "AE",
+  "country" : {
+    "id" : 7,
+    "code" : "AE",
+    "name" : {
+      "lang_code" : "en",
+      "text" : "United Arab Emirates"
+    }
+  },
+  "utc_offset" : 14400,
   "url" : "",
   "description" : "",
   "ws_entity" : {

@@ -8,8 +8,8 @@
   "puppeteer_id" : null,
   "data" : {
     "event_id" : "2",
-    "parent_event_id" : "1",
-    "event_name" : "WorldSkills São Paulo 2015"
+    "event_name" : "WorldSkills São Paulo 2015",
+    "parent_event_id" : "1"
   },
   "ws_entity_id" : 1
 }

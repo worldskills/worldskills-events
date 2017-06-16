@@ -1,0 +1,43 @@
+{
+  "skills" : [ {
+    "id" : 1,
+    "name" : {
+      "lang_code" : "en",
+      "text" : "Web Design"
+    },
+    "description" : {
+      "lang_code" : null,
+      "text" : null
+    },
+    "sector" : null,
+    "photos" : [ {
+      "id" : 1,
+      "image_id" : 321,
+      "thumbnail_hash" : "ab42cdef",
+      "thumbnail" : "http://worldskills-images.org/wsab/ws42/321/wsab42cdef",
+      "description" : {
+        "lang_code" : "en",
+        "text" : "A computer"
+      },
+      "links" : [ {
+        "rel" : "image",
+        "href" : "https://api.worldskills.org/images/321",
+        "content_type" : null,
+        "description" : null
+      } ]
+    } ],
+    "links" : [ {
+      "rel" : "self",
+      "href" : "http://localhost:9090/events/skills/1?l=en",
+      "content_type" : null,
+      "description" : null
+    } ]
+  } ],
+  "total_count" : 1,
+  "links" : [ {
+    "rel" : "self",
+    "href" : "http://localhost:9090/events/skills?offset=0&limit=10&sort=name_asc&l=en",
+    "content_type" : null,
+    "description" : null
+  } ]
+}

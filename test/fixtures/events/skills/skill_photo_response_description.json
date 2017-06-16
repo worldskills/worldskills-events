@@ -1,0 +1,21 @@
+{
+  "id" : 1,
+  "image_id" : 987,
+  "thumbnail_hash" : "gjkfg778sd",
+  "thumbnail" : "http://worldskills-images.org/wsgj/wskf/987/wsgjkfg778sd",
+  "description" : {
+    "lang_code" : "en",
+    "text" : "Web designer in action"
+  },
+  "links" : [ {
+    "rel" : "self",
+    "href" : "http://localhost:9090/events/1/skills/1/photos/1",
+    "content_type" : null,
+    "description" : null
+  }, {
+    "rel" : "image",
+    "href" : "https://api.worldskills.org/images/987",
+    "content_type" : null,
+    "description" : null
+  } ]
+}

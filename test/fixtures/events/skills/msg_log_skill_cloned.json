@@ -7,10 +7,10 @@
   "person_id" : 123,
   "puppeteer_id" : null,
   "data" : {
-    "parent_competition_skill_id" : "1",
-    "skill_id" : "1",
     "competition_skill_id" : "2",
-    "competition_skill_name" : "Web Design"
+    "competition_skill_name" : "Web Design",
+    "parent_competition_skill_id" : "1",
+    "skill_id" : "1"
   },
   "ws_entity_id" : 1
 }

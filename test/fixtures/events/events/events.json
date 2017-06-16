@@ -24,7 +24,15 @@
     "venue" : "Abu Dhabi National Exhibition Centre",
     "town" : "Abu Dhabi",
     "code" : "WSAD",
-    "country" : "AE",
+    "country" : {
+      "id" : 7,
+      "code" : "AE",
+      "name" : {
+        "lang_code" : "en",
+        "text" : "United Arab Emirates"
+      }
+    },
+    "utc_offset" : 14400,
     "url" : "",
     "description" : "",
     "ws_entity" : {
@@ -86,7 +94,15 @@
     "venue" : "Anhembi",
     "town" : "São Paulo",
     "code" : "WSSP",
-    "country" : "BR",
+    "country" : {
+      "id" : 5,
+      "code" : "BR",
+      "name" : {
+        "lang_code" : "en",
+        "text" : "Brazil"
+      }
+    },
+    "utc_offset" : -10800,
     "url" : "http://www.worldskillssaopaulo2015.com/",
     "description" : "43rd WorldSkills Competition",
     "ws_entity" : {
@@ -148,7 +164,15 @@
     "venue" : "Swiss Museum of Transport",
     "town" : "Lucerne",
     "code" : "WSGA2014",
-    "country" : "CH",
+    "country" : {
+      "id" : 6,
+      "code" : "CH",
+      "name" : {
+        "lang_code" : "en",
+        "text" : "Switzerland"
+      }
+    },
+    "utc_offset" : 7200,
     "url" : "",
     "description" : "",
     "ws_entity" : {

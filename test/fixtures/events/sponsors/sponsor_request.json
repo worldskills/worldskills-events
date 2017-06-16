@@ -3,6 +3,7 @@
     "id" : 1
   },
   "name" : "Autodesk",
+  "url" : "http://www.autodesk.com/",
   "logo" : {
     "id": 321,
     "thumbnail_hash": "ab42cdef"

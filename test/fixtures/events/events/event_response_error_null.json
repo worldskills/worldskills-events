@@ -22,10 +22,5 @@
     "user_msg" : "event.end_date may not be null",
     "dev_msg" : "Error path createEvent.arg0.endDate",
     "errors" : null
-  }, {
-    "code" : "400-106",
-    "user_msg" : "event.country may not be null",
-    "dev_msg" : "Error path createEvent.arg0.country",
-    "errors" : null
   } ]
 }

@@ -18,7 +18,15 @@
       <venue>Anhembi</venue>
       <town>São Paulo</town>
       <code>WSSP</code>
-      <country>BR</country>
+      <country>
+        <id>5</id>
+        <code>BR</code>
+        <name>
+          <lang_code>en</lang_code>
+          <text>Brazil</text>
+        </name>
+      </country>
+      <utc_offset>-10800</utc_offset>
       <url>http://www.worldskillssaopaulo2015.com/</url>
       <description>43rd WorldSkills Competition</description>
       <ws_entity>
@@ -35,6 +43,7 @@
       <link href="http://localhost:9090/events/1/sectors" rel="sectors"/>
     </event>
     <name>Autodesk</name>
+    <url>http://www.autodesk.com/</url>
     <logo>
       <id>321</id>
       <thumbnail_hash>ab42cdef</thumbnail_hash>

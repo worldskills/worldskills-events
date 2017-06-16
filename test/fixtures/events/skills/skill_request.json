@@ -1,7 +1,4 @@
 {
-  "event": {
-    "id" : 1
-  },
   "type" : "official",
   "number" : "17",
   "status" : "on_notice",
@@ -20,10 +17,12 @@
     "id" : 1
   },
   "min_teams" : 4,
+  "max_teams" : 20,
   "team_size" : 0,
   "identify_judges" : false,
   "group_competitors" : false,
   "compatriot_marking" : false,
   "generate_500_scale" : false,
-  "landscape_marking" : false
+  "landscape_marking" : false,
+  "competitor_max_age" : 22
 }
