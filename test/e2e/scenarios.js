@@ -48,7 +48,7 @@ describe('Events app', function() {
       expect(event.competition_start_date).toEqual("2017-09-07");
       expect(event.competition_end_date).toEqual("2017-09-15");
       expect(event.type).toEqual("competition");
-      expect(event.country).toEqual('AF');
+      expect(event.country.id).toEqual(1);
     });
 
   });

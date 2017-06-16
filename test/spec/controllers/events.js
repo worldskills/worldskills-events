@@ -40,6 +40,7 @@ describe('controllers events', function() {
             $httpBackend.expectGET('http://localhost:8080/org/countries').respond({
                 country_list: [
                     {
+                        id: 1,
                         code: 'AQ',
                         name: {
                             text: 'Antarctica'
@@ -205,6 +206,7 @@ describe('controllers events', function() {
             $httpBackend.expectGET('http://localhost:8080/org/countries').respond({
                 country_list: [
                     {
+                        id: 1,
                         code: 'AQ',
                         name: {
                             text: 'Antarctica'
@@ -254,17 +256,6 @@ describe('controllers events', function() {
 
             $httpBackend.flush();
         }));
-
-        it('should load countries and entities', function() {
-
-            expect($scope.countries).toEqual([
-                {
-                    code: 'AQ',
-                    name: 'Antarctica'
-                }
-            ]);
-            expect($scope.countries.length).toBe(1);
-        });
 
         it('should save', function() {
 

@@ -8,7 +8,7 @@
         $scope.filters = {};
     });
 
-    angular.module('eventsApp').controller('EventsListCtrl', function($scope, $state, $stateParams, Event, auth, $http, EVENTS_APP_CODE, WORLDSKILLS_API_EVENTS, WORLDSKILLS_API_ORGANIZATIONS, WORLDSKILLS_API_AUTH, $translate, $filter, $location) {
+    angular.module('eventsApp').controller('EventsListCtrl', function($scope, $state, $stateParams, Event, Country, auth, $http, EVENTS_APP_CODE, WORLDSKILLS_API_EVENTS, WORLDSKILLS_API_ORGANIZATIONS, WORLDSKILLS_API_AUTH, $translate, $filter, $location) {
         angular.forEach($stateParams, function (value, key) {
             if (value) {
                 $scope.filters[key] = value;
@@ -53,12 +53,7 @@
                 $scope.filters.page = page;
             });
         };
-        $http({method: 'GET', url: WORLDSKILLS_API_ORGANIZATIONS + '/countries'}).success(function(data, status, headers, config) {
-            $scope.countries = [];
-            angular.forEach(data.country_list, function (country) {
-                $scope.countries.push({code: country.code, name: country.name.text});
-            });
-        });
+        $scope.countries = Country.query();
         $http({
             method: 'GET',
             url: WORLDSKILLS_API_AUTH + '/ws_entities',
@@ -154,14 +149,11 @@
         $scope.event.end_date = new Date();
         $scope.event.code = '';
         $scope.event.town = '';
-        $scope.event.country = 'ZZ';
+        $scope.event.country = {id: 0};
     });
-    angular.module('eventsApp').controller('EventFormCtrl', function($scope, $stateParams, Event, $http, $filter, WORLDSKILLS_API_EVENTS, WORLDSKILLS_API_ORGANIZATIONS, WORLDSKILLS_API_AUTH, EVENTS_APP_CODE, $translate, $state, alert) {
-        $http({method: 'GET', url: WORLDSKILLS_API_ORGANIZATIONS + '/countries'}).success(function(data, status, headers, config) {
-            $scope.countries = [];
-            angular.forEach(data.country_list, function (country) {
-                $scope.countries.push({code: country.code, name: country.name.text});
-            });
+    angular.module('eventsApp').controller('EventFormCtrl', function($scope, $stateParams, Event, Country, $http, $filter, WORLDSKILLS_API_EVENTS, WORLDSKILLS_API_AUTH, EVENTS_APP_CODE, $translate, $state, alert) {
+        $scope.countries = Country.query(function () {
+            $scope.countries.country_list.unshift({id: 0, name: {text: ''}});
         });
         $http({
             method: 'GET',

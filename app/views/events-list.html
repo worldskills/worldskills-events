@@ -41,7 +41,7 @@
                         <td><a ui-sref="events.event.form({ id: event.id })">{{event.id}}</a></td>
                         <td><a ui-sref="events.event.form({ id: event.id })" title="{{event.name}}">{{event.name}}</a></td>
                         <td>{{event.start_date|date:'d MMMM yyyy'}}</td>
-                        <td>{{event.country|translate}}</td>
+                        <td>{{event.country.name.text}}</td>
                     </tr>
                     <tr ng-show="!loading && events.total_count == 0">
                         <td colspan="4">No events found.</td>
@@ -100,7 +100,7 @@
                             <label for="country">Country</label>
                             <select class="form-control" id="country" name="country" required ng-model="filters.country">
                                 <option></option>
-                                <option ng-repeat="country in countries|orderBy:'name'" value="{{country.code}}">{{country.name}}</option>
+                                <option ng-repeat="country in countries.country_list" value="{{country.id}}">{{country.name.text}}</option>
                             </select>
                         </div>
                         <div class="form-group">
