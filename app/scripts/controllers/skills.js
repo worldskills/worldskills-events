@@ -14,7 +14,6 @@
         var url = WORLDSKILLS_API_EVENTS + "/" + $stateParams.eventId + "/sectors";
         $http({method: 'GET', url: url}).success(function(data, status, headers, config) {
             $scope.sectors = data.sectors;
-            console.log($scope.sectors);
         });
     });
 
