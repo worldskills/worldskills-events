@@ -9,6 +9,13 @@
         $scope.skill.description_required_skills = {text: '', lang_code: 'en'};
         $scope.skill.description_competition_action = {text: '', lang_code: 'en'};
         $scope.skill.event = Event.get({id: $stateParams.eventId});
+
+        //hacky, but works //JA
+        var url = WORLDSKILLS_API_EVENTS + "/" + $stateParams.eventId + "/sectors";
+        $http({method: 'GET', url: url}).success(function(data, status, headers, config) {
+            $scope.sectors = data.sectors;
+            console.log($scope.sectors);
+        });
     });
 
     angular.module('eventsApp').controller('SkillCtrl', function($scope, $stateParams, Skill, auth, $http, $q, WORLDSKILLS_API_EVENTS, EVENTS_APP_CODE, $translate, $state, WorldSkills, alert) {
