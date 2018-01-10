@@ -48,7 +48,7 @@ describe('controllers events', function() {
                     }
                 ]
             });
-            $httpBackend.expectGET('http://localhost:8080/auth/ws_entities?limit=200').respond({
+            $httpBackend.expectGET('http://localhost:8080/auth/ws_entities?limit=900').respond({
                 entities: [
                     {
                         id: 1,
@@ -214,7 +214,7 @@ describe('controllers events', function() {
                     }
                 ]
             });
-            $httpBackend.expectGET('http://localhost:8080/auth/ws_entities?limit=100&role=EditEvents&roleApp=400').respond({
+            $httpBackend.expectGET('http://localhost:8080/auth/ws_entities?limit=900&role=EditEvents&roleApp=400').respond({
                 entities: [
                     {
                         id: 1,
@@ -226,7 +226,7 @@ describe('controllers events', function() {
                     }
                 ]
             });
-            $httpBackend.expectGET('http://localhost:8080/auth/ws_entities?limit=200').respond({
+            $httpBackend.expectGET('http://localhost:8080/auth/ws_entities?limit=900').respond({
                 entities: [
                     {
                         id: 1,
