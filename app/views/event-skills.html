@@ -7,17 +7,22 @@
 <div class="table-responsive">
     <table class="table table-striped">
         <colgroup>
-            <col width="10%" />
+            <col width="3%" />
+            <col width="7%" />
             <col width="60%" />
             <col width="30%" />
         </colgroup>
         <thead>
             <tr>
+                <th>&nbsp;</th>
                 <th>Number</th>
                 <th>Name</th>
                 <th>Type</th>
             </tr>
             <tr class="active">
+                <td>
+                    <input type="checkbox" ng-change="toggleChecked()" ng-model="skillsFilterChecked" />
+                </td>
                 <td>
                     <input type="text" class="form-control input-sm" ng-model="skillsFilterNumber" />
                 </td>
@@ -40,20 +45,36 @@
             </tr>
         </thead>
         <tfoot>
-            <tr ng-show="!loading"><td colspan="3"></td></tr>
+            <tr ng-show="!loading"><td colspan="4"></td></tr>
         </tfoot>
         <tbody>
             <tr ng-repeat="skill in filteredSkills = (skills | filter:{number:skillsFilterNumber, $:skillsFilterName, type:skillsFilterType})">
+                <td><input type="checkbox" ng-model="skill.checked"></td>
                 <td><a ui-sref="events.skill.form({eventId: skill.event.id, id: skill.id})">{{skill.number}}</a></td>
                 <td><a ui-sref="events.skill.form({eventId: skill.event.id, id: skill.id})">{{skill.name.text}}</a></td>
                 <td>{{("skill_type_" + skill.type)|translate}}</td>
             </tr>
             <tr ng-show="!loading && filteredSkills.length == 0">
-                <td colspan="3">No Skills found.</td>
+                <td colspan="4">No Skills found.</td>
             </tr>
             <tr ng-show="loading">
-                <td colspan="3"><ws-spinner></ws-spinner></td>
+                <td colspan="4"><ws-spinner></ws-spinner></td>
             </tr>
         </tbody>
     </table>
 </div>
+
+<p>
+    <div class="btn-group dropup">
+        <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown">
+            Copy selected Skills to event <span class="caret"></span>
+        </button>
+        <ul class="dropdown-menu">
+            <li ng-repeat="event in events.events"><a href="javascript:" ng-click="cloneSkills(event)">{{event.name}}</a></li>
+            <li ng-show="events.events.length == 0"><a href="javascript:">No events available</a></li>
+        </ul>
+    </div>
+    &nbsp;
+    <span class="text-muted" ng-show="cloneLoading">Copying skills...</span>
+    <span class="text-muted" ng-show="!cloneLoading && cloneDone">Skills copied</span>
+</p>

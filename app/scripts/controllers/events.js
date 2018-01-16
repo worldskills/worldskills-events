@@ -214,7 +214,7 @@
             }
         };
     });
-    angular.module('eventsApp').controller('EventSkillsCtrl', function($scope, $stateParams, Event, $http, $translate, $state, $timeout, WorldSkills) {
+    angular.module('eventsApp').controller('EventSkillsCtrl', function($scope, $stateParams, alert, Event, SkillClone, $q, $http, $translate, $state, $timeout, WorldSkills) {
         $scope.loading = true;
         $scope.skills = [];
         var searchTimeout;
@@ -227,6 +227,32 @@
                 $scope.loading = false;
             });
         });
+        Event.query({limit: 300, type: 'competition'}, function (data) {
+            $scope.events = data;
+        });
+        $scope.toggleChecked = function () {
+            angular.forEach($scope.skills, function (skill) {
+                skill.checked = $scope.skillsFilterChecked;
+            });
+        };
+        $scope.cloneLoading = false;
+        $scope.cloneDone = false;
+        $scope.cloneSkills = function(event) {
+            $scope.cloneLoading = true;
+            var clonePromises = [];
+            angular.forEach($scope.filteredSkills, function (skill) {
+                if (skill.checked) {
+                    clonePromises.push(SkillClone.clone({eventId: skill.event.id, id: skill.id}, {event: event}, function () {
+                        skill.checked = false;
+                    }).$promise);
+                }
+            });
+            $q.all(clonePromises).then(function() {
+                alert.success('The selected skills have been copied.', true);
+                $scope.cloneLoading = false;
+                $scope.cloneDone = true;
+            });
+        };
     });
     angular.module('eventsApp').controller('EventSponsorsCtrl', function($scope, $stateParams, Event, $http, $translate, $state, WorldSkills) {
         $scope.sponsors = [];
