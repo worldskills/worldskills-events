@@ -302,6 +302,9 @@ describe('controllers events', function() {
                 ]
             });
 
+            $httpBackend.expectGET('http://localhost:8080/events?limit=300&type=competition').respond({
+                events: []
+            });
             $httpBackend.expectGET('http://localhost:8080/events/skills?l=en&limit=100').respond({
                 skills: [
                     {
