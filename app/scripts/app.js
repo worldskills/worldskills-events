@@ -70,6 +70,13 @@
             data: {
                 requireLoggedIn: true
             }
+        }).state('events.event.sectors', {
+            url: '/sectors',
+            templateUrl: 'views/event-sectors.html',
+            controller: 'EventSectorsCtrl',
+            data: {
+                requireLoggedIn: true
+            }
         }).state('events.event.tags', {
             url: '/tags',
             templateUrl: 'views/event-skill-tags.html',
@@ -192,6 +199,20 @@
             url: '',
             templateUrl: 'views/translation-form.html',
             controller: 'TranslationFormCtrl',
+            data: {
+                requireLoggedIn: true
+            }
+        }).state('events.sector_create', {
+            url: '/{eventId}/sectors/create',
+            templateUrl: 'views/sector.html',
+            controller: 'SectorCreateCtrl',
+            data: {
+                requireLoggedIn: true
+            }
+        }).state('events.sector', {
+            url: '/{eventId}/sectors/{id}',
+            templateUrl: 'views/sector.html',
+            controller: 'SectorCtrl',
             data: {
                 requireLoggedIn: true
             }

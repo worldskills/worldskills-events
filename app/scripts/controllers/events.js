@@ -254,6 +254,20 @@
             });
         };
     });
+    angular.module('eventsApp').controller('EventSectorsCtrl', function($scope, $stateParams, alert, Event, $q, $http, $translate, $state, $timeout, WorldSkills) {
+        $scope.loading = true;
+        $scope.sectors = [];
+        var searchTimeout;
+        $scope.event.$promise.then(function(data) {
+            var url = WorldSkills.getLink(data.links, 'sectors');
+            $http({method: 'GET', url: url, params: {limit: 100, l: 'en'}}).success(function(data, status, headers, config) {
+                angular.forEach(data.sectors, function (sector) {
+                    $scope.sectors.push(sector);
+                });
+                $scope.loading = false;
+            });
+        });
+    });
     angular.module('eventsApp').controller('EventSponsorsCtrl', function($scope, $stateParams, Event, $http, $translate, $state, WorldSkills) {
         $scope.sponsors = [];
         var getSponsors = function (url) {

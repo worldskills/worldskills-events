@@ -1,0 +1,41 @@
+<p class="pull-right">
+    <a ui-sref="events.sector_create({eventId: event.id})" class="btn btn-success" ng-show="canEdit">Add Sector</a>
+</p>
+
+<h2 class="clearfix">Sectors</h2>
+
+<div class="table-responsive">
+    <table class="table table-striped">
+        <colgroup>
+            <col width="10%" />
+            <col width="90%" />
+        </colgroup>
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Name</th>
+            </tr>
+        </thead>
+        <tfoot>
+            <tr ng-show="!loading"><td colspan="2"></td></tr>
+        </tfoot>
+        <tbody>
+            <tr ng-repeat="sector in sectors">
+                <td>
+                    <a ui-sref="events.sector({eventId: sector.event.id, id: sector.id})" ng-show="canEdit">{{sector.id}}</a>
+                    <span ng-show="!canEdit">{{sector.id}}</span>
+                </td>
+                <td>
+                    <a ui-sref="events.sector({eventId: sector.event.id, id: sector.id})" ng-show="canEdit">{{sector.name.text}}</a>
+                    <span ng-show="!canEdit">{{sector.name.text}}</span>
+                </td>
+            </tr>
+            <tr ng-show="!loading && sectors.length == 0">
+                <td colspan="2">No Sectors found.</td>
+            </tr>
+            <tr ng-show="loading">
+                <td colspan="2"><ws-spinner></ws-spinner></td>
+            </tr>
+        </tbody>
+    </table>
+</div>
