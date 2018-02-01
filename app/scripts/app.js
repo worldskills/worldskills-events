@@ -206,6 +206,11 @@
             url: '/{eventId}/sectors/create',
             templateUrl: 'views/sector.html',
             controller: 'SectorCreateCtrl',
+            abstract: true
+        }).state('events.sector_create.form', {
+            url: '',
+            templateUrl: 'views/sector-form.html',
+            controller: 'SectorFormCtrl',
             data: {
                 requireLoggedIn: true
             }
@@ -213,6 +218,18 @@
             url: '/{eventId}/sectors/{id}',
             templateUrl: 'views/sector.html',
             controller: 'SectorCtrl',
+            abstract: true
+        }).state('events.sector.form', {
+            url: '',
+            templateUrl: 'views/sector-form.html',
+            controller: 'SectorFormCtrl',
+            data: {
+                requireLoggedIn: true
+            }
+        }).state('events.sector.translations', {
+            url: '/translations',
+            templateUrl: 'views/sector-translations.html',
+            controller: 'SectorTranslationsCtrl',
             data: {
                 requireLoggedIn: true
             }
