@@ -1,5 +1,5 @@
 <p class="pull-right">
-    <a ui-sref="events.sector_create({eventId: event.id})" class="btn btn-success" ng-show="canEdit">Add Sector</a>
+    <a ui-sref="events.sector_create.form({eventId: event.id})" class="btn btn-success" ng-show="canEdit">Add Sector</a>
 </p>
 
 <h2 class="clearfix">Sectors</h2>
@@ -22,11 +22,11 @@
         <tbody>
             <tr ng-repeat="sector in sectors">
                 <td>
-                    <a ui-sref="events.sector({eventId: sector.event.id, id: sector.id})" ng-show="canEdit">{{sector.id}}</a>
+                    <a ui-sref="events.sector.form({eventId: sector.event.id, id: sector.id})" ng-show="canEdit">{{sector.id}}</a>
                     <span ng-show="!canEdit">{{sector.id}}</span>
                 </td>
                 <td>
-                    <a ui-sref="events.sector({eventId: sector.event.id, id: sector.id})" ng-show="canEdit">{{sector.name.text}}</a>
+                    <a ui-sref="events.sector.form({eventId: sector.event.id, id: sector.id})" ng-show="canEdit">{{sector.name.text}}</a>
                     <span ng-show="!canEdit">{{sector.name.text}}</span>
                 </td>
             </tr>

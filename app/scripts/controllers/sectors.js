@@ -6,19 +6,9 @@
         $scope.sector.name = {text: '', lang_code: 'en'};
         $scope.sector.event = Event.get({id: $stateParams.eventId});
         $scope.baseSectors = BaseSector.query();
-        $scope.save = function() {
-            $scope.submitted = true;
-            if ($scope.form.$valid) {
-                $scope.loading = true;
-                $scope.sector.$save(function () {
-                    alert.success('The Sector has been added successfully.');
-                    $state.go('events.event.sectors', {id: $scope.sector.event.id});
-                });
-            }
-        };
     });
 
-    angular.module('eventsApp').controller('SectorCtrl', function($scope, $stateParams, Sector, BaseSector, auth, $state, alert) {
+    angular.module('eventsApp').controller('SectorCtrl', function($scope, $stateParams, $http, Sector, BaseSector, EVENTS_APP_CODE, auth, $state, alert) {
         $scope.eventId = $stateParams.eventId;
         $scope.id = $stateParams.id;
         $scope.sector = Sector.get({eventId: $scope.eventId, id: $scope.id}, function (sector) {
@@ -40,12 +30,58 @@
                 });
             }
         };
+    });
+
+    angular.module('eventsApp').controller('SectorFormCtrl', function($scope, $stateParams, $http, Sector, BaseSector, EVENTS_APP_CODE, auth, $state, alert) {
         $scope.save = function() {
             $scope.submitted = true;
             if ($scope.form.$valid) {
                 $scope.loading = true;
-                $scope.sector.$update(function () {
-                    alert.success('The Sector has been updated successfully.');
+                if ($scope.sector.id) {
+                    $scope.sector.$update(function () {
+                        alert.success('The Sector has been updated successfully.');
+                        $state.go('events.event.sectors', {id: $scope.sector.event.id});
+                    });
+                } else {
+                    $scope.sector.$save(function () {
+                        alert.success('The Sector has been added successfully.');
+                        $state.go('events.event.sectors', {id: $scope.sector.event.id});
+                    });
+                }
+            }
+        };
+    });
+
+    angular.module('eventsApp').controller('SectorTranslationsCtrl', function($scope, $stateParams, $http, $q, Sector, BaseSector, EVENTS_APP_CODE, auth, $state, alert) {
+
+        $scope.translations = [];
+        $scope.sector.$promise.then(function () {
+            angular.forEach($scope.sector.links, function (link) {
+                if (link.rel == 'i18n') {
+                    $http({method: 'GET', url: link.href}).success(function(data, status, headers, config) {
+                        $scope.translations.push(new Sector(data));
+                    });
+                }
+            });
+        });
+
+        $scope.addTranslation = function (lang) {
+            var translation = angular.copy($scope.sector);
+            translation.name.text = '';
+            translation.name.lang_code = lang;
+            $scope.translations.push(translation);
+        };
+
+        $scope.save = function() {
+            $scope.submitted = true;
+            if ($scope.form.$valid) {
+                $scope.loading = true;
+                var promises = [];
+                angular.forEach($scope.translations, function (translation) {
+                    promises.push(translation.$update());
+                });
+                $q.all(promises).then(function() {
+                    alert.success('The Sector Translations have been updated successfully.');
                     $state.go('events.event.sectors', {id: $scope.sector.event.id});
                 });
             }
