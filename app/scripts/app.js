@@ -240,7 +240,7 @@
         $uiViewScrollProvider.useAnchorScroll();
     });
 
-    eventsApp.config(function($translateProvider) {
+    eventsApp.config(function($translateProvider, $httpProvider) {
 
         $translateProvider.useSanitizeValueStrategy('sanitize');
 
@@ -251,6 +251,8 @@
 
         $translateProvider.preferredLanguage('en');
         $translateProvider.fallbackLanguage('en');
+
+        $httpProvider.defaults.headers.common['Accept-Language'] = 'en';
     });
 
     eventsApp.run(function ($rootScope, $state, $stateParams) {
