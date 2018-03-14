@@ -1,5 +1,5 @@
 <p>
-    <div class="btn-group">
+    <div class="btn-group" ng-show="canEdit">
         <button type="button" class="btn btn-success dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
             Add Tag <span class="caret"></span>
         </button>
@@ -38,4 +38,7 @@
         </tbody>
     </table>
 </div>
-<button type="button" class="btn btn-danger" ng-click="removeTags()">Remove selected</button>
+
+<div ng-show="canEdit">
+    <button type="button" class="btn btn-danger" ng-click="removeTags()">Remove selected</button>
+</div>

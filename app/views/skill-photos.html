@@ -1,4 +1,4 @@
-<p>
+<p ng-show="canEdit">
     <a ui-sref="events.skill_photo_create({eventId: skill.event.id, skillId: skill.id})" class="btn btn-success">Add Photo</a>
 </p>
 
@@ -18,16 +18,22 @@
         <tbody>
             <tr ng-repeat="photo in skill.photos">
                 <td>
-                    <a ui-sref="events.skill_photo({eventId: skill.event.id, skillId: skill.id, id: photo.id})">
+                    <a ui-sref="events.skill_photo({eventId: skill.event.id, skillId: skill.id, id: photo.id})" ng-show="canEdit">
                         <div class="ws-image-thumbnail">
                             <img ng-src="{{thumbnail(photo)}}" />
                         </div>
                     </a>
+                    <div class="ws-image-thumbnail" ng-show="!canEdit">
+                        <img ng-src="{{thumbnail(photo)}}" />
+                    </div>
                 </td>
                 <td>
-                    <a ui-sref="events.skill_photo({eventId: skill.event.id, skillId: skill.id, id: photo.id})">
+                    <a ui-sref="events.skill_photo({eventId: skill.event.id, skillId: skill.id, id: photo.id})" ng-show="canEdit">
                         {{ photo.description.text }}
                     </a>
+                    <span ng-show="!canEdit">
+                        {{ photo.description.text }}
+                    </span>
                 </td>
             </tr>
             <tr ng-show="skill.photos.length == 0">
