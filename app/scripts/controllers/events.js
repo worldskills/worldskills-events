@@ -86,19 +86,18 @@
                 if (r.role_application.application_code === EVENTS_APP_CODE && r.name === 'Admin') {
                     $scope.canEdit = true;
                 }
-                if (r.role_application.application_code === EVENTS_APP_CODE && r.name === 'EditEvents') {
+                if ($scope.filters.organizer.length == 0 && r.role_application.application_code === EVENTS_APP_CODE && r.name === 'EditEvents') {
                     $scope.canEdit = true;
                     var wsEntityId = r.ws_entity.id;
                     if ($scope.filters.ws_entity.indexOf(wsEntityId) === -1) {
                         $scope.filters.ws_entity.push(wsEntityId);
                     }
-                } else {
-                  if (r.role_application.application_code === EVENTS_APP_CODE && r.name === 'OrganizerEditEvents') {
-                      var organizerId = r.ws_entity.id;
-                      if ($scope.filters.organizer.indexOf(organizerId) === -1) {
-                          $scope.filters.organizer.push(organizerId);
-                      }
-                  }
+                }
+                if ($scope.filters.ws_entity.length == 0 && r.role_application.application_code === EVENTS_APP_CODE && r.name === 'OrganizerEditEvents') {
+                    var organizerId = r.ws_entity.id;
+                    if ($scope.filters.organizer.indexOf(organizerId) === -1) {
+                        $scope.filters.organizer.push(organizerId);
+                    }
                 }
             });
 
