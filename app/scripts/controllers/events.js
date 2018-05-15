@@ -92,12 +92,13 @@
                     if ($scope.filters.ws_entity.indexOf(wsEntityId) === -1) {
                         $scope.filters.ws_entity.push(wsEntityId);
                     }
-                }
-                if (r.role_application.application_code === EVENTS_APP_CODE && r.name === 'OrganizerEditEvents') {
-                    var organizerId = r.ws_entity.id;
-                    if ($scope.filters.organizer.indexOf(organizerId) === -1) {
-                        $scope.filters.organizer.push(organizerId);
-                    }
+                } else {
+                  if (r.role_application.application_code === EVENTS_APP_CODE && r.name === 'OrganizerEditEvents') {
+                      var organizerId = r.ws_entity.id;
+                      if ($scope.filters.organizer.indexOf(organizerId) === -1) {
+                          $scope.filters.organizer.push(organizerId);
+                      }
+                  }
                 }
             });
 
