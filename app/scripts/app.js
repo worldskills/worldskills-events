@@ -233,6 +233,32 @@
             data: {
                 requireLoggedIn: true
             }
+        }).state('base_skills', {
+            url: '/base_skills',
+            templateUrl: 'views/base-skills.html',
+            controller: 'BaseSkillsCtrl',
+            data: {
+                requireLoggedIn: true
+            }
+        }).state('base_skill', {
+            url: '/base_skills/{id}',
+            templateUrl: 'views/base-skill.html',
+            controller: 'BaseSkillCtrl',
+            abstract: true
+        }).state('base_skill.form', {
+            url: '',
+            templateUrl: 'views/base-skill-form.html',
+            controller: 'BaseSkillFormCtrl',
+            data: {
+                requireLoggedIn: true
+            }
+        }).state('base_skill.photos', {
+            url: '/photos',
+            templateUrl: 'views/base-skill-photos.html',
+            controller: 'BaseSkillPhotosCtrl',
+            data: {
+                requireLoggedIn: true
+            }
         });
     });
 

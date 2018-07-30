@@ -1,0 +1,30 @@
+<div class="table-responsive">
+    <table class="table table-striped">
+        <colgroup>
+            <col width="30%" />
+            <col width="70%" />
+        </colgroup>
+        <thead>
+            <tr>
+                <th>Photo</th>
+                <th>Description</th>
+            </tr>
+        </thead>
+        <tfoot><tr><td colspan="2"></td></tr></tfoot>
+        <tbody>
+            <tr ng-repeat="photo in baseSkill.photos">
+                <td>
+                    <div class="ws-image-thumbnail" ng-show="!canEdit">
+                        <img ng-src="{{thumbnail(photo)}}" />
+                    </div>
+                </td>
+                <td>
+                    {{ photo.description.text }}
+                </td>
+            </tr>
+            <tr ng-show="baseSkill.photos.length == 0">
+                <td colspan="2">No photos found.</td>
+            </tr>
+        </tbody>
+    </table>
+</div>

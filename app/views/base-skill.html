@@ -1,0 +1,17 @@
+<ol class="breadcrumb">
+    <li><a ui-sref="events.list">Events</a></li>
+    <li><a ui-sref="base_skills">Base Skills</a></li>
+    <li class="active">{{ title }}</li>
+</ol>
+
+<alerts></alerts>
+
+<h1>{{ title }}</h1>
+
+<ul class="nav nav-tabs">
+    <li ui-sref-active="active"><a ui-sref="base_skill.form">Base Skill</a></li>
+    <li ui-sref-active="active"><a ui-sref="base_skill.photos">Photos</a></li>
+</ul>
+
+<div id="content" ui-view>
+</div>
