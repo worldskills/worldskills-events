@@ -1,7 +1,7 @@
 (function() {
     'use strict';
 
-    angular.module('eventsApp').controller('SkillCreateCtrl', function($scope, $stateParams, Skill, Event, $http, WORLDSKILLS_API_EVENTS, $translate, $state, WorldSkills, alert) {
+    angular.module('eventsApp').controller('SkillCreateCtrl', function($scope, $stateParams, Skill, BaseSkill, Event, $http, WORLDSKILLS_API_EVENTS, $translate, $state, WorldSkills, alert) {
         $scope.skill = new Skill();
         $scope.skill.name = {text: '', lang_code: 'en'};
         $scope.skill.description = {text: '', lang_code: 'en'};
@@ -14,10 +14,11 @@
             $http({method: 'GET', url: url}).success(function(data, status, headers, config) {
                 $scope.sectors = data.sectors;
             });
+            $scope.baseSkills = BaseSkill.query({entity: $scope.skill.event.ws_entity.id, limit: 900});
         });
     });
 
-    angular.module('eventsApp').controller('SkillCtrl', function($scope, $stateParams, Skill, auth, $http, $q, WORLDSKILLS_API_EVENTS, EVENTS_APP_CODE, $translate, $state, WorldSkills, alert) {
+    angular.module('eventsApp').controller('SkillCtrl', function($scope, $stateParams, Skill, BaseSkill, auth, $http, $q, WORLDSKILLS_API_EVENTS, EVENTS_APP_CODE, $translate, $state, WorldSkills, alert) {
         $scope.eventId = $stateParams.eventId;
         $scope.id = $stateParams.id;
         $scope.translations = [];
@@ -62,6 +63,7 @@
                     $scope.canOrganizerEdit = hasUserRole;
                 });
             }
+            $scope.baseSkills = BaseSkill.query({entity: $scope.skill.event.ws_entity.id, limit: 900});
         });
         $scope.setStatusRemoved = function() {
            if (alert.confirm('Setting the status of the Skill to Removed will hide it from all Skill lists. The data associated with it will not be deleted. Click OK to proceed.')) {
