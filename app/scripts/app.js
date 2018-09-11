@@ -39,7 +39,7 @@
                 requireLoggedIn: true
             },
             reloadOnSearch: false
-        }).state('event_create', {
+        }).state('event', {
             url: '/events/create',
             templateUrl: 'views/event-create.html',
             controller: 'EventCreateCtrl',
@@ -256,6 +256,37 @@
             url: '/photos',
             templateUrl: 'views/base-skill-photos.html',
             controller: 'BaseSkillPhotosCtrl',
+            data: {
+                requireLoggedIn: true
+            }
+        }).state('base_sponsors', {
+            url: '/base_sponsors',
+            templateUrl: 'views/base-sponsors.html',
+            controller: 'BaseSponsorsCtrl',
+            data: {
+                requireLoggedIn: true
+            }
+        }).state('base_sponsor_create', {
+            url: '/base_sponsors/create',
+            templateUrl: 'views/base-sponsor.html',
+            controller: 'BaseSponsorCreateCtrl',
+            abstract: true
+        }).state('base_sponsor_create.form', {
+            url: '',
+            templateUrl: 'views/base-sponsor-form.html',
+            controller: 'BaseSponsorFormCtrl',
+            data: {
+                requireLoggedIn: true
+            }
+        }).state('base_sponsor', {
+            url: '/base_sponsors/{id}',
+            templateUrl: 'views/base-sponsor.html',
+            controller: 'BaseSponsorCtrl',
+            abstract: true
+        }).state('base_sponsor.form', {
+            url: '',
+            templateUrl: 'views/base-sponsor-form.html',
+            controller: 'BaseSponsorFormCtrl',
             data: {
                 requireLoggedIn: true
             }
