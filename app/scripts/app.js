@@ -259,6 +259,13 @@
             data: {
                 requireLoggedIn: true
             }
+        }).state('base_skill.base_sponsors', {
+            url: '/base_sponsors',
+            templateUrl: 'views/base-skill-base-sponsors.html',
+            controller: 'BaseSkillBaseSponsorsCtrl',
+            data: {
+                requireLoggedIn: true
+            }
         }).state('base_sponsors', {
             url: '/base_sponsors',
             templateUrl: 'views/base-sponsors.html',

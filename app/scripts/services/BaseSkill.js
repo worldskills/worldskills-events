@@ -17,4 +17,13 @@
         });
     });
 
+    angular.module('eventsApp').service('BaseSkillSponsor', function($resource, $http, WORLDSKILLS_API_EVENTS) {
+        return $resource(WORLDSKILLS_API_EVENTS + '/base_skills/:baseSkillId/sponsors/:baseSponsorId', {
+        }, {
+            update: {
+                method: 'PUT'
+            }
+        });
+    });
+
 })();
