@@ -9,6 +9,9 @@
         $scope.id = $stateParams.id;
         $scope.baseSkill = BaseSkill.get({id: $scope.id}, function (baseSkill) {
             $scope.title = baseSkill.name.text;
+            if (!$scope.baseSkill.description) {
+                $scope.baseSkill.description = {text: '', lang_code: 'en'};
+            }
         });
     });
 
