@@ -39,7 +39,7 @@
                 requireLoggedIn: true
             },
             reloadOnSearch: false
-        }).state('event', {
+        }).state('event_create', {
             url: '/events/create',
             templateUrl: 'views/event-create.html',
             controller: 'EventCreateCtrl',
