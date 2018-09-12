@@ -259,6 +259,13 @@
             data: {
                 requireLoggedIn: true
             }
+        }).state('base_skill.tags', {
+            url: '/tags',
+            templateUrl: 'views/base-skill-tags.html',
+            controller: 'BaseSkillTagsCtrl',
+            data: {
+                requireLoggedIn: true
+            }
         }).state('base_skill.base_sponsors', {
             url: '/base_sponsors',
             templateUrl: 'views/base-skill-base-sponsors.html',

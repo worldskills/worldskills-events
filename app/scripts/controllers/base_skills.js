@@ -32,6 +32,43 @@
     angular.module('eventsApp').controller('BaseSkillPhotosCtrl', function($scope) {
     });
 
+    angular.module('eventsApp').controller('BaseSkillTagsCtrl', function($scope, alert, WsEntityBaseSkillTag, BaseSkillTag) {
+        var getTags = function () {
+            $scope.baseTags = WsEntityBaseSkillTag.query({wsEntityId: 1}, function () {
+                $scope.baseSkill.$promise.then(function () {
+                    angular.forEach($scope.baseSkill.tags, function (skillTag) {
+                        angular.forEach($scope.baseTags.tags, function (tag) {
+                            if (tag.id === skillTag.id) {
+                                tag.used = true;
+                            }
+                        });
+                    });
+                });
+            });
+        };
+        getTags();
+        $scope.addTag = function (tag) {
+            BaseSkillTag.update({baseSkillId: $scope.baseSkill.id, baseSkillTagId: tag.id}, {});
+            $scope.baseSkill.tags.push(tag);
+            getTags();
+            alert.success('The tag has been added.', true);
+            return false;
+        };
+        $scope.removeTags = function() {
+            var notRemoved = [];
+            angular.forEach($scope.baseSkill.tags, function (tag) {
+                if (tag.checked) {
+                    BaseSkillTag.remove({baseSkillId: $scope.baseSkill.id, baseSkillTagId: tag.id}, {});
+                } else {
+                    notRemoved.push(tag);
+                }
+            });
+            $scope.baseSkill.tags = notRemoved;
+            getTags();
+            alert.success('The selected tags have been removed.', true);
+        };
+    });
+
     angular.module('eventsApp').controller('BaseSkillBaseSponsorsCtrl', function($scope, alert, BaseSponsor, BaseSkillSponsor) {
       var getBaseSponsors = function () {
           $scope.baseSponsors = BaseSponsor.query({entity: 1, limit: 900}, function () {
