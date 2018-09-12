@@ -259,6 +259,20 @@
             data: {
                 requireLoggedIn: true
             }
+        }).state('base_skill_photo_create', {
+            url: '/base_skills/{skillId}/photos/create',
+            templateUrl: 'views/base-skill-photo.html',
+            controller: 'BaseSkillPhotoCreateCtrl',
+            data: {
+                requireLoggedIn: true
+            }
+        }).state('base_skill_photo', {
+            url: '/base_skills/{skillId}/photos/{id}',
+            templateUrl: 'views/base-skill-photo.html',
+            controller: 'BaseSkillPhotoCtrl',
+            data: {
+                requireLoggedIn: true
+            }
         }).state('base_skill.tags', {
             url: '/tags',
             templateUrl: 'views/base-skill-tags.html',

@@ -30,6 +30,101 @@
     });
 
     angular.module('eventsApp').controller('BaseSkillPhotosCtrl', function($scope) {
+        $scope.thumbnail = function (photo) {
+            return photo.thumbnail + '_small';
+        };
+    });
+    angular.module('eventsApp').controller('BaseSkillPhotoCreateCtrl', function($scope, $stateParams, BaseSkill, BaseSkillPhoto, $http, WORLDSKILLS_API_EVENTS, WORLDSKILLS_API_IMAGES, $q, $upload, $translate, $state, WorldSkills, alert) {
+        var image = $q.when();
+        $scope.imageLoading = false;
+        $scope.skillId = $stateParams.skillId;
+        $scope.baseSkill = BaseSkill.get({eventId: $scope.eventId, id: $scope.skillId}, function (skill) {
+        });
+        $scope.photo = new BaseSkillPhoto();
+        $scope.photo.skill = $scope.baseSkill;
+        $scope.photo.description = {text: '', lang_code: 'en'};
+        $scope.onFileSelect = function($files) {
+            var deferred = $q.defer();
+            image = deferred.promise;
+            $scope.imageLoading = true;
+            $scope.upload = $upload.upload({
+                url: WORLDSKILLS_API_IMAGES,
+                file: $files[0],
+            }).success(function(data, status, headers, config) {
+                deferred.resolve(data);
+            });
+        };
+        $scope.save = function() {
+            $scope.submitted = true;
+            if ($scope.form.$valid && $scope.imageLoading) {
+                image.then(function (image) {
+                    $scope.photo.image_id = image.id;
+                    $scope.photo.thumbnail_hash = image.thumbnail_hash;
+                    $scope.photo.$save({skillId: $scope.baseSkill.id}, function () {
+                        alert.success('The photo has been added successfully.');
+                        $state.go('base_skill.photos', {id: $scope.baseSkill.id});
+                    });
+                });
+            }
+        };
+    });
+    angular.module('eventsApp').controller('BaseSkillPhotoCtrl', function($scope, $stateParams, BaseSkill, BaseSkillPhoto, $http, WORLDSKILLS_API_EVENTS, WORLDSKILLS_API_IMAGES, $q, $upload, $translate, $state, WorldSkills, alert) {
+        var image = $q.when();
+        $scope.imageLoading = false;
+        $scope.skillId = $stateParams.skillId;
+        $scope.id = $stateParams.id;
+        $scope.baseSkill = BaseSkill.get({id: $scope.skillId}, function (skill) {
+        });
+        $scope.photo = BaseSkillPhoto.get({skillId: $scope.skillId, id: $scope.id}, function (photo) {
+            if (!$scope.photo.description) {
+                $scope.photo.description = {text: '', lang_code: 'en'};
+            }
+            if (!$scope.photo.description.lang_code) {
+                $scope.photo.description.lang_code = 'en';
+            }
+            if (!$scope.photo.description.text) {
+                $scope.photo.description.text = '';
+            }
+            $scope.photoThumbnail = photo.thumbnail + '_small';
+        });
+        $scope.onFileSelect = function($files) {
+            var deferred = $q.defer();
+            image = deferred.promise;
+            $scope.imageLoading = true;
+            $scope.upload = $upload.upload({
+                url: WORLDSKILLS_API_IMAGES,
+                file: $files[0],
+            }).success(function(data, status, headers, config) {
+                deferred.resolve(data);
+            });
+        };
+        $scope.deletePhoto = function() {
+            $scope.deleteLoading = true;
+            $scope.photo.$delete({skillId: $scope.baseSkill.id}, function () {
+                alert.success('The photo has been deleted successfully.');
+                $state.go('base_skill.photos', {id: $scope.baseSkill.id});
+            });
+        };
+        $scope.save = function() {
+            $scope.submitted = true;
+            if ($scope.form.$valid) {
+                if ($scope.imageLoading) {
+                    image.then(function (image) {
+                        $scope.photo.image_id = image.id;
+                        $scope.photo.thumbnail_hash = image.thumbnail_hash;
+                        $scope.photo.$update({skillId: $scope.baseSkill.id}, function () {
+                            alert.success('The photo has been updated successfully.');
+                            $state.go('base_skill.photos', {id: $scope.baseSkill.id});
+                        });
+                    });
+                } else {
+                    $scope.photo.$update({skillId: $scope.baseSkill.id, id: $scope.id}, function () {
+                        alert.success('The photo has been updated successfully.');
+                        $state.go('base_skill.photos', {id: $scope.baseSkill.id});
+                    });
+                }
+            }
+        };
     });
 
     angular.module('eventsApp').controller('BaseSkillTagsCtrl', function($scope, alert, WsEntityBaseSkillTag, BaseSkillTag) {

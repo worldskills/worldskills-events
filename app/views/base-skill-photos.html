@@ -1,3 +1,7 @@
+<p>
+    <a ui-sref="base_skill_photo_create({skillId: baseSkill.id})" class="btn btn-success">Add Photo</a>
+</p>
+
 <div class="table-responsive">
     <table class="table table-striped">
         <colgroup>
@@ -14,12 +18,16 @@
         <tbody>
             <tr ng-repeat="photo in baseSkill.photos">
                 <td>
-                    <div class="ws-image-thumbnail" ng-show="!canEdit">
-                        <img ng-src="{{thumbnail(photo)}}" />
-                    </div>
+                    <a ui-sref="base_skill_photo({skillId: baseSkill.id, id: photo.id})">
+                        <div class="ws-image-thumbnail">
+                            <img ng-src="{{thumbnail(photo)}}" />
+                        </div>
+                    </a>
                 </td>
                 <td>
-                    {{ photo.description.text }}
+                    <a ui-sref="base_skill_photo({skillId: baseSkill.id, id: photo.id})">
+                        {{ photo.description.text }}
+                    </a>
                 </td>
             </tr>
             <tr ng-show="baseSkill.photos.length == 0">

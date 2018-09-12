@@ -17,6 +17,16 @@
         });
     });
 
+    angular.module('eventsApp').service('BaseSkillPhoto', function($resource, WORLDSKILLS_API_EVENTS) {
+        return $resource(WORLDSKILLS_API_EVENTS + '/base_skills/:skillId/photos/:id', {
+            id: '@id'
+        }, {
+            update: {
+                method: 'PUT'
+            }
+        });
+    });
+
     angular.module('eventsApp').service('WsEntityBaseSkillTag', function($resource, WORLDSKILLS_API_EVENTS) {
         return $resource(WORLDSKILLS_API_EVENTS + '/ws_entities/:wsEntityId/base_skill_tags/:id', {
             id: '@id'
