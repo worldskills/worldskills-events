@@ -13,7 +13,7 @@
                 var options = {
                     height: 160,
                     contentsCss: 'ckeditor/contents.css',
-                    removePlugins : 'stylescombo,elementspath,resize,liststyle,image,specialchar,horizontalrule,table,tabletools,contextmenu',
+                    removePlugins : 'stylescombo,elementspath,resize,liststyle,image,specialchar,horizontalrule,table,tabletools,tableselection,contextmenu',
                     removeButtons : 'Underline',
                     toolbarGroups : [
                         {name : 'basicstyles', groups : [ 'basicstyles', 'cleanup' ]},
