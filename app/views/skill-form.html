@@ -1,8 +1,8 @@
-<form class="form-horizontal" name="form" novalidate focus-error ng-submit="save()" ng-show="!skill.id || canEdit">
+<form class="form-horizontal" name="form" novalidate focus-error ng-submit="save()" ng-show="!skill.id || canEdit || canOrganizerEdit">
     <div class="form-group" ng-class="{'has-error': submitted && form.name.$invalid}">
         <label for="name" class="col-sm-3 control-label">Name <span class="required">*</span></label>
         <div class="col-sm-4">
-            <input type="text" class="form-control" id="name" name="name" required ng-model="skill.name.text">
+            <input type="text" class="form-control" id="name" name="name" required ng-model="skill.name.text" ng-disabled="!canEdit">
         </div>
         <div class="col-sm-5">
             <span class="help-block" ng-show="submitted" ng-messages="form.name.$error">
@@ -13,7 +13,7 @@
     <div class="form-group" ng-class="{'has-error': submitted && form.number.$invalid}">
         <label for="number" class="col-sm-3 control-label">Number <span class="required">*</span></label>
         <div class="col-sm-3">
-            <input type="text" class="form-control" id="number" name="number" required ng-model="skill.number">
+            <input type="text" class="form-control" id="number" name="number" required ng-model="skill.number" ng-disabled="!canEdit">
         </div>
         <div class="col-sm-offset-1 col-sm-5">
             <span class="help-block" ng-show="submitted" ng-messages="form.number.$error">
@@ -24,7 +24,7 @@
     <div class="form-group" ng-class="{'has-error': submitted && form.type.$invalid}">
         <label for="type" class="col-sm-3 control-label">Type <span class="required">*</span></label>
         <div class="col-sm-4">
-            <select class="form-control" id="type" name="type" required ng-model="skill.type">
+            <select class="form-control" id="type" name="type" required ng-model="skill.type" ng-disabled="!canEdit">
                 <option value="official">{{"skill_type_official"|translate}}</option>
                 <option value="demo">{{"skill_type_demo"|translate}}</option>
                 <option value="presentation">{{"skill_type_presentation"|translate}}</option>
@@ -45,7 +45,7 @@
     <div class="form-group" ng-class="{'has-error': submitted && form.status.$invalid}">
         <label for="status" class="col-sm-3 control-label">Status <span class="required">*</span></label>
         <div class="col-sm-4">
-            <select class="form-control" id="status" name="status" required ng-model="skill.status">
+            <select class="form-control" id="status" name="status" required ng-model="skill.status" ng-disabled="!canEdit">
                 <option value="active">Active</option>
                 <option value="on_notice">On notice</option>
                 <option value="removed">Removed</option>
@@ -60,7 +60,7 @@
     <div class="form-group" ng-class="{'has-error': submitted && form.baseSkill.$invalid}">
         <label for="sector" class="col-sm-3 control-label">Base Skill</label>
         <div class="col-sm-4">
-            <select class="form-control" id="baseSkill" name="baseSkill" ng-model="skill.base_id" ng-options="baseSkill.id as baseSkill.name.text for baseSkill in baseSkills.base_skills">
+            <select class="form-control" id="baseSkill" name="baseSkill" ng-model="skill.base_id" ng-options="baseSkill.id as baseSkill.name.text for baseSkill in baseSkills.base_skills" ng-disabled="!canEdit">
                 <option ng-if="!skill.id"></option>
             </select>
         </div>
@@ -68,7 +68,7 @@
     <div class="form-group" ng-class="{'has-error': submitted && form.sector.$invalid}">
         <label for="sector" class="col-sm-3 control-label">Sector</label>
         <div class="col-sm-4">
-            <select class="form-control" id="sector" name="sector" ng-model="skill.sector" ng-options="sector.name.text for sector in sectors track by sector.id">
+            <select class="form-control" id="sector" name="sector" ng-model="skill.sector" ng-options="sector.name.text for sector in sectors track by sector.id" ng-disabled="!canEdit">
                 <option></option>
             </select>
         </div>
@@ -100,56 +100,56 @@
     <div class="form-group" ng-class="{'has-error': submitted && form.min_teams.$invalid}">
         <label for="min_teams" class="col-sm-3 control-label">Min. Teams</label>
         <div class="col-sm-2">
-            <input type="text" class="form-control" id="min_teams" name="min_teams" ng-model="skill.min_teams">
+            <input type="text" class="form-control" id="min_teams" name="min_teams" ng-model="skill.min_teams" ng-disabled="!canEdit">
         </div>
     </div>
     <div class="form-group" ng-class="{'has-error': submitted && form.max_teams.$invalid}">
         <label for="max_teams" class="col-sm-3 control-label">Max. Teams</label>
         <div class="col-sm-2">
-            <input type="text" class="form-control" id="max_teams" name="max_teams" ng-model="skill.max_teams">
+            <input type="text" class="form-control" id="max_teams" name="max_teams" ng-model="skill.max_teams" ng-disabled="!canEdit">
         </div>
     </div>
     <div class="form-group" ng-class="{'has-error': submitted && form.team_size.$invalid}">
         <label for="team_size" class="col-sm-3 control-label">Team Size</label>
         <div class="col-sm-2">
-            <input type="text" class="form-control" id="team_size" name="team_size" ng-model="skill.team_size">
+            <input type="text" class="form-control" id="team_size" name="team_size" ng-model="skill.team_size" ng-disabled="!canEdit">
         </div>
     </div>
     <div class="form-group" ng-class="{'has-error': submitted && form.competitor_max_age.$invalid}">
         <label for="competitor_max_age" class="col-sm-3 control-label">Competitor age limit</label>
         <div class="col-sm-2">
-            <input type="text" class="form-control" id="competitor_max_age" name="competitor_max_age" ng-model="skill.competitor_max_age">
+            <input type="text" class="form-control" id="competitor_max_age" name="competitor_max_age" ng-model="skill.competitor_max_age" ng-disabled="!canEdit">
         </div>
     </div>
     <div class="form-group" ng-class="{'has-error': submitted && form.identify_judges.$invalid}">
         <div class="col-sm-offset-3 col-sm-9">
             <div class="checkbox">
                 <label>
-                    <input type="checkbox" id="identify_judges" name="identify_judges" ng-model="skill.identify_judges">
+                    <input type="checkbox" id="identify_judges" name="identify_judges" ng-model="skill.identify_judges" ng-disabled="!canEdit">
                     Identify Judges
                 </label>
             </div>
             <div class="checkbox">
                 <label>
-                    <input type="checkbox" id="group_competitors" name="group_competitors" ng-model="skill.group_competitors">
+                    <input type="checkbox" id="group_competitors" name="group_competitors" ng-model="skill.group_competitors" ng-disabled="!canEdit">
                     Group Competitors
                 </label>
             </div>
             <div class="checkbox">
                 <label>
-                    <input type="checkbox" id="compatriot_marking" name="compatriot_marking" ng-model="skill.compatriot_marking">
+                    <input type="checkbox" id="compatriot_marking" name="compatriot_marking" ng-model="skill.compatriot_marking" ng-disabled="!canEdit">
                     Compatriot Marking
                 </label>
             </div>
             <div class="checkbox">
                 <label>
-                    <input type="checkbox" id="generate_500_scale" name="generate_500_scale" ng-model="skill.generate_500_scale">
+                    <input type="checkbox" id="generate_500_scale" name="generate_500_scale" ng-model="skill.generate_500_scale" ng-disabled="!canEdit">
                     Generate 500 Scale
                 </label>
             </div>
             <div class="checkbox">
                 <label>
-                    <input type="checkbox" id="landscape_marking" name="landscape_marking" ng-model="skill.landscape_marking">
+                    <input type="checkbox" id="landscape_marking" name="landscape_marking" ng-model="skill.landscape_marking" ng-disabled="!canEdit">
                     Landscape Marking
                 </label>
             </div>
@@ -163,7 +163,7 @@
     </div>
 </form>
 
-<div ng-show="skill.id && !canEdit">
+<div ng-show="skill.id && !canEdit && !canOrganizerEdit">
     <div class="row">
         <div class="col-sm-2">
             <p>Name:</p>
