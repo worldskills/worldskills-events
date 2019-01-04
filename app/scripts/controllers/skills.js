@@ -1,7 +1,7 @@
 (function() {
     'use strict';
 
-    angular.module('eventsApp').controller('SkillCreateCtrl', function($scope, $stateParams, Skill, BaseSkill, Event, $http, WORLDSKILLS_API_EVENTS, $translate, $state, WorldSkills, alert) {
+    angular.module('eventsApp').controller('SkillCreateCtrl', function($scope, $stateParams, Skill, BaseSkill, auth, Event, $http, WORLDSKILLS_API_EVENTS, EVENTS_APP_CODE, $translate, $state, WorldSkills, alert) {
         $scope.skill = new Skill();
         $scope.skill.name = {text: '', lang_code: 'en'};
         $scope.skill.description = {text: '', lang_code: 'en'};
@@ -13,6 +13,9 @@
             var url = WorldSkills.getLink($scope.skill.event.links, 'sectors');
             $http({method: 'GET', url: url}).success(function(data, status, headers, config) {
                 $scope.sectors = data.sectors;
+            });
+            auth.hasUserRole(EVENTS_APP_CODE, ['Admin', 'EditEvents'], $scope.skill.event.ws_entity.id).then(function (hasUserRole) {
+                $scope.canEdit = hasUserRole;
             });
             $scope.baseSkills = BaseSkill.query({entity: $scope.skill.event.ws_entity.id, limit: 900});
         });
