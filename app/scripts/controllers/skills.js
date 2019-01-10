@@ -8,6 +8,7 @@
         $scope.skill.description_industry_action = {text: '', lang_code: 'en'};
         $scope.skill.description_required_skills = {text: '', lang_code: 'en'};
         $scope.skill.description_competition_action = {text: '', lang_code: 'en'};
+        $scope.skill.description_facts = {text: '', lang_code: 'en'};
 
         $scope.skill.event = Event.get({id: $stateParams.eventId}, function () {
             var url = WorldSkills.getLink($scope.skill.event.links, 'sectors');
@@ -39,6 +40,9 @@
             }
             if (!$scope.skill.description_competition_action) {
                 $scope.skill.description_competition_action = {text: '', lang_code: 'en'};
+            }
+            if (!$scope.skill.description_facts) {
+                $scope.skill.description_facts = {text: '', lang_code: 'en'};
             }
             var url = WorldSkills.getLink(skill.event.links, 'sectors');
             $http({method: 'GET', url: url}).success(function(data, status, headers, config) {
@@ -370,6 +374,9 @@
             if (!$scope.translation.description_competition_action) {
                 $scope.translation.description_competition_action = {text: '', lang_code: ''};
             }
+            if (!$scope.translation.description_facts) {
+                $scope.translation.description_facts = {text: '', lang_code: ''};
+            }
         });
         $scope.deleteTranslation = function() {
             $scope.deleteLoading = true;
@@ -399,10 +406,14 @@
             if (!$scope.translation.description_competition_action) {
                 $scope.translation.description_competition_action = {text: '', lang_code: ''};
             }
+            if (!$scope.translation.description_facts) {
+                $scope.translation.description_facts = {text: '', lang_code: ''};
+            }
             $scope.translation.description.text = '';
             $scope.translation.description_industry_action.text = '';
             $scope.translation.description_required_skills.text = '';
             $scope.translation.description_competition_action.text = '';
+            $scope.translation.description_facts.text = '';
             angular.forEach($scope.translation.photos, function (photo) {
                 photo.description = {text: '', lang_code: ''};
             });
@@ -426,6 +437,7 @@
                 $scope.translation.description_industry_action.lang_code = langCode;
                 $scope.translation.description_required_skills.lang_code = langCode;
                 $scope.translation.description_competition_action.lang_code = langCode;
+                $scope.translation.description_facts.lang_code = langCode;
                 savePromises.push($scope.translation.$update({l: langCode}));
                 $q.all(savePromises).then(function() {
                     alert.success('The translation has been updated successfully.');
