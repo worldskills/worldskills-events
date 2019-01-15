@@ -22,12 +22,10 @@
         <tbody>
             <tr ng-repeat="sector in sectors">
                 <td>
-                    <a ui-sref="events.sector.form({eventId: sector.event.id, id: sector.id})" ng-show="canEdit">{{sector.id}}</a>
-                    <span ng-show="!canEdit">{{sector.id}}</span>
+                    <a ui-sref="events.sector.form({eventId: sector.event.id, id: sector.id})">{{sector.id}}</a>
                 </td>
                 <td>
-                    <a ui-sref="events.sector.form({eventId: sector.event.id, id: sector.id})" ng-show="canEdit">{{sector.name.text}}</a>
-                    <span ng-show="!canEdit">{{sector.name.text}}</span>
+                    <a ui-sref="events.sector.form({eventId: sector.event.id, id: sector.id})">{{sector.name.text}}</a>
                 </td>
             </tr>
             <tr ng-show="!loading && sectors.length == 0">

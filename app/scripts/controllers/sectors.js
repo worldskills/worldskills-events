@@ -16,6 +16,14 @@
             auth.hasUserRole(EVENTS_APP_CODE, ['Admin', 'DeleteEvents'], $scope.sector.event.ws_entity.id).then(function (hasUserRole) {
                 $scope.canDelete = hasUserRole;
             });
+            auth.hasUserRole(EVENTS_APP_CODE, ['Admin', 'EditEvents'], $scope.sector.event.ws_entity.id).then(function (hasUserRole) {
+                $scope.canEdit = hasUserRole;
+            });
+            if ($scope.sector.event.organizer) {
+                auth.hasUserRole(EVENTS_APP_CODE, ['Admin', 'OrganizerEditEvents'], $scope.sector.event.organizer.id).then(function (hasUserRole) {
+                    $scope.canOrganizerEdit = hasUserRole;
+                });
+            }
         });
         $scope.baseSectors = BaseSector.query();
         $scope.deleteSector = function() {

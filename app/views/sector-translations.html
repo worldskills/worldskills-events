@@ -1,39 +1,48 @@
-<div id="content">
-    <form class="form-horizontal" name="form" novalidate focus-error ng-submit="save()">
-        <div class="form-group">
-            <div class="col-sm-offset-3 col-sm-9">
-                <div class="btn-group">
-                    <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown">
-                        Add Translation <span class="caret"></span>
-                    </button>
-                    <ul class="dropdown-menu">
-                        <li><a href="javascript:" ng-click="addTranslation('en')">{{'en'|translate}}</a></li>
-                        <li><a href="javascript:" ng-click="addTranslation('de')">{{'de'|translate}}</a></li>
-                        <li><a href="javascript:" ng-click="addTranslation('fr')">{{'fr'|translate}}</a></li>
-                        <li><a href="javascript:" ng-click="addTranslation('pt_BR')">{{'pt_BR'|translate}}</a></li>
-                        <li><a href="javascript:" ng-click="addTranslation('ar_AE')">{{'ar_AE'|translate}}</a></li>
-                        <li><a href="javascript:" ng-click="addTranslation('ru_RU')">Russian</a></li>
-                        <li><a href="javascript:" ng-click="addTranslation('tt_RU')">Tatar</a></li>
-                    </ul>
-                </div>
+<form class="form-horizontal" name="form" novalidate focus-error ng-submit="save()" ng-show="!sector.id || canEdit || canOrganizerEdit">
+    <div class="form-group">
+        <div class="col-sm-offset-3 col-sm-9">
+            <div class="btn-group">
+                <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown">
+                    Add Translation <span class="caret"></span>
+                </button>
+                <ul class="dropdown-menu">
+                    <li><a href="javascript:" ng-click="addTranslation('en')">{{'en'|translate}}</a></li>
+                    <li><a href="javascript:" ng-click="addTranslation('de')">{{'de'|translate}}</a></li>
+                    <li><a href="javascript:" ng-click="addTranslation('fr')">{{'fr'|translate}}</a></li>
+                    <li><a href="javascript:" ng-click="addTranslation('pt_BR')">{{'pt_BR'|translate}}</a></li>
+                    <li><a href="javascript:" ng-click="addTranslation('ar_AE')">{{'ar_AE'|translate}}</a></li>
+                    <li><a href="javascript:" ng-click="addTranslation('ru_RU')">Russian</a></li>
+                    <li><a href="javascript:" ng-click="addTranslation('tt_RU')">Tatar</a></li>
+                </ul>
             </div>
         </div>
-        <div class="form-group" ng-class="{'has-error': submitted && form['name' + translation.name.lang_code].$invalid}" ng-repeat="translation in translations">
-            <label for="name{{translation.name.lang_code}}" class="col-sm-3 control-label">{{translation.name.lang_code|translate}}</label>
-            <div class="col-sm-4">
-                <input type="text" class="form-control" id="name{{translation.name.lang_code}}" name="name{{translation.name.lang_code}}" required ng-model="translation.name.text">
-            </div>
-            <div class="col-sm-5">
-                <span class="help-block" ng-show="submitted" ng-messages="form['name' + translation.name.lang_code].$error">
-                    <span ng-message="required">Please enter a Translation!</span>
-                </span>
-            </div>
+    </div>
+    <div class="form-group" ng-class="{'has-error': submitted && form['name' + translation.name.lang_code].$invalid}" ng-repeat="translation in translations">
+        <label for="name{{translation.name.lang_code}}" class="col-sm-3 control-label">{{translation.name.lang_code|translate}}</label>
+        <div class="col-sm-4">
+            <input type="text" class="form-control" id="name{{translation.name.lang_code}}" name="name{{translation.name.lang_code}}" required ng-model="translation.name.text">
         </div>
-        <div class="form-group">
-            <div class="col-sm-offset-3 col-sm-9">
-                <button type="submit" class="btn btn-success">Save Translations <ws-text-spinner ng-show="loading" class="ng-hide"></ws-text-spinner></button>
-                <a ui-sref="events.event.sectors({id: sector.event.id})" class="btn btn-default">Cancel</a>
-            </div>
+        <div class="col-sm-5">
+            <span class="help-block" ng-show="submitted" ng-messages="form['name' + translation.name.lang_code].$error">
+                <span ng-message="required">Please enter a Translation!</span>
+            </span>
         </div>
-    </form>
+    </div>
+    <div class="form-group">
+        <div class="col-sm-offset-3 col-sm-9">
+            <button type="submit" class="btn btn-success">Save Translations <ws-text-spinner ng-show="loading" class="ng-hide"></ws-text-spinner></button>
+            <a ui-sref="events.event.sectors({id: sector.event.id})" class="btn btn-default">Cancel</a>
+        </div>
+    </div>
+</form>
+
+<div ng-show="sector.id && !canEdit && !canOrganizerEdit">
+    <div class="row" ng-repeat="translation in translations">
+        <div class="col-sm-2">
+            <p>{{translation.name.lang_code|translate}}:</p>
+        </div>
+        <div class="col-sm-4">
+            <p>{{translation.name.text}}</p>
+        </div>
+    </div>
 </div>
