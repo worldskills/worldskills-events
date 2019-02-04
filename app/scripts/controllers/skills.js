@@ -65,11 +65,9 @@
             auth.hasUserRole(EVENTS_APP_CODE, ['Admin', 'EditEvents'], $scope.skill.event.ws_entity.id).then(function (hasUserRole) {
                 $scope.canEdit = hasUserRole;
             });
-            if ($scope.skill.event.organizer) {
-                auth.hasUserRole(EVENTS_APP_CODE, ['Admin', 'OrganizerEditEvents'], $scope.skill.event.organizer.id).then(function (hasUserRole) {
-                    $scope.canOrganizerEdit = hasUserRole;
-                });
-            }
+            auth.hasUserRole(EVENTS_APP_CODE, ['Admin', 'OrganizerEditEvents'], $scope.skill.event.ws_entity.id).then(function (hasUserRole) {
+                $scope.canOrganizerEdit = hasUserRole;
+            });
             $scope.baseSkills = BaseSkill.query({entity: $scope.skill.event.ws_entity.id, limit: 900});
         });
         $scope.setStatusRemoved = function() {

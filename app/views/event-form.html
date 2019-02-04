@@ -20,19 +20,8 @@
                 <span ng-show="submitted" ng-messages="form.ws_entity.$error">
                   <span ng-message="required">Please select an entity!</span>
                 </span>
-                Owner of the entry, select the organization you are working for.
+                Organization which is hosting the event.
             </span>
-        </div>
-    </div>
-    <div class="form-group" ng-class="{'has-error': submitted && form.organizer.$invalid}">
-        <label for="organizer" class="col-sm-3 control-label">Organizer</label>
-        <div class="col-sm-4">
-            <select class="form-control" id="organizer" name="organizer" ng-model="event.organizer" ng-options="entity.name.text for entity in organizers track by entity.id">
-                <option></option>
-            </select>
-        </div>
-        <div class="col-sm-5">
-            <span class="help-block">Organization which is hosting the event.</span>
         </div>
     </div>
     <div class="form-group" ng-class="{'has-error': submitted && form.type.$invalid}">
