@@ -226,18 +226,6 @@ describe('controllers events', function() {
                     }
                 ]
             });
-            $httpBackend.expectGET('http://localhost:8080/auth/ws_entities?limit=900').respond({
-                entities: [
-                    {
-                        id: 1,
-                        name: {
-                            lang_code: 'en',
-                            text: 'WorldSkills International'
-                        },
-                        code: 'WSI'
-                    }
-                ]
-            });
 
             $scope = $rootScope.$new();
             $scope.form = {
