@@ -12,6 +12,12 @@
             if (!$scope.baseSkill.description.lang_code) {
                 $scope.baseSkill.description.lang_code = 'en';
             }
+            if (!$scope.baseSkill.summary.lang_code) {
+                $scope.baseSkill.summary.lang_code = 'en';
+            }
+            if (!$scope.baseSkill.summary.text) {
+                $scope.baseSkill.summary.text = '';
+            }
         });
     });
 
