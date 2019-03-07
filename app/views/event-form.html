@@ -13,10 +13,11 @@
     <div class="form-group" ng-class="{'has-error': submitted && form.ws_entity.$invalid}">
         <label for="ws_entity" class="col-sm-3 control-label">Entity <span class="required">*</span></label>
         <div class="col-sm-4">
-            <select class="form-control" id="ws_entity" name="ws_entity" required ng-model="event.ws_entity" ng-options="entity.name.text for entity in entities track by entity.id"></select>
+            <select ng-if="!event.id" class="form-control" id="ws_entity" name="ws_entity" required ng-model="event.ws_entity" ng-options="entity.name.text for entity in entities track by entity.id"></select>
+            <p ng-if="event.id" class="form-control-static">{{event.ws_entity.name.text}}</p>
         </div>
         <div class="col-sm-5">
-            <span class="help-block">
+            <span ng-if="!event.id" class="help-block">
                 <span ng-show="submitted" ng-messages="form.ws_entity.$error">
                   <span ng-message="required">Please select an entity!</span>
                 </span>
@@ -27,7 +28,7 @@
     <div class="form-group" ng-class="{'has-error': submitted && form.type.$invalid}">
         <label for="type" class="col-sm-3 control-label">Type <span class="required">*</span></label>
         <div class="col-sm-4">
-            <select class="form-control" id="type" name="type" required ng-model="event.type">
+            <select ng-if="!event.id" class="form-control" id="type" name="type" required ng-model="event.type">
                 <option value="meeting">Board meeting or other meeting</option>
                 <option value="champions_forum">Champions Forum</option>
                 <option value="competition">Competition</option>
@@ -35,10 +36,21 @@
                 <option value="general_assembly">General Assembly</option>
                 <option value="member_event">Member event</option>
             </select>
+            <p ng-if="event.id" ng-switch="event.type" class="form-control-static">
+                <span ng-switch-when="meeting">Board meeting or other meeting</span>
+                <span ng-switch-when="champions_forum">Champions Forum</span>
+                <span ng-switch-when="competition">Competition</span>
+                <span ng-switch-when="conference">Conference</span>
+                <span ng-switch-when="general_assembly">General Assembly</span>
+                <span ng-switch-when="member_event">Member event</span>
+            </p>
         </div>
         <div class="col-sm-5">
-            <span class="help-block" ng-show="submitted" ng-messages="form.type.$error">
-                <span ng-message="required">Please select a type!</span>
+            <span ng-if="!event.id" class="help-block">
+                <span ng-show="submitted" ng-messages="form.type.$error">
+                    <span ng-message="required">Please select a type!</span>
+                </span>
+                Can't be changed once the event has been added.
             </span>
         </div>
     </div>
