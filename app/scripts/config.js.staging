@@ -2,12 +2,12 @@
     'use strict';
 
     var eventsApp = angular.module('eventsApp'); 
-    eventsApp.constant('WORLDSKILLS_API_EVENTS', 'https://staging-api.worldskills.org/events');
-    eventsApp.constant('WORLDSKILLS_API_IMAGES', 'https://staging-api.worldskills.org/images');
-    eventsApp.constant('WORLDSKILLS_API_ORGANIZATIONS', 'https://staging-api.worldskills.org/org');
+    eventsApp.constant('WORLDSKILLS_API_EVENTS', 'https://api.worldskills.show/events');
+    eventsApp.constant('WORLDSKILLS_API_IMAGES', 'https://api.worldskills.show/images');
+    eventsApp.constant('WORLDSKILLS_API_ORGANIZATIONS', 'https://api.worldskills.show/org');
     eventsApp.constant('WORLDSKILLS_CLIENT_ID', '269f5d2');
-    eventsApp.constant('WORLDSKILLS_API_AUTH', 'https://staging-api.worldskills.org/auth');
-    eventsApp.constant('WORLDSKILLS_AUTHORIZE_URL', 'https://staging-auth.worldskills.org/oauth/authorize');
+    eventsApp.constant('WORLDSKILLS_API_AUTH', 'https://api.worldskills.show/auth');
+    eventsApp.constant('WORLDSKILLS_AUTHORIZE_URL', 'https://auth.worldskills.show/oauth/authorize');
     eventsApp.constant('LOAD_CHILD_ENTITY_ROLES', true);
     eventsApp.constant('FILTER_AUTH_ROLES', [400]); // Events
 
