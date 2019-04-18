@@ -27,7 +27,7 @@
         $scope.id = $stateParams.id;
         $scope.translations = [];
         $scope.translationsLoading = true;
-        $scope.skill = Skill.get({eventId: $scope.eventId, id: $scope.id}, function (skill) {
+        $scope.skill = Skill.get({eventId: $scope.eventId, id: $scope.id, l: 'en'}, function (skill) {
             $scope.title = skill.name.text;
             if (!$scope.skill.description) {
                 $scope.skill.description = {text: '', lang_code: 'en'};
