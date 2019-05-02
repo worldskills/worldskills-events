@@ -10,6 +10,12 @@
             </span>
         </div>
     </div>
+    <div class="form-group" ng-if="sector.id">
+        <label for="ws_entity" class="col-sm-3 control-label">Entity</label>
+        <div class="col-sm-4">
+            <p class="form-control-static">{{sector.ws_entity.name.text}}</p>
+        </div>
+    </div>
     <div class="form-group" ng-class="{'has-error': submitted && form.base_sector.$invalid}">
         <label for="sector" class="col-sm-3 control-label">Global Sector</label>
         <div class="col-sm-4">
