@@ -118,18 +118,6 @@
                 $scope.canOrganizerEdit = hasUserRole;
             });
         });
-        $scope.cloneEvent = function() {
-            if (alert.confirm('Duplicating the Event will create a copy with all data associated (Sponsors, Skills, etc.). Click OK to proceed.')) {
-                $scope.cloneLoading = true;
-                Event.clone({id: $scope.id}, function (cloneEvent) {
-                    alert.success('The Event has been duplicated successfully. Please edit the information of the duplicate below.');
-                    $state.go('events.event.form', { id: cloneEvent.id });
-                }, function (response) {
-                    alert.error('Error duplicating Event. ' + response.data.code + ': ' + response.data.user_msg);
-                    $state.go('events.list');
-                });
-            }
-        };
         $scope.deleteEvent = function() {
             if (alert.confirm('Deleting the Event will also delete all data associated with this Event. Click OK to proceed.')) {
                 $scope.deleteLoading = true;

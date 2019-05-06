@@ -55,11 +55,6 @@
                 method: 'PUT',
                 transformRequest: convertDate,
                 transformResponse: convertResponseDate
-            },
-            clone: {
-                method: 'POST',
-                url: WORLDSKILLS_API_EVENTS + '/:id/clone',
-                transformResponse: convertResponseDate
             }
         });
     });
