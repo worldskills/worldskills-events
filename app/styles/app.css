@@ -48,6 +48,11 @@
     display: none !important;
 }
 
+.modal-body {
+    max-height: calc(100vh - 300px);
+    overflow-y: auto;
+}
+
 footer {
     padding-bottom: 70px;
 }

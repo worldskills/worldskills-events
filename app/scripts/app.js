@@ -2,7 +2,7 @@
     'use strict';
 
     var eventsApp = angular.module('eventsApp', [
-        'ngResource', 'ngSanitize', 'ngMessages', 'ui.router', 'ui.bootstrap', 'pascalprecht.translate', 'angularFileUpload', 'worldskills.utils'
+        'ngResource', 'ngSanitize', 'ngMessages', 'ui.router', 'ui.bootstrap', 'pascalprecht.translate', 'angularFileUpload', 'angularBootstrapNavTree', 'worldskills.utils'
     ]);
 
     eventsApp.constant('EVENTS_APP_CODE', 400);
