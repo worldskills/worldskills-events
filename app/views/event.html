@@ -14,9 +14,9 @@
 
 <ul class="nav nav-tabs">
     <li ui-sref-active="active"><a ui-sref="events.event.form">Event</a></li>
-    <li ng-show="type == 'competition'" ui-sref-active="active"><a ui-sref="events.event.skills">Skills</a></li>
-    <li ng-show="type == 'competition'" ui-sref-active="active"><a ui-sref="events.event.sectors">Sectors</a></li>
-    <li ng-show="type == 'competition' && canEdit" ui-sref-active="active"><a ui-sref="events.event.tags">Skill Tags</a></li>
+    <li ng-show="(type == 'competition' || type == 'preparation_meeting')" ui-sref-active="active"><a ui-sref="events.event.skills">Skills</a></li>
+    <li ng-show="(type == 'competition' || type == 'preparation_meeting')" ui-sref-active="active"><a ui-sref="events.event.sectors">Sectors</a></li>
+    <li ng-show="(type == 'competition' || type == 'preparation_meeting') && canEdit" ui-sref-active="active"><a ui-sref="events.event.tags">Skill Tags</a></li>
     <li ng-show="canEdit || canOrganizerEdit" ui-sref-active="active"><a ui-sref="events.event.sponsors">Sponsors</a></li>
 </ul>
 

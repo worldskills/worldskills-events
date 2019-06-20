@@ -35,6 +35,7 @@
                 <option value="conference">Conference</option>
                 <option value="general_assembly">General Assembly</option>
                 <option value="member_event">Member event</option>
+                <option value="preparation_meeting">Preparation Meeting</option>
             </select>
             <p ng-if="event.id" ng-switch="event.type" class="form-control-static">
                 <span ng-switch-when="meeting">Board meeting or other meeting</span>
@@ -43,6 +44,7 @@
                 <span ng-switch-when="conference">Conference</span>
                 <span ng-switch-when="general_assembly">General Assembly</span>
                 <span ng-switch-when="member_event">Member event</span>
+                <span ng-switch-when="preparation_meeting">Preparation Meeting</span>
             </p>
         </div>
         <div class="col-sm-5">
