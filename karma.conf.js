@@ -36,6 +36,7 @@ module.exports = function(config) {
             'app/bower_components/ckeditor/ckeditor.js',
             'app/bower_components/ng-file-upload/angular-file-upload.min.js',
             'app/bower_components/angular-worldskills-utils/src/angular-worldskills-utils.js',
+            'app/bower_components/angular-bootstrap-nav-tree/dist/abn_tree_directive.js',
             'app/scripts/*.js',
             'app/scripts/**/*.js',
             'test/spec/**/*.js'
