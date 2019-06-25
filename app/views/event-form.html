@@ -29,21 +29,13 @@
         <label for="type" class="col-sm-3 control-label">Type <span class="required">*</span></label>
         <div class="col-sm-4">
             <select ng-if="!event.id" class="form-control" id="type" name="type" required ng-model="event.type">
-                <option value="meeting">Board meeting or other meeting</option>
-                <option value="champions_forum">Champions Forum</option>
                 <option value="competition">Competition</option>
-                <option value="conference">Conference</option>
                 <option value="general_assembly">General Assembly</option>
-                <option value="member_event">Member event</option>
                 <option value="preparation_meeting">Preparation Meeting</option>
             </select>
             <p ng-if="event.id" ng-switch="event.type" class="form-control-static">
-                <span ng-switch-when="meeting">Board meeting or other meeting</span>
-                <span ng-switch-when="champions_forum">Champions Forum</span>
                 <span ng-switch-when="competition">Competition</span>
-                <span ng-switch-when="conference">Conference</span>
                 <span ng-switch-when="general_assembly">General Assembly</span>
-                <span ng-switch-when="member_event">Member event</span>
                 <span ng-switch-when="preparation_meeting">Preparation Meeting</span>
             </p>
         </div>
