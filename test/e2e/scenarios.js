@@ -26,9 +26,6 @@ describe('Events app', function() {
       element(by.model('event.type')).sendKeys("Competition");
       element(by.model('event.start_date')).clear().sendKeys("2017-09-01");
       element(by.model('event.end_date')).clear().sendKeys("2017-09-30");
-      var competitionEndDate = element(by.model('event.competition_end_date'));
-      competitionEndDate.element(by.xpath('../span/button')).click();
-      competitionEndDate.element(by.xpath('..')).element(by.partialButtonText("15")).click();
       element(by.model('event.country')).sendKeys("AFGHANISTAN");
 
       element(by.partialButtonText('Save')).click();
