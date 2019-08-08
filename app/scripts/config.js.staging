@@ -10,6 +10,7 @@
     eventsApp.constant('WORLDSKILLS_AUTHORIZE_URL', 'https://auth.worldskills.show/oauth/authorize');
     eventsApp.constant('LOAD_CHILD_ENTITY_ROLES', true);
     eventsApp.constant('FILTER_AUTH_ROLES', [400]); // Events
+    eventsApp.constant('ENVIRONMENT_WARNING', 'This is the staging environment. Changes in this environment might get overwritten.');
 
     eventsApp.config(['$compileProvider', function ($compileProvider) {
         $compileProvider.debugInfoEnabled(false);

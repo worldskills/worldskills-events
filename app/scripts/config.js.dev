@@ -10,5 +10,6 @@
     eventsApp.constant('WORLDSKILLS_AUTHORIZE_URL', 'http://worldskills-auth.dev/oauth/authorize');
     eventsApp.constant('LOAD_CHILD_ENTITY_ROLES', true);
     eventsApp.constant('FILTER_AUTH_ROLES', [400]); // Events
+    eventsApp.constant('ENVIRONMENT_WARNING', 'This is the local development environment. Happy coding!');
 
 })();
