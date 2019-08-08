@@ -24,7 +24,7 @@
         <script src="bower_components/json3/lib/json3.min.js"></script>
     <![endif]-->
 
-    <div style="background-color: #f0ad4e; padding: 10px 20px; color: #fff; text-align: center;" ng-if="environmentWarning">{{environmentWarning}}</div>
+    <div style="background-color: #f0ad4e; padding: 10px 20px; color: #fff; text-align: center;" ng-cloak ng-if="environmentWarning">{{environmentWarning}}</div>
     <ws-puppet p="auth.user.puppeteer"></ws-puppet>
 
     <div class="navbar navbar-worldskills navbar-static-top">
