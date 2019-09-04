@@ -86,9 +86,11 @@
         });
         $scope.selectedEntity = null;
         $scope.selectEntity = function (entity) {
+            $scope.filters.ws_entity = entity.entity.id;
             $scope.selectedEntity = entity;
         };
         $scope.clearEntity = function () {
+            delete $scope.filters.ws_entity;
             $scope.selectedEntity = null;
             $scope.wsEntityModal.close();
         };
@@ -127,23 +129,19 @@
         $scope.init();
         auth.user.$promise.then(function () {
 
-            $scope.filters.ws_entity = [];
-
             angular.forEach(auth.user.roles, function (r) {
                 if (r.role_application.application_code === EVENTS_APP_CODE && r.name === 'Admin') {
                     $scope.canEdit = true;
                 }
-                if ($scope.filters.ws_entity.length == 0 && r.role_application.application_code === EVENTS_APP_CODE && r.name === 'EditEvents') {
+                if (r.role_application.application_code === EVENTS_APP_CODE && r.name === 'EditEvents') {
                     $scope.canEdit = true;
-                    var wsEntityId = r.ws_entity.id;
-                    if ($scope.filters.ws_entity.indexOf(wsEntityId) === -1) {
-                        $scope.filters.ws_entity.push(wsEntityId);
+                    if (typeof $scope.filters.ws_entity !== 'undefined') {
+                        $scope.filters.ws_entity = r.ws_entity.id;
                     }
                 }
-                if ($scope.filters.ws_entity.length == 0 && r.role_application.application_code === EVENTS_APP_CODE && r.name === 'OrganizerEditEvents') {
-                    var wsEntityId = r.ws_entity.id;
-                    if ($scope.filters.ws_entity.indexOf(wsEntityId) === -1) {
-                        $scope.filters.ws_entity.push(wsEntityId);
+                if (r.role_application.application_code === EVENTS_APP_CODE && r.name === 'OrganizerEditEvents') {
+                    if (typeof $scope.filters.ws_entity !== 'undefined') {
+                        $scope.filters.ws_entity = r.ws_entity.id;
                     }
                 }
             });
