@@ -8,7 +8,7 @@
         $scope.filters = {};
     });
 
-    angular.module('eventsApp').controller('EventsListCtrl', function($scope, $state, $stateParams, Event, Country, auth, $http, EVENTS_APP_CODE, WORLDSKILLS_API_EVENTS, WORLDSKILLS_API_ORGANIZATIONS, WORLDSKILLS_API_AUTH, $translate, $filter, $location) {
+    angular.module('eventsApp').controller('EventsListCtrl', function($scope, $state, $stateParams, Event, Country, WsEntity, auth, $http, EVENTS_APP_CODE, WORLDSKILLS_API_EVENTS, WORLDSKILLS_API_ORGANIZATIONS, WORLDSKILLS_API_AUTH, $translate, $uibModal, $filter, $location) {
         angular.forEach($stateParams, function (value, key) {
             if (value) {
                 $scope.filters[key] = value;
@@ -54,15 +54,63 @@
             });
         };
         $scope.countries = Country.query();
-        $http({
-            method: 'GET',
-            url: WORLDSKILLS_API_AUTH + '/ws_entities',
-            params: {
-                limit: 900
+        $scope.entitiesTree = [];
+        $scope.entitiesIndexed = {};
+        $scope.entityFilter = {query: ''};
+        function parseTree(entity) {
+            var node = {label: entity.name.text, children: [], entity: entity};
+            angular.forEach(entity.children, function (child) {
+                var childNode = parseTree(child);
+                if (childNode !== false) {
+                    node.children.push(childNode);
+                }
+            });
+            if (node.label.toLowerCase().indexOf($scope.entityFilter.query.toLowerCase()) != -1 || node.children.length > 0) {
+                if ($scope.entityFilter.query && node.children.length > 0) {
+                    node.expanded = true;
+                }
+                return node;
+            } else {
+                return false;
             }
-        }).success(function(data, status, headers, config) {
-            $scope.entities = data.ws_entity_list;
+        }
+        WsEntity.query(function(data) {
+            $scope.entities = data.ws_entities;
+            $scope.entitiesIndexed = {};
+            angular.forEach(data.ws_entities, function (entity) {
+                var node = parseTree(entity);
+                if (node !== false) {
+                    $scope.entitiesTree.push(node);
+                }
+            });
         });
+        $scope.selectedEntity = null;
+        $scope.selectEntity = function (entity) {
+            $scope.selectedEntity = entity;
+        };
+        $scope.clearEntity = function () {
+            $scope.selectedEntity = null;
+            $scope.wsEntityModal.close();
+        };
+        $scope.okEntity = function (entity) {
+            $scope.wsEntityModal.close();
+        };
+        $scope.filterEntityTree = function () {
+            $scope.entitiesTree = [];
+            angular.forEach($scope.entities, function (entity) {
+                var node = parseTree(entity);
+                if (node !== false) {
+                    $scope.entitiesTree.push(node);
+                }
+            });
+        };
+        $scope.selectWsEntity = function () {
+            $scope.wsEntityModal = $uibModal.open({
+                templateUrl: 'views/ws_entity_tree.html',
+                size: 'md',
+                scope: $scope
+            });
+        };
         $scope.events = {
             events: []
         };
@@ -118,18 +166,6 @@
                 $scope.canOrganizerEdit = hasUserRole;
             });
         });
-        $scope.cloneEvent = function() {
-            if (alert.confirm('Duplicating the Event will create a copy with all data associated (Sponsors, Skills, etc.). Click OK to proceed.')) {
-                $scope.cloneLoading = true;
-                Event.clone({id: $scope.id}, function (cloneEvent) {
-                    alert.success('The Event has been duplicated successfully. Please edit the information of the duplicate below.');
-                    $state.go('events.event.form', { id: cloneEvent.id });
-                }, function (response) {
-                    alert.error('Error duplicating Event. ' + response.data.code + ': ' + response.data.user_msg);
-                    $state.go('events.list');
-                });
-            }
-        };
         $scope.deleteEvent = function() {
             if (alert.confirm('Deleting the Event will also delete all data associated with this Event. Click OK to proceed.')) {
                 $scope.deleteLoading = true;
@@ -156,7 +192,7 @@
             method: 'GET',
             url: WORLDSKILLS_API_AUTH + '/ws_entities',
             params: {
-                limit: 900,
+                limit: 9000,
                 role: 'EditEvents',
                 roleApp: EVENTS_APP_CODE
             }

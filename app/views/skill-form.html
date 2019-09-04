@@ -10,6 +10,12 @@
             </span>
         </div>
     </div>
+    <div class="form-group" ng-if="skill.id">
+        <label for="ws_entity" class="col-sm-3 control-label">Entity</label>
+        <div class="col-sm-4">
+            <p class="form-control-static">{{skill.ws_entity.name.text}}</p>
+        </div>
+    </div>
     <div class="form-group" ng-class="{'has-error': submitted && form.number.$invalid}">
         <label for="number" class="col-sm-3 control-label">Number <span class="required">*</span></label>
         <div class="col-sm-3">

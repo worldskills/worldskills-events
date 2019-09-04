@@ -26,11 +26,6 @@ describe('Events app', function() {
       element(by.model('event.type')).sendKeys("Competition");
       element(by.model('event.start_date')).clear().sendKeys("2017-09-01");
       element(by.model('event.end_date')).clear().sendKeys("2017-09-30");
-      element(by.model('event.competition_start_date')).sendKeys("2017-09-07");
-      element(by.model('event.competition_end_date')).sendKeys("2017-09-20");
-      var competitionEndDate = element(by.model('event.competition_end_date'));
-      competitionEndDate.element(by.xpath('../span/button')).click();
-      competitionEndDate.element(by.xpath('..')).element(by.partialButtonText("15")).click();
       element(by.model('event.country')).sendKeys("AFGHANISTAN");
 
       element(by.partialButtonText('Save')).click();
@@ -45,8 +40,6 @@ describe('Events app', function() {
       expect(event.ws_entity.id).toEqual(1);
       expect(event.start_date).toEqual("2017-09-01");
       expect(event.end_date).toEqual("2017-09-30");
-      expect(event.competition_start_date).toEqual("2017-09-07");
-      expect(event.competition_end_date).toEqual("2017-09-15");
       expect(event.type).toEqual("competition");
       expect(event.country.id).toEqual(1);
     });
