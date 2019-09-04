@@ -103,10 +103,7 @@
                         <div class="form-group">
                             <label for="country">Entity</label>
                             <div class="form-control-static">
-                                <button class="btn btn-default" ng-click="selectWsEntity()">
-                                  <span ng-show="selectedEntity">{{selectedEntity.label}}</span>
-                                  <span ng-show="!selectedEntity">Select entity…</span>
-                                </button>
+                                <ws-entity-select entity="filters.ws_entity" />
                             </div>
                         </div>
                         <button type="submit" class="btn btn-primary pull-right">Search</button>
