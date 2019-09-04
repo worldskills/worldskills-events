@@ -48,18 +48,6 @@ describe('controllers events', function() {
                     }
                 ]
             });
-            $httpBackend.expectGET('http://localhost:8080/events/ws_entities').respond({
-                entities: [
-                    {
-                        id: 1,
-                        name: {
-                            lang_code: 'en',
-                            text: 'WorldSkills International'
-                        },
-                        code: 'WSI'
-                    }
-                ]
-            });
 
             $scope = $rootScope.$new();
             $scope.pagination = {
@@ -211,18 +199,6 @@ describe('controllers events', function() {
                         name: {
                             text: 'Antarctica'
                         }
-                    }
-                ]
-            });
-            $httpBackend.expectGET('http://localhost:8080/events/ws_entities').respond({
-                entities: [
-                    {
-                        id: 1,
-                        name: {
-                            lang_code: 'en',
-                            text: 'WorldSkills International'
-                        },
-                        code: 'WSI'
                     }
                 ]
             });
