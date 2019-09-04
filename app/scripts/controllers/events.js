@@ -127,17 +127,6 @@
         $scope.countries = Country.query(function () {
             $scope.countries.country_list.unshift({id: 0, name: {text: ''}});
         });
-        $http({
-            method: 'GET',
-            url: WORLDSKILLS_API_AUTH + '/ws_entities',
-            params: {
-                limit: 9000,
-                role: 'EditEvents',
-                roleApp: EVENTS_APP_CODE
-            }
-        }).success(function(data, status, headers, config) {
-            $scope.entities = data.ws_entity_list;
-        });
         $scope.$watch('event.start_date', function(newValue, oldValue) {
             if (angular.isDate(newValue)) {
                 if (angular.isDate(oldValue)) {

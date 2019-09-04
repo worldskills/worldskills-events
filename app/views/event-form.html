@@ -10,16 +10,18 @@
             </span>
         </div>
     </div>
-    <div class="form-group" ng-class="{'has-error': submitted && form.ws_entity.$invalid}">
+    <div class="form-group" ng-class="{'has-error': submitted && !event.ws_entity.id}">
         <label for="ws_entity" class="col-sm-3 control-label">Entity <span class="required">*</span></label>
         <div class="col-sm-4">
-            <select ng-if="!event.id" class="form-control" id="ws_entity" name="ws_entity" required ng-model="event.ws_entity" ng-options="entity.name.text for entity in entities track by entity.id"></select>
+            <div ng-if="!event.id">
+                <ws-entity-select entity="event.ws_entity.id" />
+            </div>
             <p ng-if="event.id" class="form-control-static">{{event.ws_entity.name.text}}</p>
         </div>
         <div class="col-sm-5">
             <span ng-if="!event.id" class="help-block">
-                <span ng-show="submitted" ng-messages="form.ws_entity.$error">
-                  <span ng-message="required">Please select an entity!</span>
+                <span ng-show="submitted && !event.ws_entity.id">
+                    Please select an entity!
                 </span>
                 Owner of the entry, select the organization you are working for.
             </span>
