@@ -6,7 +6,7 @@
         bindings: {
             entity: '='
         },
-        controller: function ($scope, $uibModal, WsEntity) {
+        controller: ['$scope', '$uibModal', 'WsEntity', function ($scope, $uibModal, WsEntity) {
 
             var ctrl = this;
             $scope.entitiesTree = [];
@@ -70,7 +70,7 @@
                 });
             };
 
-        }
+        }]
 
     });
 
