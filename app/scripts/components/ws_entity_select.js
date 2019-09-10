@@ -10,10 +10,9 @@
 
             var ctrl = this;
             $scope.entitiesTree = [];
-            $scope.entitiesIndexed = {};
             $scope.entityFilter = {query: ''};
             function parseTree(entity) {
-                var node = {label: entity.name.text, children: [], entity: entity};
+                var node = {label: entity.name.text, children: [], data: entity};
                 angular.forEach(entity.children, function (child) {
                     var childNode = parseTree(child);
                     if (childNode !== false) {
@@ -29,20 +28,22 @@
                     return false;
                 }
             }
-            WsEntity.query(function(data) {
-                $scope.entities = data.ws_entities;
-                $scope.entitiesIndexed = {};
-                angular.forEach(data.ws_entities, function (entity) {
+            function createTree() {
+                $scope.entitiesTree = [];
+                angular.forEach($scope.entities, function (entity) {
                     var node = parseTree(entity);
                     if (node !== false) {
                         $scope.entitiesTree.push(node);
                     }
                 });
+            }
+            WsEntity.query(function(data) {
+                $scope.entities = data.ws_entities;
             });
 
             $scope.selectedEntity = null;
             $scope.selectEntity = function (entity) {
-                ctrl.entity = entity.entity.id;
+                ctrl.entity = entity.data.id;
                 $scope.selectedEntity = entity;
             };
             $scope.clearEntity = function () {
@@ -54,15 +55,10 @@
                 $scope.wsEntityModal.close();
             };
             $scope.filterEntityTree = function () {
-                $scope.entitiesTree = [];
-                angular.forEach($scope.entities, function (entity) {
-                    var node = parseTree(entity);
-                    if (node !== false) {
-                        $scope.entitiesTree.push(node);
-                    }
-                });
+                createTree();
             };
             $scope.selectWsEntity = function () {
+                createTree();
                 $scope.wsEntityModal = $uibModal.open({
                     templateUrl: 'views/ws_entity_tree.html',
                     size: 'md',

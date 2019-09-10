@@ -7,7 +7,7 @@
             <input type="text" class="form-control" placeholder="Search entity" ng-model="entityFilter.query" ng-change="filterEntityTree()">
         </div>
     </form>
-    <abn-tree tree-data="entitiesTree" icon-leaf="glyphicon glyphicon-asterisk" expand-level="1" on-select="selectEntity(branch)"></abn-tree>
+    <abn-tree tree-data="entitiesTree" icon-leaf="glyphicon glyphicon-triangle-right" expand-level="1" on-select="selectEntity(branch)"></abn-tree>
 </div>
 <div class="modal-footer">
     <button class="btn btn-danger" type="button" ng-click="clearEntity()">Clear</button>
