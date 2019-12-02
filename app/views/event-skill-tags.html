@@ -4,15 +4,13 @@
     <table class="table table-striped">
         <colgroup>
             <col width="5%" />
-            <col width="40%" />
-            <col width="40%" />
-            <col width="15%" />
+            <col width="75%" />
+            <col width="20%" />
         </colgroup>
         <thead>
             <tr>
                 <th>&nbsp;</th>
                 <th>Name</th>
-                <th>Arabic</th>
                 <th>&nbsp;</th>
             </tr>
         </thead>
@@ -21,9 +19,6 @@
                 <td>&nbsp;</td>
                 <td ng-class="{'has-error': submitted && !tagName}">
                     <input type="text" class="form-control" required placeholder="Tag name" ng-model="tagName" ng-keyup="$event.keyCode == 13 && addTag()">
-                </td>
-                <td>
-                    <input type="text" class="form-control" placeholder="Arabic translation" ng-model="tagNameArabic" ng-keyup="$event.keyCode == 13 && addTag()">
                 </td>
                 <td>
                     <button class="btn btn-success" ng-click="addTag()">Add Tag<ws-text-spinner ng-show="loading" class="ng-hide"></ws-text-spinner></button>
@@ -37,17 +32,13 @@
                     <button class="btn btn-link" ng-click="tag.editing = true" ng-show="!tag.editing">{{tag.name.text}}</button>
                     <input type="text" class="form-control" placeholder="Tag name" ng-model="tag.name.text" ng-show="tag.editing" ng-keyup="$event.keyCode == 13 && saveTag(tag)">
                 </td>
-                <td ng-class="{'has-error': tag.submitted && tag.arabic && !tag.arabic.text}">
-                    <button class="btn btn-link" ng-click="tag.editing = true" ng-show="!tag.editing">{{tag.arabic.text}}</button>
-                    <input type="text" class="form-control" placeholder="Arabic translation" ng-model="tag.arabic.text" ng-show="tag.editing" ng-keyup="$event.keyCode == 13 && saveTag(tag)">
-                </td>
                 <td>
                     <button class="btn btn-success" ng-click="saveTag(tag)" ng-show="tag.editing">Save<ws-text-spinner ng-show="tag.loading" class="ng-hide"></ws-text-spinner></button>
                     <button class="btn btn-link" ng-click="tag.editing = false" ng-show="tag.editing">Cancel</button>
                 </td>
             </tr>
             <tr ng-show="tags.tags.length == 0">
-                <td colspan="4">No tags found.</td>
+                <td colspan="3">No tags found.</td>
             </tr>
         </tbody>
     </table>

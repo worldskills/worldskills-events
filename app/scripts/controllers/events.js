@@ -243,17 +243,7 @@
     });
     angular.module('eventsApp').controller('EventSkillTagsCtrl', function($scope, $stateParams, EventSkillTag, alert) {
         var getTags = function () {
-            $scope.tags = EventSkillTag.query({eventId: $scope.id}, function () {
-                EventSkillTag.query({eventId: $scope.id, l: 'ar_AE'}, function (arabicTags) {
-                    angular.forEach(arabicTags.tags, function (arabicTag) {
-                        angular.forEach($scope.tags.tags, function (tag) {
-                            if (tag.id === arabicTag.id && arabicTag.name.lang_code === 'ar_AE') {
-                                tag.arabic = arabicTag.name;
-                            }
-                        });
-                    });
-                });
-            });
+            $scope.tags = EventSkillTag.query({eventId: $scope.id});
         };
         getTags();
         $scope.addTag = function() {
@@ -261,45 +251,23 @@
             if ($scope.tagName) {
                 $scope.loading = true;
                 EventSkillTag.save({eventId: $scope.event.id}, {name: {text: $scope.tagName, lang_code: 'en'}}, function (tag) {
-                    if ($scope.tagNameArabic) {
-                        tag.name.text = $scope.tagNameArabic;
-                        tag.name.lang_code = 'ar_AE';
-                        EventSkillTag.update({eventId: $scope.event.id}, tag, function () {
-                            $scope.loading = false;
-                            $scope.submitted = false;
-                            $scope.tagName = '';
-                            $scope.tagNameArabic = '';
-                            alert.success('The tag has been added successfully.');
-                            getTags();
-                        });
-                    } else {
-                        $scope.loading = false;
-                        $scope.submitted = false;
-                        $scope.tagName = '';
-                        alert.success('The tag has been added successfully.');
-                        getTags();
-                    }
+                    $scope.loading = false;
+                    $scope.submitted = false;
+                    $scope.tagName = '';
+                    alert.success('The tag has been added successfully.');
+                    getTags();
                 });
             }
         };
         $scope.saveTag = function(tag) {
             tag.submitted = true;
-            if (tag.name.text && (!tag.arabic || tag.arabic.text)) {
+            if (tag.name.text) {
                 tag.loading = true;
                 EventSkillTag.update({eventId: $scope.event.id}, tag, function () {
-                    if (tag.arabic && tag.arabic.text) {
-                        EventSkillTag.update({eventId: $scope.event.id, id: tag.id}, {name: {text: tag.arabic.text, lang_code: 'ar_AE'}}, function () {
-                            $scope.loading = false;
-                            $scope.submitted = false;
-                            tag.editing = false;
-                            alert.success('The tag has been updated successfully.');
-                        });
-                    } else {
-                        tag.loading = false;
-                        tag.submitted = false;
-                        tag.editing = false;
-                        alert.success('The tag has been updated successfully.');
-                    }
+                    tag.loading = false;
+                    tag.submitted = false;
+                    tag.editing = false;
+                    alert.success('The tag has been updated successfully.');
                 });
             }
         };
