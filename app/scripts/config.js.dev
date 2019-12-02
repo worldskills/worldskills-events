@@ -7,7 +7,7 @@
     eventsApp.constant('WORLDSKILLS_API_ORGANIZATIONS', 'http://localhost:8080/org');
     eventsApp.constant('WORLDSKILLS_CLIENT_ID', '269f5d2');
     eventsApp.constant('WORLDSKILLS_API_AUTH', 'http://localhost:8080/auth');
-    eventsApp.constant('WORLDSKILLS_AUTHORIZE_URL', 'http://worldskills-auth.dev/oauth/authorize');
+    eventsApp.constant('WORLDSKILLS_AUTHORIZE_URL', 'http://worldskills-auth.localhost/oauth/authorize');
     eventsApp.constant('LOAD_CHILD_ENTITY_ROLES', true);
     eventsApp.constant('FILTER_AUTH_ROLES', [400]); // Events
     eventsApp.constant('ENVIRONMENT_WARNING', 'This is the local development environment. Happy coding!');
