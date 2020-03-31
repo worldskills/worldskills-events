@@ -35,9 +35,31 @@
         };
     });
 
-    angular.module('eventsApp').controller('BaseSkillPhotosCtrl', function($scope) {
+    angular.module('eventsApp').controller('BaseSkillPhotosCtrl', function($scope, BaseSkillPhoto) {
         $scope.thumbnail = function (photo) {
             return photo.thumbnail + '_small';
+        };
+        $scope.moveUp = function (photo, sort) {
+            var index = $scope.baseSkill.photos.indexOf(photo);
+            var newPhoto = $scope.baseSkill.photos[index];
+            var oldPhoto = $scope.baseSkill.photos[index - 1];
+            $scope.baseSkill.photos[index - 1] = newPhoto;
+            $scope.baseSkill.photos[index] = oldPhoto;
+            newPhoto.sort = sort - 1;
+            oldPhoto.sort = sort;
+            BaseSkillPhoto.update({skillId: $scope.baseSkill.id}, newPhoto);
+            BaseSkillPhoto.update({skillId: $scope.baseSkill.id}, oldPhoto);
+        };
+        $scope.moveDown = function (photo, sort) {
+            var index = $scope.baseSkill.photos.indexOf(photo);
+            var newPhoto = $scope.baseSkill.photos[index];
+            var oldPhoto = $scope.baseSkill.photos[index + 1];
+            $scope.baseSkill.photos[index + 1] = newPhoto;
+            $scope.baseSkill.photos[index] = oldPhoto;
+            newPhoto.sort = sort + 1;
+            oldPhoto.sort = sort;
+            BaseSkillPhoto.update({skillId: $scope.baseSkill.id}, newPhoto);
+            BaseSkillPhoto.update({skillId: $scope.baseSkill.id}, oldPhoto);
         };
     });
     angular.module('eventsApp').controller('BaseSkillPhotoCreateCtrl', function($scope, $stateParams, BaseSkill, BaseSkillPhoto, $http, WORLDSKILLS_API_EVENTS, WORLDSKILLS_API_IMAGES, $q, $upload, $translate, $state, WorldSkills, alert) {
@@ -62,6 +84,11 @@
         };
         $scope.save = function() {
             $scope.submitted = true;
+            var maxSort = 0;
+            $scope.baseSkill.photos.forEach(function (photo) {
+                maxSort = Math.max(maxSort, photo.sort);
+            });
+            $scope.photo.sort = maxSort + 1;
             if ($scope.form.$valid && $scope.imageLoading) {
                 image.then(function (image) {
                     $scope.photo.image_id = image.id;

@@ -5,16 +5,18 @@
 <div class="table-responsive">
     <table class="table table-striped">
         <colgroup>
-            <col width="30%" />
+            <col width="20%" />
             <col width="70%" />
+            <col width="10%" />
         </colgroup>
         <thead>
             <tr>
                 <th>Photo</th>
                 <th>Description</th>
+                <th>Actions</th>
             </tr>
         </thead>
-        <tfoot><tr><td colspan="2"></td></tr></tfoot>
+        <tfoot><tr><td colspan="3"></td></tr></tfoot>
         <tbody>
             <tr ng-repeat="photo in skill.photos">
                 <td>
@@ -35,9 +37,15 @@
                         {{ photo.description.text }}
                     </span>
                 </td>
+                <td>
+                    <div class="btn-group" ng-show="canEdit">
+                        <button type="button" class="btn btn-primary btn-sm" ng-click="moveUp(photo, $index)" ng-disabled="$first"><span class="glyphicon glyphicon-triangle-top"></span></button>
+                        <button type="button" class="btn btn-primary btn-sm" ng-click="moveDown(photo, $index)" ng-disabled="$last"><span class="glyphicon glyphicon-triangle-bottom"></span></button>
+                    </div>
+                </td>
             </tr>
             <tr ng-show="skill.photos.length == 0">
-                <td colspan="2">No photos found.</td>
+                <td colspan="3">No photos found.</td>
             </tr>
         </tbody>
     </table>

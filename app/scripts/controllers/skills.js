@@ -251,6 +251,28 @@
         $scope.thumbnail = function (photo) {
             return photo.thumbnail + '_small';
         };
+        $scope.moveUp = function (photo, sort) {
+            var index = $scope.skill.photos.indexOf(photo);
+            var newPhoto = $scope.skill.photos[index];
+            var oldPhoto = $scope.skill.photos[index - 1];
+            $scope.skill.photos[index - 1] = newPhoto;
+            $scope.skill.photos[index] = oldPhoto;
+            newPhoto.sort = sort - 1;
+            oldPhoto.sort = sort;
+            SkillPhoto.update({eventId: $scope.skill.event.id, skillId: $scope.skill.id}, newPhoto);
+            SkillPhoto.update({eventId: $scope.skill.event.id, skillId: $scope.skill.id}, oldPhoto);
+        };
+        $scope.moveDown = function (photo, sort) {
+            var index = $scope.skill.photos.indexOf(photo);
+            var newPhoto = $scope.skill.photos[index];
+            var oldPhoto = $scope.skill.photos[index + 1];
+            $scope.skill.photos[index + 1] = newPhoto;
+            $scope.skill.photos[index] = oldPhoto;
+            newPhoto.sort = sort + 1;
+            oldPhoto.sort = sort;
+            SkillPhoto.update({eventId: $scope.skill.event.id, skillId: $scope.skill.id}, newPhoto);
+            SkillPhoto.update({eventId: $scope.skill.event.id, skillId: $scope.skill.id}, oldPhoto);
+        };
     });
     angular.module('eventsApp').controller('SkillPhotoCreateCtrl', function($scope, $stateParams, Skill, SkillPhoto, $http, WORLDSKILLS_API_EVENTS, WORLDSKILLS_API_IMAGES, $q, $upload, $translate, $state, WorldSkills, alert) {
         var image = $q.when();
@@ -275,6 +297,11 @@
         };
         $scope.save = function() {
             $scope.submitted = true;
+            var maxSort = 0;
+            $scope.skill.photos.forEach(function (photo) {
+                maxSort = Math.max(maxSort, photo.sort);
+            });
+            $scope.photo.sort = maxSort + 1;
             if ($scope.form.$valid && $scope.imageLoading) {
                 image.then(function (image) {
                     $scope.photo.image_id = image.id;
