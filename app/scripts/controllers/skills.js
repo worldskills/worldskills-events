@@ -9,6 +9,8 @@
         $scope.skill.description_required_skills = {text: '', lang_code: 'en'};
         $scope.skill.description_competition_action = {text: '', lang_code: 'en'};
         $scope.skill.description_facts = {text: '', lang_code: 'en'};
+        $scope.skill.type = 'official';
+        $scope.skill.status = 'active';
 
         $scope.skill.event = Event.get({id: $stateParams.eventId}, function () {
             var url = WorldSkills.getLink($scope.skill.event.links, 'sectors');
