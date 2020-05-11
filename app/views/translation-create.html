@@ -2,7 +2,7 @@
     <li><a ui-sref="events.list">Events</a></li>
     <li><a ui-sref="events.event.form({id: skill.event.id})">{{skill.event.name}}</a></li>
     <li><a ui-sref="events.event.skills({id: skill.event.id})">Skills</a></li>
-    <li><a ui-sref="events.skill.form({eventId: skill.event.id, id: skill.id})">{{skill.name.text}}</a></li>
+    <li><a ui-sref="events.skill.form({eventId: skill.event.id, id: skill.id})">{{skill.number}} {{skill.name.text}}</a></li>
     <li><a ui-sref="events.skill.translations({eventId: skill.event.id, id: skill.id})">Translations</a></li>
     <li class="active">Add Translation</li>
 </ol>
