@@ -4,11 +4,6 @@ import {I18nModel} from '@worldskills/worldskills-angular-lib';
 
 export interface EventRequest {
   name: string;
-}
-
-export interface Event {
-  id: number;
-  name: string;
   type: string;
   start_date: string;
   end_date: string;
@@ -17,12 +12,22 @@ export interface Event {
   code: string;
   country: {
     id: number;
-    code: string;
-    name: I18nModel;
   };
   utc_offset: number;
   url: string;
   description: string;
+  ws_entity: {
+    id: number;
+  };
+}
+
+export interface Event extends EventRequest {
+  id: number;
+  country: {
+    id: number;
+    code: string;
+    name: I18nModel;
+  };
   ws_entity: AuthEntity;
   links: Array<Link>;
 }

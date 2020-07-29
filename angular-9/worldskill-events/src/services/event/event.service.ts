@@ -52,11 +52,11 @@ export class EventService extends WsService<Event> {
     return this.request(observable, multicastOptions);
   }
 
-  update(eventId: number, event: Event, rOpt?: RequestOptions): Observable<Event>;
-  update(eventId: number, event: Event, params: FetchParams, rOpt?: RequestOptions): Observable<Event>;
-  update(eventId: number, event: Event, mOpt: MulticastOptions, rOpt?: RequestOptions): Observable<Event>;
-  update(eventId: number, event: Event, params: FetchParams, mOpt: MulticastOptions, rOpt?: RequestOptions): Observable<Event>;
-  update(eventId: number, event: Event, p1: WsServiceRequestP1, p2?: WsServiceRequestP2, p3?: WsServiceRequestP3): Observable<Event> {
+  update(eventId: number, event: EventRequest, rOpt?: RequestOptions): Observable<Event>;
+  update(eventId: number, event: EventRequest, params: FetchParams, rOpt?: RequestOptions): Observable<Event>;
+  update(eventId: number, event: EventRequest, mOpt: MulticastOptions, rOpt?: RequestOptions): Observable<Event>;
+  update(eventId: number, event: EventRequest, params: FetchParams, mOpt: MulticastOptions, rOpt?: RequestOptions): Observable<Event>;
+  update(eventId: number, event: EventRequest, p1: WsServiceRequestP1, p2?: WsServiceRequestP2, p3?: WsServiceRequestP3): Observable<Event> {
     const {fetchParams, multicastOptions, requestOptions} = this.resolveArgs(p1, p2, p3, FULL);
     const params = httpParamsFromFetchParams(fetchParams);
     const observable = this.http.put<Event>(

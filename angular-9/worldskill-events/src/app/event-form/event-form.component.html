@@ -1,0 +1,286 @@
+<ng-container *ngIf="loading || !initialized">
+  <ws-spinner></ws-spinner>
+</ng-container>
+<ng-container *ngIf="initialized && !loading">
+  <form class="form-horizontal" [ngClass]="{'was-validated': this.form.submitted}" novalidate
+        (ngSubmit)="submit()" #form="ngForm">
+
+    <div class="form-group row">
+      <label for="name" class="col-sm-3 col-form-label text-right font-weight-bold">{{'Name' | translate}}&nbsp;*</label>
+      <div class="col-sm-4">
+        <input
+          placeholder="{{'Name' | translate}}"
+          type="text"
+          class="form-control"
+          id="name"
+          name="name"
+          required
+          [ngModel]="event ? event.name : undefined">
+      </div>
+      <div class="col-sm-5">
+      <span
+        class="form-text text-danger"
+        style="display: block"
+        *ngIf="form.submitted && this.form.controls.name.errors && this.form.controls.name.errors.required">
+        {{'Please enter a name!' | translate}}
+      </span>
+      </div>
+    </div>
+
+    <div class="form-group row">
+      <label for="ws_entity" class="col-sm-3 col-form-label text-right font-weight-bold">{{'Entity' | translate}}&nbsp;*</label>
+      <div class="col-sm-4">
+        <ws-entity-tree-select
+          id="ws_entity"
+          name="ws_entity"
+          [disabled]="!!event"
+          [ngModel]="event ? event.ws_entity : undefined"
+          [multiple]="false">
+        </ws-entity-tree-select>
+      </div>
+      <div class="col-sm-5">
+      <span
+        class="form-text text-danger"
+        style="display: block"
+        *ngIf="form.submitted && this.form.controls.ws_entity.errors && this.form.controls.ws_entity.errors.required">
+        {{'Please select an entity!' | translate}}
+      </span>
+      </div>
+    </div>
+
+    <div class="form-group row">
+      <label for="type" class="col-sm-3 col-form-label text-right font-weight-bold">{{'Type' | translate}}&nbsp;*</label>
+      <div class="col-sm-4">
+        <select
+          class="form-control"
+          id="type"
+          name="type"
+          [ngModel]="event ? event.type : undefined"
+          [disabled]="!!event"
+          required
+        >
+          <option value="">{{'Select type...' | translate}}</option>
+          <option value="competition">{{'Competition' | translate}}</option>
+          <option value="general_assembly">{{'General Assembly' | translate}}</option>
+          <option value="preparation_meeting">{{'Preparation Meeting' | translate}}</option>
+        </select>
+      </div>
+      <div class="col-sm-5">
+      <span
+        class="form-text text-danger"
+        style="display: block"
+        *ngIf="form.submitted && this.form.controls.type.errors && this.form.controls.type.errors.required">
+        {{'Please select a type!' | translate}}
+      </span>
+      </div>
+    </div>
+
+    <div class="form-group row">
+      <label for="start_date" class="col-sm-3 col-form-label text-right font-weight-bold">{{'Start date' | translate}}&nbsp;*</label>
+      <div class="col-sm-4">
+        <input #inputStartDate="ngModel" #dStartDate="ngbDatepicker"
+               placeholder="{{'Start date' | translate}}"
+               type="text"
+               class="form-control"
+               id="start_date"
+               name="start_date"
+               [ngModel]="event ? ngbDateCache.getNgbDate(event.start_date, inputStartDate) : undefined"
+               ngbDatepicker
+               (focus)="dStartDate.open()"
+               [autoClose]="true"
+               [restoreFocus]="true"/>
+      </div>
+      <div class="col-sm-5">
+      <span
+        class="form-text text-danger"
+        style="display: block"
+        *ngIf="form.submitted && this.form.controls.start_date.errors && this.form.controls.start_date.errors.required">
+        {{'Please select a start date!' | translate}}
+      </span>
+      </div>
+    </div>
+
+    <div class="form-group row">
+      <label for="end_date" class="col-sm-3 col-form-label text-right font-weight-bold">{{'End date' | translate}}&nbsp;*</label>
+      <div class="col-sm-4">
+        <input #inputEndDate="ngModel" #dEndDate="ngbDatepicker"
+               placeholder="{{'Start date' | translate}}"
+               type="text"
+               class="form-control"
+               id="end_date"
+               name="end_date"
+               [ngModel]="event ? ngbDateCache.getNgbDate(event.end_date, inputEndDate) : undefined"
+               ngbDatepicker
+               (focus)="dEndDate.open()"
+               [autoClose]="true"
+               [restoreFocus]="true"/>
+      </div>
+      <div class="col-sm-5">
+      <span
+        class="form-text text-danger"
+        style="display: block"
+        *ngIf="form.submitted && this.form.controls.end_date.errors && this.form.controls.end_date.errors.required">
+        {{'Please select an end date!' | translate}}
+      </span>
+      </div>
+    </div>
+
+    <div class="form-group row">
+      <label for="utc_offset" class="col-sm-3 col-form-label text-right font-weight-bold">{{'Timezone' | translate}}</label>
+      <div class="col-sm-4">
+        <select
+          id="utc_offset"
+          class="form-control"
+          name="utc_offset"
+          [ngModel]="event ? event.utc_offset : undefined"
+        >
+          <option value="">{{'Select timezone...' | translate}}</option>
+          <option value="-43200">UTC−12:00</option>
+          <option value="-39600">UTC−11:00</option>
+          <option value="-36000">UTC−10:00</option>
+          <option value="-34200">UTC−09:30</option>
+          <option value="-32400">UTC−09:00</option>
+          <option value="-28800">UTC−08:00</option>
+          <option value="-25200">UTC−07:00</option>
+          <option value="-21600">UTC−06:00</option>
+          <option value="-18000">UTC−05:00</option>
+          <option value="-14400">UTC−04:00</option>
+          <option value="-12600">UTC−03:30</option>
+          <option value="-10800">UTC−03:00</option>
+          <option value="-7200">UTC−02:00</option>
+          <option value="-3600">UTC−01:00</option>
+          <option value="0">UTC+00:00</option>
+          <option value="3600">UTC+01:00</option>
+          <option value="7200">UTC+02:00</option>
+          <option value="10800">UTC+03:00</option>
+          <option value="12600">UTC+03:30</option>
+          <option value="14400">UTC+04:00</option>
+          <option value="16200">UTC+04:30</option>
+          <option value="18000">UTC+05:00</option>
+          <option value="19800">UTC+05:30</option>
+          <option value="20700">UTC+05:45</option>
+          <option value="21600">UTC+06:00</option>
+          <option value="23400">UTC+06:30</option>
+          <option value="25200">UTC+07:00</option>
+          <option value="28800">UTC+08:00</option>
+          <option value="30600">UTC+08:30</option>
+          <option value="31500">UTC+08:45</option>
+          <option value="32400">UTC+09:00</option>
+          <option value="34200">UTC+09:30</option>
+          <option value="36000">UTC+10:00</option>
+          <option value="37800">UTC+10:30</option>
+          <option value="39600">UTC+11:00</option>
+          <option value="43200">UTC+12:00</option>
+          <option value="43200">UTC+12:45</option>
+          <option value="46800">UTC+13:00</option>
+          <option value="50400">UTC+14:00</option>
+        </select>
+      </div>
+      <div class="col-sm-5">&nbsp;</div>
+    </div>
+
+    <hr class="my-2">
+
+    <div class="form-group row">
+      <label for="country" class="col-sm-3 col-form-label text-right font-weight-bold">{{'Country' | translate}}&nbsp;*</label>
+      <div class="col-sm-4">
+        <ng-select
+          id="country"
+          [wsSelect]="['id', 'name.text']"
+          name="country"
+          [ngModel]="event ? event.country.id : undefined"
+          placeholder="{{'Country' | translate}}"
+          [items]="countries || []"
+        ></ng-select>
+      </div>
+      <div class="col-sm-5">
+      <span
+        class="form-text text-danger"
+        style="display: block"
+        *ngIf="form.submitted && this.form.controls.country.errors && this.form.controls.country.errors.required">
+        {{'Please select a country!' | translate}}
+      </span>
+      </div>
+    </div>
+
+    <div class="form-group row">
+      <label for="town" class="col-sm-3 col-form-label text-right font-weight-bold">{{'Town' | translate}}</label>
+      <div class="col-sm-4">
+        <input
+          placeholder="{{'Town' | translate}}"
+          type="text"
+          class="form-control"
+          id="town"
+          name="town"
+          [ngModel]="event ? event.town : undefined">
+      </div>
+      <div class="col-sm-5">&nbsp;</div>
+    </div>
+
+    <div class="form-group row">
+      <label for="venue" class="col-sm-3 col-form-label text-right font-weight-bold">{{'Venue' | translate}}</label>
+      <div class="col-sm-4">
+        <input
+          placeholder="{{'Venue' | translate}}"
+          type="text"
+          class="form-control"
+          id="venue"
+          name="venue"
+          [ngModel]="event ? event.venue : undefined">
+      </div>
+      <div class="col-sm-5">&nbsp;</div>
+    </div>
+
+    <div class="form-group row">
+      <label for="code" class="col-sm-3 col-form-label text-right font-weight-bold">{{'Code' | translate}}</label>
+      <div class="col-sm-4">
+        <input
+          placeholder="{{'Code' | translate}}"
+          type="text"
+          class="form-control"
+          id="code"
+          name="code"
+          [ngModel]="event ? event.code : undefined">
+      </div>
+      <div class="col-sm-5">&nbsp;</div>
+    </div>
+
+    <div class="form-group row">
+      <label for="url" class="col-sm-3 col-form-label text-right font-weight-bold">{{'Website' | translate}}</label>
+      <div class="col-sm-4">
+        <input
+          placeholder="{{'http://www.example.org' | translate}}"
+          type="text"
+          class="form-control"
+          id="url"
+          name="url"
+          [ngModel]="event ? event.url : undefined">
+      </div>
+      <div class="col-sm-5">&nbsp;</div>
+    </div>
+
+    <div class="form-group row">
+      <label for="description" class="col-sm-3 col-form-label text-right font-weight-bold">{{'Description' | translate}}</label>
+      <div class="col-sm-4">
+      <textarea
+        placeholder="{{'Description' | translate}}"
+        class="form-control"
+        id="description"
+        name="description"
+        [ngModel]="event ? event.description : undefined">
+      </textarea>
+      </div>
+      <div class="col-sm-5">&nbsp;</div>
+    </div>
+
+    <div class="form-group row">
+      <div class="offset-sm-3 col-sm-9">
+        <button type="submit" class="btn btn-success" id="saveEvent" [disabled]="loading">
+          {{'Save' | translate}}
+        </button>&nbsp;
+        <a class="btn btn-secondary" routerLink="/events">{{'Cancel' | translate}}</a><br/>
+        <ws-spinner *ngIf="loading"></ws-spinner>
+      </div>
+    </div>
+  </form>
+</ng-container>

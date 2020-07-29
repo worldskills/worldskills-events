@@ -27,6 +27,8 @@ import {CkEditorDirective} from "../directives/ck-editor/ck-editor.directive";
 import {EventsComponent} from './events/events.component';
 import {EventsSearchFormComponent} from './events-search-form/events-search-form.component';
 import {EventComponent} from './event/event.component';
+import { EventFormComponent } from './event-form/event-form.component';
+import { EventUpdateComponent } from './event-update/event-update.component';
 
 export function HttpLoaderFactory(http: HttpClient) {
   return new TranslateHttpLoader(http);
@@ -42,6 +44,8 @@ export function HttpLoaderFactory(http: HttpClient) {
     EventsComponent,
     EventsSearchFormComponent,
     EventComponent,
+    EventFormComponent,
+    EventUpdateComponent,
   ],
   imports: [
     BrowserModule,

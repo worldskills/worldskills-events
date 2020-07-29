@@ -1,0 +1,10 @@
+<ng-container *ngIf="loading || !initialized">
+  <ws-spinner></ws-spinner>
+</ng-container>
+<ng-container *ngIf="initialized && !loading">
+  <app-event-form
+    [event]="event"
+    (save)="save($event)"
+  >
+  </app-event-form>
+</ng-container>
