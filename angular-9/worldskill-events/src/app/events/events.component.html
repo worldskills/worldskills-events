@@ -1,0 +1,98 @@
+<button
+  routerLink="/events/add"
+  class="btn btn-success float-right"
+>{{'Add Event' | translate}}</button>
+<h2 class="mt-0">{{'Events' | translate}}</h2>
+<div class="clearfix border-bottom"></div>
+
+<div class="row mt-2">
+  <div class="col-md-9">
+    <ng-template [ngIf]="eventList && fetchParams" [ngIfElse]="uninitialized">
+      <span class="float-left">{{'Total results:' | translate}}&nbsp;{{eventList.total_count}}</span>
+      <ngb-pagination
+        class="float-right component-pager"
+        [collectionSize]="eventList.total_count"
+        [page]="(fetchParams.offset / fetchParams.limit) + 1"
+        [pageSize]="fetchParams.limit"
+        [maxSize]="10"
+        [boundaryLinks]="true"
+        (pageChange)="fetch($event)">
+      </ngb-pagination>
+      <div class="clearfix"></div>
+
+      <div class="table-responsive-md">
+        <table class="table table-striped">
+          <colgroup>
+            <col width="10%">
+            <col width="30%">
+            <col width="30%">
+            <col width="30%">
+          </colgroup>
+          <thead>
+          <tr>
+            <th class="border-top-0">
+              {{'ID' | translate}}&nbsp;
+            </th>
+            <th class="border-top-0">
+              {{'Name' | translate}}&nbsp;
+            </th>
+            <th class="border-top-0">
+              <a href="#" (click)="$event.preventDefault(); sort('start_date')">
+                {{'Date' | translate}}&nbsp;
+                <ng-container *ngIf="fetchParams.sort === 'start_date_asc'">&darr;</ng-container>
+                <ng-container *ngIf="fetchParams.sort !== 'start_date_asc'">&uarr;</ng-container>
+              </a>
+            </th>
+            <th class="border-top-0">
+              {{'Country' | translate}}
+            </th>
+          </tr>
+          </thead>
+          <ng-template [ngIf]="!loading" [ngIfElse]="loader">
+            <tbody>
+            <tr *ngFor="let event of eventList.events">
+              <td>{{event.id}}</td>
+              <td>
+                <a routerLink="{{event.id}}">
+                  {{event.name}}
+                </a>
+              </td>
+              <td>{{event.start_date | date}}</td>
+              <td>{{event.country.name.text}}</td>
+            </tr>
+            <tr *ngIf="eventList.events.length === 0">
+              <td colspan="4">{{'No events found.' | translate}}</td>
+            </tr>
+            </tbody>
+          </ng-template>
+          <ng-template #loader>
+            <tbody>
+            <tr>
+              <td colspan="4">
+                <ws-spinner></ws-spinner>
+              </td>
+            </tr>
+            </tbody>
+          </ng-template>
+        </table>
+      </div>
+
+      <ngb-pagination
+        class="float-right component-pager"
+        [collectionSize]="eventList.total_count"
+        [page]="(fetchParams.offset / fetchParams.limit) + 1"
+        [pageSize]="fetchParams.limit"
+        [maxSize]="10"
+        [boundaryLinks]="true"
+        (pageChange)="fetch($event)">
+      </ngb-pagination>
+      <div class="clearfix"></div>
+    </ng-template>
+    <ng-template #uninitialized>
+      {{'Use the search form to find Events records.' | translate}}
+    </ng-template>
+  </div>
+  <div class="col-md-3">
+    <app-events-search-form></app-events-search-form>
+  </div>
+</div>

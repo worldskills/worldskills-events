@@ -27,3 +27,7 @@ export class NgbDateCache {
   }
 
 }
+
+export function isNgbDateStruct(ngbDateStruct: any): ngbDateStruct is NgbDateStruct {
+  return typeof ngbDateStruct === 'object' && 'year' in ngbDateStruct && 'month' in ngbDateStruct && 'day' in ngbDateStruct;
+}

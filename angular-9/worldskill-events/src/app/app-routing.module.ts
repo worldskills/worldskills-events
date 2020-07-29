@@ -2,6 +2,7 @@ import {NgModule} from '@angular/core';
 import {RouterModule, Routes} from '@angular/router';
 import {HomeComponent} from "./home/home.component";
 import {ErrorComponent} from "./error/error.component";
+import {EventsComponent} from "./events/events.component";
 
 function forAppCode(appCode: number, roles: Array<string>) {
   return roles.map(name => ({
@@ -14,7 +15,18 @@ const routes: Routes = [
   {
     path: '',
     component: HomeComponent,
-    children: [],
+    children: [
+      {
+        path: 'events',
+        children: [
+          {
+            path: '',
+            pathMatch: 'full',
+            component: EventsComponent,
+          },
+        ],
+      }
+    ],
   },
   {
     path: 'not-authorized',

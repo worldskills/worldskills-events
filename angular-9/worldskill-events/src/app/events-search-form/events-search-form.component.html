@@ -1,0 +1,113 @@
+<div class="card">
+  <h5 class="card-header m-0">{{'Search events' | translate}}</h5>
+  <div class="card-body">
+    <form *ngIf="initialized" class="form-horizontal" novalidate (ngSubmit)="submit()" #form="ngForm"
+          (change)="onChange()">
+      <fieldset [disabled]="loading">
+        <div class="form-group row">
+          <div class="col-sm-12">
+            <input
+              type="text"
+              placeholder="{{'Name' | translate}}"
+              class="form-control"
+              name="name"
+              [ngModel]="fetchParams.name"
+            >
+          </div>
+        </div>
+
+        <div class="form-group row">
+          <div class="col-sm-12">
+            <input #inputAfter="ngModel" #dAfter="ngbDatepicker"
+                   placeholder="{{'After' | translate}}"
+                   type="text"
+                   class="form-control"
+                   name="after"
+                   [ngModel]="fetchParams.after ? ngbDateCache.getNgbDate(fetchParams.after.toString(), inputAfter) : undefined"
+                   ngbDatepicker
+                   (focus)="dAfter.open()"
+                   [autoClose]="true"
+                   [restoreFocus]="true"/>
+          </div>
+        </div>
+
+        <div class="form-group row">
+          <div class="col-sm-12">
+            <input #inputBefore="ngModel" #dBefore="ngbDatepicker"
+                   placeholder="{{'Before' | translate}}"
+                   type="text"
+                   class="form-control"
+                   name="before"
+                   [ngModel]="fetchParams.before ? ngbDateCache.getNgbDate(fetchParams.before.toString(), inputBefore) : undefined"
+                   ngbDatepicker
+                   (focus)="dBefore.open()"
+                   [autoClose]="true"
+                   [restoreFocus]="true"/>
+          </div>
+        </div>
+
+        <div class="form-group row">
+          <div class="col-sm-12">
+            <select
+              class="form-control"
+              name="type"
+              [ngModel]="fetchParams.type || ''"
+              [disabled]="loading"
+              (change)="onChange()"
+              required
+            >
+              <option value="">{{'Select type...' | translate}}</option>
+              <option value="competition">{{'Competition' | translate}}</option>
+              <option value="general_assembly">{{'General Assembly' | translate}}</option>
+              <option value="preparation_meeting">{{'Preparation Meeting' | translate}}</option>
+            </select>
+          </div>
+        </div>
+
+        <div class="form-group row">
+          <div class="col-sm-12">
+            <ng-select
+              [wsSelect]="['id', 'name.text']"
+              name="country"
+              [ngModel]="fetchParams.country"
+              placeholder="{{'Country' | translate}}"
+              [items]="countries || []"
+              [disabled]="loading"
+              (change)="onChange()"
+            ></ng-select>
+          </div>
+        </div>
+
+
+        <div class="form-group row">
+          <div class="col-sm-12">
+            <ws-entity-tree-select
+              name="ws_entity"
+              [ngModel]="fetchParams.ws_entity"
+              [multiple]="false"
+              [disabled]="loading"
+              (change)="onChange()"
+              [showControls]="false"
+              [showFullPath]="false"
+            ></ws-entity-tree-select>
+          </div>
+        </div>
+
+        <div class="form-group row mb-0">
+          <div class="col-sm-12 text-right">
+            <button
+              type="submit"
+              class="btn btn-primary btn-sm" id="saveCentre" [disabled]="loading">
+              <ng-container *ngIf="!loading">{{'Search' | translate}}</ng-container>
+              <ng-container *ngIf="loading">
+                <ws-spinner></ws-spinner>
+              </ng-container>
+            </button>&nbsp;
+          </div>
+        </div>
+
+      </fieldset>
+    </form>
+    <ws-spinner *ngIf="!initialized"></ws-spinner>
+  </div>
+</div>

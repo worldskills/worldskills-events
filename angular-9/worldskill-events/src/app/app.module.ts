@@ -24,6 +24,8 @@ import {DatePipe} from '@angular/common';
 import {HttpInterceptorService} from '../services/http-interceptor/http-interceptor.service';
 import {WsSpinnerComponent} from './ws-spinner/ws-spinner.component';
 import {CkEditorDirective} from "../directives/ck-editor/ck-editor.directive";
+import { EventsComponent } from './events/events.component';
+import { EventsSearchFormComponent } from './events-search-form/events-search-form.component';
 
 export function HttpLoaderFactory(http: HttpClient) {
   return new TranslateHttpLoader(http);
@@ -36,6 +38,8 @@ export function HttpLoaderFactory(http: HttpClient) {
     ErrorComponent,
     WsSpinnerComponent,
     CkEditorDirective,
+    EventsComponent,
+    EventsSearchFormComponent,
   ],
   imports: [
     BrowserModule,
