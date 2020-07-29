@@ -3,6 +3,7 @@ import {RouterModule, Routes} from '@angular/router';
 import {HomeComponent} from "./home/home.component";
 import {ErrorComponent} from "./error/error.component";
 import {EventsComponent} from "./events/events.component";
+import {EventComponent} from "./event/event.component";
 
 function forAppCode(appCode: number, roles: Array<string>) {
   return roles.map(name => ({
@@ -23,6 +24,12 @@ const routes: Routes = [
             path: '',
             pathMatch: 'full',
             component: EventsComponent,
+          },
+          {
+            path: ':eventId',
+            data: {breadcrumb: 'Event'},
+            component: EventComponent,
+            children: [],
           },
         ],
       }

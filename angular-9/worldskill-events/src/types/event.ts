@@ -2,6 +2,10 @@ import {Link, List} from './common';
 import {AuthEntity} from './entity';
 import {I18nModel} from '@worldskills/worldskills-angular-lib';
 
+export interface EventRequest {
+  name: string;
+}
+
 export interface Event {
   id: number;
   name: string;

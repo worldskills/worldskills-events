@@ -1,0 +1,39 @@
+<ng-container *ngIf="loading || !initialized">
+  <ws-spinner></ws-spinner>
+</ng-container>
+<ng-container *ngIf="initialized && !loading">
+  <p class="float-right">
+    <button (click)="deleteEvent()" class="btn btn-danger btn-sm">
+      {{'Delete Event' | translate}}
+    </button>
+  </p>
+
+  <h2>{{event.name}}</h2>
+
+  <ul class="nav nav-tabs">
+    <li class="nav-item">
+      <a class="nav-link" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}"
+         routerLink="/events/{{event.id}}">{{'Event' | translate}}</a>
+    </li>
+    <li class="nav-item">
+      <a class="nav-link" routerLinkActive="active"
+         routerLink="/events/{{event.id}}/skills">{{'Skills' | translate}}</a>
+    </li>
+    <li class="nav-item">
+      <a class="nav-link" routerLinkActive="active"
+         routerLink="/events/{{event.id}}/sectors">{{'Sectors' | translate}}</a>
+    </li>
+    <li class="nav-item">
+      <a class="nav-link" routerLinkActive="active"
+         routerLink="/events/{{event.id}}/skill-tags">{{'Skill tags' | translate}}</a>
+    </li>
+    <li class="nav-item">
+      <a class="nav-link" routerLinkActive="active"
+         routerLink="/events/{{event.id}}/sponsors">{{'Sponsors' | translate}}</a>
+    </li>
+  </ul>
+
+  <div id="content">
+    <router-outlet></router-outlet>
+  </div>
+</ng-container>
