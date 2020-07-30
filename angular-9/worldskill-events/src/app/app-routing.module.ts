@@ -5,6 +5,7 @@ import {ErrorComponent} from "./error/error.component";
 import {EventsComponent} from "./events/events.component";
 import {EventComponent} from "./event/event.component";
 import {EventUpdateComponent} from "./event-update/event-update.component";
+import {SkillsComponent} from "./skills/skills.component";
 
 function forAppCode(appCode: number, roles: Array<string>) {
   return roles.map(name => ({
@@ -35,6 +36,16 @@ const routes: Routes = [
                 pathMatch: 'full',
                 data: {breadcrumb: 'Event'},
                 component: EventUpdateComponent,
+              },
+              // {
+              //   path: 'skills/:skillId',
+              //   data: {breadcrumb: 'Skill'},
+              //   component: SkillComponent,
+              // },
+              {
+                path: 'skills',
+                data: {breadcrumb: 'Skills'},
+                component: SkillsComponent,
               },
             ],
           },

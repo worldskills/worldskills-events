@@ -1,0 +1,82 @@
+<ng-container *ngIf="loading || !initialized">
+  <ws-spinner></ws-spinner>
+</ng-container>
+<ng-container *ngIf="initialized && !loading">
+  <div class="row my-2">
+    <div class="col-12">
+      <h2 class="m-0 float-left">
+        {{'Skills' | translate}}
+      </h2>
+      <button routerLink="create" class="btn btn-primary btn-sm float-right">
+        {{'Add skill' | translate}}
+      </button>
+      <div class="btn-group float-right mr-1">
+        <ws-spinner *ngIf="this.loadingClone"></ws-spinner>
+        <button
+          [disabled]="selectedSkills.length === 0 || this.loadingClone"
+          class="btn btn-secondary btn-sm dropdown-toggle ml-1"
+          type="button"
+          data-toggle="dropdown"
+          aria-haspopup="true" aria-expanded="false">
+          {{'Copy selected skills to event' | translate}}
+        </button>
+        <div class="dropdown-menu dropdown-menu-right">
+          <ng-container *ngFor="let e of events">
+            <a class="dropdown-item" href="#" (click)="copySelectedSkills($event, e)">{{e.name}}</a>
+          </ng-container>
+        </div>
+      </div>
+      <div class="clearfix"></div>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-12">
+      <div class="table-responsive">
+        <table class="table table-striped border-top">
+          <colgroup>
+            <col width="5%">
+            <col width="10%">
+            <col width="50%">
+            <col width="35%">
+          </colgroup>
+          <thead>
+          <tr>
+            <th class="border-top-0">&nbsp;</th>
+            <th class="border-top-0">{{'Number' | translate}}</th>
+            <th class="border-top-0">{{'Name' | translate}}</th>
+            <th class="border-top-0">{{'Type' | translate}}</th>
+          </tr>
+          <tr>
+            <th><input type="checkbox" (change)="toggleSelectAll($event)"></th>
+            <th><input type="text" class="form-control" placeholder="{{'Number' | translate}}"
+                       (change)="updateFilter('number', $event)"
+                       (keyup)="updateFilter('number', $event)"/></th>
+            <th><input type="text" class="form-control" placeholder="{{'Name' | translate}}"
+                       (change)="updateFilter('name', $event)"
+                       (keyup)="updateFilter('name', $event)"/></th>
+            <th>
+              <select class="form-control" (change)="updateFilter('type', $event)">
+                <option value="">{{'Select type...' | translate}}</option>
+                <ng-container *ngFor="let l of TypeLabels">
+                  <option value="{{l.key}}">{{l.label}}</option>
+                </ng-container>
+              </select>
+            </th>
+          </tr>
+          </thead>
+          <tbody>
+          <tr *ngFor="let skill of filteredSkills">
+            <td><input type="checkbox" [checked]="isSelected(skill)" (change)="toggleSelection($event, skill)"></td>
+            <td><a href="{{skill.id}}">{{skill.number}}</a></td>
+            <td><a href="{{skill.id}}">{{skill.name.text}}</a></td>
+            <td>{{getTypeLabel(skill.type) | translate}}</td>
+          </tr>
+          <tr *ngIf="filteredSkills.length === 0">
+            <td colspan="4">{{'No skills found' | translate}}</td>
+          </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</ng-container>

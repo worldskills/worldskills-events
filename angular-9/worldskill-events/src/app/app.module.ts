@@ -29,6 +29,7 @@ import {EventsSearchFormComponent} from './events-search-form/events-search-form
 import {EventComponent} from './event/event.component';
 import { EventFormComponent } from './event-form/event-form.component';
 import { EventUpdateComponent } from './event-update/event-update.component';
+import { SkillsComponent } from './skills/skills.component';
 
 export function HttpLoaderFactory(http: HttpClient) {
   return new TranslateHttpLoader(http);
@@ -46,6 +47,7 @@ export function HttpLoaderFactory(http: HttpClient) {
     EventComponent,
     EventFormComponent,
     EventUpdateComponent,
+    SkillsComponent,
   ],
   imports: [
     BrowserModule,
