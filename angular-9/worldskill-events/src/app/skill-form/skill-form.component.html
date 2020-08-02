@@ -1,0 +1,398 @@
+<ng-container *ngIf="loading || !initialized">
+  <ws-spinner></ws-spinner>
+</ng-container>
+<ng-container *ngIf="initialized && !loading">
+  <form class="form-horizontal" [ngClass]="{'was-validated': this.form.submitted}" novalidate
+        (ngSubmit)="submit()" #form="ngForm">
+
+    <div class="form-group row">
+      <label for="name"
+             class="col-3 col-form-label text-right font-weight-bold">{{'Name' | translate}}&nbsp;*</label>
+      <div class="col-6">
+        <input
+          placeholder="{{'Name' | translate}}"
+          type="text"
+          class="form-control"
+          id="name"
+          name="name"
+          required
+          [ngModel]="skill ? skill.name.text : undefined">
+      </div>
+      <div class="col-3">
+      <span
+        class="form-text text-danger"
+        style="display: block"
+        *ngIf="form.submitted && this.form.controls.name.errors && this.form.controls.name.errors.required">
+        {{'Please enter a name!' | translate}}
+      </span>
+      </div>
+    </div>
+
+    <div class="form-group row">
+      <label for="ws_entity"
+             class="col-3 col-form-label text-right font-weight-bold">{{'Entity' | translate}}&nbsp;*</label>
+      <div class="col-6">
+        <ws-entity-tree-select
+          id="ws_entity"
+          name="ws_entity"
+          [disabled]="!!skill"
+          [ngModel]="skill ? skill.ws_entity : undefined"
+          [multiple]="false"
+          [showFullPath]="false">
+        </ws-entity-tree-select>
+      </div>
+      <div class="col-3">
+      <span
+        class="form-text text-danger"
+        style="display: block"
+        *ngIf="form.submitted && this.form.controls.ws_entity.errors && this.form.controls.ws_entity.errors.required">
+        {{'Please select an entity!' | translate}}
+      </span>
+      </div>
+    </div>
+
+    <div class="form-group row">
+      <label for="number"
+             class="col-3 col-form-label text-right font-weight-bold">{{'Number' | translate}}&nbsp;*</label>
+      <div class="col-6">
+        <input
+          placeholder="{{'Number' | translate}}"
+          type="text"
+          class="form-control"
+          id="number"
+          name="number"
+          required
+          [ngModel]="skill ? skill.number : undefined">
+      </div>
+      <div class="col-3">
+      <span
+        class="form-text text-danger"
+        style="display: block"
+        *ngIf="form.submitted && this.form.controls.number.errors && this.form.controls.number.errors.required">
+        {{'Please enter a number!' | translate}}
+      </span>
+      </div>
+    </div>
+
+    <div class="form-group row">
+      <label for="type"
+             class="col-3 col-form-label text-right font-weight-bold">{{'Type' | translate}}&nbsp;*</label>
+      <div class="col-6">
+        <select
+          class="form-control"
+          id="type"
+          name="type"
+          [ngModel]="skill ? skill.type : undefined"
+          required
+        >
+          <option value="">{{'Select type...' | translate}}</option>
+          <option value="official">{{'Official' | translate}}</option>
+          <option value="demo">{{'Demo' | translate}}</option>
+          <option value="presentation">{{'Presentation' | translate}}</option>
+          <option value="multi">{{'Multi' | translate}}</option>
+          <option value="possible_official">{{'Possible official' | translate}}</option>
+          <option value="proposed_demo">{{'Proposed demo' | translate}}</option>
+          <option value="exhibition">{{'Exhibition' | translate}}</option>
+          <option value="host_member">{{'Host member' | translate}}</option>
+          <option value="juniors">{{'Juniors' | translate}}</option>
+        </select>
+      </div>
+      <div class="col-3">
+      <span
+        class="form-text text-danger"
+        style="display: block"
+        *ngIf="form.submitted && this.form.controls.type.errors && this.form.controls.type.errors.required">
+        {{'Please select a type!' | translate}}
+      </span>
+      </div>
+    </div>
+
+    <div class="form-group row">
+      <label for="status"
+             class="col-3 col-form-label text-right font-weight-bold">{{'Status' | translate}}&nbsp;*</label>
+      <div class="col-6">
+        <select
+          class="form-control"
+          id="status"
+          name="status"
+          [ngModel]="skill ? skill.status : undefined"
+          required
+        >
+          <option value="">{{'Select status...' | translate}}</option>
+          <option value="active">{{'Active' | translate}}</option>
+          <option value="on_notice">{{'On notice' | translate}}</option>
+          <option value="removed">{{'Removed' | translate}}</option>
+        </select>
+      </div>
+      <div class="col-3">
+      <span
+        class="form-text text-danger"
+        style="display: block"
+        *ngIf="form.submitted && this.form.controls.status.errors && this.form.controls.status.errors.required">
+        {{'Please select a status!' | translate}}
+      </span>
+      </div>
+    </div>
+
+    <div class="form-group row">
+      <label for="base_id"
+             class="col-3 col-form-label text-right font-weight-bold">{{'Base Skill' | translate}}&nbsp;*</label>
+      <div class="col-6">
+        <ng-select
+          id="base_id"
+          [wsSelect]="['id', 'name.text']"
+          name="base_id"
+          [ngModel]="skill ? skill.base_id : undefined"
+          placeholder="{{'Base Skill' | translate}}"
+          [items]="baseSkills || []"
+        ></ng-select>
+      </div>
+      <div class="col-3">
+      <span
+        class="form-text text-danger"
+        style="display: block"
+        *ngIf="form.submitted && this.form.controls.base_id.errors && this.form.controls.base_id.errors.required">
+        {{'Please select a base skill!' | translate}}
+      </span>
+      </div>
+    </div>
+
+    <div class="form-group row">
+      <label for="sector"
+             class="col-3 col-form-label text-right font-weight-bold">{{'Sector' | translate}}&nbsp;*</label>
+      <div class="col-6">
+        <ng-select
+          id="sector"
+          [wsSelect]="['id', 'name.text']"
+          name="sector"
+          [ngModel]="skill ? skill.sector : undefined"
+          placeholder="{{'Sectors' | translate}}"
+          [items]="sectors || []"
+        ></ng-select>
+      </div>
+      <div class="col-3">
+      <span
+        class="form-text text-danger"
+        style="display: block"
+        *ngIf="form.submitted && this.form.controls.sector.errors && this.form.controls.sector.errors.required">
+        {{'Please select a sector!' | translate}}
+      </span>
+      </div>
+    </div>
+
+    <div class="form-group row">
+      <label for="description"
+             class="col-3 col-form-label text-right font-weight-bold">{{'Description' | translate}}</label>
+      <div class="col-6">
+      <textarea
+        appCkEditor
+        placeholder="{{'Description' | translate}}"
+        class="form-control"
+        id="description"
+        name="description"
+        [ngModel]="skill ? skill.description.text : undefined">
+      </textarea>
+      </div>
+      <div class="col-3">&nbsp;</div>
+    </div>
+
+    <div class="form-group row">
+      <label for="description_industry_action"
+             class="col-3 col-form-label text-right font-weight-bold">{{'Career info' | translate}}</label>
+      <div class="col-6">
+      <textarea
+        appCkEditor
+        placeholder="{{'Career info' | translate}}"
+        class="form-control"
+        id="description_industry_action"
+        name="description_industry_action"
+        [ngModel]="skill ? skill.description_industry_action.text : undefined">
+      </textarea>
+      </div>
+      <div class="col-3">&nbsp;</div>
+    </div>
+
+    <div class="form-group row">
+      <label for="description_required_skills"
+             class="col-3 col-form-label text-right font-weight-bold">{{'Required skills' | translate}}</label>
+      <div class="col-6">
+      <textarea
+        appCkEditor
+        placeholder="{{'Required skills' | translate}}"
+        class="form-control"
+        id="description_required_skills"
+        name="description_required_skills"
+        [ngModel]="skill ? skill.description_required_skills.text : undefined">
+      </textarea>
+      </div>
+      <div class="col-3">&nbsp;</div>
+    </div>
+
+    <div class="form-group row">
+      <label for="description_competition_action"
+             class="col-3 col-form-label text-right font-weight-bold">{{'At the competition' | translate}}</label>
+      <div class="col-6">
+      <textarea
+        appCkEditor
+        placeholder="{{'At the competition' | translate}}"
+        class="form-control"
+        id="description_competition_action"
+        name="description_competition_action"
+        [ngModel]="skill ? skill.description_competition_action.text : undefined">
+      </textarea>
+      </div>
+      <div class="col-3">&nbsp;</div>
+    </div>
+
+    <div class="form-group row">
+      <label for="description_facts"
+             class="col-3 col-form-label text-right font-weight-bold">{{'Facts' | translate}}</label>
+      <div class="col-6">
+      <textarea
+        appCkEditor
+        placeholder="{{'Facts' | translate}}"
+        class="form-control"
+        id="description_facts"
+        name="description_facts"
+        [ngModel]="skill ? skill.description_facts.text : undefined">
+      </textarea>
+      </div>
+      <div class="col-3">&nbsp;</div>
+    </div>
+
+    <div class="form-group row">
+      <label for="url_video"
+             class="col-3 col-form-label text-right font-weight-bold">{{'Video URL' | translate}}</label>
+      <div class="col-6">
+        <input
+          placeholder="{{'Video URL' | translate}}"
+          type="text"
+          class="form-control"
+          id="url_video"
+          name="url_video"
+          [ngModel]="skill ? skill.url_video : undefined">
+      </div>
+      <div class="col-3">&nbsp;</div>
+    </div>
+
+    <div class="form-group row">
+      <label for="min_teams"
+             class="col-3 col-form-label text-right font-weight-bold">{{'Min. teams' | translate}}</label>
+      <div class="col-6">
+        <input
+          placeholder="{{'Min. teams' | translate}}"
+          type="text"
+          class="form-control"
+          id="min_teams"
+          name="min_teams"
+          [ngModel]="skill ? skill.min_teams : undefined">
+      </div>
+      <div class="col-3">&nbsp;</div>
+    </div>
+
+    <div class="form-group row">
+      <label for="max_teams"
+             class="col-3 col-form-label text-right font-weight-bold">{{'Max. teams' | translate}}</label>
+      <div class="col-6">
+        <input
+          placeholder="{{'Max. teams' | translate}}"
+          type="text"
+          class="form-control"
+          id="max_teams"
+          name="max_teams"
+          [ngModel]="skill ? skill.max_teams : undefined">
+      </div>
+      <div class="col-3">&nbsp;</div>
+    </div>
+
+    <div class="form-group row">
+      <label for="team_size"
+             class="col-3 col-form-label text-right font-weight-bold">{{'Team size' | translate}}</label>
+      <div class="col-6">
+        <input
+          placeholder="{{'Team size' | translate}}"
+          type="text"
+          class="form-control"
+          id="team_size"
+          name="team_size"
+          [ngModel]="skill ? skill.team_size : undefined">
+      </div>
+      <div class="col-3">&nbsp;</div>
+    </div>
+
+    <div class="form-group row">
+      <label for="competitor_max_age"
+             class="col-3 col-form-label text-right font-weight-bold">{{'Competitor age limit' | translate}}</label>
+      <div class="col-6">
+        <input
+          placeholder="{{'Competitor age limit' | translate}}"
+          type="text"
+          class="form-control"
+          id="competitor_max_age"
+          name="competitor_max_age"
+          [ngModel]="skill ? skill.competitor_max_age : undefined">
+      </div>
+      <div class="col-3">&nbsp;</div>
+    </div>
+
+    <div class="form-group row">
+      <div class="offset-sm-3 col-sm-9">
+        <label>
+          <input type="checkbox" id="identify_judges" name="identify_judges"
+                 [ngModel]="skill ? skill.identify_judges : false">
+          &nbsp;{{'Identify judges'| translate}}
+        </label>
+      </div>
+    </div>
+
+    <div class="form-group row">
+      <div class="offset-sm-3 col-sm-9">
+        <label>
+          <input type="checkbox" id="group_competitors" name="group_competitors"
+                 [ngModel]="skill ? skill.group_competitors : false">
+          &nbsp;{{'Group competitors'| translate}}
+        </label>
+      </div>
+    </div>
+
+    <div class="form-group row">
+      <div class="offset-sm-3 col-sm-9">
+        <label>
+          <input type="checkbox" id="compatriot_marking" name="compatriot_marking"
+                 [ngModel]="skill ? skill.compatriot_marking : false">
+          &nbsp;{{'Compatriot marking'| translate}}
+        </label>
+      </div>
+    </div>
+
+    <div class="form-group row">
+      <div class="offset-sm-3 col-sm-9">
+        <label>
+          <input type="checkbox" id="generate_500_scale" name="generate_500_scale"
+                 [ngModel]="skill ? skill.generate_500_scale : false">
+          &nbsp;{{'Generate 500 scale'| translate}}
+        </label>
+      </div>
+    </div>
+
+    <div class="form-group row">
+      <div class="offset-sm-3 col-sm-9">
+        <label>
+          <input type="checkbox" id="landscape_marking" name="landscape_marking"
+                 [ngModel]="skill ? skill.landscape_marking : false">
+          &nbsp;{{'Landscape marking'| translate}}
+        </label>
+      </div>
+    </div>
+
+    <div class="form-group row">
+      <div class="offset-sm-3 col-sm-9">
+        <button type="submit" class="btn btn-success" id="saveSkill" [disabled]="loading">
+          {{'Save' | translate}}
+        </button>&nbsp;
+        <a class="btn btn-secondary" routerLink="/skills">{{'Cancel' | translate}}</a><br/>
+        <ws-spinner *ngIf="loading"></ws-spinner>
+      </div>
+    </div>
+  </form>
+</ng-container>

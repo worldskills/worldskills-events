@@ -67,8 +67,8 @@
           <tbody>
           <tr *ngFor="let skill of filteredSkills">
             <td><input type="checkbox" [checked]="isSelected(skill)" (change)="toggleSelection($event, skill)"></td>
-            <td><a href="{{skill.id}}">{{skill.number}}</a></td>
-            <td><a href="{{skill.id}}">{{skill.name.text}}</a></td>
+            <td><a [routerLink]="[skill.id]">{{skill.number}}</a></td>
+            <td><a [routerLink]="[skill.id]">{{skill.name.text}}</a></td>
             <td>{{getTypeLabel(skill.type) | translate}}</td>
           </tr>
           <tr *ngIf="filteredSkills.length === 0">

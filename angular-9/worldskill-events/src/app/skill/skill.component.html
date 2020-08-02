@@ -1,0 +1,72 @@
+<ng-container *ngIf="loading || !initialized">
+  <ws-spinner></ws-spinner>
+</ng-container>
+<ng-container *ngIf="initialized && !loading">
+  <div class="row my-2">
+    <div class="col-12">
+      <h2 class="m-0 float-left">
+        {{'Skill' | translate}}
+      </h2>
+      <div class="btn-group float-right mr-1">
+        <ws-spinner *ngIf="this.loadingRemoving"></ws-spinner>
+        <button
+          [disabled]="this.loadingRemoving"
+          class="btn btn-secondary btn-sm"
+          type="button"
+          (click)="markAsRemoved()"
+        >
+          {{'Mark Skill as removed' | translate}}
+        </button>
+        <button
+          class="btn btn-danger btn-sm ml-1"
+          type="button"
+          (click)="delete()"
+        >
+          {{'Delete Skill' | translate}}
+        </button>
+      </div>
+      <div class="clearfix"></div>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-md-3">
+      <div class="card">
+        <div class="list-group list-group-flush">
+          <a
+            routerLinkActive="active"
+            routerLink="./" [routerLinkActiveOptions]="{exact: true}"
+            class="list-group-item list-group-item-action">
+            {{'Skill' | translate}}
+          </a>
+          <a
+            routerLinkActive="active"
+            routerLink="photos"
+            class="list-group-item list-group-item-action">
+            {{'Photos' | translate}}
+          </a>
+          <a
+            routerLinkActive="active"
+            routerLink="tags"
+            class="list-group-item list-group-item-action">
+            {{'Tags' | translate}}
+          </a>
+          <a
+            routerLinkActive="active"
+            routerLink="contacts"
+            class="list-group-item list-group-item-action">
+            {{'Sponsors' | translate}}
+          </a>
+          <a
+            routerLinkActive="active"
+            routerLink="addresses"
+            class="list-group-item list-group-item-action">
+            {{'Copy' | translate}}
+          </a>
+        </div>
+      </div>
+    </div>
+    <div class="col-md-9">
+      <router-outlet></router-outlet>
+    </div>
+  </div>
+</ng-container>

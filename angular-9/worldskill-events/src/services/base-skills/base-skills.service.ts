@@ -1,0 +1,58 @@
+import {Injectable} from '@angular/core';
+import {
+  FetchParams,
+  FULL,
+  MulticastOptions,
+  RequestOptions,
+  WsService,
+  WsServiceRequestP1,
+  WsServiceRequestP2,
+  WsServiceRequestP3
+} from '@worldskills/worldskills-angular-lib';
+import {HttpClient} from '@angular/common/http';
+import {Observable} from 'rxjs';
+import {httpParamsFromFetchParams} from '../../utils/http';
+import {environment} from '../../environments/environment';
+import {share} from 'rxjs/operators';
+import {BaseSkillList} from '../../types/base-skill';
+
+const DEFAULT_FETCH_PARAMS: FetchParams = {
+  limit: 9999,
+  offset: 0,
+};
+
+@Injectable({
+  providedIn: 'root'
+})
+export class BaseSkillsService extends WsService<BaseSkillList> {
+
+  constructor(private http: HttpClient) {
+    super();
+  }
+
+  fetch(rOpt?: RequestOptions): Observable<BaseSkillList>;
+  fetch(params: FetchParams, rOpt?: RequestOptions): Observable<BaseSkillList>;
+  fetch(mOpt: MulticastOptions, rOpt?: RequestOptions): Observable<BaseSkillList>;
+  fetch(params: FetchParams, mOpt: MulticastOptions, rOpt?: RequestOptions): Observable<BaseSkillList>;
+  fetch(p1: WsServiceRequestP1, p2?: WsServiceRequestP2, p3?: WsServiceRequestP3): Observable<BaseSkillList> {
+    const {fetchParams, multicastOptions, requestOptions} = this.resolveArgs(p1, p2, p3, FULL, DEFAULT_FETCH_PARAMS);
+    const params = httpParamsFromFetchParams(fetchParams);
+    const observable = this.http.get<BaseSkillList>(
+      requestOptions.url ?? `${environment.worldskillsApiEvents}/base_skills`, {params}
+    ).pipe(share());
+    return this.request(observable, multicastOptions);
+  }
+
+  fetchByEntity(entityId: number, rOpt?: RequestOptions): Observable<BaseSkillList>;
+  fetchByEntity(entityId: number, params: FetchParams, rOpt?: RequestOptions): Observable<BaseSkillList>;
+  fetchByEntity(entityId: number, mOpt: MulticastOptions, rOpt?: RequestOptions): Observable<BaseSkillList>;
+  fetchByEntity(entityId: number, params: FetchParams, mOpt: MulticastOptions, rOpt?: RequestOptions): Observable<BaseSkillList>;
+  fetchByEntity(entityId: number, p1: WsServiceRequestP1, p2?: WsServiceRequestP2, p3?: WsServiceRequestP3): Observable<BaseSkillList> {
+    const {fetchParams, multicastOptions, requestOptions} = this.resolveArgs(p1, p2, p3, FULL, DEFAULT_FETCH_PARAMS);
+    const params = httpParamsFromFetchParams(fetchParams);
+    const observable = this.http.get<BaseSkillList>(
+      requestOptions.url ?? `${environment.worldskillsApiEvents}/base_skills?entity=${entityId}`, {params}
+    ).pipe(share());
+    return this.request(observable, multicastOptions);
+  }
+}

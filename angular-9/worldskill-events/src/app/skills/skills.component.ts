@@ -8,6 +8,7 @@ import {combineLatest} from "rxjs";
 import {map} from "rxjs/operators";
 import {EventsService} from "../../services/events/events.service";
 import {SkillService} from "../../services/skill/skill.service";
+import {TranslateService} from "@ngx-translate/core";
 
 interface Filter {
   number?: string;
@@ -49,6 +50,7 @@ export class SkillsComponent extends WsComponent implements OnInit {
     private eventsService: EventsService,
     private skillService: SkillService,
     private alertService: AlertService,
+    private translateService: TranslateService,
   ) {
     super();
   }
@@ -134,9 +136,11 @@ export class SkillsComponent extends WsComponent implements OnInit {
         this.selectedSkills.map(skill => this.skillService.copySkill(this.event.id, skill.id, {event}))
       ).subscribe(() => {
         this.selectedSkills = [];
-        this.alertService.setAlert('copied-events', AlertType.success,
-          null, undefined, 'The skills have been successfully copied.', true);
-      })
+        this.translateService.get('The skills have been successfully copied.').subscribe(t => {
+          this.alertService.setAlert('copied-events', AlertType.success,
+            null, undefined, t, true);
+        });
+      });
     }
   }
 

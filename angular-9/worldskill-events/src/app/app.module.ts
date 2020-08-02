@@ -27,9 +27,12 @@ import {CkEditorDirective} from "../directives/ck-editor/ck-editor.directive";
 import {EventsComponent} from './events/events.component';
 import {EventsSearchFormComponent} from './events-search-form/events-search-form.component';
 import {EventComponent} from './event/event.component';
-import { EventFormComponent } from './event-form/event-form.component';
-import { EventUpdateComponent } from './event-update/event-update.component';
-import { SkillsComponent } from './skills/skills.component';
+import {EventFormComponent} from './event-form/event-form.component';
+import {EventUpdateComponent} from './event-update/event-update.component';
+import {SkillsComponent} from './skills/skills.component';
+import {SkillComponent} from './skill/skill.component';
+import {SkillUpdateComponent} from './skill-update/skill-update.component';
+import {SkillFormComponent} from './skill-form/skill-form.component';
 
 export function HttpLoaderFactory(http: HttpClient) {
   return new TranslateHttpLoader(http);
@@ -48,6 +51,9 @@ export function HttpLoaderFactory(http: HttpClient) {
     EventFormComponent,
     EventUpdateComponent,
     SkillsComponent,
+    SkillComponent,
+    SkillUpdateComponent,
+    SkillFormComponent,
   ],
   imports: [
     BrowserModule,

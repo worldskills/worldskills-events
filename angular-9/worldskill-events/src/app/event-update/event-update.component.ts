@@ -2,6 +2,7 @@ import {Component, OnInit} from '@angular/core';
 import {Event, EventRequest} from "../../types/event";
 import {EventService} from "../../services/event/event.service";
 import {AlertService, AlertType, WsComponent} from "@worldskills/worldskills-angular-lib";
+import {TranslateService} from "@ngx-translate/core";
 
 @Component({
   selector: 'app-event-update',
@@ -16,6 +17,7 @@ export class EventUpdateComponent extends WsComponent implements OnInit {
   constructor(
     private eventService: EventService,
     private alertService: AlertService,
+    private translateService: TranslateService,
   ) {
     super();
   }
@@ -33,9 +35,11 @@ export class EventUpdateComponent extends WsComponent implements OnInit {
 
   save(request: EventRequest) {
     this.eventService.update(this.event.id, request).subscribe(() => {
-      this.alertService.setAlert('updated-event', AlertType.success,
-        null, undefined, 'The Event has been updated successfully.', true);
-    })
+      this.translateService.get('The Event has been updated successfully.').subscribe(t => {
+        this.alertService.setAlert('updated-event', AlertType.success,
+          null, undefined, t, true);
+      });
+    });
   }
 
 }

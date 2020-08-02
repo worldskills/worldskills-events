@@ -41,6 +41,34 @@ export interface EventSkillCloneRequest {
   };
 }
 
+export interface SkillRequest {
+  event: { id: number };
+  type: string;
+  base_id: number;
+  number: string;
+  status: string;
+  url_video: string;
+  sort: number;
+  name: I18nModel;
+  description: I18nModel;
+  description_required_skills: I18nModel;
+  description_industry_action: I18nModel;
+  description_competition_action: I18nModel;
+  description_facts: I18nModel;
+  group?: any;
+  sector: { id: number };
+  min_teams: number;
+  max_teams?: any;
+  team_size: number;
+  identify_judges: boolean;
+  group_competitors: boolean;
+  compatriot_marking: boolean;
+  generate_500_scale: boolean;
+  landscape_marking: boolean;
+  competitor_max_age: number;
+  ws_entity: { id: number };
+}
+
 export interface Skill {
   id: number;
   event: Event;

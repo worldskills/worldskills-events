@@ -56,7 +56,7 @@ export class CkEditorDirective implements OnInit, OnChanges, OnDestroy {
 
   ngOnInit(): void {
     ClassicEditor.create(this.elementRef.nativeElement, {
-      extraPlugins: [UploadAdapter]
+      // extraPlugins: [UploadAdapter]
     }).then(
       editor => {
         this.editor = editor;

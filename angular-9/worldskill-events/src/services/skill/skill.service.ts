@@ -1,7 +1,8 @@
 import {Injectable} from '@angular/core';
-import {EventSkillCloneRequest, EventSkillRequest, SkillList} from '../../types/skill';
+import {EventSkillCloneRequest, Skill, SkillRequest} from '../../types/skill';
 import {
   FetchParams,
+  FULL,
   MulticastOptions,
   NO_SUBJECT,
   RequestOptions,
@@ -19,106 +20,80 @@ import {share} from 'rxjs/operators';
 @Injectable({
   providedIn: 'root'
 })
-export class SkillService extends WsService<SkillList> {
+export class SkillService extends WsService<Skill> {
 
   constructor(private http: HttpClient) {
     super();
   }
 
-  copySkill(eventId: number, skillId: number, cloneRequest: EventSkillCloneRequest, rOpt?: RequestOptions): Observable<SkillList>;
-  copySkill(eventId: number, skillId: number, cloneRequest: EventSkillCloneRequest, params: FetchParams, rOpt?: RequestOptions): Observable<SkillList>;
-  copySkill(eventId: number, skillId: number, cloneRequest: EventSkillCloneRequest, mOpt: MulticastOptions, rOpt?: RequestOptions): Observable<SkillList>;
-  copySkill(eventId: number, skillId: number, cloneRequest: EventSkillCloneRequest, params: FetchParams, mOpt: MulticastOptions, rOpt?: RequestOptions): Observable<SkillList>;
-  copySkill(eventId: number, skillId: number, cloneRequest: EventSkillCloneRequest, p1: WsServiceRequestP1, p2?: WsServiceRequestP2, p3?: WsServiceRequestP3): Observable<SkillList> {
+  fetch(eventId: number, skillId: number, rOpt?: RequestOptions): Observable<Skill>;
+  fetch(eventId: number, skillId: number, params: FetchParams, rOpt?: RequestOptions): Observable<Skill>;
+  fetch(eventId: number, skillId: number, mOpt: MulticastOptions, rOpt?: RequestOptions): Observable<Skill>;
+  fetch(eventId: number, skillId: number, params: FetchParams, mOpt: MulticastOptions, rOpt?: RequestOptions): Observable<Skill>;
+  fetch(eventId: number, skillId: number, p1: WsServiceRequestP1, p2?: WsServiceRequestP2, p3?: WsServiceRequestP3): Observable<Skill> {
+    const {fetchParams, multicastOptions, requestOptions} = this.resolveArgs(p1, p2, p3, FULL);
+    const params = httpParamsFromFetchParams(fetchParams);
+    const observable = this.http.get<Skill>(
+      requestOptions.url ?? `${environment.worldskillsApiEvents}/${eventId}/skills/${skillId}`, {params}
+    ).pipe(share());
+    return this.request(observable, multicastOptions);
+  }
+
+  create(eventId: number, skillRequest: SkillRequest, rOpt?: RequestOptions): Observable<Skill>;
+  create(eventId: number, skillRequest: SkillRequest, params: FetchParams, rOpt?: RequestOptions): Observable<Skill>;
+  create(eventId: number, skillRequest: SkillRequest, mOpt: MulticastOptions, rOpt?: RequestOptions): Observable<Skill>;
+  create(eventId: number, skillRequest: SkillRequest, params: FetchParams, mOpt: MulticastOptions, rOpt?: RequestOptions): Observable<Skill>;
+  create(eventId: number, skillRequest: SkillRequest, p1: WsServiceRequestP1, p2?: WsServiceRequestP2, p3?: WsServiceRequestP3): Observable<Skill> {
+    const {fetchParams, multicastOptions, requestOptions} = this.resolveArgs(p1, p2, p3, FULL);
+    const params = httpParamsFromFetchParams(fetchParams);
+    const observable = this.http.post<Skill>(
+      requestOptions.url ?? `${environment.worldskillsApiEvents}/${eventId}/skills`, skillRequest, {params}
+    ).pipe(share());
+    return this.request(observable, multicastOptions);
+  }
+
+  update(eventId: number, skillId: number, skillRequest: SkillRequest, rOpt?: RequestOptions): Observable<Skill>;
+  update(eventId: number, skillId: number, skillRequest: SkillRequest, params: FetchParams, rOpt?: RequestOptions): Observable<Skill>;
+  update(eventId: number, skillId: number, skillRequest: SkillRequest, mOpt: MulticastOptions, rOpt?: RequestOptions): Observable<Skill>;
+  update(eventId: number, skillId: number, skillRequest: SkillRequest, params: FetchParams, mOpt: MulticastOptions, rOpt?: RequestOptions): Observable<Skill>;
+  update(
+    eventId: number, skillId: number,
+    skillRequest: SkillRequest,
+    p1: WsServiceRequestP1,
+    p2?: WsServiceRequestP2,
+    p3?: WsServiceRequestP3
+  ): Observable<Skill> {
+    const {fetchParams, multicastOptions, requestOptions} = this.resolveArgs(p1, p2, p3, FULL);
+    const params = httpParamsFromFetchParams(fetchParams);
+    const observable = this.http.put<Skill>(
+      requestOptions.url ?? `${environment.worldskillsApiEvents}/${eventId}/skills/${skillId}`, skillRequest, {params}
+    ).pipe(share());
+    return this.request(observable, multicastOptions);
+  }
+
+  delete(eventId: number, skillId: number, rOpt?: RequestOptions): Observable<Skill>;
+  delete(eventId: number, skillId: number, params: FetchParams, rOpt?: RequestOptions): Observable<Skill>;
+  delete(eventId: number, skillId: number, mOpt: MulticastOptions, rOpt?: RequestOptions): Observable<Skill>;
+  delete(eventId: number, skillId: number, params: FetchParams, mOpt: MulticastOptions, rOpt?: RequestOptions): Observable<Skill>;
+  delete(eventId: number, skillId: number, p1: WsServiceRequestP1, p2?: WsServiceRequestP2, p3?: WsServiceRequestP3): Observable<Skill> {
     const {fetchParams, multicastOptions, requestOptions} = this.resolveArgs(p1, p2, p3, NO_SUBJECT);
     const params = httpParamsFromFetchParams(fetchParams);
-    const observable = this.http.post<SkillList>(
+    const observable = this.http.delete<Skill>(
+      requestOptions.url ?? `${environment.worldskillsApiEvents}/${eventId}/skills/${skillId}`, {params}
+    ).pipe(share());
+    return this.request(observable, multicastOptions);
+  }
+
+  copySkill(eventId: number, skillId: number, cloneRequest: EventSkillCloneRequest, rOpt?: RequestOptions): Observable<Skill>;
+  copySkill(eventId: number, skillId: number, cloneRequest: EventSkillCloneRequest, params: FetchParams, rOpt?: RequestOptions): Observable<Skill>;
+  copySkill(eventId: number, skillId: number, cloneRequest: EventSkillCloneRequest, mOpt: MulticastOptions, rOpt?: RequestOptions): Observable<Skill>;
+  copySkill(eventId: number, skillId: number, cloneRequest: EventSkillCloneRequest, params: FetchParams, mOpt: MulticastOptions, rOpt?: RequestOptions): Observable<Skill>;
+  copySkill(eventId: number, skillId: number, cloneRequest: EventSkillCloneRequest, p1: WsServiceRequestP1, p2?: WsServiceRequestP2, p3?: WsServiceRequestP3): Observable<Skill> {
+    const {fetchParams, multicastOptions, requestOptions} = this.resolveArgs(p1, p2, p3, NO_SUBJECT);
+    const params = httpParamsFromFetchParams(fetchParams);
+    const observable = this.http.post<Skill>(
       requestOptions.url ?? `${environment.worldskillsApiEvents}/${eventId}/skills/${skillId}/clone`, cloneRequest, {params}
     ).pipe(share());
     return this.request(observable, multicastOptions);
   }
-
-  bind(eventId: number, eventSkillRequest: EventSkillRequest, rOpt?: RequestOptions): Observable<SkillList>;
-  bind(
-    eventId: number, eventSkillRequest: EventSkillRequest, params: FetchParams, rOpt?: RequestOptions
-  ): Observable<SkillList>;
-  bind(
-    eventId: number, eventSkillRequest: EventSkillRequest, mOpt: MulticastOptions, rOpt?: RequestOptions
-  ): Observable<SkillList>;
-  bind(
-    eventId: number,
-    eventSkillRequest: EventSkillRequest,
-    params: FetchParams,
-    mOpt: MulticastOptions,
-    rOpt?: RequestOptions
-  ): Observable<SkillList>;
-  bind(
-    eventId: number,
-    eventSkillRequest: EventSkillRequest,
-    p1: WsServiceRequestP1,
-    p2?: WsServiceRequestP2,
-    p3?: WsServiceRequestP3
-  ): Observable<SkillList> {
-    const {fetchParams, multicastOptions, requestOptions} = this.resolveArgs(p1, p2, p3, NO_SUBJECT);
-    const params = httpParamsFromFetchParams(fetchParams);
-    const observable = this.http.post<SkillList>(
-      requestOptions.url ?? `${environment.worldskillsApiEvents}/${eventId}/skills`, eventSkillRequest, {params}
-    ).pipe(share());
-    return this.request(observable, multicastOptions);
-  }
-
-  update(
-    eventId: number, skillId: number, eventSkillRequest: EventSkillRequest, rOpt?: RequestOptions
-  ): Observable<SkillList>;
-  update(
-    eventId: number, skillId: number, eventSkillRequest: EventSkillRequest, params: FetchParams, rOpt?: RequestOptions
-  ): Observable<SkillList>;
-  update(
-    eventId: number, skillId: number, eventSkillRequest: EventSkillRequest, mOpt: MulticastOptions, rOpt?: RequestOptions
-  ): Observable<SkillList>;
-  update(
-    eventId: number, skillId: number,
-    eventSkillRequest: EventSkillRequest,
-    params: FetchParams,
-    mOpt: MulticastOptions,
-    rOpt?: RequestOptions
-  ): Observable<SkillList>;
-  update(
-    eventId: number, skillId: number,
-    eventSkillRequest: EventSkillRequest,
-    p1: WsServiceRequestP1,
-    p2?: WsServiceRequestP2,
-    p3?: WsServiceRequestP3
-  ): Observable<SkillList> {
-    const {fetchParams, multicastOptions, requestOptions} = this.resolveArgs(p1, p2, p3, NO_SUBJECT);
-    const params = httpParamsFromFetchParams(fetchParams);
-    const observable = this.http.put<SkillList>(
-      requestOptions.url ?? `${environment.worldskillsApiEvents}/${eventId}/skills/${skillId}`,
-      eventSkillRequest,
-      {params}
-    ).pipe(share());
-    return this.request(observable, multicastOptions);
-  }
-
-  unbind(eventId: number, eventSkillId: number, rOpt?: RequestOptions): Observable<SkillList>;
-  unbind(eventId: number, eventSkillId: number, params: FetchParams, rOpt?: RequestOptions): Observable<SkillList>;
-  unbind(eventId: number, eventSkillId: number, mOpt: MulticastOptions, rOpt?: RequestOptions): Observable<SkillList>;
-  unbind(
-    eventId: number, eventSkillId: number, params: FetchParams, mOpt: MulticastOptions, rOpt?: RequestOptions
-  ): Observable<SkillList>;
-  unbind(
-    eventId: number,
-    eventSkillId: number,
-    p1: WsServiceRequestP1,
-    p2?: WsServiceRequestP2,
-    p3?: WsServiceRequestP3
-  ): Observable<SkillList> {
-    const {fetchParams, multicastOptions, requestOptions} = this.resolveArgs(p1, p2, p3, NO_SUBJECT);
-    const params = httpParamsFromFetchParams(fetchParams);
-    const observable = this.http.delete<SkillList>(
-      requestOptions.url ?? `${environment.worldskillsApiEvents}/${eventId}/skills/${eventSkillId}`, {params}
-    ).pipe(share());
-    return this.request(observable, multicastOptions);
-  }
-
 }
