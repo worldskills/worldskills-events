@@ -48,7 +48,7 @@ export class SkillFormComponent extends WsComponent implements OnInit {
         .pipe(map(ls => !ls.every(l => !l)))
         .subscribe(loading => (this.loading = loading)),
     );
-    this.baseSkillsService.fetch();
+    this.baseSkillsService.fetchByEntity(this.event.ws_entity.id);
     this.sectorsService.fetch(this.event.id);
   }
 

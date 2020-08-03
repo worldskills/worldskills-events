@@ -4,6 +4,7 @@ import {AuthEntity} from "./entity";
 import {Country} from "./country";
 import {Sector} from "./sector";
 import {Photo} from "./photo";
+import {Tag} from "./tag";
 
 export interface Event {
   id: number;
@@ -87,7 +88,7 @@ export interface Skill {
   landscape_marking: boolean;
   competitor_max_age: number;
   photos: Array<Photo>;
-  tags: Array<any>;
+  tags: Array<Tag>;
   sponsors: Array<any>;
   ws_entity: AuthEntity;
   links: Array<Link>;

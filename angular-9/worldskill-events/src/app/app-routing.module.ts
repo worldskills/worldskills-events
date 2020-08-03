@@ -9,6 +9,7 @@ import {SkillsComponent} from "./skills/skills.component";
 import {SkillComponent} from "./skill/skill.component";
 import {SkillUpdateComponent} from "./skill-update/skill-update.component";
 import {SkillPhotosComponent} from "./skill-photos/skill-photos.component";
+import {SkillTagsComponent} from "./skill-tags/skill-tags.component";
 
 function forAppCode(appCode: number, roles: Array<string>) {
   return roles.map(name => ({
@@ -69,6 +70,11 @@ const routes: Routes = [
                             component: SkillPhotosComponent,
                           },
                         ],
+                      },
+                      {
+                        path: 'tags',
+                        data: {breadcrumb: 'Tags'},
+                        component: SkillTagsComponent,
                       },
                     ],
                   },

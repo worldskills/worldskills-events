@@ -1,5 +1,5 @@
 import {Component, OnInit, ViewChild} from '@angular/core';
-import {WsComponent} from "@worldskills/worldskills-angular-lib";
+import {LOADER_ONLY, WsComponent} from "@worldskills/worldskills-angular-lib";
 import {Event} from "../../types/event";
 import {Photo} from "../../types/photo";
 import {Skill} from "../../types/skill";
@@ -52,8 +52,8 @@ export class SkillPhotosComponent extends WsComponent implements OnInit {
 
   move(down: Photo, up: Photo) {
     combineLatest([
-      this.skillPhotoService.update(this.event.id, this.skill.id, down.id, {...down, sort: up.sort}),
-      this.skillPhotoService.update(this.event.id, this.skill.id, up.id, {...up, sort: down.sort}),
+      this.skillPhotoService.update(this.event.id, this.skill.id, down.id, {...down, sort: up.sort}, LOADER_ONLY),
+      this.skillPhotoService.update(this.event.id, this.skill.id, up.id, {...up, sort: down.sort}, LOADER_ONLY),
     ])
       .subscribe(() => {
         this.skillService.fetch(this.event.id, this.skill.id);

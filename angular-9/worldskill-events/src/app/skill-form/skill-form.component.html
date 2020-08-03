@@ -165,7 +165,7 @@
           id="sector"
           [wsSelect]="['id', 'name.text']"
           name="sector"
-          [ngModel]="skill ? skill.sector : undefined"
+          [ngModel]="skill ? skill.sector.id : undefined"
           placeholder="{{'Sector' | translate}}"
           [items]="sectors || []"
         ></ng-select>

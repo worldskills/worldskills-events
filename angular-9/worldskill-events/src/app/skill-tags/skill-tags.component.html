@@ -1,0 +1,53 @@
+<ng-template #button>
+  <div *ngIf="tags" class="btn-group" role="group">
+    <button type="button" class="btn btn-primary btn-sm mr-1 dropdown-toggle" data-toggle="dropdown"
+            aria-haspopup="true" aria-expanded="false">
+      {{'Add tag' | translate}}
+    </button>
+    <div class="dropdown-menu">
+      <ng-container *ngFor="let tag of filteredTags">
+        <a class="dropdown-item" href="#" (click)="$event.preventDefault(); bind(tag)">{{tag.name.text}}</a>
+      </ng-container>
+    </div>
+  </div>
+</ng-template>
+<ng-container *ngIf="loading || !initialized">
+  <ws-spinner></ws-spinner>
+</ng-container>
+<ng-container *ngIf="initialized && !loading">
+  <div class="row">
+    <div class="col-12">
+      <div class="table-responsive">
+        <table class="table table-striped border-top">
+          <colgroup>
+            <col width="80%">
+            <col width="20%">
+          </colgroup>
+          <thead>
+          <tr>
+            <th class="border-top-0">{{'Tag' | translate}}</th>
+            <th class="border-top-0">&nbsp;</th>
+          </tr>
+          </thead>
+          <tbody>
+          <tr *ngFor="let tag of skill.tags">
+            <td>{{tag.name.text}}</td>
+            <td class="text-right">
+              <button
+                (click)="unbind(tag)"
+                type="button"
+                class="btn btn-primary btn-sm"
+              >
+                {{'Remove' | translate}}
+              </button>
+            </td>
+          </tr>
+          <tr *ngIf="skill.tags.length === 0">
+            <td colspan="4">{{'No tags found' | translate}}</td>
+          </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</ng-container>
