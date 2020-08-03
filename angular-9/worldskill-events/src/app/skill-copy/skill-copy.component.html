@@ -1,0 +1,46 @@
+<ng-container *ngIf="loading || !initialized">
+  <ws-spinner></ws-spinner>
+</ng-container>
+<ng-container *ngIf="initialized && !loading">
+  <form class="form-horizontal" [ngClass]="{'was-validated': this.form.submitted}" novalidate
+        (ngSubmit)="submit()" #form="ngForm">
+
+    <div class="row">
+      <div class="col-9 offset-3">
+        {{'Copy this Skill with all its photos and translations to a different event.' | translate}}
+      </div>
+    </div>
+
+    <div class="form-group row">
+      <label for="eventId"
+             class="col-3 col-form-label text-right font-weight-bold">{{'Event' | translate}}&nbsp;*</label>
+      <div class="col-6">
+        <ng-select
+          id="eventId"
+          [wsSelect]="['id', 'name']"
+          name="eventId"
+          [ngModel]="undefined"
+          placeholder="{{'Event' | translate}}"
+          [items]="events || []"
+        ></ng-select>
+      </div>
+      <div class="col-3">
+      <span
+        class="form-text text-danger"
+        style="display: block"
+        *ngIf="form.submitted && this.form.controls.base_id.errors && this.form.controls.base_id.errors.required">
+        {{'Please select an event!' | translate}}
+      </span>
+      </div>
+    </div>
+
+    <div class="form-group row">
+      <div class="offset-sm-3 col-sm-9">
+        <button type="submit" class="btn btn-success" id="saveSkill" [disabled]="loading">
+          {{'Copy Skill to Event' | translate}}
+        </button>&nbsp;
+        <ws-spinner *ngIf="loading"></ws-spinner>
+      </div>
+    </div>
+  </form>
+</ng-container>

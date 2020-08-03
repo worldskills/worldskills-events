@@ -3,7 +3,7 @@ import {AlertService, AlertType, WsComponent} from "@worldskills/worldskills-ang
 import {Skill} from "../../types/skill";
 import {Event} from "../../types/event";
 import {SkillService} from "../../services/skill/skill.service";
-import {ActivatedRoute} from "@angular/router";
+import {ActivatedRoute, Router} from "@angular/router";
 import {TranslateService} from "@ngx-translate/core";
 import {EventService} from "../../services/event/event.service";
 import {combineLatest} from "rxjs";
@@ -30,6 +30,7 @@ export class SkillComponent extends WsComponent implements OnInit {
     private alertService: AlertService,
     private translateService: TranslateService,
     private uiSkillService: UiSkillService,
+    private router: Router,
   ) {
     super();
   }
@@ -60,26 +61,28 @@ export class SkillComponent extends WsComponent implements OnInit {
   }
 
   markAsRemoved() {
-    this.translateService.get('Setting the status of the Skill to Removed will hide it from all Skill lists. The data associated with it will not be deleted. Click OK to proceed..').subscribe(confirm => {
-      if (confirm) {
+    this.translateService.get('Setting the status of the Skill to Removed will hide it from all Skill lists. The data associated with it will not be deleted. Click OK to proceed..').subscribe(c => {
+      if (confirm(c)) {
         this.skillService.update(this.event.id, this.skill.id, {...this.skill, status: 'removed'}).subscribe(() => {
           this.translateService.get('The Skill has been removed successfully.').subscribe(t => {
             this.alertService.setAlert('removed-skill', AlertType.success,
               null, undefined, t, true);
           });
+          this.router.navigate(['/events', this.event.id, 'skills']);
         });
       }
     });
   }
 
   delete() {
-    this.translateService.get('Are you sure you want you delete the Skill.').subscribe(confirm => {
-      if (confirm) {
+    this.translateService.get('Are you sure you want you delete the Skill.').subscribe(c => {
+      if (confirm(c)) {
         this.skillService.delete(this.event.id, this.skill.id).subscribe(() => {
           this.translateService.get('The Skill has been deleted successfully.').subscribe(t => {
             this.alertService.setAlert('deleted-skill', AlertType.success,
               null, undefined, t, true);
           });
+          this.router.navigate(['/events', this.event.id, 'skills']);
         });
       }
     });
