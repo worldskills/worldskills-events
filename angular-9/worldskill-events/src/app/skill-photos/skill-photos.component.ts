@@ -9,6 +9,7 @@ import {combineLatest} from "rxjs";
 import {map} from "rxjs/operators";
 import {SkillPhotoService} from "../../services/skill-photo/skill-photo.service";
 import {UiSkillService} from "../../services/ui-skill/ui-skill.service";
+import {faCaretDown, faCaretUp} from '@fortawesome/free-solid-svg-icons';
 
 @Component({
   selector: 'app-skill-photos',
@@ -21,6 +22,8 @@ export class SkillPhotosComponent extends WsComponent implements OnInit {
   skill: Skill;
   loading = false;
   @ViewChild('button', {static: true}) button;
+  faCaretDown = faCaretDown;
+  faCaretUp = faCaretUp;
 
   constructor(
     private eventService: EventService,

@@ -1,0 +1,120 @@
+<ng-template #button>
+  <div *ngIf="sponsors" class="btn-group" role="group">
+    <button type="button" class="btn btn-primary btn-sm mr-1 dropdown-toggle" data-toggle="dropdown"
+            aria-haspopup="true" aria-expanded="false">
+      {{'Add sponsor' | translate}}
+    </button>
+    <div class="dropdown-menu">
+      <ng-container *ngFor="let sponsor of filteredSponsors">
+        <a class="dropdown-item" href="#" (click)="$event.preventDefault(); bind(sponsor)">{{sponsor.name}}</a>
+      </ng-container>
+    </div>
+  </div>
+</ng-template>
+<ng-container *ngIf="loading || !initialized">
+  <ws-spinner></ws-spinner>
+</ng-container>
+<ng-container *ngIf="initialized && !loading">
+  <div class="row">
+    <div class="col-12">
+      <div class="table-responsive">
+        <table class="table table-striped border-top">
+          <colgroup>
+            <col width="50%">
+            <col width="40%">
+          </colgroup>
+          <thead>
+          <tr>
+            <th class="border-top-0">{{'Featured sponsor' | translate}}</th>
+            <th class="border-top-0">&nbsp;</th>
+          </tr>
+          </thead>
+          <tbody>
+          <tr *ngFor="let sponsor of featuredSponsors">
+            <td>{{sponsor.name}}</td>
+            <td class="text-right">
+              <button
+                (click)="unfeature(sponsor)"
+                type="button"
+                class="btn btn-warning btn-sm mr-1"
+              >
+                <fa-icon size="xs" [icon]="faStar"></fa-icon>
+              </button>
+              <button
+                (click)="unbind(sponsor)"
+                type="button"
+                class="btn btn-danger btn-sm"
+              >
+                <fa-icon size="xs" [icon]="faTimes"></fa-icon>
+              </button>
+            </td>
+          </tr>
+          <tr *ngIf="featuredSponsors.length === 0">
+            <td colspan="2">{{'No featured sponsors found' | translate}}</td>
+          </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+  <div class="row mt-2">
+    <div class="col-12">
+      <div class="table-responsive">
+        <table class="table table-striped border-top">
+          <colgroup>
+            <col width="60%">
+            <col width="40%">
+          </colgroup>
+          <thead>
+          <tr>
+            <th class="border-top-0">{{'Sponsor' | translate}}</th>
+            <th class="border-top-0">&nbsp;</th>
+          </tr>
+          </thead>
+          <tbody>
+          <tr *ngFor="let sponsor of unfeaturedSponsors; let index=index">
+            <td>{{sponsor.name}}</td>
+            <td class="text-right">
+              <div class="btn-group btn-group-sm mr-1">
+                <button
+                  [disabled]="index === skill.sponsors.length - 1"
+                  (click)="move(sponsor, skill.sponsors[index + 1])"
+                  type="button"
+                  class="btn btn-primary"
+                >
+                  <fa-icon size="xs" [icon]="faCaretDown"></fa-icon>
+                </button>
+                <button
+                  [disabled]="index === 0"
+                  (click)="move(sponsor, skill.sponsors[index - 1])"
+                  type="button"
+                  class="btn btn-primary"
+                >
+                  <fa-icon size="xs" [icon]="faCaretUp"></fa-icon>
+                </button>
+              </div>
+              <button
+                (click)="feature(sponsor)"
+                type="button"
+                class="btn btn-info btn-sm mr-1"
+              >
+                <fa-icon size="xs" [icon]="faStar"></fa-icon>
+              </button>
+              <button
+                (click)="unbind(sponsor)"
+                type="button"
+                class="btn btn-danger btn-sm"
+              >
+                <fa-icon size="xs" [icon]="faTimes"></fa-icon>
+              </button>
+            </td>
+          </tr>
+          <tr *ngIf="unfeaturedSponsors.length === 0">
+            <td colspan="2">{{'No sponsors found' | translate}}</td>
+          </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</ng-container>

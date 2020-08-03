@@ -4,9 +4,9 @@
 <ng-container *ngIf="initialized && !loading">
   <div class="row my-2">
     <div class="col-12">
-      <h2 class="m-0 float-left">
+      <h3 class="m-0 float-left">
         {{skill.number}}&nbsp;{{skill.name.text}}
-      </h2>
+      </h3>
       <div class="btn-group float-right">
         <ng-template [ngTemplateOutlet]="additionalMenu"></ng-template>
         <ws-spinner *ngIf="this.loadingRemoving"></ws-spinner>
@@ -53,13 +53,13 @@
           </a>
           <a
             routerLinkActive="active"
-            routerLink="contacts"
+            routerLink="sponsors"
             class="list-group-item list-group-item-action">
             {{'Sponsors' | translate}}
           </a>
           <a
             routerLinkActive="active"
-            routerLink="addresses"
+            routerLink="copy"
             class="list-group-item list-group-item-action">
             {{'Copy' | translate}}
           </a>

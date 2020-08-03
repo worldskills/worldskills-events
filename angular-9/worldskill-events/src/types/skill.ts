@@ -5,6 +5,7 @@ import {Country} from "./country";
 import {Sector} from "./sector";
 import {Photo} from "./photo";
 import {Tag} from "./tag";
+import {Sponsor} from "./sponsor";
 
 export interface Event {
   id: number;
@@ -89,7 +90,7 @@ export interface Skill {
   competitor_max_age: number;
   photos: Array<Photo>;
   tags: Array<Tag>;
-  sponsors: Array<any>;
+  sponsors: Array<Sponsor>;
   ws_entity: AuthEntity;
   links: Array<Link>;
 }

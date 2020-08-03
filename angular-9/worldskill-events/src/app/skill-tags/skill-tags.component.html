@@ -36,14 +36,14 @@
               <button
                 (click)="unbind(tag)"
                 type="button"
-                class="btn btn-primary btn-sm"
+                class="btn btn-danger btn-sm"
               >
-                {{'Remove' | translate}}
+                <fa-icon size="xs" [icon]="faTimes"></fa-icon>
               </button>
             </td>
           </tr>
           <tr *ngIf="skill.tags.length === 0">
-            <td colspan="4">{{'No tags found' | translate}}</td>
+            <td colspan="2">{{'No tags found' | translate}}</td>
           </tr>
           </tbody>
         </table>

@@ -11,6 +11,7 @@ import {Event} from "../../types/event";
 import {Skill} from "../../types/skill";
 import {Tag} from "../../types/tag";
 import {TranslateService} from "@ngx-translate/core";
+import {faTimes} from '@fortawesome/free-solid-svg-icons';
 
 @Component({
   selector: 'app-skill-tags',
@@ -24,6 +25,7 @@ export class SkillTagsComponent extends WsComponent implements OnInit {
   tags: Array<Tag>;
   loading = false;
   @ViewChild('button', {static: true}) button;
+  faTimes = faTimes;
 
   constructor(
     private eventService: EventService,
