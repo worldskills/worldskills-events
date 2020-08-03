@@ -8,6 +8,7 @@ import {EventUpdateComponent} from "./event-update/event-update.component";
 import {SkillsComponent} from "./skills/skills.component";
 import {SkillComponent} from "./skill/skill.component";
 import {SkillUpdateComponent} from "./skill-update/skill-update.component";
+import {SkillPhotosComponent} from "./skill-photos/skill-photos.component";
 
 function forAppCode(appCode: number, roles: Array<string>) {
   return roles.map(name => ({
@@ -57,7 +58,18 @@ const routes: Routes = [
                         path: '',
                         pathMatch: 'full',
                         component: SkillUpdateComponent,
-                      }
+                      },
+                      {
+                        path: 'photos',
+                        data: {breadcrumb: 'Photos'},
+                        children: [
+                          {
+                            path: '',
+                            pathMatch: 'full',
+                            component: SkillPhotosComponent,
+                          },
+                        ],
+                      },
                     ],
                   },
                 ],
@@ -65,7 +77,7 @@ const routes: Routes = [
             ],
           },
         ],
-      }
+      },
     ],
   },
   {

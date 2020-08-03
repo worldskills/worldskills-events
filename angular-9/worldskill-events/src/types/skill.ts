@@ -3,6 +3,7 @@ import {I18nModel} from "@worldskills/worldskills-angular-lib";
 import {AuthEntity} from "./entity";
 import {Country} from "./country";
 import {Sector} from "./sector";
+import {Photo} from "./photo";
 
 export interface Event {
   id: number;
@@ -18,16 +19,6 @@ export interface Event {
   url: string;
   description: string;
   ws_entity: AuthEntity;
-  links: Array<Link>;
-}
-
-export interface Photo {
-  id: number;
-  image_id: number;
-  thumbnail_hash: string;
-  thumbnail: string;
-  description: I18nModel;
-  sort: number;
   links: Array<Link>;
 }
 

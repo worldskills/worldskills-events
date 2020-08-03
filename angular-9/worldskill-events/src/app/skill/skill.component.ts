@@ -8,6 +8,7 @@ import {TranslateService} from "@ngx-translate/core";
 import {EventService} from "../../services/event/event.service";
 import {combineLatest} from "rxjs";
 import {map} from "rxjs/operators";
+import {UiSkillService} from "../../services/ui-skill/ui-skill.service";
 
 @Component({
   selector: 'app-skill',
@@ -20,6 +21,7 @@ export class SkillComponent extends WsComponent implements OnInit {
   skill: Skill;
   loading = false;
   loadingRemoving = false;
+  additionalMenu = null;
 
   constructor(
     private eventService: EventService,
@@ -27,12 +29,14 @@ export class SkillComponent extends WsComponent implements OnInit {
     private route: ActivatedRoute,
     private alertService: AlertService,
     private translateService: TranslateService,
+    private uiSkillService: UiSkillService,
   ) {
     super();
   }
 
   ngOnInit(): void {
     this.subscribe(
+      this.uiSkillService.subject.subscribe(templateRef => (setTimeout(() => this.additionalMenu = templateRef))),
       combineLatest([
         this.eventService.subject,
         this.route.params,

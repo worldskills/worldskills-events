@@ -7,7 +7,8 @@
       <h2 class="m-0 float-left">
         {{'Skill' | translate}}
       </h2>
-      <div class="btn-group float-right mr-1">
+      <div class="btn-group float-right">
+        <ng-template [ngTemplateOutlet]="additionalMenu"></ng-template>
         <ws-spinner *ngIf="this.loadingRemoving"></ws-spinner>
         <button
           [disabled]="this.loadingRemoving"

@@ -1,0 +1,61 @@
+<ng-template #button>
+  <button routerLink="create" class="btn btn-primary btn-sm mr-1">
+    {{'Add photo' | translate}}
+  </button>
+</ng-template>
+<ng-container *ngIf="loading || !initialized">
+  <ws-spinner></ws-spinner>
+</ng-container>
+<ng-container *ngIf="initialized && !loading">
+  <div class="row">
+    <div class="col-12">
+      <div class="table-responsive">
+        <table class="table table-striped border-top">
+          <colgroup>
+            <col width="20%">
+            <col width="70%">
+            <col width="10%">
+          </colgroup>
+          <thead>
+          <tr>
+            <th class="border-top-0">{{'Photo' | translate}}</th>
+            <th class="border-top-0">{{'Description' | translate}}</th>
+            <th class="border-top-0">{{'Type' | translate}}</th>
+          </tr>
+          </thead>
+          <tbody>
+          <tr *ngFor="let photo of skill.photos; let index=index">
+            <td>
+              <div class="photo bg-secondary" style="background-image: url({{photo.thumbnail}})"></div>
+            </td>
+            <td><a [routerLink]="[photo.id]">{{photo.description.text}}</a></td>
+            <td>
+              <div class="btn-group btn-group-sm">
+                <button
+                  [disabled]="index === skill.photos.length - 1"
+                  (click)="move(photo, skill.photos[index + 1])"
+                  type="button"
+                  class="btn btn-primary"
+                >
+                  &darr;
+                </button>
+                <button
+                  [disabled]="index === 0"
+                  (click)="move(photo, skill.photos[index - 1])"
+                  type="button"
+                  class="btn btn-primary"
+                >
+                  &uarr;
+                </button>
+              </div>
+            </td>
+          </tr>
+          <tr *ngIf="skill.photos.length === 0">
+            <td colspan="4">{{'No photos found' | translate}}</td>
+          </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</ng-container>

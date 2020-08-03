@@ -136,7 +136,7 @@
 
     <div class="form-group row">
       <label for="base_id"
-             class="col-3 col-form-label text-right font-weight-bold">{{'Base Skill' | translate}}&nbsp;*</label>
+             class="col-3 col-form-label text-right font-weight-bold">{{'Base Skill' | translate}}</label>
       <div class="col-6">
         <ng-select
           id="base_id"
@@ -159,14 +159,14 @@
 
     <div class="form-group row">
       <label for="sector"
-             class="col-3 col-form-label text-right font-weight-bold">{{'Sector' | translate}}&nbsp;*</label>
+             class="col-3 col-form-label text-right font-weight-bold">{{'Sector' | translate}}</label>
       <div class="col-6">
         <ng-select
           id="sector"
           [wsSelect]="['id', 'name.text']"
           name="sector"
           [ngModel]="skill ? skill.sector : undefined"
-          placeholder="{{'Sectors' | translate}}"
+          placeholder="{{'Sector' | translate}}"
           [items]="sectors || []"
         ></ng-select>
       </div>

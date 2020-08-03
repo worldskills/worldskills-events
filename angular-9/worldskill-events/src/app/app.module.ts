@@ -33,6 +33,7 @@ import {SkillsComponent} from './skills/skills.component';
 import {SkillComponent} from './skill/skill.component';
 import {SkillUpdateComponent} from './skill-update/skill-update.component';
 import {SkillFormComponent} from './skill-form/skill-form.component';
+import { SkillPhotosComponent } from './skill-photos/skill-photos.component';
 
 export function HttpLoaderFactory(http: HttpClient) {
   return new TranslateHttpLoader(http);
@@ -54,6 +55,7 @@ export function HttpLoaderFactory(http: HttpClient) {
     SkillComponent,
     SkillUpdateComponent,
     SkillFormComponent,
+    SkillPhotosComponent,
   ],
   imports: [
     BrowserModule,
