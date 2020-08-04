@@ -36,7 +36,7 @@
           id="ws_entity"
           name="ws_entity"
           [disabled]="!!skill"
-          [ngModel]="skill ? skill.ws_entity : undefined"
+          [ngModel]="skill ? skill.ws_entity.id : undefined"
           [multiple]="false"
           [showFullPath]="false">
         </ws-entity-tree-select>
@@ -390,7 +390,7 @@
         <button type="submit" class="btn btn-success" id="saveSkill" [disabled]="loading">
           {{'Save' | translate}}
         </button>&nbsp;
-        <a class="btn btn-secondary" routerLink="/skills">{{'Cancel' | translate}}</a><br/>
+        <a class="btn btn-secondary" [routerLink]="['/event', this.event.id, 'skills']">{{'Cancel' | translate}}</a><br/>
         <ws-spinner *ngIf="loading"></ws-spinner>
       </div>
     </div>

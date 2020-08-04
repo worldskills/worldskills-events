@@ -34,8 +34,9 @@
           id="ws_entity"
           name="ws_entity"
           [disabled]="!!event"
-          [ngModel]="event ? event.ws_entity : undefined"
-          [multiple]="false">
+          [ngModel]="event ? event.ws_entity.id : undefined"
+          [multiple]="false"
+          [showFullPath]="false">
         </ws-entity-tree-select>
       </div>
       <div class="col-sm-5">
@@ -278,7 +279,7 @@
         <button type="submit" class="btn btn-success" id="saveEvent" [disabled]="loading">
           {{'Save' | translate}}
         </button>&nbsp;
-        <a class="btn btn-secondary" routerLink="/events">{{'Cancel' | translate}}</a><br/>
+        <a class="btn btn-secondary" [routerLink]="['/events']">{{'Cancel' | translate}}</a><br/>
         <ws-spinner *ngIf="loading"></ws-spinner>
       </div>
     </div>

@@ -37,6 +37,10 @@ import {SkillPhotosComponent} from './skill-photos/skill-photos.component';
 import {SkillTagsComponent} from './skill-tags/skill-tags.component';
 import {SkillSponsorsComponent} from './skill-sponsors/skill-sponsors.component';
 import {SkillCopyComponent} from './skill-copy/skill-copy.component';
+import {SectorsComponent} from './sectors/sectors.component';
+import {SectorFormComponent} from './sector-form/sector-form.component';
+import {SectorUpdateComponent} from './sector-update/sector-update.component';
+import {SectorCreateComponent} from './sector-create/sector-create.component';
 
 export function HttpLoaderFactory(http: HttpClient) {
   return new TranslateHttpLoader(http);
@@ -62,6 +66,10 @@ export function HttpLoaderFactory(http: HttpClient) {
     SkillTagsComponent,
     SkillSponsorsComponent,
     SkillCopyComponent,
+    SectorsComponent,
+    SectorFormComponent,
+    SectorUpdateComponent,
+    SectorCreateComponent,
   ],
   imports: [
     BrowserModule,
