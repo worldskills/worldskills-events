@@ -9,6 +9,15 @@ export interface Logo {
 }
 
 export interface SponsorRequest {
+  event: { id: number };
+  name: string;
+  url: string;
+  logo?: { id: number };
+  organization?: any;
+  sort?: number;
+}
+
+export interface Sponsor {
   id: number;
   event: Event;
   name: string;
@@ -17,9 +26,6 @@ export interface SponsorRequest {
   organization?: any;
   sort: number;
   links: Array<Link>;
-}
-
-export interface Sponsor extends SponsorRequest {
 }
 
 export type SponsorList = List<Sponsor, 'sponsors'>;

@@ -2,7 +2,7 @@ import {Component, OnInit, ViewChild} from '@angular/core';
 import {AlertService, AlertType, LOADER_ONLY, WsComponent} from "@worldskills/worldskills-angular-lib";
 import {EventService} from "../../services/event/event.service";
 import {SkillService} from "../../services/skill/skill.service";
-import {SkillSponsorsService} from "../../services/skill-sponsors/skill-sponsors.service";
+import {SponsorsService} from "../../services/sponsors/sponsors.service";
 import {SkillSponsorService} from "../../services/skill-sponsor/skill-sponsor.service";
 import {UiSkillService} from "../../services/ui-skill/ui-skill.service";
 import {combineLatest} from "rxjs";
@@ -33,7 +33,7 @@ export class SkillSponsorsComponent extends WsComponent implements OnInit {
   constructor(
     private eventService: EventService,
     private skillService: SkillService,
-    private skillSponsorsService: SkillSponsorsService,
+    private skillSponsorsService: SponsorsService,
     private skillSponsorService: SkillSponsorService,
     private alertService: AlertService,
     private translateService: TranslateService,

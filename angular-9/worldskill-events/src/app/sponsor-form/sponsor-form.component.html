@@ -1,0 +1,98 @@
+<ng-container *ngIf="loading || !initialized">
+  <ws-spinner></ws-spinner>
+</ng-container>
+<ng-container *ngIf="initialized && !loading">
+  <form class="form-horizontal" [ngClass]="{'was-validated': this.form.submitted}" novalidate
+        (ngSubmit)="submit()" #form="ngForm">
+
+    <div class="form-group row">
+      <label for="name"
+             class="col-sm-3 col-form-label text-right font-weight-bold">{{'Name' | translate}}&nbsp;*</label>
+      <div class="col-sm-4">
+        <input
+          placeholder="{{'Name' | translate}}"
+          type="text"
+          class="form-control"
+          id="name"
+          name="name"
+          required
+          [ngModel]="sponsor ? sponsor.name : undefined">
+      </div>
+      <div class="col-sm-5">
+      <span
+        class="form-text text-danger"
+        style="display: block"
+        *ngIf="form.submitted && this.form.controls.name.errors && this.form.controls.name.errors.required">
+        {{'Please enter a name!' | translate}}
+      </span>
+      </div>
+    </div>
+
+    <div class="form-group row">
+      <label for="url" class="col-sm-3 col-form-label text-right font-weight-bold">{{'Website' | translate}}</label>
+      <div class="col-sm-4">
+        <input
+          placeholder="{{'Name' | translate}}"
+          type="text"
+          class="form-control"
+          id="url"
+          name="url"
+          required
+          [ngModel]="sponsor ? sponsor.url : undefined">
+      </div>
+      <div class="col-sm-5">&nbsp;</div>
+    </div>
+
+    <div class="form-group row">
+      <label for="url" class="col-sm-3 col-form-label text-right font-weight-bold">{{'Logo' | translate}}</label>
+      <div class="col-sm-4">
+        <div class="mb-1 mw-100">
+          <img class="mw-100" *ngIf="sponsor.logo" [src]="sponsor.logo.thumbnail"/>
+          <div
+            *ngIf="!sponsor.logo"
+            class="alert alert-warning"
+          >
+            {{'No flag has been uploaded' | translate}}
+          </div>
+        </div>
+        <input #fileInput
+               class="float-left"
+               name="flag"
+               type="file"
+               (change)="setFileFromInput($event)"
+        />
+        <button *ngIf="!!uploadFile" class="btn btn-danger btn-sm float-right" (click)="unsetUpload()">
+          {{'Remove image' | translate}}
+        </button>
+        <div class="clearfix mb-2"></div>
+        <ng-container *ngIf="!!sponsor && !!sponsor.logo">
+          <input
+            type="checkbox"
+            name="removeFile"
+            [ngModel]="false"
+          />&nbsp;{{'Delete image' | translate}}
+        </ng-container>
+      </div>
+      <div class="col-sm-5">
+        <p *ngIf="resourceLoading">
+          <ngb-progressbar
+            type="info"
+            [value]="resourceProgress * 100"
+            [striped]="true"
+          ></ngb-progressbar>
+        </p>
+      </div>
+    </div>
+
+    <div class="form-group row">
+      <div class="offset-sm-3 col-sm-9">
+        <button type="submit" class="btn btn-success" id="saveSponsor" [disabled]="loading">
+          {{'Save' | translate}}
+        </button>&nbsp;
+        <a class="btn btn-secondary"
+           [routerLink]="['/events', this.event.id, 'sponsors']">{{'Cancel' | translate}}</a><br/>
+        <ws-spinner *ngIf="loading"></ws-spinner>
+      </div>
+    </div>
+  </form>
+</ng-container>

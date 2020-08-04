@@ -1,14 +1,14 @@
 import {TestBed} from '@angular/core/testing';
 
-import {SkillSponsorsService} from './skill-sponsors.service';
+import {ImageService} from './image.service';
 import {HttpClientTestingModule} from '@angular/common/http/testing';
 
-describe('SkillSponsorsService', () => {
-  let service: SkillSponsorsService;
+describe('ImageService', () => {
+  let service: ImageService;
 
   beforeEach(() => {
     TestBed.configureTestingModule({imports: [HttpClientTestingModule]});
-    service = TestBed.inject(SkillSponsorsService);
+    service = TestBed.inject(ImageService);
   });
 
   it('should be created', () => {

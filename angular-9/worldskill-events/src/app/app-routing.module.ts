@@ -18,6 +18,9 @@ import {SectorCreateComponent} from "./sector-create/sector-create.component";
 import {TagsComponent} from "./tags/tags.component";
 import {TagCreateComponent} from "./tag-create/tag-create.component";
 import {TagUpdateComponent} from "./tag-update/tag-update.component";
+import {SponsorsComponent} from './sponsors/sponsors.component';
+import {SponsorCreateComponent} from "./sponsor-create/sponsor-create.component";
+import {SponsorUpdateComponent} from "./sponsor-update/sponsor-update.component";
 
 function forAppCode(appCode: number, roles: Array<string>) {
   return roles.map(name => ({
@@ -138,6 +141,27 @@ const routes: Routes = [
                     path: ':tagId',
                     data: {breadcrumb: 'Update Tag'},
                     component: TagUpdateComponent,
+                  }
+                ],
+              },
+              {
+                path: 'sponsors',
+                data: {breadcrumb: 'Sponsors'},
+                children: [
+                  {
+                    path: '',
+                    pathMatch: 'full',
+                    component: SponsorsComponent,
+                  },
+                  {
+                    path: 'create',
+                    data: {breadcrumb: 'Create Sponsor'},
+                    component: SponsorCreateComponent,
+                  },
+                  {
+                    path: ':sponsorId',
+                    data: {breadcrumb: 'Update Sponsor'},
+                    component: SponsorUpdateComponent,
                   }
                 ],
               },

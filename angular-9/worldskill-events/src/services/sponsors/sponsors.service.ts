@@ -16,10 +16,15 @@ import {httpParamsFromFetchParams} from '../../utils/http';
 import {environment} from '../../environments/environment';
 import {share} from 'rxjs/operators';
 
+const DEFAULT_FETCH_PARAMS = {
+  limit: 9999,
+  offset: 0,
+};
+
 @Injectable({
   providedIn: 'root'
 })
-export class SkillSponsorsService extends WsService<SponsorList> {
+export class SponsorsService extends WsService<SponsorList> {
 
   constructor(private http: HttpClient) {
     super();
@@ -30,7 +35,7 @@ export class SkillSponsorsService extends WsService<SponsorList> {
   fetch(eventId: number, mOpt: MulticastOptions, rOpt?: RequestOptions): Observable<SponsorList>;
   fetch(eventId: number, params: FetchParams, mOpt: MulticastOptions, rOpt?: RequestOptions): Observable<SponsorList>;
   fetch(eventId: number, p1: WsServiceRequestP1, p2?: WsServiceRequestP2, p3?: WsServiceRequestP3): Observable<SponsorList> {
-    const {fetchParams, multicastOptions, requestOptions} = this.resolveArgs(p1, p2, p3, FULL);
+    const {fetchParams, multicastOptions, requestOptions} = this.resolveArgs(p1, p2, p3, FULL, DEFAULT_FETCH_PARAMS);
     const params = httpParamsFromFetchParams(fetchParams);
     const observable = this.http.get<SponsorList>(
       requestOptions.url ?? `${environment.worldskillsApiEvents}/${eventId}/sponsors`, {params}

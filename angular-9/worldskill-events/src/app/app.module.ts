@@ -45,6 +45,10 @@ import {TagsComponent} from './tags/tags.component';
 import {TagFormComponent} from './tag-form/tag-form.component';
 import {TagUpdateComponent} from './tag-update/tag-update.component';
 import {TagCreateComponent} from './tag-create/tag-create.component';
+import {SponsorsComponent} from './sponsors/sponsors.component';
+import {SponsorCreateComponent} from './sponsor-create/sponsor-create.component';
+import {SponsorUpdateComponent} from './sponsor-update/sponsor-update.component';
+import {SponsorFormComponent} from './sponsor-form/sponsor-form.component';
 
 export function HttpLoaderFactory(http: HttpClient) {
   return new TranslateHttpLoader(http);
@@ -78,6 +82,10 @@ export function HttpLoaderFactory(http: HttpClient) {
     TagFormComponent,
     TagUpdateComponent,
     TagCreateComponent,
+    SponsorsComponent,
+    SponsorCreateComponent,
+    SponsorUpdateComponent,
+    SponsorFormComponent,
   ],
   imports: [
     BrowserModule,
