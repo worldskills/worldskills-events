@@ -1,0 +1,54 @@
+<ng-container *ngIf="loading || !initialized">
+  <ws-spinner></ws-spinner>
+</ng-container>
+<ng-container *ngIf="initialized && !loading">
+  <div class="row my-2">
+    <div class="col-12">
+      <h3 class="m-0 float-left">
+        {{'Tags' | translate}}
+      </h3>
+      <button routerLink="create" class="btn btn-primary btn-sm float-right">
+        {{'Add tag' | translate}}
+      </button>
+      <div class="clearfix"></div>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-12">
+      <div class="table-responsive">
+        <table class="table table-striped border-top">
+          <colgroup>
+            <col width="10%">
+            <col width="80%">
+            <col width="10%">
+          </colgroup>
+          <thead>
+          <tr>
+            <th class="border-top-0">{{'ID' | translate}}</th>
+            <th class="border-top-0">{{'Name' | translate}}</th>
+            <th class="border-top-0">&nbsp;</th>
+          </tr>
+          </thead>
+          <tbody>
+          <tr *ngFor="let tag of tags">
+            <td><a [routerLink]="[tag.id]">{{tag.id}}</a></td>
+            <td><a [routerLink]="[tag.id]">{{tag.name.text}}</a></td>
+            <td class="text-right">
+              <button
+                (click)="delete(tag)"
+                type="button"
+                class="btn btn-danger btn-sm"
+              >
+                <fa-icon size="xs" [icon]="faTimes"></fa-icon>
+              </button>
+            </td>
+          </tr>
+          <tr *ngIf="tags.length === 0">
+            <td colspan="3">{{'No tags found' | translate}}</td>
+          </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</ng-container>

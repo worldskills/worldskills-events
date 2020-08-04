@@ -2,7 +2,7 @@ import {Component, OnInit, ViewChild} from '@angular/core';
 import {AlertService, AlertType, WsComponent} from "@worldskills/worldskills-angular-lib";
 import {EventService} from "../../services/event/event.service";
 import {SkillService} from "../../services/skill/skill.service";
-import {SkillTagsService} from "../../services/skill-tags/skill-tags.service";
+import {TagsService} from "../../services/tags/tags.service";
 import {SkillTagService} from "../../services/skill-tag/skill-tag.service";
 import {UiSkillService} from "../../services/ui-skill/ui-skill.service";
 import {combineLatest} from "rxjs";
@@ -30,7 +30,7 @@ export class SkillTagsComponent extends WsComponent implements OnInit {
   constructor(
     private eventService: EventService,
     private skillService: SkillService,
-    private skillTagsService: SkillTagsService,
+    private tagsService: TagsService,
     private skillTagService: SkillTagService,
     private alertService: AlertService,
     private translateService: TranslateService,
@@ -44,14 +44,14 @@ export class SkillTagsComponent extends WsComponent implements OnInit {
     this.subscribe(
       this.eventService.subject.subscribe(event => {
         this.event = event;
-        this.skillTagsService.fetch(this.event.id);
+        this.tagsService.fetch(this.event.id);
       }),
       this.skillService.subject.subscribe(skill => (this.skill = skill)),
-      this.skillTagsService.subject.subscribe(tags => (this.tags = tags.tags)),
+      this.tagsService.subject.subscribe(tags => (this.tags = tags.tags)),
       combineLatest([
         this.eventService.loading,
         this.skillService.loading,
-        this.skillTagsService.loading,
+        this.tagsService.loading,
         this.skillTagService.loading,
       ])
         .pipe(map(ls => !ls.every(l => !l)))

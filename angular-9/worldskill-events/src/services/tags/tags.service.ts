@@ -19,7 +19,7 @@ import {share} from 'rxjs/operators';
 @Injectable({
   providedIn: 'root'
 })
-export class SkillTagsService extends WsService<TagList> {
+export class TagsService extends WsService<TagList> {
 
   constructor(private http: HttpClient) {
     super();

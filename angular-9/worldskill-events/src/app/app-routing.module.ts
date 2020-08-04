@@ -15,6 +15,9 @@ import {SkillCopyComponent} from "./skill-copy/skill-copy.component";
 import {SectorsComponent} from "./sectors/sectors.component";
 import {SectorUpdateComponent} from "./sector-update/sector-update.component";
 import {SectorCreateComponent} from "./sector-create/sector-create.component";
+import {TagsComponent} from "./tags/tags.component";
+import {TagCreateComponent} from "./tag-create/tag-create.component";
+import {TagUpdateComponent} from "./tag-update/tag-update.component";
 
 function forAppCode(appCode: number, roles: Array<string>) {
   return roles.map(name => ({
@@ -116,7 +119,28 @@ const routes: Routes = [
                     component: SectorUpdateComponent,
                   }
                 ],
-              }
+              },
+              {
+                path: 'tags',
+                data: {breadcrumb: 'Tags'},
+                children: [
+                  {
+                    path: '',
+                    pathMatch: 'full',
+                    component: TagsComponent,
+                  },
+                  {
+                    path: 'create',
+                    data: {breadcrumb: 'Create Tag'},
+                    component: TagCreateComponent,
+                  },
+                  {
+                    path: ':tagId',
+                    data: {breadcrumb: 'Update Tag'},
+                    component: TagUpdateComponent,
+                  }
+                ],
+              },
             ],
           },
         ],

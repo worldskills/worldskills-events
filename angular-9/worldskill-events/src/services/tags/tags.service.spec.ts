@@ -1,14 +1,14 @@
 import {TestBed} from '@angular/core/testing';
 
-import {SkillTagsService} from './skill-tags.service';
+import {TagsService} from './tags.service';
 import {HttpClientTestingModule} from '@angular/common/http/testing';
 
-describe('SkillTagsService', () => {
-  let service: SkillTagsService;
+describe('TagsService', () => {
+  let service: TagsService;
 
   beforeEach(() => {
     TestBed.configureTestingModule({imports: [HttpClientTestingModule]});
-    service = TestBed.inject(SkillTagsService);
+    service = TestBed.inject(TagsService);
   });
 
   it('should be created', () => {

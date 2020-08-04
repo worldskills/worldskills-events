@@ -1,0 +1,23 @@
+<ng-container *ngIf="loading || !initialized">
+  <ws-spinner></ws-spinner>
+</ng-container>
+<ng-container *ngIf="initialized && !loading">
+  <div class="row my-2">
+    <div class="col-12">
+      <h3 class="m-0 float-left">
+        {{tag.name.text}}
+      </h3>
+      <div class="clearfix"></div>
+    </div>
+  </div>
+  <hr class="my-2"/>
+  <div class="row">
+    <div class="col-12">
+      <app-tag-form
+        [event]="event"
+        [tag]="tag"
+        (save)="save($event)"
+      ></app-tag-form>
+    </div>
+  </div>
+</ng-container>

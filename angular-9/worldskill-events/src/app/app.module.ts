@@ -41,6 +41,10 @@ import {SectorsComponent} from './sectors/sectors.component';
 import {SectorFormComponent} from './sector-form/sector-form.component';
 import {SectorUpdateComponent} from './sector-update/sector-update.component';
 import {SectorCreateComponent} from './sector-create/sector-create.component';
+import {TagsComponent} from './tags/tags.component';
+import {TagFormComponent} from './tag-form/tag-form.component';
+import {TagUpdateComponent} from './tag-update/tag-update.component';
+import {TagCreateComponent} from './tag-create/tag-create.component';
 
 export function HttpLoaderFactory(http: HttpClient) {
   return new TranslateHttpLoader(http);
@@ -70,6 +74,10 @@ export function HttpLoaderFactory(http: HttpClient) {
     SectorFormComponent,
     SectorUpdateComponent,
     SectorCreateComponent,
+    TagsComponent,
+    TagFormComponent,
+    TagUpdateComponent,
+    TagCreateComponent,
   ],
   imports: [
     BrowserModule,
