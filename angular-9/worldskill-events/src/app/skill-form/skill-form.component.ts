@@ -80,7 +80,6 @@ export class SkillFormComponent extends WsComponent implements OnInit {
         generate_500_scale,
         landscape_marking,
         competitor_max_age,
-        ws_entity,
       } = this.form.value;
       const skill: SkillRequest = {
         event: {id: this.event.id},
@@ -124,7 +123,7 @@ export class SkillFormComponent extends WsComponent implements OnInit {
         generate_500_scale,
         landscape_marking,
         competitor_max_age: competitor_max_age ? parseInt(competitor_max_age) : undefined,
-        ws_entity: {id: this.skill ? this.skill.ws_entity.id : ws_entity},
+        ws_entity: this.skill ? {id: this.skill.ws_entity.id} : undefined,
       };
       this.save.emit(skill);
     }

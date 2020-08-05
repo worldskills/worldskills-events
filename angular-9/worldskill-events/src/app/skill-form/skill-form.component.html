@@ -4,7 +4,6 @@
 <ng-container *ngIf="initialized && !loading">
   <form class="form-horizontal" [ngClass]="{'was-validated': this.form.submitted}" novalidate
         (ngSubmit)="submit()" #form="ngForm">
-
     <div class="form-group row">
       <label for="name"
              class="col-3 col-form-label text-right font-weight-bold">{{'Name' | translate}}&nbsp;*</label>
@@ -16,7 +15,7 @@
           id="name"
           name="name"
           required
-          [ngModel]="skill ? skill.name.text : undefined">
+          [ngModel]="skill ? skill.name.text : ''">
       </div>
       <div class="col-3">
       <span
@@ -28,7 +27,7 @@
       </div>
     </div>
 
-    <div class="form-group row">
+    <div class="form-group row" *ngIf="skill">
       <label for="ws_entity"
              class="col-3 col-form-label text-right font-weight-bold">{{'Entity' | translate}}&nbsp;*</label>
       <div class="col-6">
@@ -165,7 +164,7 @@
           id="sector"
           [wsSelect]="['id', 'name.text']"
           name="sector"
-          [ngModel]="skill ? skill.sector.id : undefined"
+          [ngModel]="skill && skill.sector ? skill.sector.id : undefined"
           placeholder="{{'Sector' | translate}}"
           [items]="sectors || []"
         ></ng-select>
@@ -190,7 +189,7 @@
         class="form-control"
         id="description"
         name="description"
-        [ngModel]="skill ? skill.description.text : undefined">
+        [ngModel]="skill ? skill.description.text : ''">
       </textarea>
       </div>
       <div class="col-3">&nbsp;</div>
@@ -206,7 +205,7 @@
         class="form-control"
         id="description_industry_action"
         name="description_industry_action"
-        [ngModel]="skill ? skill.description_industry_action.text : undefined">
+        [ngModel]="skill && skill.description_industry_action ? skill.description_industry_action.text : ''">
       </textarea>
       </div>
       <div class="col-3">&nbsp;</div>
@@ -222,7 +221,7 @@
         class="form-control"
         id="description_required_skills"
         name="description_required_skills"
-        [ngModel]="skill ? skill.description_required_skills.text : undefined">
+        [ngModel]="skill && skill.description_required_skills ? skill.description_required_skills.text : ''">
       </textarea>
       </div>
       <div class="col-3">&nbsp;</div>
@@ -238,7 +237,7 @@
         class="form-control"
         id="description_competition_action"
         name="description_competition_action"
-        [ngModel]="skill ? skill.description_competition_action.text : undefined">
+        [ngModel]="skill && skill.description_competition_action ? skill.description_competition_action.text : ''">
       </textarea>
       </div>
       <div class="col-3">&nbsp;</div>
@@ -254,7 +253,7 @@
         class="form-control"
         id="description_facts"
         name="description_facts"
-        [ngModel]="skill ? skill.description_facts.text : undefined">
+        [ngModel]="skill && skill.description_facts ? skill.description_facts.text : ''">
       </textarea>
       </div>
       <div class="col-3">&nbsp;</div>

@@ -22,6 +22,7 @@ import {SponsorsComponent} from './sponsors/sponsors.component';
 import {SponsorCreateComponent} from "./sponsor-create/sponsor-create.component";
 import {SponsorUpdateComponent} from "./sponsor-update/sponsor-update.component";
 import {EventCreateComponent} from "./event-create/event-create.component";
+import {SkillCreateComponent} from "./skill-create/skill-create.component";
 
 function forAppCode(appCode: number, roles: Array<string>) {
   return roles.map(name => ({
@@ -66,6 +67,11 @@ const routes: Routes = [
                     path: '',
                     pathMatch: 'full',
                     component: SkillsComponent,
+                  },
+                  {
+                    path: 'create',
+                    data: {breadcrumb: 'Create Skill'},
+                    component: SkillCreateComponent,
                   },
                   {
                     path: ':skillId',

@@ -59,7 +59,7 @@ export interface SkillRequest {
   generate_500_scale: boolean;
   landscape_marking: boolean;
   competitor_max_age: number;
-  ws_entity: { id: number };
+  ws_entity?: { id: number };
 }
 
 export interface Skill {

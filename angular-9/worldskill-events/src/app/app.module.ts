@@ -50,6 +50,7 @@ import {SponsorCreateComponent} from './sponsor-create/sponsor-create.component'
 import {SponsorUpdateComponent} from './sponsor-update/sponsor-update.component';
 import {SponsorFormComponent} from './sponsor-form/sponsor-form.component';
 import { EventCreateComponent } from './event-create/event-create.component';
+import { SkillCreateComponent } from './skill-create/skill-create.component';
 
 export function HttpLoaderFactory(http: HttpClient) {
   return new TranslateHttpLoader(http);
@@ -88,6 +89,7 @@ export function HttpLoaderFactory(http: HttpClient) {
     SponsorUpdateComponent,
     SponsorFormComponent,
     EventCreateComponent,
+    SkillCreateComponent,
   ],
   imports: [
     BrowserModule,

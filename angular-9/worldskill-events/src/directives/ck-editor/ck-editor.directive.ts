@@ -67,9 +67,9 @@ export class CkEditorDirective implements OnInit, OnChanges, OnDestroy {
             }
           });
         }
-        this.editor.plugins.get('FileRepository').createUploadAdapter = (loader) => {
-          return new UploadAdapter(loader, this.http);
-        };
+        // this.editor.plugins.get('FileRepository').createUploadAdapter = (loader) => {
+        //   return new UploadAdapter(loader, this.http);
+        // };
         this.editor.model.document.on('change:data', () => {
           if (this.formControl) {
             this.formControl.setValue(this.editor.getData());

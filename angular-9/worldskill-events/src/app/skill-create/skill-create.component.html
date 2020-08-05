@@ -1,0 +1,10 @@
+<ng-container *ngIf="loading || !initialized">
+  <ws-spinner></ws-spinner>
+</ng-container>
+<ng-container *ngIf="initialized && !loading">
+  <h3>{{'Add skill' | translate}}</h3>
+  <app-skill-form
+    [event]="event"
+    (save)="save($event)"
+  ></app-skill-form>
+</ng-container>
