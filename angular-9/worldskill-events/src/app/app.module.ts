@@ -51,6 +51,9 @@ import {SponsorUpdateComponent} from './sponsor-update/sponsor-update.component'
 import {SponsorFormComponent} from './sponsor-form/sponsor-form.component';
 import { EventCreateComponent } from './event-create/event-create.component';
 import { SkillCreateComponent } from './skill-create/skill-create.component';
+import { SkillPhotoFormComponent } from './skill-photo-form/skill-photo-form.component';
+import { SkillPhotoCreateComponent } from './skill-photo-create/skill-photo-create.component';
+import { SkillPhotoUpdateComponent } from './skill-photo-update/skill-photo-update.component';
 
 export function HttpLoaderFactory(http: HttpClient) {
   return new TranslateHttpLoader(http);
@@ -90,6 +93,9 @@ export function HttpLoaderFactory(http: HttpClient) {
     SponsorFormComponent,
     EventCreateComponent,
     SkillCreateComponent,
+    SkillPhotoFormComponent,
+    SkillPhotoCreateComponent,
+    SkillPhotoUpdateComponent,
   ],
   imports: [
     BrowserModule,

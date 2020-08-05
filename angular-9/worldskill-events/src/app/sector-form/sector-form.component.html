@@ -6,8 +6,8 @@
         (ngSubmit)="submit()" #form="ngForm">
 
     <div class="form-group row">
-      <label for="name" class="col-sm-3 col-form-label text-right font-weight-bold">{{'Name' | translate}}&nbsp;*</label>
-      <div class="col-sm-4">
+      <label for="name" class="col-3 col-form-label text-right font-weight-bold">{{'Name' | translate}}&nbsp;*</label>
+      <div class="col-4">
         <input
           placeholder="{{'Name' | translate}}"
           type="text"
@@ -17,7 +17,7 @@
           required
           [ngModel]="sector ? sector.name.text : undefined">
       </div>
-      <div class="col-sm-5">
+      <div class="col-5">
       <span
         class="form-text text-danger"
         style="display: block"
@@ -28,8 +28,8 @@
     </div>
 
     <div class="form-group row">
-      <label for="ws_entity" class="col-sm-3 col-form-label text-right font-weight-bold">{{'Entity' | translate}}</label>
-      <div class="col-sm-4">
+      <label for="ws_entity" class="col-3 col-form-label text-right font-weight-bold">{{'Entity' | translate}}</label>
+      <div class="col-4">
         <ws-entity-tree-select
           id="ws_entity"
           name="ws_entity"
@@ -39,7 +39,7 @@
           [showFullPath]="false">
         </ws-entity-tree-select>
       </div>
-      <div class="col-sm-5">
+      <div class="col-5">
       <span
         class="form-text text-danger"
         style="display: block"
@@ -50,8 +50,8 @@
     </div>
 
     <div class="form-group row">
-      <label for="base_sector_id" class="col-sm-3 col-form-label text-right font-weight-bold">{{'Global Sector' | translate}}</label>
-      <div class="col-sm-4">
+      <label for="base_sector_id" class="col-3 col-form-label text-right font-weight-bold">{{'Global Sector' | translate}}</label>
+      <div class="col-4">
         <ng-select
           id="base_sector_id"
           [wsSelect]="['id', 'name.text']"
@@ -61,7 +61,7 @@
           [items]="baseSectors || []"
         ></ng-select>
       </div>
-      <div class="col-sm-5">
+      <div class="col-5">
       <span
         class="form-text text-danger"
         style="display: block"
@@ -72,7 +72,7 @@
     </div>
 
     <div class="form-group row">
-      <div class="offset-sm-3 col-sm-9">
+      <div class="offset-sm-3 col-9">
         <button type="submit" class="btn btn-success" id="saveSector" [disabled]="loading">
           {{'Save' | translate}}
         </button>&nbsp;

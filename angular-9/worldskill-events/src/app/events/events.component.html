@@ -6,7 +6,7 @@
 <div class="clearfix border-bottom"></div>
 
 <div class="row mt-2">
-  <div class="col-md-9">
+  <div class="col-9">
     <ng-template [ngIf]="eventList && fetchParams" [ngIfElse]="uninitialized">
       <span class="float-left">{{'Total results:' | translate}}&nbsp;{{eventList.total_count}}</span>
       <ngb-pagination
@@ -92,7 +92,7 @@
       {{'Use the search form to find Events records.' | translate}}
     </ng-template>
   </div>
-  <div class="col-md-3">
+  <div class="col-3">
     <app-events-search-form></app-events-search-form>
   </div>
 </div>

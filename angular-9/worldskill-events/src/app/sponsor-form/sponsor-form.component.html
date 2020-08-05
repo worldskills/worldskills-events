@@ -7,8 +7,8 @@
 
     <div class="form-group row">
       <label for="name"
-             class="col-sm-3 col-form-label text-right font-weight-bold">{{'Name' | translate}}&nbsp;*</label>
-      <div class="col-sm-4">
+             class="col-3 col-form-label text-right font-weight-bold">{{'Name' | translate}}&nbsp;*</label>
+      <div class="col-4">
         <input
           placeholder="{{'Name' | translate}}"
           type="text"
@@ -18,7 +18,7 @@
           required
           [ngModel]="sponsor ? sponsor.name : undefined">
       </div>
-      <div class="col-sm-5">
+      <div class="col-5">
       <span
         class="form-text text-danger"
         style="display: block"
@@ -29,8 +29,8 @@
     </div>
 
     <div class="form-group row">
-      <label for="url" class="col-sm-3 col-form-label text-right font-weight-bold">{{'Website' | translate}}</label>
-      <div class="col-sm-4">
+      <label for="url" class="col-3 col-form-label text-right font-weight-bold">{{'Website' | translate}}</label>
+      <div class="col-4">
         <input
           placeholder="{{'Name' | translate}}"
           type="text"
@@ -40,12 +40,12 @@
           required
           [ngModel]="sponsor ? sponsor.url : undefined">
       </div>
-      <div class="col-sm-5">&nbsp;</div>
+      <div class="col-5">&nbsp;</div>
     </div>
 
     <div class="form-group row">
-      <label for="url" class="col-sm-3 col-form-label text-right font-weight-bold">{{'Logo' | translate}}</label>
-      <div class="col-sm-4">
+      <label for="url" class="col-3 col-form-label text-right font-weight-bold">{{'Logo' | translate}}</label>
+      <div class="col-4">
         <div class="mb-1 mw-100">
           <img class="mw-100" *ngIf="sponsor.logo" [src]="sponsor.logo.thumbnail"/>
           <div
@@ -73,7 +73,7 @@
           />&nbsp;{{'Delete image' | translate}}
         </ng-container>
       </div>
-      <div class="col-sm-5">
+      <div class="col-5">
         <p *ngIf="resourceLoading">
           <ngb-progressbar
             type="info"
@@ -85,7 +85,7 @@
     </div>
 
     <div class="form-group row">
-      <div class="offset-sm-3 col-sm-9">
+      <div class="offset-sm-3 col-9">
         <button type="submit" class="btn btn-success" id="saveSponsor" [disabled]="loading">
           {{'Save' | translate}}
         </button>&nbsp;

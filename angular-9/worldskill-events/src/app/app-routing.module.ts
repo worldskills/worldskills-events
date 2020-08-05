@@ -23,6 +23,8 @@ import {SponsorCreateComponent} from "./sponsor-create/sponsor-create.component"
 import {SponsorUpdateComponent} from "./sponsor-update/sponsor-update.component";
 import {EventCreateComponent} from "./event-create/event-create.component";
 import {SkillCreateComponent} from "./skill-create/skill-create.component";
+import {SkillPhotoCreateComponent} from "./skill-photo-create/skill-photo-create.component";
+import {SkillPhotoUpdateComponent} from "./skill-photo-update/skill-photo-update.component";
 
 function forAppCode(appCode: number, roles: Array<string>) {
   return roles.map(name => ({
@@ -92,6 +94,16 @@ const routes: Routes = [
                             path: '',
                             pathMatch: 'full',
                             component: SkillPhotosComponent,
+                          },
+                          {
+                            path: 'create',
+                            data: {breadcrumb: 'Create Skill Photo'},
+                            component: SkillPhotoCreateComponent,
+                          },
+                          {
+                            path: ':skillPhotoId',
+                            data: {breadcrumb: 'Update Skill Photo'},
+                            component: SkillPhotoUpdateComponent,
                           },
                         ],
                       },

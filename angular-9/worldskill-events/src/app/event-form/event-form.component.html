@@ -6,8 +6,8 @@
         (ngSubmit)="submit()" #form="ngForm">
 
     <div class="form-group row">
-      <label for="name" class="col-sm-3 col-form-label text-right font-weight-bold">{{'Name' | translate}}&nbsp;*</label>
-      <div class="col-sm-4">
+      <label for="name" class="col-3 col-form-label text-right font-weight-bold">{{'Name' | translate}}&nbsp;*</label>
+      <div class="col-4">
         <input
           placeholder="{{'Name' | translate}}"
           type="text"
@@ -17,7 +17,7 @@
           required
           [ngModel]="event ? event.name : undefined">
       </div>
-      <div class="col-sm-5">
+      <div class="col-5">
       <span
         class="form-text text-danger"
         style="display: block"
@@ -28,8 +28,8 @@
     </div>
 
     <div class="form-group row">
-      <label for="ws_entity" class="col-sm-3 col-form-label text-right font-weight-bold">{{'Entity' | translate}}&nbsp;*</label>
-      <div class="col-sm-4">
+      <label for="ws_entity" class="col-3 col-form-label text-right font-weight-bold">{{'Entity' | translate}}&nbsp;*</label>
+      <div class="col-4">
         <ws-entity-tree-select
           id="ws_entity"
           name="ws_entity"
@@ -39,7 +39,7 @@
           [showFullPath]="false">
         </ws-entity-tree-select>
       </div>
-      <div class="col-sm-5">
+      <div class="col-5">
       <span
         class="form-text text-danger"
         style="display: block"
@@ -50,8 +50,8 @@
     </div>
 
     <div class="form-group row">
-      <label for="type" class="col-sm-3 col-form-label text-right font-weight-bold">{{'Type' | translate}}&nbsp;*</label>
-      <div class="col-sm-4">
+      <label for="type" class="col-3 col-form-label text-right font-weight-bold">{{'Type' | translate}}&nbsp;*</label>
+      <div class="col-4">
         <select
           class="form-control"
           id="type"
@@ -66,7 +66,7 @@
           <option value="preparation_meeting">{{'Preparation Meeting' | translate}}</option>
         </select>
       </div>
-      <div class="col-sm-5">
+      <div class="col-5">
       <span
         class="form-text text-danger"
         style="display: block"
@@ -77,8 +77,8 @@
     </div>
 
     <div class="form-group row">
-      <label for="start_date" class="col-sm-3 col-form-label text-right font-weight-bold">{{'Start date' | translate}}&nbsp;*</label>
-      <div class="col-sm-4">
+      <label for="start_date" class="col-3 col-form-label text-right font-weight-bold">{{'Start date' | translate}}&nbsp;*</label>
+      <div class="col-4">
         <input #inputStartDate="ngModel" #dStartDate="ngbDatepicker"
                placeholder="{{'Start date' | translate}}"
                type="text"
@@ -91,7 +91,7 @@
                [autoClose]="true"
                [restoreFocus]="true"/>
       </div>
-      <div class="col-sm-5">
+      <div class="col-5">
       <span
         class="form-text text-danger"
         style="display: block"
@@ -102,8 +102,8 @@
     </div>
 
     <div class="form-group row">
-      <label for="end_date" class="col-sm-3 col-form-label text-right font-weight-bold">{{'End date' | translate}}&nbsp;*</label>
-      <div class="col-sm-4">
+      <label for="end_date" class="col-3 col-form-label text-right font-weight-bold">{{'End date' | translate}}&nbsp;*</label>
+      <div class="col-4">
         <input #inputEndDate="ngModel" #dEndDate="ngbDatepicker"
                placeholder="{{'Start date' | translate}}"
                type="text"
@@ -116,7 +116,7 @@
                [autoClose]="true"
                [restoreFocus]="true"/>
       </div>
-      <div class="col-sm-5">
+      <div class="col-5">
       <span
         class="form-text text-danger"
         style="display: block"
@@ -127,8 +127,8 @@
     </div>
 
     <div class="form-group row">
-      <label for="utc_offset" class="col-sm-3 col-form-label text-right font-weight-bold">{{'Timezone' | translate}}</label>
-      <div class="col-sm-4">
+      <label for="utc_offset" class="col-3 col-form-label text-right font-weight-bold">{{'Timezone' | translate}}</label>
+      <div class="col-4">
         <select
           id="utc_offset"
           class="form-control"
@@ -177,14 +177,14 @@
           <option value="50400">UTC+14:00</option>
         </select>
       </div>
-      <div class="col-sm-5">&nbsp;</div>
+      <div class="col-5">&nbsp;</div>
     </div>
 
     <hr class="my-2">
 
     <div class="form-group row">
-      <label for="country" class="col-sm-3 col-form-label text-right font-weight-bold">{{'Country' | translate}}&nbsp;*</label>
-      <div class="col-sm-4">
+      <label for="country" class="col-3 col-form-label text-right font-weight-bold">{{'Country' | translate}}&nbsp;*</label>
+      <div class="col-4">
         <ng-select
           id="country"
           [wsSelect]="['id', 'name.text']"
@@ -194,7 +194,7 @@
           [items]="countries || []"
         ></ng-select>
       </div>
-      <div class="col-sm-5">
+      <div class="col-5">
       <span
         class="form-text text-danger"
         style="display: block"
@@ -205,8 +205,8 @@
     </div>
 
     <div class="form-group row">
-      <label for="town" class="col-sm-3 col-form-label text-right font-weight-bold">{{'Town' | translate}}</label>
-      <div class="col-sm-4">
+      <label for="town" class="col-3 col-form-label text-right font-weight-bold">{{'Town' | translate}}</label>
+      <div class="col-4">
         <input
           placeholder="{{'Town' | translate}}"
           type="text"
@@ -215,12 +215,12 @@
           name="town"
           [ngModel]="event ? event.town : undefined">
       </div>
-      <div class="col-sm-5">&nbsp;</div>
+      <div class="col-5">&nbsp;</div>
     </div>
 
     <div class="form-group row">
-      <label for="venue" class="col-sm-3 col-form-label text-right font-weight-bold">{{'Venue' | translate}}</label>
-      <div class="col-sm-4">
+      <label for="venue" class="col-3 col-form-label text-right font-weight-bold">{{'Venue' | translate}}</label>
+      <div class="col-4">
         <input
           placeholder="{{'Venue' | translate}}"
           type="text"
@@ -229,12 +229,12 @@
           name="venue"
           [ngModel]="event ? event.venue : undefined">
       </div>
-      <div class="col-sm-5">&nbsp;</div>
+      <div class="col-5">&nbsp;</div>
     </div>
 
     <div class="form-group row">
-      <label for="code" class="col-sm-3 col-form-label text-right font-weight-bold">{{'Code' | translate}}</label>
-      <div class="col-sm-4">
+      <label for="code" class="col-3 col-form-label text-right font-weight-bold">{{'Code' | translate}}</label>
+      <div class="col-4">
         <input
           placeholder="{{'Code' | translate}}"
           type="text"
@@ -243,12 +243,12 @@
           name="code"
           [ngModel]="event ? event.code : undefined">
       </div>
-      <div class="col-sm-5">&nbsp;</div>
+      <div class="col-5">&nbsp;</div>
     </div>
 
     <div class="form-group row">
-      <label for="url" class="col-sm-3 col-form-label text-right font-weight-bold">{{'Website' | translate}}</label>
-      <div class="col-sm-4">
+      <label for="url" class="col-3 col-form-label text-right font-weight-bold">{{'Website' | translate}}</label>
+      <div class="col-4">
         <input
           placeholder="{{'http://www.example.org' | translate}}"
           type="text"
@@ -257,12 +257,12 @@
           name="url"
           [ngModel]="event ? event.url : undefined">
       </div>
-      <div class="col-sm-5">&nbsp;</div>
+      <div class="col-5">&nbsp;</div>
     </div>
 
     <div class="form-group row">
-      <label for="description" class="col-sm-3 col-form-label text-right font-weight-bold">{{'Description' | translate}}</label>
-      <div class="col-sm-4">
+      <label for="description" class="col-3 col-form-label text-right font-weight-bold">{{'Description' | translate}}</label>
+      <div class="col-4">
       <textarea
         placeholder="{{'Description' | translate}}"
         class="form-control"
@@ -271,11 +271,11 @@
         [ngModel]="event ? event.description : undefined">
       </textarea>
       </div>
-      <div class="col-sm-5">&nbsp;</div>
+      <div class="col-5">&nbsp;</div>
     </div>
 
     <div class="form-group row">
-      <div class="offset-sm-3 col-sm-9">
+      <div class="offset-sm-3 col-9">
         <button type="submit" class="btn btn-success" id="saveEvent" [disabled]="loading">
           {{'Save' | translate}}
         </button>&nbsp;
