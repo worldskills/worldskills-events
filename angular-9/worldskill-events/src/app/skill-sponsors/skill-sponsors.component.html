@@ -1,7 +1,7 @@
 <ng-template #button>
   <div *ngIf="sponsors" class="btn-group" role="group">
     <button type="button" class="btn btn-primary btn-sm mr-1 dropdown-toggle" data-toggle="dropdown"
-            aria-haspopup="true" aria-expanded="false">
+            aria-haspopup="true" aria-expanded="false" [disabled]="filteredSponsors.length === 0">
       {{'Add sponsor' | translate}}
     </button>
     <div class="dropdown-menu">

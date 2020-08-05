@@ -49,7 +49,6 @@ export class SectorFormComponent extends WsComponent implements OnInit {
       const {
         name,
         base_sector_id,
-        ws_entity,
       } = this.form.value;
       const sector: SectorRequest = {
         name: {
@@ -58,7 +57,7 @@ export class SectorFormComponent extends WsComponent implements OnInit {
         },
         base_sector_id: base_sector_id ? parseInt(base_sector_id) : undefined,
         event: {id: this.event.id},
-        ws_entity: {id: this.sector ? this.sector.ws_entity.id : ws_entity},
+        ws_entity: this.sector ? {id: this.sector.ws_entity.id} : undefined,
       };
       this.save.emit(sector);
     }

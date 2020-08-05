@@ -47,9 +47,9 @@
       <label for="url" class="col-3 col-form-label text-right font-weight-bold">{{'Logo' | translate}}</label>
       <div class="col-4">
         <div class="mb-1 mw-100">
-          <img class="mw-100" *ngIf="sponsor.logo" [src]="sponsor.logo.thumbnail"/>
+          <img class="mw-100" *ngIf="!!sponsor && !!sponsor.logo" [src]="sponsor.logo.thumbnail"/>
           <div
-            *ngIf="!sponsor.logo"
+            *ngIf="!sponsor || !sponsor.logo"
             class="alert alert-warning"
           >
             {{'No flag has been uploaded' | translate}}

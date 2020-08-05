@@ -82,7 +82,7 @@ export class SponsorFormComponent extends WsComponent implements OnInit {
       const sponsor: SponsorRequest = {
         name,
         url,
-        logo: removeFile ? null : this.sponsor.logo,
+        logo: removeFile ? null : (this.sponsor && this.sponsor.logo) ? this.sponsor.logo : null,
         event: this.event,
       };
       if (!removeFile && this.uploadFile) {
