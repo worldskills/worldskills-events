@@ -2,7 +2,7 @@ import {Component, OnInit} from '@angular/core';
 import {Event} from "../../types/event";
 import {TagRequest} from "../../types/tag";
 import {TagService} from "../../services/tag/tag.service";
-import {AlertService, AlertType, WsComponent} from "@worldskills/worldskills-angular-lib";
+import {AlertService, AlertType, EntityTreeService, WsComponent} from "@worldskills/worldskills-angular-lib";
 import {TranslateService} from "@ngx-translate/core";
 import {EventService} from "../../services/event/event.service";
 import {combineLatest} from "rxjs";
@@ -25,6 +25,7 @@ export class TagCreateComponent extends WsComponent implements OnInit {
     private alertService: AlertService,
     private translateService: TranslateService,
     private router: Router,
+    private entityTreeService: EntityTreeService,
   ) {
     super();
   }
@@ -34,6 +35,7 @@ export class TagCreateComponent extends WsComponent implements OnInit {
       this.eventService.subject.subscribe(event => (this.event = event)),
       combineLatest([
         this.eventService.loading,
+        this.tagService.loading,
       ])
         .pipe(map(ls => !ls.every(l => !l)))
         .subscribe(loading => (this.loading = loading))
@@ -49,6 +51,7 @@ export class TagCreateComponent extends WsComponent implements OnInit {
       this.translateService.get('The Tag has been created successfully.').subscribe(t => {
         this.alertService.setAlert('created-tag', AlertType.success,
           null, undefined, t, true);
+        this.entityTreeService.clearCache();
         this.router.navigate(['/events', this.event.id, 'tags']);
       });
     });

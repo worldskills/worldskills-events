@@ -34,6 +34,7 @@ export class SponsorCreateComponent extends WsComponent implements OnInit {
       this.eventService.subject.subscribe(event => (this.event = event)),
       combineLatest([
         this.eventService.loading,
+        this.sponsorService.loading,
       ])
         .pipe(map(ls => !ls.every(l => !l)))
         .subscribe(loading => (this.loading = loading))

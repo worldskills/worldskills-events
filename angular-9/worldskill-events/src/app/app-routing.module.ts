@@ -21,6 +21,7 @@ import {TagUpdateComponent} from "./tag-update/tag-update.component";
 import {SponsorsComponent} from './sponsors/sponsors.component';
 import {SponsorCreateComponent} from "./sponsor-create/sponsor-create.component";
 import {SponsorUpdateComponent} from "./sponsor-update/sponsor-update.component";
+import {EventCreateComponent} from "./event-create/event-create.component";
 
 function forAppCode(appCode: number, roles: Array<string>) {
   return roles.map(name => ({
@@ -43,13 +44,18 @@ const routes: Routes = [
             component: EventsComponent,
           },
           {
+            path: 'add',
+            data: {breadcrumb: 'Add Event'},
+            component: EventCreateComponent,
+          },
+          {
             path: ':eventId',
             component: EventComponent,
             children: [
               {
                 path: '',
                 pathMatch: 'full',
-                data: {breadcrumb: 'Event'},
+                data: {breadcrumb: 'Update Event'},
                 component: EventUpdateComponent,
               },
               {
