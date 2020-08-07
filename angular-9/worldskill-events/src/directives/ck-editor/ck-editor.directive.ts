@@ -48,6 +48,7 @@ class UploadAdapter {
 })
 export class CkEditorDirective implements OnInit, OnChanges, OnDestroy {
   @Input() formControl: FormControl;
+  @Input() disabled: boolean = false;
   private editor;
   private subscription: Subscription;
 

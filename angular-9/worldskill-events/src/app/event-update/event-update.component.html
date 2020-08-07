@@ -3,6 +3,7 @@
 </ng-container>
 <ng-container *ngIf="initialized && !loading">
   <app-event-form
+    [editable]="hasUserRole('Admin', 'EditEvents')"
     [event]="event"
     (save)="save($event)"
   >

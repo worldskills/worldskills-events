@@ -7,10 +7,10 @@
       <h3 class="m-0 float-left">
         {{'Skills' | translate}}
       </h3>
-      <button routerLink="create" class="btn btn-primary btn-sm float-right">
+      <button routerLink="create" class="btn btn-primary btn-sm float-right ml-1" *ngIf="hasUserRole('Admin', 'EditEvents')">
         {{'Add skill' | translate}}
       </button>
-      <div class="btn-group float-right mr-1">
+      <div class="btn-group float-right">
         <ws-spinner *ngIf="this.loadingClone"></ws-spinner>
         <button
           [disabled]="selectedSkills.length === 0 || this.loadingClone"

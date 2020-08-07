@@ -1,4 +1,5 @@
 <button
+  *ngIf="hasUserRole('Admin', 'EditEvents')"
   routerLink="/events/add"
   class="btn btn-success float-right"
 >{{'Add Event' | translate}}</button>

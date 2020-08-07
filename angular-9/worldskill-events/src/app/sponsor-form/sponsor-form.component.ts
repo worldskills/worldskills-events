@@ -16,6 +16,7 @@ export class SponsorFormComponent extends WsComponent implements OnInit {
 
   @Input() event: WsEvent;
   @Input() sponsor: Sponsor = null;
+  @Input() editable = false;
   @Output() save: EventEmitter<SponsorRequest> = new EventEmitter<SponsorRequest>();
   @ViewChild('form') form: NgForm;
   loading = false;
@@ -73,7 +74,7 @@ export class SponsorFormComponent extends WsComponent implements OnInit {
   }
 
   submit() {
-    if (this.form.valid) {
+    if (this.editable && this.form.valid) {
       const {
         name,
         url,

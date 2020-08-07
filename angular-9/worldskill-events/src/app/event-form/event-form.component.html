@@ -15,6 +15,7 @@
           id="name"
           name="name"
           required
+          [disabled]="!editable"
           [ngModel]="event ? event.name : undefined">
       </div>
       <div class="col-5">
@@ -33,7 +34,7 @@
         <ws-entity-tree-select
           id="ws_entity"
           name="ws_entity"
-          [disabled]="!!event"
+          [disabled]="!editable || !!event"
           [ngModel]="event ? event.ws_entity.id : undefined"
           [multiple]="false"
           [showFullPath]="false">
@@ -57,7 +58,7 @@
           id="type"
           name="type"
           [ngModel]="event ? event.type : undefined"
-          [disabled]="!!event"
+          [disabled]="!editable || !!event"
           required
         >
           <option value="">{{'Select type...' | translate}}</option>
@@ -85,6 +86,7 @@
                class="form-control"
                id="start_date"
                name="start_date"
+               [disabled]="!editable"
                [ngModel]="event ? ngbDateCache.getNgbDate(event.start_date, inputStartDate) : undefined"
                ngbDatepicker
                (focus)="dStartDate.open()"
@@ -110,6 +112,7 @@
                class="form-control"
                id="end_date"
                name="end_date"
+               [disabled]="!editable"
                [ngModel]="event ? ngbDateCache.getNgbDate(event.end_date, inputEndDate) : undefined"
                ngbDatepicker
                (focus)="dEndDate.open()"
@@ -133,6 +136,7 @@
           id="utc_offset"
           class="form-control"
           name="utc_offset"
+          [disabled]="!editable"
           [ngModel]="event ? event.utc_offset : undefined"
         >
           <option value="">{{'Select timezone...' | translate}}</option>
@@ -189,6 +193,7 @@
           id="country"
           [wsSelect]="['id', 'name.text']"
           name="country"
+          [disabled]="!editable"
           [ngModel]="event ? event.country.id : undefined"
           placeholder="{{'Country' | translate}}"
           [items]="countries || []"
@@ -213,6 +218,7 @@
           class="form-control"
           id="town"
           name="town"
+          [disabled]="!editable"
           [ngModel]="event ? event.town : undefined">
       </div>
       <div class="col-5">&nbsp;</div>
@@ -227,6 +233,7 @@
           class="form-control"
           id="venue"
           name="venue"
+          [disabled]="!editable"
           [ngModel]="event ? event.venue : undefined">
       </div>
       <div class="col-5">&nbsp;</div>
@@ -241,6 +248,7 @@
           class="form-control"
           id="code"
           name="code"
+          [disabled]="!editable"
           [ngModel]="event ? event.code : undefined">
       </div>
       <div class="col-5">&nbsp;</div>
@@ -255,6 +263,7 @@
           class="form-control"
           id="url"
           name="url"
+          [disabled]="!editable"
           [ngModel]="event ? event.url : undefined">
       </div>
       <div class="col-5">&nbsp;</div>
@@ -268,6 +277,7 @@
         class="form-control"
         id="description"
         name="description"
+        [disabled]="!editable"
         [ngModel]="event ? event.description : undefined">
       </textarea>
       </div>
@@ -276,10 +286,10 @@
 
     <div class="form-group row">
       <div class="offset-sm-3 col-9">
-        <button type="submit" class="btn btn-success" id="saveEvent" [disabled]="loading">
+        <button type="submit" class="btn btn-success ml-1" id="saveEvent" [disabled]="loading" *ngIf="editable">
           {{'Save' | translate}}
-        </button>&nbsp;
-        <a class="btn btn-secondary" [routerLink]="['/events']">{{'Cancel' | translate}}</a><br/>
+        </button>
+        <a class="btn btn-secondary" [routerLink]="['/events']">{{'Back' | translate}}</a><br/>
         <ws-spinner *ngIf="loading"></ws-spinner>
       </div>
     </div>

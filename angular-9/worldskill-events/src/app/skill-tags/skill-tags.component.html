@@ -1,15 +1,17 @@
 <ng-template #button>
-  <div *ngIf="tags" class="btn-group" role="group">
-    <button type="button" class="btn btn-primary btn-sm mr-1 dropdown-toggle" data-toggle="dropdown"
-            aria-haspopup="true" aria-expanded="false" [disabled]="filteredTags.length === 0">
-      {{'Add tag' | translate}}
-    </button>
-    <div class="dropdown-menu">
-      <ng-container *ngFor="let tag of filteredTags">
-        <a class="dropdown-item" href="#" (click)="$event.preventDefault(); bind(tag)">{{tag.name.text}}</a>
-      </ng-container>
+  <ng-container *ngIf="hasUserRole('Admin', 'EditEvents')">
+    <div *ngIf="tags" class="btn-group" role="group">
+      <button type="button" class="btn btn-primary btn-sm mr-1 dropdown-toggle" data-toggle="dropdown"
+              aria-haspopup="true" aria-expanded="false" [disabled]="filteredTags.length === 0">
+        {{'Add tag' | translate}}
+      </button>
+      <div class="dropdown-menu">
+        <ng-container *ngFor="let tag of filteredTags">
+          <a class="dropdown-item" href="#" (click)="$event.preventDefault(); bind(tag)">{{tag.name.text}}</a>
+        </ng-container>
+      </div>
     </div>
-  </div>
+  </ng-container>
 </ng-template>
 <ng-container *ngIf="loading || !initialized">
   <ws-spinner></ws-spinner>
@@ -34,6 +36,7 @@
             <td>{{tag.name.text}}</td>
             <td class="text-right">
               <button
+                *ngIf="hasUserRole('Admin', 'EditEvents')"
                 (click)="unbind(tag)"
                 type="button"
                 class="btn btn-danger btn-sm"

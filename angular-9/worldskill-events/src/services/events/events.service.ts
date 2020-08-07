@@ -32,6 +32,7 @@ export function isEventsFetchParams(object: any): object is EventsFetchParams {
 }
 
 export const DEFAULT_FETCH_PARAMS: EventsFetchParams = {limit: 100, l: 'en', sort: 'start_date_desc'};
+export const DEFAULT_FETCH_PARAMS_PAGER: EventsFetchParams = {offset: 0, limit: 20, sort: 'start_date_desc'};
 
 @Injectable({
   providedIn: 'root'
@@ -42,11 +43,7 @@ export class EventsService extends WsService<EventList, EventsFetchParams> {
 
   constructor(private http: HttpClient) {
     super();
-    this.updateFetchParams({
-      offset: 0,
-      limit: 20,
-      sort: 'start_date_desc',
-    }, true);
+    this.updateFetchParams(DEFAULT_FETCH_PARAMS_PAGER, true);
   }
 
   updateFetchParams(value: EventsFetchParams | undefined, update = true) {

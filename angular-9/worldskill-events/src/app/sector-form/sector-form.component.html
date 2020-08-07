@@ -15,6 +15,7 @@
           id="name"
           name="name"
           required
+          [disabled]="!editable"
           [ngModel]="sector ? sector.name.text : undefined">
       </div>
       <div class="col-5">
@@ -27,7 +28,7 @@
       </div>
     </div>
 
-    <div class="form-group row" *ngIf="!!sector">
+    <div class="form-group row" *ngIf="editable && !!sector">
       <label for="ws_entity" class="col-3 col-form-label text-right font-weight-bold">{{'Entity' | translate}}</label>
       <div class="col-4">
         <ws-entity-tree-select
@@ -49,7 +50,7 @@
       </div>
     </div>
 
-    <div class="form-group row">
+    <div class="form-group row" *ngIf="editable">
       <label for="base_sector_id" class="col-3 col-form-label text-right font-weight-bold">{{'Global Sector' | translate}}</label>
       <div class="col-4">
         <ng-select
@@ -73,10 +74,10 @@
 
     <div class="form-group row">
       <div class="offset-sm-3 col-9">
-        <button type="submit" class="btn btn-success" id="saveSector" [disabled]="loading">
+        <button type="submit" class="btn btn-success ml-1" id="saveSector" [disabled]="loading" *ngIf="editable">
           {{'Save' | translate}}
-        </button>&nbsp;
-        <a class="btn btn-secondary" [routerLink]="['/events', this.event.id, 'sectors']">{{'Cancel' | translate}}</a><br/>
+        </button>
+        <a class="btn btn-secondary" [routerLink]="['/events', this.event.id, 'sectors']">{{'Back' | translate}}</a><br/>
         <ws-spinner *ngIf="loading"></ws-spinner>
       </div>
     </div>

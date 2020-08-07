@@ -1,5 +1,5 @@
 import {Component, OnInit, ViewChild} from '@angular/core';
-import {LOADER_ONLY, WsComponent} from "@worldskills/worldskills-angular-lib";
+import {LOADER_ONLY, UserModel, WsComponent} from "@worldskills/worldskills-angular-lib";
 import {Event} from "../../types/event";
 import {Photo} from "../../types/photo";
 import {Skill} from "../../types/skill";
@@ -10,6 +10,9 @@ import {map} from "rxjs/operators";
 import {SkillPhotoService} from "../../services/skill-photo/skill-photo.service";
 import {UiSkillService} from "../../services/ui-skill/ui-skill.service";
 import {faCaretDown, faCaretUp} from '@fortawesome/free-solid-svg-icons';
+import {AuthService} from "../../services/auth/auth.service";
+import {userHasRolesOfEntity} from "../../utils/userRole";
+import {environment} from "../../environments/environment";
 
 @Component({
   selector: 'app-skill-photos',
@@ -18,6 +21,7 @@ import {faCaretDown, faCaretUp} from '@fortawesome/free-solid-svg-icons';
 })
 export class SkillPhotosComponent extends WsComponent implements OnInit {
 
+  authenticatedUser: UserModel;
   event: Event;
   skill: Skill;
   loading = false;
@@ -26,6 +30,7 @@ export class SkillPhotosComponent extends WsComponent implements OnInit {
   faCaretUp = faCaretUp;
 
   constructor(
+    private authService: AuthService,
     private eventService: EventService,
     private skillService: SkillService,
     private skillPhotoService: SkillPhotoService,
@@ -37,6 +42,7 @@ export class SkillPhotosComponent extends WsComponent implements OnInit {
   ngOnInit(): void {
     this.uiSkillService.subject.next(this.button);
     this.subscribe(
+      this.authService.authStatus.subscribe(authStatus => (this.authenticatedUser = authStatus.user)),
       this.eventService.subject.subscribe(event => (this.event = event)),
       this.skillService.subject.subscribe(skill => (this.skill = skill)),
       combineLatest([
@@ -61,6 +67,11 @@ export class SkillPhotosComponent extends WsComponent implements OnInit {
       .subscribe(() => {
         this.skillService.fetch(this.event.id, this.skill.id);
       });
+  }
+
+  hasUserRole(...roles: Array<string>) {
+    return this.authenticatedUser && this.event && this.event.ws_entity &&
+      userHasRolesOfEntity(this.authenticatedUser, environment.worldskillsAppId, this.event.ws_entity.id, ...roles);
   }
 
 }

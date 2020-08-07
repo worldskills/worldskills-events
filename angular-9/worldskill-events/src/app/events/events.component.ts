@@ -1,10 +1,18 @@
 import {Component, OnInit} from '@angular/core';
 import {UserModel, WsComponent} from "@worldskills/worldskills-angular-lib";
 import {EventList} from "../../types/event";
-import {EventsFetchParams, EventsService, isEventsFetchParams} from "../../services/events/events.service";
+import {
+  DEFAULT_FETCH_PARAMS_PAGER,
+  EventsFetchParams,
+  EventsService,
+  isEventsFetchParams
+} from "../../services/events/events.service";
 import {AuthService} from "../../services/auth/auth.service";
 import {ActivatedRoute, Router} from "@angular/router";
 import {take} from "rxjs/operators";
+import {userHasRoles} from "../../utils/userRole";
+import {environment} from "../../environments/environment";
+import {combineLatest} from "rxjs";
 
 @Component({
   selector: 'app-events',
@@ -29,7 +37,28 @@ export class EventsComponent extends WsComponent implements OnInit {
 
   ngOnInit(): void {
     this.subscribe(
-      this.authService.authStatus.subscribe(authStatus => (this.authenticatedUser = authStatus.user)),
+      combineLatest([
+        this.authService.authStatus,
+        this.route.queryParams.pipe(take(1)),
+      ]).subscribe(([authStatus, queryParams]) => {
+        this.authenticatedUser = authStatus.user;
+        if (isEventsFetchParams(queryParams)) {
+          this.eventsService.updateFetchParams(
+            this.eventsService.convertQueryParamsToFetchParams(queryParams),
+            true
+          );
+        } else if (this.hasUserRole('EditEvents', 'OrganizerEditEvents')) {
+          const role = this.authenticatedUser.roles
+            .find(r => r.roleApplication.applicationCode === environment.worldskillsAppId &&
+              (r.name === 'EditEvents' || r.name === 'OrganizerEditEvents'));
+          if (role && role.wsEntity) {
+            this.eventsService.updateFetchParams(
+              {...DEFAULT_FETCH_PARAMS_PAGER, ws_entity: role.wsEntity.id},
+              true
+            );
+          }
+        }
+      }),
       this.eventsService.fetchParams.subscribe(fetchParams => {
         this.fetchParams = fetchParams;
         if (this.fetchParams.update) {
@@ -46,14 +75,6 @@ export class EventsComponent extends WsComponent implements OnInit {
       this.eventsService.subject.subscribe(eventList => (this.eventList = eventList)),
       this.eventsService.loading.subscribe(loading => (this.loading = loading))
     );
-    this.route.queryParams.pipe(take(1)).subscribe(queryParams => {
-      if (isEventsFetchParams(queryParams)) {
-        this.eventsService.updateFetchParams(
-          this.eventsService.convertQueryParamsToFetchParams(queryParams),
-          true
-        );
-      }
-    });
   }
 
   sort(field: string) {
@@ -81,6 +102,10 @@ export class EventsComponent extends WsComponent implements OnInit {
         offset: this.fetchParams.limit ? this.fetchParams.limit * (page - 1) : 0,
       });
     }
+  }
+
+  hasUserRole(...roles: Array<string>) {
+    return userHasRoles(this.authenticatedUser, environment.worldskillsAppId, ...roles);
   }
 
 }

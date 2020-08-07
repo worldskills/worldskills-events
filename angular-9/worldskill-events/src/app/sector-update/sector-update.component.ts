@@ -2,12 +2,15 @@ import {Component, OnInit} from '@angular/core';
 import {Event} from "../../types/event";
 import {Sector, SectorRequest} from "../../types/sector";
 import {SectorService} from "../../services/sector/sector.service";
-import {AlertService, AlertType, WsComponent} from "@worldskills/worldskills-angular-lib";
+import {AlertService, AlertType, UserModel, WsComponent} from "@worldskills/worldskills-angular-lib";
 import {TranslateService} from "@ngx-translate/core";
 import {EventService} from "../../services/event/event.service";
 import {combineLatest} from "rxjs";
 import {map} from "rxjs/operators";
 import {ActivatedRoute, Router} from "@angular/router";
+import {userHasRolesOfEntity} from "../../utils/userRole";
+import {environment} from "../../environments/environment";
+import {AuthService} from "../../services/auth/auth.service";
 
 @Component({
   selector: 'app-sector-update',
@@ -16,11 +19,13 @@ import {ActivatedRoute, Router} from "@angular/router";
 })
 export class SectorUpdateComponent extends WsComponent implements OnInit {
 
+  authenticatedUser: UserModel;
   event: Event;
   sector: Sector;
   loading = false;
 
   constructor(
+    private authService: AuthService,
     private eventService: EventService,
     private sectorService: SectorService,
     private alertService: AlertService,
@@ -33,6 +38,7 @@ export class SectorUpdateComponent extends WsComponent implements OnInit {
 
   ngOnInit(): void {
     this.subscribe(
+      this.authService.authStatus.subscribe(authStatus => (this.authenticatedUser = authStatus.user)),
       combineLatest([
         this.route.params,
         this.eventService.subject,
@@ -62,6 +68,11 @@ export class SectorUpdateComponent extends WsComponent implements OnInit {
       });
       this.router.navigate(['/events', this.event.id, 'sectors']);
     });
+  }
+
+  hasUserRole(...roles: Array<string>) {
+    return this.authenticatedUser && this.event && this.event.ws_entity &&
+      userHasRolesOfEntity(this.authenticatedUser, environment.worldskillsAppId, this.event.ws_entity.id, ...roles);
   }
 
 }

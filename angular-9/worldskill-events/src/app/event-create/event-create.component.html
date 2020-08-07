@@ -4,6 +4,7 @@
 <ng-container *ngIf="initialized && !loading">
   <h2>{{'Add event' | translate}}</h2>
   <app-event-form
+    [editable]="true"
     (save)="save($event)"
   >
   </app-event-form>

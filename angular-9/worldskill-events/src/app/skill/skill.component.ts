@@ -1,5 +1,5 @@
 import {Component, OnInit} from '@angular/core';
-import {AlertService, AlertType, WsComponent} from "@worldskills/worldskills-angular-lib";
+import {AlertService, AlertType, UserModel, WsComponent} from "@worldskills/worldskills-angular-lib";
 import {Skill} from "../../types/skill";
 import {Event} from "../../types/event";
 import {SkillService} from "../../services/skill/skill.service";
@@ -9,6 +9,9 @@ import {EventService} from "../../services/event/event.service";
 import {combineLatest} from "rxjs";
 import {map} from "rxjs/operators";
 import {UiSkillService} from "../../services/ui-skill/ui-skill.service";
+import {AuthService} from "../../services/auth/auth.service";
+import {userHasRolesOfEntity} from "../../utils/userRole";
+import {environment} from "../../environments/environment";
 
 @Component({
   selector: 'app-skill',
@@ -17,6 +20,7 @@ import {UiSkillService} from "../../services/ui-skill/ui-skill.service";
 })
 export class SkillComponent extends WsComponent implements OnInit {
 
+  authenticatedUser: UserModel;
   event: Event;
   skill: Skill;
   loading = false;
@@ -24,6 +28,7 @@ export class SkillComponent extends WsComponent implements OnInit {
   additionalMenu = null;
 
   constructor(
+    private authService: AuthService,
     private eventService: EventService,
     private skillService: SkillService,
     private route: ActivatedRoute,
@@ -37,6 +42,7 @@ export class SkillComponent extends WsComponent implements OnInit {
 
   ngOnInit(): void {
     this.subscribe(
+      this.authService.authStatus.subscribe(authStatus => (this.authenticatedUser = authStatus.user)),
       this.uiSkillService.subject.subscribe(templateRef => (setTimeout(() => this.additionalMenu = templateRef))),
       combineLatest([
         this.eventService.subject,
@@ -86,6 +92,11 @@ export class SkillComponent extends WsComponent implements OnInit {
         });
       }
     });
+  }
+
+  hasUserRole(...roles: Array<string>) {
+    return this.authenticatedUser && this.event && this.event.ws_entity &&
+      userHasRolesOfEntity(this.authenticatedUser, environment.worldskillsAppId, this.event.ws_entity.id, ...roles);
   }
 
 }

@@ -15,6 +15,7 @@ import {Country} from "../../types/country";
 export class EventFormComponent extends WsComponent implements OnInit {
 
   @Input() event: Event = null;
+  @Input() editable = false;
   countries: Array<Country>;
   @Output() save: EventEmitter<EventRequest> = new EventEmitter<EventRequest>();
   @ViewChild('form') form: NgForm;
@@ -42,7 +43,7 @@ export class EventFormComponent extends WsComponent implements OnInit {
   }
 
   submit() {
-    if (this.form.valid) {
+    if (this.editable && this.form.valid) {
       const {
         name,
         type,

@@ -16,6 +16,7 @@
           id="name"
           name="name"
           required
+          [disabled]="!editable"
           [ngModel]="sponsor ? sponsor.name : undefined">
       </div>
       <div class="col-5">
@@ -38,6 +39,7 @@
           id="url"
           name="url"
           required
+          [disabled]="!editable"
           [ngModel]="sponsor ? sponsor.url : undefined">
       </div>
       <div class="col-5">&nbsp;</div>
@@ -59,6 +61,7 @@
                class="float-left"
                name="flag"
                type="file"
+               [disabled]="!editable"
                (change)="setFileFromInput($event)"
         />
         <button *ngIf="!!uploadFile" class="btn btn-danger btn-sm float-right" (click)="unsetUpload()">
@@ -69,6 +72,7 @@
           <input
             type="checkbox"
             name="removeFile"
+            [disabled]="!editable"
             [ngModel]="false"
           />&nbsp;{{'Delete image' | translate}}
         </ng-container>
@@ -86,7 +90,7 @@
 
     <div class="form-group row">
       <div class="offset-sm-3 col-9">
-        <button type="submit" class="btn btn-success" id="saveSponsor" [disabled]="loading">
+        <button type="submit" class="btn btn-success" id="saveSponsor" [disabled]="loading" *ngIf="editable">
           {{'Save' | translate}}
         </button>&nbsp;
         <a class="btn btn-secondary"

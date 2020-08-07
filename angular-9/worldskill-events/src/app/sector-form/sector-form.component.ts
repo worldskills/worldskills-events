@@ -17,6 +17,7 @@ export class SectorFormComponent extends WsComponent implements OnInit {
 
   @Input() event: Event;
   @Input() sector: Sector = null;
+  @Input() editable = false;
   baseSectors: Array<BaseSector>;
   @Output() save: EventEmitter<SectorRequest> = new EventEmitter<SectorRequest>();
   @ViewChild('form') form: NgForm;
@@ -45,7 +46,7 @@ export class SectorFormComponent extends WsComponent implements OnInit {
   }
 
   submit() {
-    if (this.form.valid) {
+    if (this.editable && this.form.valid) {
       const {
         name,
         base_sector_id,

@@ -1,5 +1,5 @@
 import {Component, OnInit} from '@angular/core';
-import {AlertService, AlertType, WsComponent} from "@worldskills/worldskills-angular-lib";
+import {AlertService, AlertType, UserModel, WsComponent} from "@worldskills/worldskills-angular-lib";
 import {Event} from "../../types/event";
 import {Sector} from "../../types/sector";
 import {EventService} from "../../services/event/event.service";
@@ -9,6 +9,9 @@ import {map} from "rxjs/operators";
 import {SectorService} from "../../services/sector/sector.service";
 import {TranslateService} from "@ngx-translate/core";
 import {faTimes} from '@fortawesome/free-solid-svg-icons';
+import {userHasRolesOfEntity} from "../../utils/userRole";
+import {environment} from "../../environments/environment";
+import {AuthService} from "../../services/auth/auth.service";
 
 @Component({
   selector: 'app-sectors',
@@ -17,12 +20,14 @@ import {faTimes} from '@fortawesome/free-solid-svg-icons';
 })
 export class SectorsComponent extends WsComponent implements OnInit {
 
+  authenticatedUser: UserModel;
   event: Event;
   sectors: Array<Sector>;
   loading = false;
   faTimes = faTimes;
 
   constructor(
+    private authService: AuthService,
     private eventService: EventService,
     private sectorsService: SectorsService,
     private sectorService: SectorService,
@@ -34,6 +39,7 @@ export class SectorsComponent extends WsComponent implements OnInit {
 
   ngOnInit(): void {
     this.subscribe(
+      this.authService.authStatus.subscribe(authStatus => (this.authenticatedUser = authStatus.user)),
       this.eventService.subject.subscribe(event => {
         this.event = event;
         this.sectorsService.fetch(this.event.id);
@@ -66,6 +72,11 @@ export class SectorsComponent extends WsComponent implements OnInit {
           });
       }
     });
+  }
+
+  hasUserRole(...roles: Array<string>) {
+    return this.authenticatedUser && this.event && this.event.ws_entity &&
+      userHasRolesOfEntity(this.authenticatedUser, environment.worldskillsAppId, this.event.ws_entity.id, ...roles);
   }
 
 }

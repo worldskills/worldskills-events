@@ -2,7 +2,7 @@
   <ws-spinner></ws-spinner>
 </ng-container>
 <ng-container *ngIf="initialized && !loading">
-  <p class="float-right">
+  <p class="float-right" *ngIf="hasUserRole('Admin', 'DeleteEvents')">
     <button (click)="deleteEvent()" class="btn btn-danger btn-sm">
       {{'Delete Event' | translate}}
     </button>
@@ -15,19 +15,19 @@
       <a class="nav-link" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}"
          routerLink="/events/{{event.id}}">{{'Event' | translate}}</a>
     </li>
-    <li class="nav-item">
+    <li class="nav-item" *ngIf="isCompetitionOrPreparationMeeting">
       <a class="nav-link" routerLinkActive="active"
          routerLink="/events/{{event.id}}/skills">{{'Skills' | translate}}</a>
     </li>
-    <li class="nav-item">
+    <li class="nav-item" *ngIf="isCompetitionOrPreparationMeeting">
       <a class="nav-link" routerLinkActive="active"
          routerLink="/events/{{event.id}}/sectors">{{'Sectors' | translate}}</a>
     </li>
-    <li class="nav-item">
+    <li class="nav-item" *ngIf="isCompetitionOrPreparationMeeting && hasUserRole('Admin', 'EditEvents')">
       <a class="nav-link" routerLinkActive="active"
          routerLink="/events/{{event.id}}/tags">{{'Skill tags' | translate}}</a>
     </li>
-    <li class="nav-item">
+    <li class="nav-item" *ngIf="hasUserRole('Admin', 'EditEvents', 'OrganizerEditEvents')">
       <a class="nav-link" routerLinkActive="active"
          routerLink="/events/{{event.id}}/sponsors">{{'Sponsors' | translate}}</a>
     </li>

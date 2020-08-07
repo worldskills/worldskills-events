@@ -1,5 +1,5 @@
 <ng-template #button>
-  <button routerLink="create" class="btn btn-primary btn-sm mr-1">
+  <button routerLink="create" class="btn btn-primary btn-sm mr-1" *ngIf="hasUserRole('Admin', 'EditEvents')">
     {{'Add photo' | translate}}
   </button>
 </ng-template>
@@ -26,13 +26,23 @@
           <tbody>
           <tr *ngFor="let photo of skill.photos; let index=index">
             <td>
-              <a [routerLink]="[photo.id]">
+              <a *ngIf="hasUserRole('Admin', 'EditEvents')" [routerLink]="[photo.id]">
                 <div class="photo bg-secondary" style="background-image: url({{photo.thumbnail}})"></div>
               </a>
+              <ng-container *ngIf="!hasUserRole('Admin', 'EditEvents')">
+                <div class="photo bg-secondary" style="background-image: url({{photo.thumbnail}})"></div>
+              </ng-container>
             </td>
-            <td><a [routerLink]="[photo.id]">{{photo.description.text}}</a></td>
             <td>
-              <div class="btn-group btn-group-sm">
+              <ng-container *ngIf="hasUserRole('Admin', 'EditEvents')">
+                <a [routerLink]="[photo.id]">{{photo.description.text}}</a>
+              </ng-container>
+              <ng-container *ngIf="!hasUserRole('Admin', 'EditEvents')">
+                {{photo.description.text}}
+              </ng-container>
+            </td>
+            <td>
+              <div class="btn-group btn-group-sm" *ngIf="hasUserRole('Admin', 'EditEvents')">
                 <button
                   [disabled]="index === skill.photos.length - 1"
                   (click)="move(photo, skill.photos[index + 1])"

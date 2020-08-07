@@ -1,8 +1,11 @@
 import {Component, OnInit} from '@angular/core';
 import {Event} from '../../types/event';
 import {ActivatedRoute, Router} from '@angular/router';
-import {AlertService, AlertType, WsComponent} from '@worldskills/worldskills-angular-lib';
+import {AlertService, AlertType, UserModel, WsComponent} from '@worldskills/worldskills-angular-lib';
 import {EventService} from '../../services/event/event.service';
+import {userHasRolesOfEntity} from "../../utils/userRole";
+import {environment} from "../../environments/environment";
+import {AuthService} from "../../services/auth/auth.service";
 
 @Component({
   selector: 'app-event',
@@ -11,10 +14,12 @@ import {EventService} from '../../services/event/event.service';
 })
 export class EventComponent extends WsComponent implements OnInit {
 
+  authenticatedUser: UserModel;
   event: Event = null;
   loading = false;
 
   constructor(
+    private authService: AuthService,
     private eventService: EventService,
     private router: Router,
     private route: ActivatedRoute,
@@ -25,6 +30,7 @@ export class EventComponent extends WsComponent implements OnInit {
 
   ngOnInit(): void {
     this.subscribe(
+      this.authService.authStatus.subscribe(authStatus => (this.authenticatedUser = authStatus.user)),
       this.eventService.subject.subscribe(event => (this.event = event)),
       this.eventService.loading.subscribe(loading => (this.loading = loading))
     );
@@ -38,6 +44,10 @@ export class EventComponent extends WsComponent implements OnInit {
     return !!this.event;
   }
 
+  get isCompetitionOrPreparationMeeting() {
+    return this.event && (this.event.type === 'competition' || this.event.type === 'preparation_meeting');
+  }
+
   deleteEvent() {
     if (confirm('Deleting the Event will also delete all questions and attempts. Click OK to proceed.')) {
       this.eventService.delete(this.event.id).subscribe(() => {
@@ -47,6 +57,11 @@ export class EventComponent extends WsComponent implements OnInit {
         }
       );
     }
+  }
+
+  hasUserRole(...roles: Array<string>) {
+    return this.authenticatedUser && this.event && this.event.ws_entity &&
+      userHasRolesOfEntity(this.authenticatedUser, environment.worldskillsAppId, this.event.ws_entity.id, ...roles);
   }
 
 }

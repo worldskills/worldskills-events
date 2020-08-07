@@ -15,6 +15,7 @@
           id="name"
           name="name"
           required
+          [disabled]="!editable"
           [ngModel]="skill ? skill.name.text : ''">
       </div>
       <div class="col-3">
@@ -34,7 +35,7 @@
         <ws-entity-tree-select
           id="ws_entity"
           name="ws_entity"
-          [disabled]="!!skill"
+          [disabled]="!editable || !!skill"
           [ngModel]="skill ? skill.ws_entity.id : undefined"
           [multiple]="false"
           [showFullPath]="false">
@@ -61,6 +62,7 @@
           id="number"
           name="number"
           required
+          [disabled]="!editable"
           [ngModel]="skill ? skill.number : undefined">
       </div>
       <div class="col-3">
@@ -81,6 +83,7 @@
           class="form-control"
           id="type"
           name="type"
+          [disabled]="!editable"
           [ngModel]="skill ? skill.type : undefined"
           required
         >
@@ -114,6 +117,7 @@
           class="form-control"
           id="status"
           name="status"
+          [disabled]="!editable"
           [ngModel]="skill ? skill.status : undefined"
           required
         >
@@ -141,6 +145,7 @@
           id="base_id"
           [wsSelect]="['id', 'name.text']"
           name="base_id"
+          [disabled]="!editable"
           [ngModel]="skill ? skill.base_id : undefined"
           placeholder="{{'Base Skill' | translate}}"
           [items]="baseSkills || []"
@@ -164,6 +169,7 @@
           id="sector"
           [wsSelect]="['id', 'name.text']"
           name="sector"
+          [disabled]="!editable"
           [ngModel]="skill && skill.sector ? skill.sector.id : undefined"
           placeholder="{{'Sector' | translate}}"
           [items]="sectors || []"
@@ -189,6 +195,7 @@
         class="form-control"
         id="description"
         name="description"
+        [disabled]="!editable"
         [ngModel]="skill ? skill.description.text : ''">
       </textarea>
       </div>
@@ -205,6 +212,7 @@
         class="form-control"
         id="description_industry_action"
         name="description_industry_action"
+        [disabled]="!editable"
         [ngModel]="skill && skill.description_industry_action ? skill.description_industry_action.text : ''">
       </textarea>
       </div>
@@ -221,6 +229,7 @@
         class="form-control"
         id="description_required_skills"
         name="description_required_skills"
+        [disabled]="!editable"
         [ngModel]="skill && skill.description_required_skills ? skill.description_required_skills.text : ''">
       </textarea>
       </div>
@@ -253,6 +262,7 @@
         class="form-control"
         id="description_facts"
         name="description_facts"
+        [disabled]="!editable"
         [ngModel]="skill && skill.description_facts ? skill.description_facts.text : ''">
       </textarea>
       </div>
@@ -269,6 +279,7 @@
           class="form-control"
           id="url_video"
           name="url_video"
+          [disabled]="!editable"
           [ngModel]="skill ? skill.url_video : undefined">
       </div>
       <div class="col-3">&nbsp;</div>
@@ -284,6 +295,7 @@
           class="form-control"
           id="min_teams"
           name="min_teams"
+          [disabled]="!editable"
           [ngModel]="skill ? skill.min_teams : undefined">
       </div>
       <div class="col-3">&nbsp;</div>
@@ -299,6 +311,7 @@
           class="form-control"
           id="max_teams"
           name="max_teams"
+          [disabled]="!editable"
           [ngModel]="skill ? skill.max_teams : undefined">
       </div>
       <div class="col-3">&nbsp;</div>
@@ -314,6 +327,7 @@
           class="form-control"
           id="team_size"
           name="team_size"
+          [disabled]="!editable"
           [ngModel]="skill ? skill.team_size : undefined">
       </div>
       <div class="col-3">&nbsp;</div>
@@ -329,6 +343,7 @@
           class="form-control"
           id="competitor_max_age"
           name="competitor_max_age"
+          [disabled]="!editable"
           [ngModel]="skill ? skill.competitor_max_age : undefined">
       </div>
       <div class="col-3">&nbsp;</div>
@@ -337,8 +352,12 @@
     <div class="form-group row">
       <div class="offset-sm-3 col-9">
         <label>
-          <input type="checkbox" id="identify_judges" name="identify_judges"
-                 [ngModel]="skill ? skill.identify_judges : false">
+          <input
+            type="checkbox"
+            id="identify_judges"
+            name="identify_judges"
+            [disabled]="!editable"
+            [ngModel]="skill ? skill.identify_judges : false">
           &nbsp;{{'Identify judges'| translate}}
         </label>
       </div>
@@ -347,8 +366,12 @@
     <div class="form-group row">
       <div class="offset-sm-3 col-9">
         <label>
-          <input type="checkbox" id="group_competitors" name="group_competitors"
-                 [ngModel]="skill ? skill.group_competitors : false">
+          <input
+            type="checkbox"
+            id="group_competitors"
+            name="group_competitors"
+            [disabled]="!editable"
+            [ngModel]="skill ? skill.group_competitors : false">
           &nbsp;{{'Group competitors'| translate}}
         </label>
       </div>
@@ -357,8 +380,12 @@
     <div class="form-group row">
       <div class="offset-sm-3 col-9">
         <label>
-          <input type="checkbox" id="compatriot_marking" name="compatriot_marking"
-                 [ngModel]="skill ? skill.compatriot_marking : false">
+          <input
+            type="checkbox"
+            id="compatriot_marking"
+            name="compatriot_marking"
+            [disabled]="!editable"
+            [ngModel]="skill ? skill.compatriot_marking : false">
           &nbsp;{{'Compatriot marking'| translate}}
         </label>
       </div>
@@ -367,8 +394,12 @@
     <div class="form-group row">
       <div class="offset-sm-3 col-9">
         <label>
-          <input type="checkbox" id="generate_500_scale" name="generate_500_scale"
-                 [ngModel]="skill ? skill.generate_500_scale : false">
+          <input
+            type="checkbox"
+            id="generate_500_scale"
+            name="generate_500_scale"
+            [disabled]="!editable"
+            [ngModel]="skill ? skill.generate_500_scale : false">
           &nbsp;{{'Generate 500 scale'| translate}}
         </label>
       </div>
@@ -377,8 +408,12 @@
     <div class="form-group row">
       <div class="offset-sm-3 col-9">
         <label>
-          <input type="checkbox" id="landscape_marking" name="landscape_marking"
-                 [ngModel]="skill ? skill.landscape_marking : false">
+          <input
+            type="checkbox"
+            id="landscape_marking"
+            name="landscape_marking"
+            [disabled]="!editable"
+            [ngModel]="skill ? skill.landscape_marking : false">
           &nbsp;{{'Landscape marking'| translate}}
         </label>
       </div>
@@ -386,10 +421,10 @@
 
     <div class="form-group row">
       <div class="offset-sm-3 col-9">
-        <button type="submit" class="btn btn-success" id="saveSkill" [disabled]="loading">
+        <button type="submit" class="btn btn-success" id="saveSkill" [disabled]="loading" *ngIf="editable">
           {{'Save' | translate}}
         </button>&nbsp;
-        <a class="btn btn-secondary" [routerLink]="['/event', this.event.id, 'skills']">{{'Cancel' | translate}}</a><br/>
+        <a class="btn btn-secondary" [routerLink]="['/event', this.event.id, 'skills']">{{'Back' | translate}}</a><br/>
         <ws-spinner *ngIf="loading"></ws-spinner>
       </div>
     </div>

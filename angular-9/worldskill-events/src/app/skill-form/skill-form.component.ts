@@ -21,6 +21,7 @@ export class SkillFormComponent extends WsComponent implements OnInit {
 
   @Input() event: Event;
   @Input() skill: Skill = null;
+  @Input() editable = false;
   baseSkills: Array<BaseSkill>;
   sectors: Array<Sector>;
   @Output() save: EventEmitter<SkillRequest> = new EventEmitter<SkillRequest>();
@@ -57,7 +58,7 @@ export class SkillFormComponent extends WsComponent implements OnInit {
   }
 
   submit() {
-    if (this.form.valid) {
+    if (this.editable && this.form.valid) {
       const {
         type,
         base_id,

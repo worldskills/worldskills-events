@@ -1,5 +1,5 @@
 import {Component, OnInit, ViewChild} from '@angular/core';
-import {AlertService, AlertType, WsComponent} from "@worldskills/worldskills-angular-lib";
+import {AlertService, AlertType, UserModel, WsComponent} from "@worldskills/worldskills-angular-lib";
 import {EventService} from "../../services/event/event.service";
 import {SkillService} from "../../services/skill/skill.service";
 import {TagsService} from "../../services/tags/tags.service";
@@ -12,6 +12,9 @@ import {Skill} from "../../types/skill";
 import {Tag} from "../../types/tag";
 import {TranslateService} from "@ngx-translate/core";
 import {faTimes} from '@fortawesome/free-solid-svg-icons';
+import {userHasRolesOfEntity} from "../../utils/userRole";
+import {environment} from "../../environments/environment";
+import {AuthService} from "../../services/auth/auth.service";
 
 @Component({
   selector: 'app-skill-tags',
@@ -20,6 +23,7 @@ import {faTimes} from '@fortawesome/free-solid-svg-icons';
 })
 export class SkillTagsComponent extends WsComponent implements OnInit {
 
+  authenticatedUser: UserModel;
   event: Event;
   skill: Skill;
   tags: Array<Tag>;
@@ -28,6 +32,7 @@ export class SkillTagsComponent extends WsComponent implements OnInit {
   faTimes = faTimes;
 
   constructor(
+    private authService: AuthService,
     private eventService: EventService,
     private skillService: SkillService,
     private tagsService: TagsService,
@@ -40,6 +45,7 @@ export class SkillTagsComponent extends WsComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    this.authService.authStatus.subscribe(authStatus => (this.authenticatedUser = authStatus.user)),
     this.uiSkillService.subject.next(this.button);
     this.subscribe(
       this.eventService.subject.subscribe(event => {
@@ -86,5 +92,11 @@ export class SkillTagsComponent extends WsComponent implements OnInit {
       });
     });
   }
+
+  hasUserRole(...roles: Array<string>) {
+    return this.authenticatedUser && this.event && this.event.ws_entity &&
+      userHasRolesOfEntity(this.authenticatedUser, environment.worldskillsAppId, this.event.ws_entity.id, ...roles);
+  }
+
 
 }
