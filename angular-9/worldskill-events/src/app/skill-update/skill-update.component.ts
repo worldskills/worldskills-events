@@ -2,12 +2,15 @@ import {Component, OnInit} from '@angular/core';
 import {Event} from "../../types/event";
 import {Skill, SkillRequest} from "../../types/skill";
 import {SkillService} from "../../services/skill/skill.service";
-import {AlertService, AlertType, WsComponent} from "@worldskills/worldskills-angular-lib";
+import {AlertService, AlertType, UserModel, WsComponent} from "@worldskills/worldskills-angular-lib";
 import {TranslateService} from "@ngx-translate/core";
 import {EventService} from "../../services/event/event.service";
 import {combineLatest} from "rxjs";
 import {map} from "rxjs/operators";
 import {UiSkillService} from "../../services/ui-skill/ui-skill.service";
+import {AuthService} from "../../services/auth/auth.service";
+import {userHasRolesOfEntity} from "../../utils/userRole";
+import {environment} from "../../environments/environment";
 
 @Component({
   selector: 'app-skill-update',
@@ -16,11 +19,13 @@ import {UiSkillService} from "../../services/ui-skill/ui-skill.service";
 })
 export class SkillUpdateComponent extends WsComponent implements OnInit {
 
+  authenticatedUser: UserModel;
   event: Event;
   skill: Skill;
   loading = false;
 
   constructor(
+    private authService: AuthService,
     private eventService: EventService,
     private skillService: SkillService,
     private alertService: AlertService,
@@ -31,6 +36,7 @@ export class SkillUpdateComponent extends WsComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    this.authService.authStatus.subscribe(authStatus => (this.authenticatedUser = authStatus.user)),
     this.uiSkillService.subject.next(null);
     this.subscribe(
       this.eventService.subject.subscribe(event => (this.event = event)),
@@ -55,6 +61,11 @@ export class SkillUpdateComponent extends WsComponent implements OnInit {
           null, undefined, t, true);
       });
     });
+  }
+
+  hasUserRole(...roles: Array<string>) {
+    return this.authenticatedUser && this.event && this.event.ws_entity &&
+      userHasRolesOfEntity(this.authenticatedUser, environment.worldskillsAppId, this.event.ws_entity.id, ...roles);
   }
 
 }

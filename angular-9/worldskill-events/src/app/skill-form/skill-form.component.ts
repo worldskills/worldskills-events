@@ -11,6 +11,7 @@ import {combineLatest} from "rxjs";
 import {map} from "rxjs/operators";
 import {SectorsService} from "../../services/sectors/sectors.service";
 import {Sector} from "../../types/sector";
+import * as ClassicEditor from '@ckeditor/ckeditor5-build-classic';
 
 @Component({
   selector: 'app-skill-form',
@@ -28,6 +29,7 @@ export class SkillFormComponent extends WsComponent implements OnInit {
   @ViewChild('form') form: NgForm;
   loading = false;
   ngbDateCache: NgbDateCache;
+  editor = ClassicEditor;
 
   constructor(
     private baseSkillsService: BaseSkillsService,

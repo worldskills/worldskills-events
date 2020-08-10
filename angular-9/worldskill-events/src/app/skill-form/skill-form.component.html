@@ -189,15 +189,13 @@
       <label for="description"
              class="col-3 col-form-label text-right font-weight-bold">{{'Description' | translate}}</label>
       <div class="col-6">
-      <textarea
-        appCkEditor
-        placeholder="{{'Description' | translate}}"
-        class="form-control"
-        id="description"
-        name="description"
-        [disabled]="!editable"
-        [ngModel]="skill ? skill.description.text : ''">
-      </textarea>
+        <ckeditor
+          [editor]="editor"
+          name="description"
+          id="description"
+          [ngModel]="skill ? skill.description.text : ''"
+          [disabled]="!editable"
+        ></ckeditor>
       </div>
       <div class="col-3">&nbsp;</div>
     </div>
@@ -206,15 +204,13 @@
       <label for="description_industry_action"
              class="col-3 col-form-label text-right font-weight-bold">{{'Career info' | translate}}</label>
       <div class="col-6">
-      <textarea
-        appCkEditor
-        placeholder="{{'Career info' | translate}}"
-        class="form-control"
-        id="description_industry_action"
-        name="description_industry_action"
-        [disabled]="!editable"
-        [ngModel]="skill && skill.description_industry_action ? skill.description_industry_action.text : ''">
-      </textarea>
+        <ckeditor
+          [editor]="editor"
+          name="description_industry_action"
+          id="description_industry_action"
+          [ngModel]="skill ? skill.description_industry_action.text : ''"
+          [disabled]="!editable"
+        ></ckeditor>
       </div>
       <div class="col-3">&nbsp;</div>
     </div>
@@ -223,15 +219,13 @@
       <label for="description_required_skills"
              class="col-3 col-form-label text-right font-weight-bold">{{'Required skills' | translate}}</label>
       <div class="col-6">
-      <textarea
-        appCkEditor
-        placeholder="{{'Required skills' | translate}}"
-        class="form-control"
-        id="description_required_skills"
-        name="description_required_skills"
-        [disabled]="!editable"
-        [ngModel]="skill && skill.description_required_skills ? skill.description_required_skills.text : ''">
-      </textarea>
+        <ckeditor
+          [editor]="editor"
+          name="description_required_skills"
+          id="description_required_skills"
+          [ngModel]="skill ? skill.description_required_skills.text : ''"
+          [disabled]="!editable"
+        ></ckeditor>
       </div>
       <div class="col-3">&nbsp;</div>
     </div>
@@ -240,14 +234,13 @@
       <label for="description_competition_action"
              class="col-3 col-form-label text-right font-weight-bold">{{'At the competition' | translate}}</label>
       <div class="col-6">
-      <textarea
-        appCkEditor
-        placeholder="{{'At the competition' | translate}}"
-        class="form-control"
-        id="description_competition_action"
-        name="description_competition_action"
-        [ngModel]="skill && skill.description_competition_action ? skill.description_competition_action.text : ''">
-      </textarea>
+        <ckeditor
+          [editor]="editor"
+          name="description_competition_action"
+          id="description_competition_action"
+          [ngModel]="skill ? skill.description_competition_action.text : ''"
+          [disabled]="!editable"
+        ></ckeditor>
       </div>
       <div class="col-3">&nbsp;</div>
     </div>
@@ -256,15 +249,13 @@
       <label for="description_facts"
              class="col-3 col-form-label text-right font-weight-bold">{{'Facts' | translate}}</label>
       <div class="col-6">
-      <textarea
-        appCkEditor
-        placeholder="{{'Facts' | translate}}"
-        class="form-control"
-        id="description_facts"
-        name="description_facts"
-        [disabled]="!editable"
-        [ngModel]="skill && skill.description_facts ? skill.description_facts.text : ''">
-      </textarea>
+        <ckeditor
+          [editor]="editor"
+          name="description_facts"
+          id="description_facts"
+          [ngModel]="skill ? skill.description_facts.text : ''"
+          [disabled]="!editable"
+        ></ckeditor>
       </div>
       <div class="col-3">&nbsp;</div>
     </div>

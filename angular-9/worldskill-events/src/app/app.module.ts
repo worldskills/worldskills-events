@@ -23,7 +23,6 @@ import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
 import {DatePipe} from '@angular/common';
 import {HttpInterceptorService} from '../services/http-interceptor/http-interceptor.service';
 import {WsSpinnerComponent} from './ws-spinner/ws-spinner.component';
-import {CkEditorDirective} from "../directives/ck-editor/ck-editor.directive";
 import {EventsComponent} from './events/events.component';
 import {EventsSearchFormComponent} from './events-search-form/events-search-form.component';
 import {EventComponent} from './event/event.component';
@@ -49,11 +48,12 @@ import {SponsorsComponent} from './sponsors/sponsors.component';
 import {SponsorCreateComponent} from './sponsor-create/sponsor-create.component';
 import {SponsorUpdateComponent} from './sponsor-update/sponsor-update.component';
 import {SponsorFormComponent} from './sponsor-form/sponsor-form.component';
-import { EventCreateComponent } from './event-create/event-create.component';
-import { SkillCreateComponent } from './skill-create/skill-create.component';
-import { SkillPhotoFormComponent } from './skill-photo-form/skill-photo-form.component';
-import { SkillPhotoCreateComponent } from './skill-photo-create/skill-photo-create.component';
-import { SkillPhotoUpdateComponent } from './skill-photo-update/skill-photo-update.component';
+import {EventCreateComponent} from './event-create/event-create.component';
+import {SkillCreateComponent} from './skill-create/skill-create.component';
+import {SkillPhotoFormComponent} from './skill-photo-form/skill-photo-form.component';
+import {SkillPhotoCreateComponent} from './skill-photo-create/skill-photo-create.component';
+import {SkillPhotoUpdateComponent} from './skill-photo-update/skill-photo-update.component';
+import {CKEditorModule} from "@ckeditor/ckeditor5-angular";
 
 export function HttpLoaderFactory(http: HttpClient) {
   return new TranslateHttpLoader(http);
@@ -65,7 +65,6 @@ export function HttpLoaderFactory(http: HttpClient) {
     HomeComponent,
     ErrorComponent,
     WsSpinnerComponent,
-    CkEditorDirective,
     EventsComponent,
     EventsSearchFormComponent,
     EventComponent,
@@ -134,6 +133,7 @@ export function HttpLoaderFactory(http: HttpClient) {
         deps: [HttpClient]
       }
     }),
+    CKEditorModule,
   ],
   providers: [
     DatePipe,
