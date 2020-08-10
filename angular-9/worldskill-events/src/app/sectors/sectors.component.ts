@@ -12,6 +12,7 @@ import {faTimes} from '@fortawesome/free-solid-svg-icons';
 import {userHasRolesOfEntity} from "../../utils/userRole";
 import {environment} from "../../environments/environment";
 import {AuthService} from "../../services/auth/auth.service";
+import {SkillsService} from "../../services/skills/skills.service";
 
 @Component({
   selector: 'app-sectors',
@@ -25,12 +26,14 @@ export class SectorsComponent extends WsComponent implements OnInit {
   sectors: Array<Sector>;
   loading = false;
   faTimes = faTimes;
+  sectorDeletableInfo: Map<number, boolean> = new Map<number, boolean>();
 
   constructor(
     private authService: AuthService,
     private eventService: EventService,
     private sectorsService: SectorsService,
     private sectorService: SectorService,
+    private skillsService: SkillsService,
     private alertService: AlertService,
     private translateService: TranslateService,
   ) {
@@ -44,7 +47,16 @@ export class SectorsComponent extends WsComponent implements OnInit {
         this.event = event;
         this.sectorsService.fetch(this.event.id);
       }),
-      this.sectorsService.subject.subscribe(sectors => (this.sectors = sectors.sectors)),
+      this.sectorsService.subject.subscribe(sectors => {
+        this.sectors = sectors.sectors;
+        this.sectors.forEach(sector => {
+          this.skillsService.fetch(sector.event.id, {sector: sector.id}, {
+            subject: false,
+            loader: false,
+            subscription: false,
+          }).subscribe(skills => this.sectorDeletableInfo.set(sector.id, skills.total_count === 0));
+        });
+      }),
       combineLatest([
         this.eventService.loading,
         this.sectorsService.loading,
@@ -53,6 +65,14 @@ export class SectorsComponent extends WsComponent implements OnInit {
         .pipe(map(ls => !ls.every(l => !l)))
         .subscribe(loading => (this.loading = loading)),
     );
+  }
+
+  deletableSectorLoading(sector: Sector) {
+    return !this.sectorDeletableInfo.has(sector.id);
+  }
+
+  deletableSector(sector: Sector) {
+    return this.sectorDeletableInfo.get(sector.id);
   }
 
   get initialized() {

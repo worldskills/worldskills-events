@@ -19,8 +19,8 @@
         <table class="table table-striped border-top">
           <colgroup>
             <col width="10%">
-            <col width="80%">
-            <col width="10%">
+            <col width="70%">
+            <col width="20%">
           </colgroup>
           <thead>
           <tr>
@@ -34,14 +34,26 @@
             <td><a [routerLink]="[sector.id]">{{sector.id}}</a></td>
             <td><a [routerLink]="[sector.id]">{{sector.name.text}}</a></td>
             <td class="text-right">
-              <button
-                *ngIf="hasUserRole('Admin', 'DeleteEvents')"
-                (click)="delete(sector)"
-                type="button"
-                class="btn btn-danger btn-sm"
-              >
-                <fa-icon size="xs" [icon]="faTimes"></fa-icon>
-              </button>
+              <ng-container *ngIf="hasUserRole('Admin', 'DeleteEvents')">
+                <button
+                  *ngIf="!deletableSectorLoading(sector) && deletableSector(sector)"
+                  (click)="delete(sector)"
+                  type="button"
+                  class="btn btn-danger btn-sm"
+                >
+                  <fa-icon size="xs" [icon]="faTimes"></fa-icon>
+                </button>
+                <button
+                  *ngIf="!deletableSectorLoading(sector) && !deletableSector(sector)"
+                  placement="top"
+                  ngbTooltip="{{'Cannot delete, sector has skills' | translate}}"
+                  type="button"
+                  class="btn btn-danger btn-sm disabled"
+                >
+                  <fa-icon size="xs" [icon]="faTimes"></fa-icon>
+                </button>
+                <ws-spinner [textAlign]="true" *ngIf="deletableSectorLoading(sector)"></ws-spinner>
+              </ng-container>
             </td>
           </tr>
           <tr *ngIf="sectors.length === 0">
