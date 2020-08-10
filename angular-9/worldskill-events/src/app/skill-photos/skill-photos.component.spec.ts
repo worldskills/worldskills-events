@@ -1,6 +1,11 @@
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import {async, ComponentFixture, TestBed} from '@angular/core/testing';
 
-import { SkillPhotosComponent } from './skill-photos.component';
+import {SkillPhotosComponent} from './skill-photos.component';
+import {TranslateServiceTestingProvider, TranslationMockPipe} from "../../test";
+import {RouterTestingModule} from "@angular/router/testing";
+import {WorldskillsAngularLibModule} from "@worldskills/worldskills-angular-lib";
+import {HttpClientTestingModule} from "@angular/common/http/testing";
+import {AuthService} from "../../services/auth/auth.service";
 
 describe('SkillPhotosComponent', () => {
   let component: SkillPhotosComponent;
@@ -8,9 +13,14 @@ describe('SkillPhotosComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ SkillPhotosComponent ]
+      declarations: [SkillPhotosComponent, TranslationMockPipe],
+      imports: [RouterTestingModule, WorldskillsAngularLibModule, HttpClientTestingModule],
+      providers: [
+        {provide: AuthService, useValue: {authStatus: {subscribe: () => undefined}}},
+        TranslateServiceTestingProvider
+      ]
     })
-    .compileComponents();
+      .compileComponents();
   }));
 
   beforeEach(() => {

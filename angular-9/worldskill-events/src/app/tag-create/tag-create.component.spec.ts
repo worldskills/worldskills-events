@@ -1,6 +1,12 @@
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import {async, ComponentFixture, TestBed} from '@angular/core/testing';
 
-import { TagCreateComponent } from './tag-create.component';
+import {TagCreateComponent} from './tag-create.component';
+import {TranslateServiceTestingProvider, TranslationMockPipe} from "../../test";
+import {RouterTestingModule} from "@angular/router/testing";
+import {EntityTreeService, WorldskillsAngularLibModule} from "@worldskills/worldskills-angular-lib";
+import {HttpClientTestingModule} from "@angular/common/http/testing";
+import {AuthService} from "../../services/auth/auth.service";
+import {of} from "rxjs";
 
 describe('TagCreateComponent', () => {
   let component: TagCreateComponent;
@@ -8,9 +14,15 @@ describe('TagCreateComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ TagCreateComponent ]
+      declarations: [TagCreateComponent, TranslationMockPipe],
+      imports: [RouterTestingModule, WorldskillsAngularLibModule, HttpClientTestingModule],
+      providers: [
+        {provide: AuthService, useValue: {authStatus: {subscribe: () => undefined}}},
+        {provide: EntityTreeService, useValue: {list: (fetchParams: any) => of([]), clearCache: () => undefined}},
+        TranslateServiceTestingProvider
+      ]
     })
-    .compileComponents();
+      .compileComponents();
   }));
 
   beforeEach(() => {

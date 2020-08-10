@@ -1,6 +1,11 @@
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import {async, ComponentFixture, TestBed} from '@angular/core/testing';
 
-import { EventUpdateComponent } from './event-update.component';
+import {EventUpdateComponent} from './event-update.component';
+import {TranslateServiceTestingProvider, TranslationMockPipe} from "../../test";
+import {HttpClientTestingModule} from "@angular/common/http/testing";
+import {RouterTestingModule} from "@angular/router/testing";
+import {WorldskillsAngularLibModule} from "@worldskills/worldskills-angular-lib";
+import {AuthService} from "../../services/auth/auth.service";
 
 describe('EventUpdateComponent', () => {
   let component: EventUpdateComponent;
@@ -8,9 +13,14 @@ describe('EventUpdateComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ EventUpdateComponent ]
+      declarations: [EventUpdateComponent, TranslationMockPipe],
+      imports: [RouterTestingModule, WorldskillsAngularLibModule, HttpClientTestingModule],
+      providers: [
+        {provide: AuthService, useValue: {authStatus: {subscribe: () => undefined}}},
+        TranslateServiceTestingProvider
+      ]
     })
-    .compileComponents();
+      .compileComponents();
   }));
 
   beforeEach(() => {

@@ -1,6 +1,12 @@
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import {async, ComponentFixture, TestBed} from '@angular/core/testing';
 
-import { TagFormComponent } from './tag-form.component';
+import {TagFormComponent} from './tag-form.component';
+import {TranslateServiceTestingProvider, TranslationMockPipe} from "../../test";
+import {RouterTestingModule} from "@angular/router/testing";
+import {WorldskillsAngularLibModule} from "@worldskills/worldskills-angular-lib";
+import {HttpClientTestingModule} from "@angular/common/http/testing";
+import {AuthService} from "../../services/auth/auth.service";
+import {FormsModule} from "@angular/forms";
 
 describe('TagFormComponent', () => {
   let component: TagFormComponent;
@@ -8,14 +14,20 @@ describe('TagFormComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ TagFormComponent ]
+      declarations: [TagFormComponent, TranslationMockPipe],
+      imports: [RouterTestingModule, WorldskillsAngularLibModule, HttpClientTestingModule, FormsModule],
+      providers: [
+        {provide: AuthService, useValue: {authStatus: {subscribe: () => undefined}}},
+        TranslateServiceTestingProvider
+      ]
     })
-    .compileComponents();
+      .compileComponents();
   }));
 
   beforeEach(() => {
     fixture = TestBed.createComponent(TagFormComponent);
     component = fixture.componentInstance;
+    component.event = {id: 1} as any;
     fixture.detectChanges();
   });
 

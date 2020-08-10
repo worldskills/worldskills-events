@@ -9,10 +9,10 @@ import {TranslateServiceTestingProvider, TranslationMockPipe} from '../test';
 describe('AppComponent', () => {
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      imports: [RouterTestingModule, WorldskillsAngularLibModule, HttpClientTestingModule],
       declarations: [AppComponent, TranslationMockPipe],
+      imports: [RouterTestingModule, WorldskillsAngularLibModule, HttpClientTestingModule],
       providers: [
-        {provide: AuthService, useValue: {}},
+        {provide: AuthService, useValue: {authStatus: {subscribe: () => undefined}}},
         TranslateServiceTestingProvider
       ]
     }).compileComponents();

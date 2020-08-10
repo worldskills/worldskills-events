@@ -1,6 +1,12 @@
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import {async, ComponentFixture, TestBed} from '@angular/core/testing';
 
-import { SectorCreateComponent } from './sector-create.component';
+import {SectorCreateComponent} from './sector-create.component';
+import {TranslateServiceTestingProvider, TranslationMockPipe} from "../../test";
+import {HttpClientTestingModule} from "@angular/common/http/testing";
+import {RouterTestingModule} from "@angular/router/testing";
+import {EntityTreeService, WorldskillsAngularLibModule} from "@worldskills/worldskills-angular-lib";
+import {AuthService} from "../../services/auth/auth.service";
+import {of} from "rxjs";
 
 describe('SectorCreateComponent', () => {
   let component: SectorCreateComponent;
@@ -8,9 +14,15 @@ describe('SectorCreateComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ SectorCreateComponent ]
+      declarations: [SectorCreateComponent, TranslationMockPipe],
+      imports: [RouterTestingModule, WorldskillsAngularLibModule, HttpClientTestingModule],
+      providers: [
+        {provide: AuthService, useValue: {authStatus: {subscribe: () => undefined}}},
+        {provide: EntityTreeService, useValue: {list: (fetchParams: any) => of([]), clearCache: () => undefined}},
+        TranslateServiceTestingProvider
+      ]
     })
-    .compileComponents();
+      .compileComponents();
   }));
 
   beforeEach(() => {
