@@ -1,6 +1,0 @@
-{
-  "code" : "400-402",
-  "user_msg" : "JSON mapping error",
-  "dev_msg" : "type: Can not construct instance of org.worldskills.util.model.EventType from String value 'foobar': value not one of declared Enum instance names: [member_event, meeting, conference, general_assembly, competition, champions_forum]",
-  "errors" : null
-}

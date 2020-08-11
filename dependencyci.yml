@@ -1,4 +1,0 @@
-type:
-  development:
-    tests:
-      unmaintained: skip

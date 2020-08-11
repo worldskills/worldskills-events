@@ -1,6 +1,0 @@
-{
-  "code" : "400-111",
-  "user_msg" : "event.country is invalid",
-  "dev_msg" : "Country with ID \"7\" not found",
-  "errors" : null
-}

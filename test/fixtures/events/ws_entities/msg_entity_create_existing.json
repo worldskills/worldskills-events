@@ -1,8 +1,0 @@
-{
-  "action" : "CREATE",
-  "id" : 1,
-  "name" : [ {
-    "lang_code" : "en",
-    "text" : "WSI"
-  } ]
-}

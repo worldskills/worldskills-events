@@ -1,6 +1,0 @@
-{
-  "code" : "400-419",
-  "user_msg" : "Insufficient permissions for skill.event.ws_entity",
-  "dev_msg" : "User needs delete permission for entity 3",
-  "errors" : null
-}

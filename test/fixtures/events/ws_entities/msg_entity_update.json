@@ -1,8 +1,0 @@
-{
-  "action" : "UPDATE",
-  "id" : 2,
-  "name" : [ {
-    "lang_code" : "en",
-    "text" : "Antarctica"
-  } ]
-}

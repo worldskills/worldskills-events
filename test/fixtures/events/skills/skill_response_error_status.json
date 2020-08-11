@@ -1,6 +1,0 @@
-{
-  "code" : "400-402",
-  "user_msg" : "JSON mapping error",
-  "dev_msg" : "status: Can not construct instance of org.worldskills.util.model.SkillStatus from String value 'foobar': value not one of declared Enum instance names: [removed, active, on_notice]",
-  "errors" : null
-}

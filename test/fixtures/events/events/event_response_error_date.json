@@ -1,6 +1,0 @@
-{
-  "code" : "100-105",
-  "user_msg" : "Invalid date",
-  "dev_msg" : "Date doesn't match format yyyy-MM-dd",
-  "errors" : null
-}
