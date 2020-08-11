@@ -1,5 +1,5 @@
 import {I18nModel} from "@worldskills/worldskills-angular-lib";
-import {Link} from "./common";
+import {Link, List} from "./common";
 
 export interface PhotoRequest {
   image_id: number;

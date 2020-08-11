@@ -10,10 +10,27 @@
       <div class="btn-group float-right">
         <ng-template [ngTemplateOutlet]="additionalMenu"></ng-template>
         <ws-spinner *ngIf="this.loadingRemoving"></ws-spinner>
+        <div class="btn-group" role="group"
+             *ngIf="(localeContextService.effectiveOverriddenLanguage | async) as o">
+          <button type="button" class="btn btn-primary btn-sm dropdown-toggle" data-toggle="dropdown"
+                  aria-haspopup="true" aria-expanded="false">
+            {{o.name}}
+          </button>
+          <div class="dropdown-menu">
+            <ng-container *ngFor="let language of localeContextService.languages">
+              <span
+                style="cursor: pointer"
+                class="dropdown-item"
+                (mousedown)="switchLanguage($event, language)">
+                {{language.name}}
+              </span>
+            </ng-container>
+          </div>
+        </div>
         <button
           [disabled]="this.loadingRemoving"
           *ngIf="hasUserRole('Admin', 'EditEvents')"
-          class="btn btn-secondary btn-sm"
+          class="btn btn-secondary btn-sm ml-1"
           type="button"
           (click)="markAsRemoved()"
         >

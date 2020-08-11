@@ -12,7 +12,7 @@ import {SkillPhotosComponent} from "./skill-photos/skill-photos.component";
 import {SkillTagsComponent} from "./skill-tags/skill-tags.component";
 import {SkillSponsorsComponent} from "./skill-sponsors/skill-sponsors.component";
 import {SkillCopyComponent} from "./skill-copy/skill-copy.component";
-import {SectorsComponent} from "./sectors/sectors.component";
+import {SectorListComponent} from "./sector-list/sector-list.component";
 import {SectorUpdateComponent} from "./sector-update/sector-update.component";
 import {SectorCreateComponent} from "./sector-create/sector-create.component";
 import {TagsComponent} from "./tags/tags.component";
@@ -25,6 +25,7 @@ import {EventCreateComponent} from "./event-create/event-create.component";
 import {SkillCreateComponent} from "./skill-create/skill-create.component";
 import {SkillPhotoCreateComponent} from "./skill-photo-create/skill-photo-create.component";
 import {SkillPhotoUpdateComponent} from "./skill-photo-update/skill-photo-update.component";
+import {SectorsComponent} from "./sectors/sectors.component";
 
 function forAppCode(appCode: number, roles: Array<string>) {
   return roles.map(name => ({
@@ -129,11 +130,12 @@ const routes: Routes = [
               {
                 path: 'sectors',
                 data: {breadcrumb: 'Sectors'},
+                component: SectorsComponent,
                 children: [
                   {
                     path: '',
                     pathMatch: 'full',
-                    component: SectorsComponent,
+                    component: SectorListComponent,
                   },
                   {
                     path: 'create',

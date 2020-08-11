@@ -7,61 +7,28 @@
       <h3 class="m-0 float-left">
         {{'Sectors' | translate}}
       </h3>
-      <button routerLink="create" class="btn btn-primary btn-sm float-right" *ngIf="hasUserRole('Admin', 'EditEvents')">
-        {{'Add sector' | translate}}
-      </button>
+      <div class="btn-group float-right">
+        <ng-template [ngTemplateOutlet]="additionalMenu"></ng-template>
+        <div class="btn-group" role="group"
+             *ngIf="(localeContextService.effectiveOverriddenLanguage | async) as o">
+          <button type="button" class="btn btn-primary btn-sm dropdown-toggle" data-toggle="dropdown"
+                  aria-haspopup="true" aria-expanded="false">
+            {{o.name}}
+          </button>
+          <div class="dropdown-menu">
+            <ng-container *ngFor="let language of localeContextService.languages">
+              <a
+                href="#"
+                class="dropdown-item"
+                (click)="switchLanguage($event, language)">
+                {{language.name}}
+              </a>
+            </ng-container>
+          </div>
+        </div>
+      </div>
       <div class="clearfix"></div>
     </div>
   </div>
-  <div class="row">
-    <div class="col-12">
-      <div class="table-responsive">
-        <table class="table table-striped border-top">
-          <colgroup>
-            <col width="10%">
-            <col width="70%">
-            <col width="20%">
-          </colgroup>
-          <thead>
-          <tr>
-            <th class="border-top-0">{{'ID' | translate}}</th>
-            <th class="border-top-0">{{'Name' | translate}}</th>
-            <th class="border-top-0">&nbsp;</th>
-          </tr>
-          </thead>
-          <tbody>
-          <tr *ngFor="let sector of sectors">
-            <td><a [routerLink]="[sector.id]">{{sector.id}}</a></td>
-            <td><a [routerLink]="[sector.id]">{{sector.name.text}}</a></td>
-            <td class="text-right">
-              <ng-container *ngIf="hasUserRole('Admin', 'DeleteEvents')">
-                <button
-                  *ngIf="!deletableSectorLoading(sector) && deletableSector(sector)"
-                  (click)="delete(sector)"
-                  type="button"
-                  class="btn btn-danger btn-sm"
-                >
-                  <fa-icon size="xs" [icon]="faTimes"></fa-icon>
-                </button>
-                <button
-                  *ngIf="!deletableSectorLoading(sector) && !deletableSector(sector)"
-                  placement="top"
-                  ngbTooltip="{{'Cannot delete, sector has skills' | translate}}"
-                  type="button"
-                  class="btn btn-danger btn-sm disabled"
-                >
-                  <fa-icon size="xs" [icon]="faTimes"></fa-icon>
-                </button>
-                <ws-spinner [textAlign]="true" *ngIf="deletableSectorLoading(sector)"></ws-spinner>
-              </ng-container>
-            </td>
-          </tr>
-          <tr *ngIf="sectors.length === 0">
-            <td colspan="3">{{'No sectors found' | translate}}</td>
-          </tr>
-          </tbody>
-        </table>
-      </div>
-    </div>
-  </div>
+  <router-outlet></router-outlet>
 </ng-container>

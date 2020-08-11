@@ -1,4 +1,4 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, OnDestroy, OnInit} from '@angular/core';
 import {AlertService, AlertType, UserModel, WsComponent} from "@worldskills/worldskills-angular-lib";
 import {Skill} from "../../types/skill";
 import {Event} from "../../types/event";
@@ -12,13 +12,14 @@ import {UiSkillService} from "../../services/ui-skill/ui-skill.service";
 import {AuthService} from "../../services/auth/auth.service";
 import {userHasRolesOfEntity} from "../../utils/userRole";
 import {environment} from "../../environments/environment";
+import {LocaleContextService} from "../../services/locale-context/locale-context.service";
 
 @Component({
   selector: 'app-skill',
   templateUrl: './skill.component.html',
   styleUrls: ['./skill.component.css']
 })
-export class SkillComponent extends WsComponent implements OnInit {
+export class SkillComponent extends WsComponent implements OnInit, OnDestroy {
 
   authenticatedUser: UserModel;
   event: Event;
@@ -36,6 +37,7 @@ export class SkillComponent extends WsComponent implements OnInit {
     private translateService: TranslateService,
     private uiSkillService: UiSkillService,
     private router: Router,
+    public localeContextService: LocaleContextService,
   ) {
     super();
   }
@@ -47,6 +49,7 @@ export class SkillComponent extends WsComponent implements OnInit {
       combineLatest([
         this.eventService.subject,
         this.route.params,
+        this.localeContextService.override,
       ])
         .subscribe(([event, {skillId}]) => {
           this.event = event;
@@ -64,6 +67,17 @@ export class SkillComponent extends WsComponent implements OnInit {
 
   get initialized() {
     return !!this.skill;
+  }
+
+  ngOnDestroy(): void {
+    super.ngOnDestroy();
+    this.localeContextService.override.next(null);
+  }
+
+  switchLanguage(event, language) {
+    event.preventDefault();
+    event.stopPropagation();
+    this.localeContextService.override.next(language);
   }
 
   markAsRemoved() {
