@@ -1,5 +1,5 @@
 import {Component, OnInit, ViewChild} from '@angular/core';
-import {AlertService, AlertType, WsComponent} from "@worldskills/worldskills-angular-lib";
+import {ɵa as AlertService, AlertType, WsComponent} from "@worldskills/worldskills-angular-lib";
 import {Event} from "../../types/event";
 import {Skill} from "../../types/skill";
 import {EventService} from "../../services/event/event.service";
@@ -65,7 +65,7 @@ export class SkillCopyComponent extends WsComponent implements OnInit {
         .subscribe(skill => {
           this.translateService.get('The Skill has been copied successfully.').subscribe(t => {
             this.alertService.setAlert('copied-skill', AlertType.success,
-              null, undefined, t, true);
+              null, t, true);
             this.router.navigate(['/events', event.id, 'skills', skill.id]);
           });
         });

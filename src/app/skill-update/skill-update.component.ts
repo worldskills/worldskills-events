@@ -2,14 +2,13 @@ import {Component, OnInit} from '@angular/core';
 import {Event} from "../../types/event";
 import {Skill, SkillRequest} from "../../types/skill";
 import {SkillService} from "../../services/skill/skill.service";
-import {AlertService, AlertType, UserModel, WsComponent} from "@worldskills/worldskills-angular-lib";
+import {AlertType, User, UserRoleUtil, WsComponent, ɵa as AlertService} from "@worldskills/worldskills-angular-lib";
 import {TranslateService} from "@ngx-translate/core";
 import {EventService} from "../../services/event/event.service";
 import {combineLatest} from "rxjs";
 import {map} from "rxjs/operators";
 import {UiSkillService} from "../../services/ui-skill/ui-skill.service";
 import {AuthService} from "../../services/auth/auth.service";
-import {userHasRolesOfEntity} from "../../utils/userRole";
 import {environment} from "../../environments/environment";
 
 @Component({
@@ -19,10 +18,12 @@ import {environment} from "../../environments/environment";
 })
 export class SkillUpdateComponent extends WsComponent implements OnInit {
 
-  authenticatedUser: UserModel;
+  authenticatedUser: User;
   event: Event;
   skill: Skill;
   loading = false;
+  appId = environment.worldskillsAppId;
+  hasUserRole = UserRoleUtil.userHasRolesOfEntity;
 
   constructor(
     private authService: AuthService,
@@ -37,7 +38,7 @@ export class SkillUpdateComponent extends WsComponent implements OnInit {
 
   ngOnInit(): void {
     this.authService.authStatus.subscribe(authStatus => (this.authenticatedUser = authStatus.user)),
-    this.uiSkillService.subject.next(null);
+      this.uiSkillService.subject.next(null);
     this.subscribe(
       this.eventService.subject.subscribe(event => (this.event = event)),
       this.skillService.subject.subscribe(skill => (this.skill = skill)),
@@ -58,14 +59,9 @@ export class SkillUpdateComponent extends WsComponent implements OnInit {
     this.skillService.update(this.event.id, this.skill.id, request).subscribe(() => {
       this.translateService.get('The Skill has been updated successfully.').subscribe(t => {
         this.alertService.setAlert('updated-skill', AlertType.success,
-          null, undefined, t, true);
+          null, t, true);
       });
     });
-  }
-
-  hasUserRole(...roles: Array<string>) {
-    return this.authenticatedUser && this.event && this.event.ws_entity &&
-      userHasRolesOfEntity(this.authenticatedUser, environment.worldskillsAppId, this.event.ws_entity.id, ...roles);
   }
 
 }

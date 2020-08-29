@@ -3,7 +3,7 @@
 </ng-container>
 <ng-container *ngIf="initialized && !loading">
   <app-skill-form
-    [editable]="hasUserRole('Admin', 'EditEvents')"
+    [editable]="authenticatedUser && event && event.ws_entity && hasUserRole(authenticatedUser, appId, event.ws_entity.id, 'Admin', 'EditEvents')"
     [event]="event"
     [skill]="skill"
     (save)="save($event)"

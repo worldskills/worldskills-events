@@ -1,5 +1,5 @@
 import {Component, OnInit} from '@angular/core';
-import {UserModel, WsComponent} from "@worldskills/worldskills-angular-lib";
+import {User, UserRoleUtil, WsComponent} from "@worldskills/worldskills-angular-lib";
 import {EventList} from "../../types/event";
 import {
   DEFAULT_FETCH_PARAMS_PAGER,
@@ -10,7 +10,6 @@ import {
 import {AuthService} from "../../services/auth/auth.service";
 import {ActivatedRoute, Router} from "@angular/router";
 import {take} from "rxjs/operators";
-import {userHasRoles} from "../../utils/userRole";
 import {environment} from "../../environments/environment";
 import {combineLatest} from "rxjs";
 
@@ -21,10 +20,11 @@ import {combineLatest} from "rxjs";
 })
 export class EventsComponent extends WsComponent implements OnInit {
 
-  authenticatedUser: UserModel;
+  authenticatedUser: User;
   eventList: EventList;
   fetchParams: EventsFetchParams;
   loading = false;
+  appId = environment.worldskillsAppId;
 
   constructor(
     private authService: AuthService,
@@ -47,13 +47,13 @@ export class EventsComponent extends WsComponent implements OnInit {
             this.eventsService.convertQueryParamsToFetchParams(queryParams),
             true
           );
-        } else if (this.hasUserRole('EditEvents', 'OrganizerEditEvents')) {
+        } else if (UserRoleUtil.userHasRoles(this.authenticatedUser, this.appId, 'EditEvents', 'OrganizerEditEvents')) {
           const role = this.authenticatedUser.roles
-            .find(r => r.roleApplication.applicationCode === environment.worldskillsAppId &&
+            .find(r => r.role_application.application_code === environment.worldskillsAppId &&
               (r.name === 'EditEvents' || r.name === 'OrganizerEditEvents'));
-          if (role && role.wsEntity) {
+          if (role && role.ws_entity) {
             this.eventsService.updateFetchParams(
-              {...DEFAULT_FETCH_PARAMS_PAGER, ws_entity: role.wsEntity.id},
+              {...DEFAULT_FETCH_PARAMS_PAGER, ws_entity: role.ws_entity.id},
               true
             );
           }
@@ -102,10 +102,6 @@ export class EventsComponent extends WsComponent implements OnInit {
         offset: this.fetchParams.limit ? this.fetchParams.limit * (page - 1) : 0,
       });
     }
-  }
-
-  hasUserRole(...roles: Array<string>) {
-    return userHasRoles(this.authenticatedUser, environment.worldskillsAppId, ...roles);
   }
 
 }

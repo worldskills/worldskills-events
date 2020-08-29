@@ -1,5 +1,5 @@
 import {Component, OnDestroy, OnInit, ViewChild} from '@angular/core';
-import {AlertService, AlertType, UserModel, WsComponent} from "@worldskills/worldskills-angular-lib";
+import {ɵa as AlertService, AlertType, User, WsComponent} from "@worldskills/worldskills-angular-lib";
 import {Event} from "../../types/event";
 import {Sector} from "../../types/sector";
 import {EventService} from "../../services/event/event.service";
@@ -9,7 +9,6 @@ import {map} from "rxjs/operators";
 import {SectorService} from "../../services/sector/sector.service";
 import {TranslateService} from "@ngx-translate/core";
 import {faTimes} from '@fortawesome/free-solid-svg-icons';
-import {userHasRolesOfEntity} from "../../utils/userRole";
 import {environment} from "../../environments/environment";
 import {AuthService} from "../../services/auth/auth.service";
 import {SkillsService} from "../../services/skills/skills.service";
@@ -23,13 +22,14 @@ import {LocaleContextService} from "../../services/locale-context/locale-context
 })
 export class SectorListComponent extends WsComponent implements OnInit, OnDestroy {
 
-  authenticatedUser: UserModel;
+  authenticatedUser: User;
   event: Event;
   sectors: Array<Sector>;
   loading = false;
   @ViewChild('button', {static: true}) button;
   faTimes = faTimes;
   sectorDeletableInfo: Map<number, boolean> = new Map<number, boolean>();
+  appId = environment.worldskillsAppId;
 
   constructor(
     private authService: AuthService,
@@ -100,17 +100,12 @@ export class SectorListComponent extends WsComponent implements OnInit, OnDestro
           .subscribe(() => {
             this.translateService.get('The Sector has been removed successfully.').subscribe(t2 => {
               this.alertService.setAlert('removed-sector', AlertType.success,
-                null, undefined, t2, true);
+                null, t2, true);
               this.eventService.fetch(this.event.id);
             });
           });
       }
     });
-  }
-
-  hasUserRole(...roles: Array<string>) {
-    return this.authenticatedUser && this.event && this.event.ws_entity &&
-      userHasRolesOfEntity(this.authenticatedUser, environment.worldskillsAppId, this.event.ws_entity.id, ...roles);
   }
 
 }

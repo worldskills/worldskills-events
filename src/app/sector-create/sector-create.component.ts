@@ -2,7 +2,7 @@ import {Component, OnInit} from '@angular/core';
 import {Event} from "../../types/event";
 import {SectorRequest} from "../../types/sector";
 import {SectorService} from "../../services/sector/sector.service";
-import {AlertService, AlertType, EntityTreeService, WsComponent} from "@worldskills/worldskills-angular-lib";
+import {ɵa as AlertService, AlertType, EntityTreeService, WsComponent} from "@worldskills/worldskills-angular-lib";
 import {TranslateService} from "@ngx-translate/core";
 import {EventService} from "../../services/event/event.service";
 import {combineLatest} from "rxjs";
@@ -50,7 +50,7 @@ export class SectorCreateComponent extends WsComponent implements OnInit {
     this.sectorService.create(this.event.id, request).subscribe(() => {
       this.translateService.get('The Sector has been created successfully.').subscribe(t => {
         this.alertService.setAlert('created-sector', AlertType.success,
-          null, undefined, t, true);
+          null, t, true);
         this.entityTreeService.clearCache();
         this.router.navigate(['/events', this.event.id, 'sectors']);
       });

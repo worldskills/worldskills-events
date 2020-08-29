@@ -3,6 +3,7 @@ import {HttpClient} from '@angular/common/http';
 import {
   FetchParams,
   FULL,
+  HttpUtil,
   MulticastOptions,
   NO_SUBJECT,
   RequestOptions,
@@ -13,7 +14,6 @@ import {
 } from '@worldskills/worldskills-angular-lib';
 import {Observable} from 'rxjs';
 import {Event, EventRequest} from '../../types/event';
-import {httpParamsFromFetchParams} from '../../utils/http';
 import {environment} from '../../environments/environment';
 import {share} from 'rxjs/operators';
 
@@ -32,7 +32,7 @@ export class EventService extends WsService<Event> {
   fetch(eventId: number, params: FetchParams, mOpt: MulticastOptions, rOpt?: RequestOptions): Observable<Event>;
   fetch(eventId: number, p1: WsServiceRequestP1, p2?: WsServiceRequestP2, p3?: WsServiceRequestP3): Observable<Event> {
     const {fetchParams, multicastOptions, requestOptions} = this.resolveArgs(p1, p2, p3, FULL);
-    const params = httpParamsFromFetchParams(fetchParams);
+    const params = HttpUtil.objectToParams(fetchParams || {});
     const observable = this.http.get<Event>(
       requestOptions.url ?? `${environment.worldskillsApiEvents}/${eventId}`, {params}
     ).pipe(share());
@@ -45,7 +45,7 @@ export class EventService extends WsService<Event> {
   create(event: EventRequest, params: FetchParams, mOpt: MulticastOptions, rOpt?: RequestOptions): Observable<Event>;
   create(event: EventRequest, p1: WsServiceRequestP1, p2?: WsServiceRequestP2, p3?: WsServiceRequestP3): Observable<Event> {
     const {fetchParams, multicastOptions, requestOptions} = this.resolveArgs(p1, p2, p3, FULL);
-    const params = httpParamsFromFetchParams(fetchParams);
+    const params = HttpUtil.objectToParams(fetchParams || {});
     const observable = this.http.post<Event>(
       requestOptions.url ?? `${environment.worldskillsApiEvents}`, event, {params}
     ).pipe(share());
@@ -58,7 +58,7 @@ export class EventService extends WsService<Event> {
   update(eventId: number, event: EventRequest, params: FetchParams, mOpt: MulticastOptions, rOpt?: RequestOptions): Observable<Event>;
   update(eventId: number, event: EventRequest, p1: WsServiceRequestP1, p2?: WsServiceRequestP2, p3?: WsServiceRequestP3): Observable<Event> {
     const {fetchParams, multicastOptions, requestOptions} = this.resolveArgs(p1, p2, p3, FULL);
-    const params = httpParamsFromFetchParams(fetchParams);
+    const params = HttpUtil.objectToParams(fetchParams || {});
     const observable = this.http.put<Event>(
       requestOptions.url ?? `${environment.worldskillsApiEvents}/${eventId}`, event, {params}
     ).pipe(share());
@@ -71,7 +71,7 @@ export class EventService extends WsService<Event> {
   delete(eventId: number, params: FetchParams, mOpt: MulticastOptions, rOpt?: RequestOptions): Observable<Event>;
   delete(eventId: number, p1: WsServiceRequestP1, p2?: WsServiceRequestP2, p3?: WsServiceRequestP3): Observable<Event> {
     const {fetchParams, multicastOptions, requestOptions} = this.resolveArgs(p1, p2, p3, NO_SUBJECT);
-    const params = httpParamsFromFetchParams(fetchParams);
+    const params = HttpUtil.objectToParams(fetchParams || {});
     const observable = this.http.delete<Event>(
       requestOptions.url ?? `${environment.worldskillsApiEvents}/${eventId}`, {params}
     ).pipe(share());

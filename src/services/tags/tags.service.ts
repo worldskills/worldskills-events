@@ -3,6 +3,7 @@ import {TagList} from '../../types/tag';
 import {
   FetchParams,
   FULL,
+  HttpUtil,
   MulticastOptions,
   RequestOptions,
   WsService,
@@ -12,7 +13,6 @@ import {
 } from '@worldskills/worldskills-angular-lib';
 import {HttpClient} from '@angular/common/http';
 import {Observable} from 'rxjs';
-import {httpParamsFromFetchParams} from '../../utils/http';
 import {environment} from '../../environments/environment';
 import {share} from 'rxjs/operators';
 
@@ -31,7 +31,7 @@ export class TagsService extends WsService<TagList> {
   fetch(eventId: number, params: FetchParams, mOpt: MulticastOptions, rOpt?: RequestOptions): Observable<TagList>;
   fetch(eventId: number, p1: WsServiceRequestP1, p2?: WsServiceRequestP2, p3?: WsServiceRequestP3): Observable<TagList> {
     const {fetchParams, multicastOptions, requestOptions} = this.resolveArgs(p1, p2, p3, FULL);
-    const params = httpParamsFromFetchParams(fetchParams);
+    const params = HttpUtil.objectToParams(fetchParams || {});
     const observable = this.http.get<TagList>(
       requestOptions.url ?? `${environment.worldskillsApiEvents}/${eventId}/skill_tags`, {params}
     ).pipe(share());

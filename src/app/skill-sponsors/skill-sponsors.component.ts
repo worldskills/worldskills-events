@@ -1,5 +1,5 @@
 import {Component, OnInit, ViewChild} from '@angular/core';
-import {AlertService, AlertType, LOADER_ONLY, WsComponent} from "@worldskills/worldskills-angular-lib";
+import {ɵa as AlertService, AlertType, LOADER_ONLY, WsComponent} from "@worldskills/worldskills-angular-lib";
 import {EventService} from "../../services/event/event.service";
 import {SkillService} from "../../services/skill/skill.service";
 import {SponsorsService} from "../../services/sponsors/sponsors.service";
@@ -85,7 +85,7 @@ export class SkillSponsorsComponent extends WsComponent implements OnInit {
     }).subscribe(() => {
       this.translateService.get('The Sponsor has been bound successfully.').subscribe(t => {
         this.alertService.setAlert('bound-sponsor', AlertType.success,
-          null, undefined, t, true);
+          null, t, true);
         this.skillService.fetch(this.event.id, this.skill.id);
       });
     });
@@ -95,7 +95,7 @@ export class SkillSponsorsComponent extends WsComponent implements OnInit {
     this.skillSponsorService.unbind(this.event.id, this.skill.id, sponsor.id).subscribe(() => {
       this.translateService.get('The Sponsor has been unbound successfully.').subscribe(t => {
         this.alertService.setAlert('unbound-sponsor', AlertType.success,
-          null, undefined, t, true);
+          null, t, true);
         this.skillService.fetch(this.event.id, this.skill.id);
       });
     });

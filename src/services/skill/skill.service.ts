@@ -2,7 +2,7 @@ import {Injectable} from '@angular/core';
 import {EventSkillCloneRequest, Skill, SkillRequest} from '../../types/skill';
 import {
   FetchParams,
-  FULL,
+  FULL, HttpUtil,
   MulticastOptions,
   NO_SUBJECT,
   RequestOptions,
@@ -13,7 +13,6 @@ import {
 } from '@worldskills/worldskills-angular-lib';
 import {HttpClient} from '@angular/common/http';
 import {Observable} from 'rxjs';
-import {httpParamsFromFetchParams} from '../../utils/http';
 import {environment} from '../../environments/environment';
 import {share} from 'rxjs/operators';
 
@@ -32,7 +31,7 @@ export class SkillService extends WsService<Skill> {
   fetch(eventId: number, skillId: number, params: FetchParams, mOpt: MulticastOptions, rOpt?: RequestOptions): Observable<Skill>;
   fetch(eventId: number, skillId: number, p1: WsServiceRequestP1, p2?: WsServiceRequestP2, p3?: WsServiceRequestP3): Observable<Skill> {
     const {fetchParams, multicastOptions, requestOptions} = this.resolveArgs(p1, p2, p3, FULL);
-    const params = httpParamsFromFetchParams(fetchParams);
+    const params = HttpUtil.objectToParams(fetchParams || {});
     const observable = this.http.get<Skill>(
       requestOptions.url ?? `${environment.worldskillsApiEvents}/${eventId}/skills/${skillId}`, {params}
     ).pipe(share());
@@ -45,7 +44,7 @@ export class SkillService extends WsService<Skill> {
   create(eventId: number, skillRequest: SkillRequest, params: FetchParams, mOpt: MulticastOptions, rOpt?: RequestOptions): Observable<Skill>;
   create(eventId: number, skillRequest: SkillRequest, p1: WsServiceRequestP1, p2?: WsServiceRequestP2, p3?: WsServiceRequestP3): Observable<Skill> {
     const {fetchParams, multicastOptions, requestOptions} = this.resolveArgs(p1, p2, p3, FULL);
-    const params = httpParamsFromFetchParams(fetchParams);
+    const params = HttpUtil.objectToParams(fetchParams || {});
     const observable = this.http.post<Skill>(
       requestOptions.url ?? `${environment.worldskillsApiEvents}/${eventId}/skills`, skillRequest, {params}
     ).pipe(share());
@@ -64,7 +63,7 @@ export class SkillService extends WsService<Skill> {
     p3?: WsServiceRequestP3
   ): Observable<Skill> {
     const {fetchParams, multicastOptions, requestOptions} = this.resolveArgs(p1, p2, p3, FULL);
-    const params = httpParamsFromFetchParams(fetchParams);
+    const params = HttpUtil.objectToParams(fetchParams || {});
     const observable = this.http.put<Skill>(
       requestOptions.url ?? `${environment.worldskillsApiEvents}/${eventId}/skills/${skillId}`, skillRequest, {params}
     ).pipe(share());
@@ -77,7 +76,7 @@ export class SkillService extends WsService<Skill> {
   delete(eventId: number, skillId: number, params: FetchParams, mOpt: MulticastOptions, rOpt?: RequestOptions): Observable<Skill>;
   delete(eventId: number, skillId: number, p1: WsServiceRequestP1, p2?: WsServiceRequestP2, p3?: WsServiceRequestP3): Observable<Skill> {
     const {fetchParams, multicastOptions, requestOptions} = this.resolveArgs(p1, p2, p3, NO_SUBJECT);
-    const params = httpParamsFromFetchParams(fetchParams);
+    const params = HttpUtil.objectToParams(fetchParams || {});
     const observable = this.http.delete<Skill>(
       requestOptions.url ?? `${environment.worldskillsApiEvents}/${eventId}/skills/${skillId}`, {params}
     ).pipe(share());
@@ -90,7 +89,7 @@ export class SkillService extends WsService<Skill> {
   copySkill(eventId: number, skillId: number, cloneRequest: EventSkillCloneRequest, params: FetchParams, mOpt: MulticastOptions, rOpt?: RequestOptions): Observable<Skill>;
   copySkill(eventId: number, skillId: number, cloneRequest: EventSkillCloneRequest, p1: WsServiceRequestP1, p2?: WsServiceRequestP2, p3?: WsServiceRequestP3): Observable<Skill> {
     const {fetchParams, multicastOptions, requestOptions} = this.resolveArgs(p1, p2, p3, NO_SUBJECT);
-    const params = httpParamsFromFetchParams(fetchParams);
+    const params = HttpUtil.objectToParams(fetchParams || {});
     const observable = this.http.post<Skill>(
       requestOptions.url ?? `${environment.worldskillsApiEvents}/${eventId}/skills/${skillId}/clone`, cloneRequest, {params}
     ).pipe(share());

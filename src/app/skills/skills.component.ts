@@ -3,13 +3,12 @@ import {Skill} from "../../types/skill";
 import {Event} from "../../types/event";
 import {EventService} from "../../services/event/event.service";
 import {SkillsService} from "../../services/skills/skills.service";
-import {AlertService, AlertType, UserModel, WsComponent} from "@worldskills/worldskills-angular-lib";
+import {AlertType, User, WsComponent, ɵa as AlertService} from "@worldskills/worldskills-angular-lib";
 import {combineLatest} from "rxjs";
 import {map} from "rxjs/operators";
 import {EventsService} from "../../services/events/events.service";
 import {SkillService} from "../../services/skill/skill.service";
 import {TranslateService} from "@ngx-translate/core";
-import {userHasRolesOfEntity} from "../../utils/userRole";
 import {environment} from "../../environments/environment";
 import {AuthService} from "../../services/auth/auth.service";
 
@@ -38,7 +37,7 @@ const TypeLabels = [
 })
 export class SkillsComponent extends WsComponent implements OnInit {
 
-  authenticatedUser: UserModel;
+  authenticatedUser: User;
   event: Event;
   skills: Array<Skill>;
   events: Array<Event>;
@@ -47,6 +46,7 @@ export class SkillsComponent extends WsComponent implements OnInit {
   selectedSkills: Array<Skill> = [];
   filters: Filter = {};
   TypeLabels = TypeLabels;
+  appId = environment.worldskillsAppId;
 
   constructor(
     private authService: AuthService,
@@ -144,15 +144,10 @@ export class SkillsComponent extends WsComponent implements OnInit {
         this.selectedSkills = [];
         this.translateService.get('The skills have been successfully copied.').subscribe(t => {
           this.alertService.setAlert('copied-events', AlertType.success,
-            null, undefined, t, true);
+            null, t, true);
         });
       });
     }
-  }
-
-  hasUserRole(...roles: Array<string>) {
-    return this.authenticatedUser && this.event && this.event.ws_entity &&
-      userHasRolesOfEntity(this.authenticatedUser, environment.worldskillsAppId, this.event.ws_entity.id, ...roles);
   }
 
 }

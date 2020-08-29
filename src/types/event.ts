@@ -1,6 +1,6 @@
 import {Link, List} from './common';
 import {AuthEntity} from './entity';
-import {I18nModel} from '@worldskills/worldskills-angular-lib';
+import {I18nText} from '@worldskills/worldskills-angular-lib';
 
 export interface EventRequest {
   name: string;
@@ -26,7 +26,7 @@ export interface Event extends EventRequest {
   country: {
     id: number;
     code: string;
-    name: I18nModel;
+    name: I18nText;
   };
   ws_entity: AuthEntity;
   links: Array<Link>;

@@ -1,7 +1,7 @@
 import {Component, OnInit} from '@angular/core';
 import {EventRequest} from "../../types/event";
 import {EventService} from "../../services/event/event.service";
-import {AlertService, AlertType, WsComponent} from "@worldskills/worldskills-angular-lib";
+import {ɵa as AlertService, AlertType, WsComponent} from "@worldskills/worldskills-angular-lib";
 import {TranslateService} from "@ngx-translate/core";
 import {combineLatest} from "rxjs";
 import {map} from "rxjs/operators";
@@ -43,7 +43,7 @@ export class EventCreateComponent extends WsComponent implements OnInit {
     this.eventService.create(request).subscribe(event => {
       this.translateService.get('The Event has been created successfully.').subscribe(t => {
         this.alertService.setAlert('created-event', AlertType.success,
-          null, undefined, t, true);
+          null, t, true);
         this.router.navigate(['/events', event.id]);
       });
     });

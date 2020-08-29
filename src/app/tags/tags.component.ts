@@ -1,5 +1,5 @@
 import {Component, OnInit} from '@angular/core';
-import {AlertService, AlertType, WsComponent} from "@worldskills/worldskills-angular-lib";
+import {ɵa as AlertService, AlertType, WsComponent} from "@worldskills/worldskills-angular-lib";
 import {Event} from "../../types/event";
 import {Tag} from "../../types/tag";
 import {EventService} from "../../services/event/event.service";
@@ -60,7 +60,7 @@ export class TagsComponent extends WsComponent implements OnInit {
           .subscribe(() => {
             this.translateService.get('The Tag has been removed successfully.').subscribe(t2 => {
               this.alertService.setAlert('removed-tag', AlertType.success,
-                null, undefined, t2, true);
+                null, t2, true);
               this.eventService.fetch(this.event.id);
             });
           });

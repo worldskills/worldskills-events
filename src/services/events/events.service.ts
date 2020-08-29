@@ -2,12 +2,12 @@ import {Injectable} from '@angular/core';
 import {HttpClient, HttpParams} from '@angular/common/http';
 import {Observable, ReplaySubject} from 'rxjs';
 import {EventList} from '../../types/event';
-import {httpParamsFromFetchParams} from '../../utils/http';
 import {share} from 'rxjs/operators';
 import {environment} from '../../environments/environment';
 import {
   FetchParams,
   FULL,
+  HttpUtil,
   MulticastOptions,
   RequestOptions,
   WsService,
@@ -61,35 +61,13 @@ export class EventsService extends WsService<EventList, EventsFetchParams> {
     return queryParams;
   }
 
-  createParamsFromFetchParams(fetchParams: EventsFetchParams, params: HttpParams): HttpParams {
-    if (fetchParams.name) {
-      params = params.set('name', fetchParams.name);
-    }
-    if (fetchParams.after) {
-      params = params.set('after', fetchParams.after);
-    }
-    if (fetchParams.before) {
-      params = params.set('before', fetchParams.before);
-    }
-    if (fetchParams.type) {
-      params = params.set('type', fetchParams.type);
-    }
-    if (fetchParams.country) {
-      params = params.set('country', fetchParams.country.toString());
-    }
-    if (fetchParams.ws_entity) {
-      params = params.set('ws_entity', fetchParams.ws_entity.toString());
-    }
-    return params;
-  }
-
   fetch(rOpt?: RequestOptions): Observable<EventList>;
   fetch(params: EventsFetchParams, rOpt?: RequestOptions): Observable<EventList>;
   fetch(mOpt: MulticastOptions, rOpt?: RequestOptions): Observable<EventList>;
   fetch(params: EventsFetchParams, mOpt: MulticastOptions, rOpt?: RequestOptions): Observable<EventList>;
   fetch(p1: WsServiceRequestP1, p2?: WsServiceRequestP2, p3?: WsServiceRequestP3): Observable<EventList> {
     const {fetchParams, multicastOptions, requestOptions} = this.resolveArgs(p1, p2, p3, FULL, DEFAULT_FETCH_PARAMS);
-    const params = this.createParamsFromFetchParams(fetchParams, httpParamsFromFetchParams(fetchParams));
+    const params = HttpUtil.objectToParams(fetchParams || {});
     const observable = this.http.get<EventList>(
       requestOptions.url ?? `${environment.worldskillsApiEvents}`, {params}
     ).pipe(share());

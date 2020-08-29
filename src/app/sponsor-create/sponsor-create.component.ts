@@ -2,7 +2,7 @@ import {Component, OnInit} from '@angular/core';
 import {Event} from "../../types/event";
 import {SponsorRequest} from "../../types/sponsor";
 import {SponsorService} from "../../services/sponsor/sponsor.service";
-import {AlertService, AlertType, WsComponent} from "@worldskills/worldskills-angular-lib";
+import {ɵa as AlertService, AlertType, WsComponent} from "@worldskills/worldskills-angular-lib";
 import {TranslateService} from "@ngx-translate/core";
 import {EventService} from "../../services/event/event.service";
 import {combineLatest} from "rxjs";
@@ -49,7 +49,7 @@ export class SponsorCreateComponent extends WsComponent implements OnInit {
     this.sponsorService.create(request).subscribe(() => {
       this.translateService.get('The Sponsor has been created successfully.').subscribe(t => {
         this.alertService.setAlert('created-sponsor', AlertType.success,
-          null, undefined, t, true);
+          null, t, true);
         this.router.navigate(['/events', this.event.id, 'sponsors']);
       });
     });

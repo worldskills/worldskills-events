@@ -1,5 +1,5 @@
 import {Component, OnInit, ViewChild} from '@angular/core';
-import {AlertService, AlertType, UserModel, WsComponent} from "@worldskills/worldskills-angular-lib";
+import {AlertType, User, WsComponent, ɵa as AlertService} from "@worldskills/worldskills-angular-lib";
 import {EventService} from "../../services/event/event.service";
 import {SkillService} from "../../services/skill/skill.service";
 import {TagsService} from "../../services/tags/tags.service";
@@ -12,7 +12,6 @@ import {Skill} from "../../types/skill";
 import {Tag} from "../../types/tag";
 import {TranslateService} from "@ngx-translate/core";
 import {faTimes} from '@fortawesome/free-solid-svg-icons';
-import {userHasRolesOfEntity} from "../../utils/userRole";
 import {environment} from "../../environments/environment";
 import {AuthService} from "../../services/auth/auth.service";
 
@@ -23,13 +22,14 @@ import {AuthService} from "../../services/auth/auth.service";
 })
 export class SkillTagsComponent extends WsComponent implements OnInit {
 
-  authenticatedUser: UserModel;
+  authenticatedUser: User;
   event: Event;
   skill: Skill;
   tags: Array<Tag>;
   loading = false;
   @ViewChild('button', {static: true}) button;
   faTimes = faTimes;
+  appId = environment.worldskillsAppId;
 
   constructor(
     private authService: AuthService,
@@ -46,7 +46,7 @@ export class SkillTagsComponent extends WsComponent implements OnInit {
 
   ngOnInit(): void {
     this.authService.authStatus.subscribe(authStatus => (this.authenticatedUser = authStatus.user)),
-    this.uiSkillService.subject.next(this.button);
+      this.uiSkillService.subject.next(this.button);
     this.subscribe(
       this.eventService.subject.subscribe(event => {
         this.event = event;
@@ -77,7 +77,7 @@ export class SkillTagsComponent extends WsComponent implements OnInit {
     this.skillTagService.bind(this.event.id, this.skill.id, tag.id).subscribe(() => {
       this.translateService.get('The Tag has been bound successfully.').subscribe(t => {
         this.alertService.setAlert('bound-tag', AlertType.success,
-          null, undefined, t, true);
+          null, t, true);
         this.skillService.fetch(this.event.id, this.skill.id);
       });
     });
@@ -87,16 +87,10 @@ export class SkillTagsComponent extends WsComponent implements OnInit {
     this.skillTagService.unbind(this.event.id, this.skill.id, tag.id).subscribe(() => {
       this.translateService.get('The Tag has been unbound successfully.').subscribe(t => {
         this.alertService.setAlert('unbound-tag', AlertType.success,
-          null, undefined, t, true);
+          null, t, true);
         this.skillService.fetch(this.event.id, this.skill.id);
       });
     });
   }
-
-  hasUserRole(...roles: Array<string>) {
-    return this.authenticatedUser && this.event && this.event.ws_entity &&
-      userHasRolesOfEntity(this.authenticatedUser, environment.worldskillsAppId, this.event.ws_entity.id, ...roles);
-  }
-
 
 }

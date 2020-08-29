@@ -1,5 +1,5 @@
 import {Component, OnInit, ViewChild} from '@angular/core';
-import {LOADER_ONLY, UserModel, WsComponent} from "@worldskills/worldskills-angular-lib";
+import {LOADER_ONLY, User, WsComponent} from "@worldskills/worldskills-angular-lib";
 import {Event} from "../../types/event";
 import {Photo} from "../../types/photo";
 import {Skill} from "../../types/skill";
@@ -11,7 +11,6 @@ import {SkillPhotoService} from "../../services/skill-photo/skill-photo.service"
 import {UiSkillService} from "../../services/ui-skill/ui-skill.service";
 import {faCaretDown, faCaretUp} from '@fortawesome/free-solid-svg-icons';
 import {AuthService} from "../../services/auth/auth.service";
-import {userHasRolesOfEntity} from "../../utils/userRole";
 import {environment} from "../../environments/environment";
 
 @Component({
@@ -21,13 +20,14 @@ import {environment} from "../../environments/environment";
 })
 export class SkillPhotosComponent extends WsComponent implements OnInit {
 
-  authenticatedUser: UserModel;
+  authenticatedUser: User;
   event: Event;
   skill: Skill;
   loading = false;
   @ViewChild('button', {static: true}) button;
   faCaretDown = faCaretDown;
   faCaretUp = faCaretUp;
+  appId = environment.worldskillsAppId;
 
   constructor(
     private authService: AuthService,
@@ -67,11 +67,6 @@ export class SkillPhotosComponent extends WsComponent implements OnInit {
       .subscribe(() => {
         this.skillService.fetch(this.event.id, this.skill.id);
       });
-  }
-
-  hasUserRole(...roles: Array<string>) {
-    return this.authenticatedUser && this.event && this.event.ws_entity &&
-      userHasRolesOfEntity(this.authenticatedUser, environment.worldskillsAppId, this.event.ws_entity.id, ...roles);
   }
 
 }

@@ -2,7 +2,7 @@ import {Injectable} from '@angular/core';
 import {SkillList} from '../../types/skill';
 import {
   FetchParams,
-  FULL,
+  FULL, HttpUtil,
   MulticastOptions,
   RequestOptions,
   WsService,
@@ -12,7 +12,6 @@ import {
 } from '@worldskills/worldskills-angular-lib';
 import {HttpClient} from '@angular/common/http';
 import {Observable} from 'rxjs';
-import {httpParamsFromFetchParams} from '../../utils/http';
 import {environment} from '../../environments/environment';
 import {share} from 'rxjs/operators';
 
@@ -40,7 +39,7 @@ export class SkillsService extends WsService<SkillList, SkillsFetchParams> {
   fetch(eventId: number, params: SkillsFetchParams, mOpt: MulticastOptions, rOpt?: RequestOptions): Observable<SkillList>;
   fetch(eventId: number, p1: WsServiceRequestP1, p2?: WsServiceRequestP2, p3?: WsServiceRequestP3): Observable<SkillList> {
     const {fetchParams, multicastOptions, requestOptions} = this.resolveArgs(p1, p2, p3, FULL, DEFAULT_FETCH_PARAMS);
-    let params = httpParamsFromFetchParams(fetchParams);
+    let params = HttpUtil.objectToParams(fetchParams || {});
     if (fetchParams.sector) {
       params = params.set('sector', fetchParams.sector.toString());
     }

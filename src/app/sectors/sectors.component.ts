@@ -1,12 +1,10 @@
 import {Component, OnInit} from '@angular/core';
-import {UserModel, WsComponent} from "@worldskills/worldskills-angular-lib";
+import {User, WsComponent} from "@worldskills/worldskills-angular-lib";
 import {Event} from "../../types/event";
 import {AuthService} from "../../services/auth/auth.service";
 import {EventService} from "../../services/event/event.service";
 import {combineLatest} from "rxjs";
 import {map} from "rxjs/operators";
-import {userHasRolesOfEntity} from "../../utils/userRole";
-import {environment} from "../../environments/environment";
 import {UiSectorService} from "../../services/ui-sector/ui-sector.service";
 import {LocaleContextService} from "../../services/locale-context/locale-context.service";
 
@@ -17,7 +15,7 @@ import {LocaleContextService} from "../../services/locale-context/locale-context
 })
 export class SectorsComponent extends WsComponent implements OnInit {
 
-  authenticatedUser: UserModel;
+  authenticatedUser: User;
   event: Event;
   loading = false;
   additionalMenu = null;
@@ -57,11 +55,6 @@ export class SectorsComponent extends WsComponent implements OnInit {
     event.preventDefault();
     event.stopPropagation();
     this.localeContextService.override.next(language);
-  }
-
-  hasUserRole(...roles: Array<string>) {
-    return this.authenticatedUser && this.event && this.event.ws_entity &&
-      userHasRolesOfEntity(this.authenticatedUser, environment.worldskillsAppId, this.event.ws_entity.id, ...roles);
   }
 
 }

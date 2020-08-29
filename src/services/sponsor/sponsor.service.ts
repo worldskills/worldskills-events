@@ -2,7 +2,7 @@ import {Injectable} from '@angular/core';
 import {HttpClient} from '@angular/common/http';
 import {
   FetchParams,
-  FULL,
+  FULL, HttpUtil,
   MulticastOptions,
   NO_SUBJECT,
   RequestOptions,
@@ -13,7 +13,6 @@ import {
 } from '@worldskills/worldskills-angular-lib';
 import {Observable} from 'rxjs';
 import {Sponsor, SponsorRequest} from '../../types/sponsor';
-import {httpParamsFromFetchParams} from '../../utils/http';
 import {environment} from '../../environments/environment';
 import {share} from 'rxjs/operators';
 
@@ -32,7 +31,7 @@ export class SponsorService extends WsService<Sponsor> {
   fetch(sponsorId: number, params: FetchParams, mOpt: MulticastOptions, rOpt?: RequestOptions): Observable<Sponsor>;
   fetch(sponsorId: number, p1: WsServiceRequestP1, p2?: WsServiceRequestP2, p3?: WsServiceRequestP3): Observable<Sponsor> {
     const {fetchParams, multicastOptions, requestOptions} = this.resolveArgs(p1, p2, p3, FULL);
-    const params = httpParamsFromFetchParams(fetchParams);
+    const params = HttpUtil.objectToParams(fetchParams || {});
     const observable = this.http.get<Sponsor>(
       requestOptions.url ?? `${environment.worldskillsApiEvents}/sponsors/${sponsorId}`, {params}
     ).pipe(share());
@@ -45,7 +44,7 @@ export class SponsorService extends WsService<Sponsor> {
   create(sponsor: SponsorRequest, params: FetchParams, mOpt: MulticastOptions, rOpt?: RequestOptions): Observable<Sponsor>;
   create(sponsor: SponsorRequest, p1: WsServiceRequestP1, p2?: WsServiceRequestP2, p3?: WsServiceRequestP3): Observable<Sponsor> {
     const {fetchParams, multicastOptions, requestOptions} = this.resolveArgs(p1, p2, p3, FULL);
-    const params = httpParamsFromFetchParams(fetchParams);
+    const params = HttpUtil.objectToParams(fetchParams || {});
     const observable = this.http.post<Sponsor>(
       requestOptions.url ?? `${environment.worldskillsApiEvents}/sponsors`, sponsor, {params}
     ).pipe(share());
@@ -58,7 +57,7 @@ export class SponsorService extends WsService<Sponsor> {
   update(sponsorId: number, sponsor: SponsorRequest, params: FetchParams, mOpt: MulticastOptions, rOpt?: RequestOptions): Observable<Sponsor>;
   update(sponsorId: number, sponsor: SponsorRequest, p1: WsServiceRequestP1, p2?: WsServiceRequestP2, p3?: WsServiceRequestP3): Observable<Sponsor> {
     const {fetchParams, multicastOptions, requestOptions} = this.resolveArgs(p1, p2, p3, FULL);
-    const params = httpParamsFromFetchParams(fetchParams);
+    const params = HttpUtil.objectToParams(fetchParams || {});
     const observable = this.http.put<Sponsor>(
       requestOptions.url ?? `${environment.worldskillsApiEvents}/sponsors/${sponsorId}`, sponsor, {params}
     ).pipe(share());
@@ -71,7 +70,7 @@ export class SponsorService extends WsService<Sponsor> {
   delete(sponsorId: number, params: FetchParams, mOpt: MulticastOptions, rOpt?: RequestOptions): Observable<Sponsor>;
   delete(sponsorId: number, p1: WsServiceRequestP1, p2?: WsServiceRequestP2, p3?: WsServiceRequestP3): Observable<Sponsor> {
     const {fetchParams, multicastOptions, requestOptions} = this.resolveArgs(p1, p2, p3, NO_SUBJECT);
-    const params = httpParamsFromFetchParams(fetchParams);
+    const params = HttpUtil.objectToParams(fetchParams || {});
     const observable = this.http.delete<Sponsor>(
       requestOptions.url ?? `${environment.worldskillsApiEvents}/sponsors/${sponsorId}`, {params}
     ).pipe(share());

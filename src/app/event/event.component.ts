@@ -1,9 +1,8 @@
 import {Component, OnInit} from '@angular/core';
 import {Event} from '../../types/event';
 import {ActivatedRoute, Router} from '@angular/router';
-import {AlertService, AlertType, UserModel, WsComponent} from '@worldskills/worldskills-angular-lib';
+import {ɵa as AlertService, AlertType, User, WsComponent, UserRoleUtil} from '@worldskills/worldskills-angular-lib';
 import {EventService} from '../../services/event/event.service';
-import {userHasRolesOfEntity} from "../../utils/userRole";
 import {environment} from "../../environments/environment";
 import {AuthService} from "../../services/auth/auth.service";
 
@@ -14,9 +13,11 @@ import {AuthService} from "../../services/auth/auth.service";
 })
 export class EventComponent extends WsComponent implements OnInit {
 
-  authenticatedUser: UserModel;
+  authenticatedUser: User;
   event: Event = null;
   loading = false;
+  appId = environment.worldskillsAppId;
+  hasUserRole = UserRoleUtil.userHasRolesOfEntity;
 
   constructor(
     private authService: AuthService,
@@ -52,16 +53,11 @@ export class EventComponent extends WsComponent implements OnInit {
     if (confirm('Deleting the Event will also delete all questions and attempts. Click OK to proceed.')) {
       this.eventService.delete(this.event.id).subscribe(() => {
           this.alertService.setAlert('new-event', AlertType.success,
-            null, undefined, 'The Event has been deleted successfully.', true);
+            null, 'The Event has been deleted successfully.', true);
           this.router.navigateByUrl('/events').catch(e => alert(e));
         }
       );
     }
-  }
-
-  hasUserRole(...roles: Array<string>) {
-    return this.authenticatedUser && this.event && this.event.ws_entity &&
-      userHasRolesOfEntity(this.authenticatedUser, environment.worldskillsAppId, this.event.ws_entity.id, ...roles);
   }
 
 }

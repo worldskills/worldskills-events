@@ -2,7 +2,7 @@ import {Component, OnInit} from '@angular/core';
 import {Event} from "../../types/event";
 import {Skill} from "../../types/skill";
 import {SkillService} from "../../services/skill/skill.service";
-import {AlertService, AlertType, WsComponent} from "@worldskills/worldskills-angular-lib";
+import {ɵa as AlertService, AlertType, WsComponent} from "@worldskills/worldskills-angular-lib";
 import {TranslateService} from "@ngx-translate/core";
 import {EventService} from "../../services/event/event.service";
 import {combineLatest} from "rxjs";
@@ -59,7 +59,7 @@ export class SkillPhotoCreateComponent extends WsComponent implements OnInit {
       this.translateService.get('The Skill Photo has been created successfully.').subscribe(t => {
         this.skillService.fetch(this.event.id, this.skill.id);
         this.alertService.setAlert('created-skill-photo', AlertType.success,
-          null, undefined, t, true);
+          null, t, true);
         this.router.navigate(['/events', this.event.id, 'skills', this.skill.id, 'photos']);
       });
     });

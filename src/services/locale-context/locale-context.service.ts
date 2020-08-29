@@ -1,7 +1,7 @@
 import {Injectable} from '@angular/core';
 import {combineLatest, ReplaySubject} from 'rxjs';
 import {TranslateService} from '@ngx-translate/core';
-import {ILanguageModel} from '@worldskills/worldskills-angular-lib/lib/models/ilanguage';
+import {Language} from "@worldskills/worldskills-angular-lib";
 
 @Injectable({
   providedIn: 'root'
@@ -9,11 +9,11 @@ import {ILanguageModel} from '@worldskills/worldskills-angular-lib/lib/models/il
 export class LocaleContextService {
 
   private locked: boolean;
-  subject = new ReplaySubject<ILanguageModel>(1);
-  override = new ReplaySubject<ILanguageModel>(1);
-  effectiveOverriddenLanguage = new ReplaySubject<ILanguageModel>(1);
+  subject = new ReplaySubject<Language>(1);
+  override = new ReplaySubject<Language>(1);
+  effectiveOverriddenLanguage = new ReplaySubject<Language>(1);
   lock = new ReplaySubject<boolean>(1);
-  lockedLanguage: ILanguageModel;
+  lockedLanguage: Language;
 
   constructor(private translateService: TranslateService) {
     this.lock.subscribe(locked => (this.locked = locked));
@@ -27,11 +27,11 @@ export class LocaleContextService {
     this.lock.next(false);
   }
 
-  changeLanguage(language: ILanguageModel) {
+  changeLanguage(language: Language) {
     this.subject.next(language);
   }
 
-  lockLanguage(language: ILanguageModel = null) {
+  lockLanguage(language: Language = null) {
     if (!this.locked) {
       this.lockedLanguage = language || this.defaultLanguage;
       this.lock.next(true);
@@ -44,7 +44,7 @@ export class LocaleContextService {
     }
   }
 
-  get languages(): Array<ILanguageModel> {
+  get languages(): Array<Language> {
     return [
       {code: 'en', name: 'English'},
       {code: 'de', name: 'German'},

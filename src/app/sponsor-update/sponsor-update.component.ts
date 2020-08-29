@@ -2,13 +2,12 @@ import {Component, OnInit} from '@angular/core';
 import {Event} from "../../types/event";
 import {Sponsor, SponsorRequest} from "../../types/sponsor";
 import {SponsorService} from "../../services/sponsor/sponsor.service";
-import {AlertService, AlertType, UserModel, WsComponent} from "@worldskills/worldskills-angular-lib";
+import {AlertType, User, UserRoleUtil, WsComponent, ɵa as AlertService} from "@worldskills/worldskills-angular-lib";
 import {TranslateService} from "@ngx-translate/core";
 import {EventService} from "../../services/event/event.service";
 import {combineLatest} from "rxjs";
 import {map} from "rxjs/operators";
 import {ActivatedRoute, Router} from "@angular/router";
-import {userHasRolesOfEntity} from "../../utils/userRole";
 import {environment} from "../../environments/environment";
 import {AuthService} from "../../services/auth/auth.service";
 
@@ -19,10 +18,12 @@ import {AuthService} from "../../services/auth/auth.service";
 })
 export class SponsorUpdateComponent extends WsComponent implements OnInit {
 
-  authenticatedUser: UserModel;
+  authenticatedUser: User;
   event: Event;
   sponsor: Sponsor;
   loading = false;
+  appId = environment.worldskillsAppId;
+  hasUserRole = UserRoleUtil.userHasRolesOfEntity;
 
   constructor(
     private authService: AuthService,
@@ -61,15 +62,10 @@ export class SponsorUpdateComponent extends WsComponent implements OnInit {
     this.sponsorService.update(this.sponsor.id, request).subscribe(() => {
       this.translateService.get('The Sponsor has been updated successfully.').subscribe(t => {
         this.alertService.setAlert('updated-sponsor', AlertType.success,
-          null, undefined, t, true);
+          null, t, true);
       });
       this.router.navigate(['/events', this.event.id, 'sponsors']);
     });
-  }
-
-  hasUserRole(...roles: Array<string>) {
-    return this.authenticatedUser && this.event && this.event.ws_entity &&
-      userHasRolesOfEntity(this.authenticatedUser, environment.worldskillsAppId, this.event.ws_entity.id, ...roles);
   }
 
 }

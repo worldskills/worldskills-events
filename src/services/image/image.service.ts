@@ -1,7 +1,7 @@
 import {Injectable} from '@angular/core';
 import {
   FetchParams,
-  FULL,
+  FULL, HttpUtil,
   MulticastOptions,
   RequestOptions,
   WsService,
@@ -12,7 +12,6 @@ import {
 import {Image, ImageRequest} from '../../types/image';
 import {HttpClient, HttpRequest} from '@angular/common/http';
 import {Observable} from 'rxjs';
-import {httpParamsFromFetchParams} from '../../utils/http';
 import {environment} from '../../environments/environment';
 import {share} from 'rxjs/operators';
 
@@ -31,7 +30,7 @@ export class ImageService extends WsService<string | Image> {
   create(file: File, params: FetchParams, mOpt: MulticastOptions, rOpt?: RequestOptions): Observable<Image>;
   create(file: File, p1: WsServiceRequestP1, p2?: WsServiceRequestP2, p3?: WsServiceRequestP3): Observable<Image> {
     const {fetchParams, multicastOptions, requestOptions} = this.resolveArgs(p1, p2, p3, FULL);
-    const params = httpParamsFromFetchParams(fetchParams);
+    const params = HttpUtil.objectToParams(fetchParams || {});
     const formData = new FormData();
     formData.append('file', file);
     const observable = this.http.post<Image>(
@@ -57,7 +56,7 @@ export class ImageService extends WsService<string | Image> {
     imageId: number, thumbnailHash: string, p1: WsServiceRequestP1, p2?: WsServiceRequestP2, p3?: WsServiceRequestP3
   ): Observable<Image> {
     const {fetchParams, multicastOptions, requestOptions} = this.resolveArgs(p1, p2, p3, FULL);
-    const params = httpParamsFromFetchParams(fetchParams);
+    const params = HttpUtil.objectToParams(fetchParams || {});
     const observable = this.http.get<Image>(
       requestOptions.url ?? `${environment.worldskillsApiImages}/${imageId}/${thumbnailHash}`, {params}
     ).pipe(share());
@@ -74,7 +73,7 @@ export class ImageService extends WsService<string | Image> {
     imageId: number, thumbnailHash: string, p1: WsServiceRequestP1, p2?: WsServiceRequestP2, p3?: WsServiceRequestP3
   ): Observable<string> {
     const {fetchParams, multicastOptions, requestOptions} = this.resolveArgs(p1, p2, p3, FULL);
-    const params = httpParamsFromFetchParams(fetchParams);
+    const params = HttpUtil.objectToParams(fetchParams || {});
     const observable = this.http.get(
       requestOptions.url ?? `${environment.worldskillsApiImages}/${imageId}/${thumbnailHash}/base64`, {
         params,
@@ -94,7 +93,7 @@ export class ImageService extends WsService<string | Image> {
     imageId: number, thumbnailHash: string, image: ImageRequest, p1: WsServiceRequestP1, p2?: WsServiceRequestP2, p3?: WsServiceRequestP3
   ): Observable<Image> {
     const {fetchParams, multicastOptions, requestOptions} = this.resolveArgs(p1, p2, p3, FULL);
-    const params = httpParamsFromFetchParams(fetchParams);
+    const params = HttpUtil.objectToParams(fetchParams || {});
     const observable = this.http.post<Image>(
       requestOptions.url ?? `${environment.worldskillsApiImages}/${imageId}/${thumbnailHash}/clone`, image, {params}
     ).pipe(share());

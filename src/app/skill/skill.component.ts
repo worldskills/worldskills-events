@@ -1,5 +1,5 @@
 import {Component, OnDestroy, OnInit} from '@angular/core';
-import {AlertService, AlertType, UserModel, WsComponent} from "@worldskills/worldskills-angular-lib";
+import {ɵa as AlertService, AlertType, User, WsComponent} from "@worldskills/worldskills-angular-lib";
 import {Skill} from "../../types/skill";
 import {Event} from "../../types/event";
 import {SkillService} from "../../services/skill/skill.service";
@@ -10,7 +10,6 @@ import {combineLatest} from "rxjs";
 import {map} from "rxjs/operators";
 import {UiSkillService} from "../../services/ui-skill/ui-skill.service";
 import {AuthService} from "../../services/auth/auth.service";
-import {userHasRolesOfEntity} from "../../utils/userRole";
 import {environment} from "../../environments/environment";
 import {LocaleContextService} from "../../services/locale-context/locale-context.service";
 
@@ -21,12 +20,13 @@ import {LocaleContextService} from "../../services/locale-context/locale-context
 })
 export class SkillComponent extends WsComponent implements OnInit, OnDestroy {
 
-  authenticatedUser: UserModel;
+  authenticatedUser: User;
   event: Event;
   skill: Skill;
   loading = false;
   loadingRemoving = false;
   additionalMenu = null;
+  appId = environment.worldskillsAppId;
 
   constructor(
     private authService: AuthService,
@@ -86,7 +86,7 @@ export class SkillComponent extends WsComponent implements OnInit, OnDestroy {
         this.skillService.update(this.event.id, this.skill.id, {...this.skill, status: 'removed'}).subscribe(() => {
           this.translateService.get('The Skill has been removed successfully.').subscribe(t => {
             this.alertService.setAlert('removed-skill', AlertType.success,
-              null, undefined, t, true);
+              null, t, true);
           });
           this.router.navigate(['/events', this.event.id, 'skills']);
         });
@@ -100,17 +100,12 @@ export class SkillComponent extends WsComponent implements OnInit, OnDestroy {
         this.skillService.delete(this.event.id, this.skill.id).subscribe(() => {
           this.translateService.get('The Skill has been deleted successfully.').subscribe(t => {
             this.alertService.setAlert('deleted-skill', AlertType.success,
-              null, undefined, t, true);
+              null, t, true);
           });
           this.router.navigate(['/events', this.event.id, 'skills']);
         });
       }
     });
-  }
-
-  hasUserRole(...roles: Array<string>) {
-    return this.authenticatedUser && this.event && this.event.ws_entity &&
-      userHasRolesOfEntity(this.authenticatedUser, environment.worldskillsAppId, this.event.ws_entity.id, ...roles);
   }
 
 }

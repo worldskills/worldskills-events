@@ -1,10 +1,10 @@
-import {I18nModel} from "@worldskills/worldskills-angular-lib";
+import {I18nText} from "@worldskills/worldskills-angular-lib";
 import {AuthEntity} from "./entity";
 import {Link, List} from "./common";
 import {Event} from "./skill";
 
 export interface SectorRequest {
-  name: I18nModel;
+  name: I18nText;
   event: { id: number };
   base_sector_id: number;
   ws_entity: { id: number }
@@ -12,7 +12,7 @@ export interface SectorRequest {
 
 export interface Sector {
   id: number;
-  name: I18nModel;
+  name: I18nText;
   event: Event;
   base_sector_id: number;
   ws_entity: AuthEntity;

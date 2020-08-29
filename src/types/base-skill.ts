@@ -1,17 +1,17 @@
-import {I18nModel} from "@worldskills/worldskills-angular-lib";
+import {I18nText} from "@worldskills/worldskills-angular-lib";
 import {Link, List} from "./common";
 import {AuthEntity} from "./entity";
 
 export interface BaseSkillSector {
   id: number;
-  name: I18nModel;
-  description: I18nModel;
+  name: I18nText;
+  description: I18nText;
   links: Array<Link>;
 }
 
 export interface BaseSkillTag {
   id: number;
-  name: I18nModel;
+  name: I18nText;
 }
 
 export interface BaseSkillPhoto {
@@ -19,7 +19,7 @@ export interface BaseSkillPhoto {
   image_id: number;
   thumbnail_hash: string;
   thumbnail: string;
-  description: I18nModel;
+  description: I18nText;
   sort: number;
   links: Array<Link>;
 }
@@ -34,8 +34,8 @@ export interface Logo {
 export interface BaseSkillSponsor {
   id: number;
   entity: AuthEntity;
-  name: I18nModel;
-  description: I18nModel;
+  name: I18nText;
+  description: I18nText;
   url: string;
   website: string;
   logo: Logo;
@@ -45,9 +45,9 @@ export interface BaseSkillSponsor {
 
 export interface BaseSkill {
   id: number;
-  name: I18nModel;
-  summary: I18nModel;
-  description: I18nModel;
+  name: I18nText;
+  summary: I18nText;
+  description: I18nText;
   sector: BaseSkillSector;
   url_video: string;
   tags: Array<BaseSkillTag>;

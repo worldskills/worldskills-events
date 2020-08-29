@@ -1,10 +1,9 @@
 import {Component, OnInit} from '@angular/core';
 import {Event, EventRequest} from "../../types/event";
 import {EventService} from "../../services/event/event.service";
-import {AlertService, AlertType, UserModel, WsComponent} from "@worldskills/worldskills-angular-lib";
+import {ɵa as AlertService, AlertType, User, WsComponent, UserRoleUtil} from "@worldskills/worldskills-angular-lib";
 import {TranslateService} from "@ngx-translate/core";
 import {AuthService} from "../../services/auth/auth.service";
-import {userHasRolesOfEntity} from "../../utils/userRole";
 import {environment} from "../../environments/environment";
 
 @Component({
@@ -14,9 +13,11 @@ import {environment} from "../../environments/environment";
 })
 export class EventUpdateComponent extends WsComponent implements OnInit {
 
-  authenticatedUser: UserModel;
+  authenticatedUser: User;
   event: Event = null;
   loading = false;
+  appId =  environment.worldskillsAppId;
+  hasUserRole = UserRoleUtil.userHasRolesOfEntity;
 
   constructor(
     private authService: AuthService,
@@ -43,14 +44,9 @@ export class EventUpdateComponent extends WsComponent implements OnInit {
     this.eventService.update(this.event.id, request).subscribe(() => {
       this.translateService.get('The Event has been updated successfully.').subscribe(t => {
         this.alertService.setAlert('updated-event', AlertType.success,
-          null, undefined, t, true);
+          null, t, true);
       });
     });
-  }
-
-  hasUserRole(...roles: Array<string>) {
-    return this.authenticatedUser && this.event && this.event.ws_entity &&
-      userHasRolesOfEntity(this.authenticatedUser, environment.worldskillsAppId, this.event.ws_entity.id, ...roles);
   }
 
 }

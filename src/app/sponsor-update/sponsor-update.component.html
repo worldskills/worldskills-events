@@ -14,7 +14,7 @@
   <div class="row">
     <div class="col-12">
       <app-sponsor-form
-        [editable]="hasUserRole('Admin', 'EditEvents')"
+        [editable]="authenticatedUser && event && event.ws_entity && hasUserRole(authenticatedUser, appId, event.ws_entity.id, 'Admin', 'EditEvents')"
         [event]="event"
         [sponsor]="sponsor"
         (save)="save($event)"

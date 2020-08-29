@@ -1,7 +1,7 @@
 import {Component, OnInit} from '@angular/core';
 import {SkillRequest} from "../../types/skill";
 import {SkillService} from "../../services/skill/skill.service";
-import {AlertService, AlertType, WsComponent} from "@worldskills/worldskills-angular-lib";
+import {ɵa as AlertService, AlertType, WsComponent} from "@worldskills/worldskills-angular-lib";
 import {TranslateService} from "@ngx-translate/core";
 import {combineLatest} from "rxjs";
 import {map} from "rxjs/operators";
@@ -49,7 +49,7 @@ export class SkillCreateComponent extends WsComponent implements OnInit {
     this.skillService.create(this.event.id, request).subscribe(skill => {
       this.translateService.get('The Skill has been created successfully.').subscribe(t => {
         this.alertService.setAlert('created-skill', AlertType.success,
-          null, undefined, t, true);
+          null, t, true);
         this.router.navigate(['/events', this.event.id, 'skills', skill.id]);
       });
     });

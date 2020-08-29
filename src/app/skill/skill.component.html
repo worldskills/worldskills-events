@@ -29,7 +29,7 @@
         </div>
         <button
           [disabled]="this.loadingRemoving"
-          *ngIf="hasUserRole('Admin', 'EditEvents')"
+          *wsUserRole="['Admin', 'EditEvents']; user : authenticatedUser; entity : event ? event.ws_entity.id : null; appId : appId"
           class="btn btn-secondary btn-sm ml-1"
           type="button"
           (click)="markAsRemoved()"
@@ -37,7 +37,7 @@
           {{'Mark Skill as removed' | translate}}
         </button>
         <button
-          *ngIf="hasUserRole('Admin', 'DeleteEvents')"
+          *wsUserRole="['Admin', 'DeleteEvents']; user : authenticatedUser; entity : event ? event.ws_entity.id : null; appId : appId"
           class="btn btn-danger btn-sm ml-1"
           type="button"
           (click)="delete()"
@@ -59,28 +59,28 @@
             {{'Skill' | translate}}
           </a>
           <a
-            *ngIf="hasUserRole('Admin', 'EditEvents', 'OrganizerEditEvents')"
+            *wsUserRole="['Admin', 'EditEvents', 'OrganizerEditEvents']; user : authenticatedUser; entity : event ? event.ws_entity.id : null; appId : appId"
             routerLinkActive="active"
             routerLink="photos"
             class="list-group-item list-group-item-action">
             {{'Photos' | translate}}
           </a>
           <a
-            *ngIf="hasUserRole('Admin', 'EditEvents', 'OrganizerEditEvents')"
+            *wsUserRole="['Admin', 'EditEvents', 'OrganizerEditEvents']; user : authenticatedUser; entity : event ? event.ws_entity.id : null; appId : appId"
             routerLinkActive="active"
             routerLink="tags"
             class="list-group-item list-group-item-action">
             {{'Tags' | translate}}
           </a>
           <a
-            *ngIf="hasUserRole('Admin', 'EditEvents', 'OrganizerEditEvents')"
+            *wsUserRole="['Admin', 'EditEvents', 'OrganizerEditEvents']; user : authenticatedUser; entity : event ? event.ws_entity.id : null; appId : appId"
             routerLinkActive="active"
             routerLink="sponsors"
             class="list-group-item list-group-item-action">
             {{'Sponsors' | translate}}
           </a>
           <a
-            *ngIf="hasUserRole('Admin', 'EditEvents')"
+            *wsUserRole="['Admin', 'EditEvents']; user : authenticatedUser; entity : event ? event.ws_entity.id : null; appId : appId"
             routerLinkActive="active"
             routerLink="copy"
             class="list-group-item list-group-item-action">

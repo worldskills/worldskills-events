@@ -1,13 +1,12 @@
 import {Injectable} from '@angular/core';
-import {AuthService as WsAuthService, UserModel, UserService} from '@worldskills/worldskills-angular-lib';
+import {AuthService as WsAuthService, NgAuthService as UserService, User} from '@worldskills/worldskills-angular-lib';
 import {BehaviorSubject} from 'rxjs';
 import {share} from 'rxjs/operators';
 import {HttpClient} from '@angular/common/http';
-import {environment} from '../../environments/environment';
 
 export interface AuthStatus {
   isLoggedIn: boolean;
-  user: UserModel;
+  user: User;
   authenticated: boolean;
 }
 
@@ -28,45 +27,41 @@ export class AuthService {
     private http: HttpClient,
   ) {
     this.authStatus.next({
-      isLoggedIn: this.authService.isLoggedIn(),
+      isLoggedIn: this.userService.isLoggedIn(),
       user: undefined,
       authenticated: false,
     });
-    this.authService.currentUser.subscribe((user: UserModel) => {
-      if (user instanceof UserModel) {
-        this.authStatus.next({
-          isLoggedIn: true,
-          user,
-          authenticated: true
-        });
-      }
-    });
-    if (this.authService.isLoggedIn()) {
-      this.authService.loadUserProfile(user => {
-        if ('ok' in user && !user.ok) {
-          if (this.authService.isLoggedIn()) {
-            this.logout().subscribe({
-              error: () => {
-                this.login();
-              },
-              next: () => {
-                this.login();
-              }
-            });
-          } else {
-            this.login();
-          }
-        }
+    this.userService.currentUser.subscribe((user: User) => {
+      this.authStatus.next({
+        isLoggedIn: true,
+        user,
+        authenticated: true
       });
+    });
+    if (this.userService.isLoggedIn()) {
+      this.userService.loadUserProfile(user => {
+        if (this.userService.isLoggedIn()) {
+          this.logout().subscribe({
+            error: () => {
+              this.login();
+            },
+            next: () => {
+              this.login();
+            }
+          });
+        } else {
+          this.login();
+        }
+      }, err => console.error(err));
     }
   }
 
   login() {
-    this.authService.login();
+    this.userService.login();
   }
 
   logout() {
-    const observable = this.userService.logout().pipe(share());
+    const observable = this.authService.logout().pipe(share());
     observable.subscribe({
       complete: () => {
         this.authStatus.next({
@@ -77,11 +72,6 @@ export class AuthService {
       }
     });
     return observable;
-  }
-
-  // tslint:disable-next-line:variable-name
-  puppeteer(person_id: number) {
-    return this.http.post(environment.worldskillsPuppeteer, {person_id});
   }
 
 }
