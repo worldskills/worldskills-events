@@ -2,13 +2,19 @@ import {Component, OnInit} from '@angular/core';
 import {Event} from "../../types/event";
 import {Skill, SkillRequest} from "../../types/skill";
 import {SkillService} from "../../services/skill/skill.service";
-import {AlertType, User, UserRoleUtil, WsComponent, ɵa as AlertService} from "@worldskills/worldskills-angular-lib";
+import {
+  AlertService,
+  AlertType,
+  NgAuthService,
+  User,
+  UserRoleUtil,
+  WsComponent
+} from "@worldskills/worldskills-angular-lib";
 import {TranslateService} from "@ngx-translate/core";
 import {EventService} from "../../services/event/event.service";
 import {combineLatest} from "rxjs";
 import {map} from "rxjs/operators";
 import {UiSkillService} from "../../services/ui-skill/ui-skill.service";
-import {AuthService} from "../../services/auth/auth.service";
 import {environment} from "../../environments/environment";
 
 @Component({
@@ -18,7 +24,7 @@ import {environment} from "../../environments/environment";
 })
 export class SkillUpdateComponent extends WsComponent implements OnInit {
 
-  authenticatedUser: User;
+  currentUser: User;
   event: Event;
   skill: Skill;
   loading = false;
@@ -26,7 +32,7 @@ export class SkillUpdateComponent extends WsComponent implements OnInit {
   hasUserRole = UserRoleUtil.userHasRolesOfEntity;
 
   constructor(
-    private authService: AuthService,
+    private authService: NgAuthService,
     private eventService: EventService,
     private skillService: SkillService,
     private alertService: AlertService,
@@ -37,7 +43,7 @@ export class SkillUpdateComponent extends WsComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.authService.authStatus.subscribe(authStatus => (this.authenticatedUser = authStatus.user)),
+    this.authService.currentUser.subscribe(currentUser => (this.currentUser = currentUser)),
       this.uiSkillService.subject.next(null);
     this.subscribe(
       this.eventService.subject.subscribe(event => (this.event = event)),

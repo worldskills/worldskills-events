@@ -1,7 +1,7 @@
 import {Component, OnInit} from '@angular/core';
 import {SkillRequest} from "../../types/skill";
 import {SkillService} from "../../services/skill/skill.service";
-import {ɵa as AlertService, AlertType, WsComponent} from "@worldskills/worldskills-angular-lib";
+import {AlertService, AlertType, WsComponent} from "@worldskills/worldskills-angular-lib";
 import {TranslateService} from "@ngx-translate/core";
 import {combineLatest} from "rxjs";
 import {map} from "rxjs/operators";

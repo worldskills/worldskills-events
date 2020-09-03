@@ -2,7 +2,7 @@
   <ws-spinner></ws-spinner>
 </ng-container>
 <ng-container *ngIf="initialized && !loading">
-  <p class="float-right" *ngIf="authenticatedUser && event && event.ws_entity && hasUserRole(authenticatedUser, appId, event.ws_entity.id, 'Admin', 'DeleteEvents')">
+  <p class="float-right" *ngIf="currentUser && event && event.ws_entity && hasUserRole(currentUser, appId, event.ws_entity.id, 'Admin', 'DeleteEvents')">
     <button (click)="deleteEvent()" class="btn btn-danger btn-sm">
       {{'Delete Event' | translate}}
     </button>
@@ -24,12 +24,12 @@
          routerLink="/events/{{event.id}}/sectors">{{'Sectors' | translate}}</a>
     </li>
     <li class="nav-item"
-        *ngIf="isCompetitionOrPreparationMeeting && authenticatedUser && event && event.ws_entity && hasUserRole(authenticatedUser, appId, event.ws_entity.id, 'Admin', 'EditEvents')">
+        *ngIf="isCompetitionOrPreparationMeeting && currentUser && event && event.ws_entity && hasUserRole(currentUser, appId, event.ws_entity.id, 'Admin', 'EditEvents')">
       <a class="nav-link" routerLinkActive="active"
          routerLink="/events/{{event.id}}/tags">{{'Skill tags' | translate}}</a>
     </li>
     <li class="nav-item"
-        *ngIf="authenticatedUser && event && event.ws_entity && hasUserRole(authenticatedUser, appId, event.ws_entity.id, 'Admin', 'EditEvents', 'OrganizerEditEvents')">
+        *ngIf="currentUser && event && event.ws_entity && hasUserRole(currentUser, appId, event.ws_entity.id, 'Admin', 'EditEvents', 'OrganizerEditEvents')">
       <a class="nav-link" routerLinkActive="active"
          routerLink="/events/{{event.id}}/sponsors">{{'Sponsors' | translate}}</a>
     </li>

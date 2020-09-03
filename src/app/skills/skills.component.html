@@ -8,7 +8,7 @@
         {{'Skills' | translate}}
       </h3>
       <button routerLink="create" class="btn btn-primary btn-sm float-right ml-1"
-              *wsUserRole="['Admin', 'EditEvents']; user : authenticatedUser; entity : event ? event.ws_entity.id : null; appId : appId">
+              *wsUserRole="['Admin', 'EditEvents']; entity : event ? event.ws_entity.id : null; appId : appId">
         {{'Add skill' | translate}}
       </button>
       <div class="btn-group float-right">

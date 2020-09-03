@@ -1,5 +1,5 @@
 import {Component, OnDestroy, OnInit} from '@angular/core';
-import {ɵa as AlertService, AlertType, User, WsComponent} from "@worldskills/worldskills-angular-lib";
+import {AlertService, AlertType, WsComponent} from "@worldskills/worldskills-angular-lib";
 import {Skill} from "../../types/skill";
 import {Event} from "../../types/event";
 import {SkillService} from "../../services/skill/skill.service";
@@ -9,7 +9,6 @@ import {EventService} from "../../services/event/event.service";
 import {combineLatest} from "rxjs";
 import {map} from "rxjs/operators";
 import {UiSkillService} from "../../services/ui-skill/ui-skill.service";
-import {AuthService} from "../../services/auth/auth.service";
 import {environment} from "../../environments/environment";
 import {LocaleContextService} from "../../services/locale-context/locale-context.service";
 
@@ -20,7 +19,6 @@ import {LocaleContextService} from "../../services/locale-context/locale-context
 })
 export class SkillComponent extends WsComponent implements OnInit, OnDestroy {
 
-  authenticatedUser: User;
   event: Event;
   skill: Skill;
   loading = false;
@@ -29,7 +27,6 @@ export class SkillComponent extends WsComponent implements OnInit, OnDestroy {
   appId = environment.worldskillsAppId;
 
   constructor(
-    private authService: AuthService,
     private eventService: EventService,
     private skillService: SkillService,
     private route: ActivatedRoute,
@@ -44,7 +41,6 @@ export class SkillComponent extends WsComponent implements OnInit, OnDestroy {
 
   ngOnInit(): void {
     this.subscribe(
-      this.authService.authStatus.subscribe(authStatus => (this.authenticatedUser = authStatus.user)),
       this.uiSkillService.subject.subscribe(templateRef => (setTimeout(() => this.additionalMenu = templateRef))),
       combineLatest([
         this.eventService.subject,

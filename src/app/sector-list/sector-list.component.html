@@ -1,5 +1,5 @@
 <ng-template #button>
-  <button routerLink="create" class="btn btn-primary btn-sm float-right mr-1" *wsUserRole="['Admin', 'EditEvents']; user : authenticatedUser; entity : event ? event.ws_entity.id : null; appId : appId">
+  <button routerLink="create" class="btn btn-primary btn-sm float-right mr-1" *wsUserRole="['Admin', 'EditEvents']; entity : event ? event.ws_entity.id : null; appId : appId">
     {{'Add sector' | translate}}
   </button>
 </ng-template>
@@ -28,7 +28,7 @@
             <td><a [routerLink]="[sector.id]">{{sector.id}}</a></td>
             <td><a [routerLink]="[sector.id]">{{sector.name.text}}</a></td>
             <td class="text-right">
-              <ng-container *wsUserRole="['Admin', 'DeleteEvents']; user : authenticatedUser; entity : event ? event.ws_entity.id : null; appId : appId">
+              <ng-container *wsUserRole="['Admin', 'DeleteEvents']; entity : event ? event.ws_entity.id : null; appId : appId">
                 <button
                   *ngIf="!deletableSectorLoading(sector) && deletableSector(sector)"
                   (click)="delete(sector)"

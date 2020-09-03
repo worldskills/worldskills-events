@@ -1,6 +1,6 @@
 <ng-template #button>
   <ng-container
-    *wsUserRole="['Admin', 'EditEvents']; user : authenticatedUser; entity : event ? event.ws_entity.id : null; appId : appId">
+    *wsUserRole="['Admin', 'EditEvents']; entity : event ? event.ws_entity.id : null; appId : appId">
     <div *ngIf="tags" class="btn-group" role="group">
       <button type="button" class="btn btn-primary btn-sm mr-1 dropdown-toggle" data-toggle="dropdown"
               aria-haspopup="true" aria-expanded="false" [disabled]="filteredTags.length === 0">
@@ -37,7 +37,7 @@
             <td>{{tag.name.text}}</td>
             <td class="text-right">
               <button
-                *wsUserRole="['Admin', 'EditEvents']; user : authenticatedUser; entity : event ? event.ws_entity.id : null; appId : appId"
+                *wsUserRole="['Admin', 'EditEvents']; entity : event ? event.ws_entity.id : null; appId : appId"
                 (click)="unbind(tag)"
                 type="button"
                 class="btn btn-danger btn-sm"

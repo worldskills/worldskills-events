@@ -4,7 +4,7 @@ import {Observable} from 'rxjs';
 import {tap} from 'rxjs/operators';
 import {Router} from '@angular/router';
 import {
-  ɵa as AlertService,
+  AlertService,
   AlertType,
   AuthService,
   NgAuthService,

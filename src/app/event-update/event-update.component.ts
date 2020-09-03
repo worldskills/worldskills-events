@@ -1,9 +1,15 @@
 import {Component, OnInit} from '@angular/core';
 import {Event, EventRequest} from "../../types/event";
 import {EventService} from "../../services/event/event.service";
-import {ɵa as AlertService, AlertType, User, WsComponent, UserRoleUtil} from "@worldskills/worldskills-angular-lib";
+import {
+  AlertService,
+  AlertType,
+  NgAuthService,
+  User,
+  UserRoleUtil,
+  WsComponent
+} from "@worldskills/worldskills-angular-lib";
 import {TranslateService} from "@ngx-translate/core";
-import {AuthService} from "../../services/auth/auth.service";
 import {environment} from "../../environments/environment";
 
 @Component({
@@ -13,14 +19,14 @@ import {environment} from "../../environments/environment";
 })
 export class EventUpdateComponent extends WsComponent implements OnInit {
 
-  authenticatedUser: User;
+  currentUser: User;
   event: Event = null;
   loading = false;
-  appId =  environment.worldskillsAppId;
+  appId = environment.worldskillsAppId;
   hasUserRole = UserRoleUtil.userHasRolesOfEntity;
 
   constructor(
-    private authService: AuthService,
+    private authService: NgAuthService,
     private eventService: EventService,
     private alertService: AlertService,
     private translateService: TranslateService,
@@ -30,7 +36,7 @@ export class EventUpdateComponent extends WsComponent implements OnInit {
 
   ngOnInit(): void {
     this.subscribe(
-      this.authService.authStatus.subscribe(authStatus => (this.authenticatedUser = authStatus.user)),
+      this.authService.currentUser.subscribe(currentUser => (this.currentUser = currentUser)),
       this.eventService.subject.subscribe(event => (this.event = event)),
       this.eventService.loading.subscribe(loading => (this.loading = loading))
     );

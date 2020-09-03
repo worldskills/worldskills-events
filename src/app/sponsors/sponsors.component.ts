@@ -1,5 +1,5 @@
 import {Component, OnInit} from '@angular/core';
-import {ɵa as AlertService, AlertType, WsComponent} from "@worldskills/worldskills-angular-lib";
+import {AlertService, AlertType, WsComponent} from "@worldskills/worldskills-angular-lib";
 import {Event} from "../../types/event";
 import {Sponsor} from "../../types/sponsor";
 import {EventService} from "../../services/event/event.service";

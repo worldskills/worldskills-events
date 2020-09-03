@@ -1,5 +1,5 @@
 import {Component, OnInit, ViewChild} from '@angular/core';
-import {AlertType, User, WsComponent, ɵa as AlertService} from "@worldskills/worldskills-angular-lib";
+import {AlertService, AlertType, User, WsComponent} from "@worldskills/worldskills-angular-lib";
 import {EventService} from "../../services/event/event.service";
 import {SkillService} from "../../services/skill/skill.service";
 import {TagsService} from "../../services/tags/tags.service";
@@ -13,7 +13,6 @@ import {Tag} from "../../types/tag";
 import {TranslateService} from "@ngx-translate/core";
 import {faTimes} from '@fortawesome/free-solid-svg-icons';
 import {environment} from "../../environments/environment";
-import {AuthService} from "../../services/auth/auth.service";
 
 @Component({
   selector: 'app-skill-tags',
@@ -32,7 +31,6 @@ export class SkillTagsComponent extends WsComponent implements OnInit {
   appId = environment.worldskillsAppId;
 
   constructor(
-    private authService: AuthService,
     private eventService: EventService,
     private skillService: SkillService,
     private tagsService: TagsService,
@@ -45,8 +43,7 @@ export class SkillTagsComponent extends WsComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.authService.authStatus.subscribe(authStatus => (this.authenticatedUser = authStatus.user)),
-      this.uiSkillService.subject.next(this.button);
+    this.uiSkillService.subject.next(this.button);
     this.subscribe(
       this.eventService.subject.subscribe(event => {
         this.event = event;

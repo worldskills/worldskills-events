@@ -5,7 +5,6 @@ import {TranslateServiceTestingProvider, TranslationMockPipe} from "../../test";
 import {RouterTestingModule} from "@angular/router/testing";
 import {WorldskillsAngularLibModule} from "@worldskills/worldskills-angular-lib";
 import {HttpClientTestingModule} from "@angular/common/http/testing";
-import {AuthService} from "../../services/auth/auth.service";
 
 describe('SponsorCreateComponent', () => {
   let component: SponsorCreateComponent;
@@ -16,7 +15,6 @@ describe('SponsorCreateComponent', () => {
       declarations: [SponsorCreateComponent, TranslationMockPipe],
       imports: [RouterTestingModule, WorldskillsAngularLibModule, HttpClientTestingModule],
       providers: [
-        {provide: AuthService, useValue: {authStatus: {subscribe: () => undefined}}},
         TranslateServiceTestingProvider
       ]
     })

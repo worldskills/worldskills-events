@@ -5,7 +5,6 @@ import {TranslateServiceTestingProvider, TranslationMockPipe} from "../../test";
 import {RouterTestingModule} from "@angular/router/testing";
 import {EntityTreeService, WorldskillsAngularLibModule} from "@worldskills/worldskills-angular-lib";
 import {HttpClientTestingModule} from "@angular/common/http/testing";
-import {AuthService} from "../../services/auth/auth.service";
 import {of} from "rxjs";
 
 describe('TagCreateComponent', () => {
@@ -17,7 +16,6 @@ describe('TagCreateComponent', () => {
       declarations: [TagCreateComponent, TranslationMockPipe],
       imports: [RouterTestingModule, WorldskillsAngularLibModule, HttpClientTestingModule],
       providers: [
-        {provide: AuthService, useValue: {authStatus: {subscribe: () => undefined}}},
         {provide: EntityTreeService, useValue: {list: (fetchParams: any) => of([]), clearCache: () => undefined}},
         TranslateServiceTestingProvider
       ]

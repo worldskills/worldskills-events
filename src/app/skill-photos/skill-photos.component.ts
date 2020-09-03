@@ -1,5 +1,5 @@
 import {Component, OnInit, ViewChild} from '@angular/core';
-import {LOADER_ONLY, User, WsComponent} from "@worldskills/worldskills-angular-lib";
+import {LOADER_ONLY, WsComponent} from "@worldskills/worldskills-angular-lib";
 import {Event} from "../../types/event";
 import {Photo} from "../../types/photo";
 import {Skill} from "../../types/skill";
@@ -10,7 +10,7 @@ import {map} from "rxjs/operators";
 import {SkillPhotoService} from "../../services/skill-photo/skill-photo.service";
 import {UiSkillService} from "../../services/ui-skill/ui-skill.service";
 import {faCaretDown, faCaretUp} from '@fortawesome/free-solid-svg-icons';
-import {AuthService} from "../../services/auth/auth.service";
+
 import {environment} from "../../environments/environment";
 
 @Component({
@@ -20,7 +20,6 @@ import {environment} from "../../environments/environment";
 })
 export class SkillPhotosComponent extends WsComponent implements OnInit {
 
-  authenticatedUser: User;
   event: Event;
   skill: Skill;
   loading = false;
@@ -30,7 +29,6 @@ export class SkillPhotosComponent extends WsComponent implements OnInit {
   appId = environment.worldskillsAppId;
 
   constructor(
-    private authService: AuthService,
     private eventService: EventService,
     private skillService: SkillService,
     private skillPhotoService: SkillPhotoService,
@@ -42,7 +40,6 @@ export class SkillPhotosComponent extends WsComponent implements OnInit {
   ngOnInit(): void {
     this.uiSkillService.subject.next(this.button);
     this.subscribe(
-      this.authService.authStatus.subscribe(authStatus => (this.authenticatedUser = authStatus.user)),
       this.eventService.subject.subscribe(event => (this.event = event)),
       this.skillService.subject.subscribe(skill => (this.skill = skill)),
       combineLatest([

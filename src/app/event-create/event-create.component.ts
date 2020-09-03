@@ -1,7 +1,7 @@
 import {Component, OnInit} from '@angular/core';
 import {EventRequest} from "../../types/event";
 import {EventService} from "../../services/event/event.service";
-import {ɵa as AlertService, AlertType, WsComponent} from "@worldskills/worldskills-angular-lib";
+import {AlertService, AlertType, WsComponent} from "@worldskills/worldskills-angular-lib";
 import {TranslateService} from "@ngx-translate/core";
 import {combineLatest} from "rxjs";
 import {map} from "rxjs/operators";

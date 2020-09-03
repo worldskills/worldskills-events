@@ -2,7 +2,7 @@ import {Component, OnInit} from '@angular/core';
 import {Event} from "../../types/event";
 import {SectorRequest} from "../../types/sector";
 import {SectorService} from "../../services/sector/sector.service";
-import {ɵa as AlertService, AlertType, EntityTreeService, WsComponent} from "@worldskills/worldskills-angular-lib";
+import {AlertService, AlertType, EntityTreeService, WsComponent} from "@worldskills/worldskills-angular-lib";
 import {TranslateService} from "@ngx-translate/core";
 import {EventService} from "../../services/event/event.service";
 import {combineLatest} from "rxjs";

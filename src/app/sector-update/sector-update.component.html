@@ -6,7 +6,7 @@
   <div class="row">
     <div class="col-12">
       <app-sector-form
-        [editable]="authenticatedUser && event && event.ws_entity && hasUserRole(authenticatedUser, appId, event.ws_entity.id, 'Admin', 'EditEvents')"
+        [editable]="currentUser && event && event.ws_entity && hasUserRole(currentUser, appId, event.ws_entity.id, 'Admin', 'EditEvents')"
         [event]="event"
         [sector]="sector"
         (save)="save($event)"

@@ -5,7 +5,6 @@ import {TranslateServiceTestingProvider, TranslationMockPipe} from "../../test";
 import {HttpClientTestingModule} from "@angular/common/http/testing";
 import {RouterTestingModule} from "@angular/router/testing";
 import {EntityTreeService, WorldskillsAngularLibModule} from "@worldskills/worldskills-angular-lib";
-import {AuthService} from "../../services/auth/auth.service";
 import {of} from "rxjs";
 
 describe('SectorCreateComponent', () => {
@@ -17,7 +16,6 @@ describe('SectorCreateComponent', () => {
       declarations: [SectorCreateComponent, TranslationMockPipe],
       imports: [RouterTestingModule, WorldskillsAngularLibModule, HttpClientTestingModule],
       providers: [
-        {provide: AuthService, useValue: {authStatus: {subscribe: () => undefined}}},
         {provide: EntityTreeService, useValue: {list: (fetchParams: any) => of([]), clearCache: () => undefined}},
         TranslateServiceTestingProvider
       ]

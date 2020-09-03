@@ -1,5 +1,5 @@
 import {Component, OnDestroy, OnInit, ViewChild} from '@angular/core';
-import {ɵa as AlertService, AlertType, User, WsComponent} from "@worldskills/worldskills-angular-lib";
+import {AlertService, AlertType, WsComponent} from "@worldskills/worldskills-angular-lib";
 import {Event} from "../../types/event";
 import {Sector} from "../../types/sector";
 import {EventService} from "../../services/event/event.service";
@@ -10,7 +10,6 @@ import {SectorService} from "../../services/sector/sector.service";
 import {TranslateService} from "@ngx-translate/core";
 import {faTimes} from '@fortawesome/free-solid-svg-icons';
 import {environment} from "../../environments/environment";
-import {AuthService} from "../../services/auth/auth.service";
 import {SkillsService} from "../../services/skills/skills.service";
 import {UiSectorService} from "../../services/ui-sector/ui-sector.service";
 import {LocaleContextService} from "../../services/locale-context/locale-context.service";
@@ -22,7 +21,6 @@ import {LocaleContextService} from "../../services/locale-context/locale-context
 })
 export class SectorListComponent extends WsComponent implements OnInit, OnDestroy {
 
-  authenticatedUser: User;
   event: Event;
   sectors: Array<Sector>;
   loading = false;
@@ -32,7 +30,6 @@ export class SectorListComponent extends WsComponent implements OnInit, OnDestro
   appId = environment.worldskillsAppId;
 
   constructor(
-    private authService: AuthService,
     private eventService: EventService,
     private sectorsService: SectorsService,
     private sectorService: SectorService,
@@ -48,7 +45,6 @@ export class SectorListComponent extends WsComponent implements OnInit, OnDestro
   ngOnInit(): void {
     this.uiSectorService.subject.next(this.button);
     this.subscribe(
-      this.authService.authStatus.subscribe(authStatus => (this.authenticatedUser = authStatus.user)),
       combineLatest([
         this.eventService.subject,
         this.localeContextService.override,

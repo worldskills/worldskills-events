@@ -2,14 +2,20 @@ import {Component, OnInit} from '@angular/core';
 import {Event} from "../../types/event";
 import {Sector, SectorRequest} from "../../types/sector";
 import {SectorService} from "../../services/sector/sector.service";
-import {ɵa as AlertService, AlertType, User, WsComponent, UserRoleUtil} from "@worldskills/worldskills-angular-lib";
+import {
+  AlertService,
+  AlertType,
+  NgAuthService,
+  User,
+  UserRoleUtil,
+  WsComponent
+} from "@worldskills/worldskills-angular-lib";
 import {TranslateService} from "@ngx-translate/core";
 import {EventService} from "../../services/event/event.service";
 import {combineLatest} from "rxjs";
 import {map} from "rxjs/operators";
 import {ActivatedRoute, Router} from "@angular/router";
 import {environment} from "../../environments/environment";
-import {AuthService} from "../../services/auth/auth.service";
 
 @Component({
   selector: 'app-sector-update',
@@ -18,7 +24,7 @@ import {AuthService} from "../../services/auth/auth.service";
 })
 export class SectorUpdateComponent extends WsComponent implements OnInit {
 
-  authenticatedUser: User;
+  currentUser: User;
   event: Event;
   sector: Sector;
   loading = false;
@@ -26,7 +32,7 @@ export class SectorUpdateComponent extends WsComponent implements OnInit {
   hasUserRole = UserRoleUtil.userHasRolesOfEntity;
 
   constructor(
-    private authService: AuthService,
+    private authService: NgAuthService,
     private eventService: EventService,
     private sectorService: SectorService,
     private alertService: AlertService,
@@ -39,7 +45,7 @@ export class SectorUpdateComponent extends WsComponent implements OnInit {
 
   ngOnInit(): void {
     this.subscribe(
-      this.authService.authStatus.subscribe(authStatus => (this.authenticatedUser = authStatus.user)),
+      this.authService.currentUser.subscribe(currentUser => (this.currentUser = currentUser)),
       combineLatest([
         this.route.params,
         this.eventService.subject,

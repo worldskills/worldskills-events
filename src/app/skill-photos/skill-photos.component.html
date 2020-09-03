@@ -1,6 +1,6 @@
 <ng-template #button>
   <button routerLink="create" class="btn btn-primary btn-sm mr-1"
-          *wsUserRole="['Admin', 'EditEvents']; user : authenticatedUser; entity : event ? event.ws_entity.id : null; appId : appId">
+          *wsUserRole="['Admin', 'EditEvents']; entity : event ? event.ws_entity.id : null; appId : appId">
     {{'Add photo' | translate}}
   </button>
 </ng-template>
@@ -28,28 +28,28 @@
           <tr *ngFor="let photo of skill.photos; let index=index">
             <td>
               <a
-                *wsUserRole="['Admin', 'EditEvents']; user : authenticatedUser; entity : event ? event.ws_entity.id : null; appId : appId"
+                *wsUserRole="['Admin', 'EditEvents']; entity : event ? event.ws_entity.id : null; appId : appId"
                 [routerLink]="[photo.id]">
                 <div class="photo bg-secondary" style="background-image: url({{photo.thumbnail}})"></div>
               </a>
               <ng-container
-                *wsUserRole="['Admin', 'EditEvents']; user : authenticatedUser; entity : event ? event.ws_entity.id : null; appId : appId">
+                *wsUserRole="['Admin', 'EditEvents']; entity : event ? event.ws_entity.id : null; appId : appId">
                 <div class="photo bg-secondary" style="background-image: url({{photo.thumbnail}})"></div>
               </ng-container>
             </td>
             <td>
               <ng-container
-                *wsUserRole="['Admin', 'EditEvents']; user : authenticatedUser; entity : event ? event.ws_entity.id : null; appId : appId">
+                *wsUserRole="['Admin', 'EditEvents']; entity : event ? event.ws_entity.id : null; appId : appId">
                 <a [routerLink]="[photo.id]">{{photo.description.text}}</a>
               </ng-container>
               <ng-container
-                *wsUserRole="['Admin', 'EditEvents']; user : authenticatedUser; entity : event ? event.ws_entity.id : null; appId : appId">
+                *wsUserRole="['Admin', 'EditEvents']; entity : event ? event.ws_entity.id : null; appId : appId">
                 {{photo.description.text}}
               </ng-container>
             </td>
             <td>
               <div class="btn-group btn-group-sm"
-                   *wsUserRole="['Admin', 'EditEvents']; user : authenticatedUser; entity : event ? event.ws_entity.id : null; appId : appId">
+                   *wsUserRole="['Admin', 'EditEvents']; entity : event ? event.ws_entity.id : null; appId : appId">
                 <button
                   [disabled]="index === skill.photos.length - 1"
                   (click)="move(photo, skill.photos[index + 1])"

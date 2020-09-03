@@ -1,40 +1,23 @@
 <ws-staging-banner *ngIf="isStaging"></ws-staging-banner>
-<ws-puppeteer-banner [currentUser]="authStatus.user"></ws-puppeteer-banner>
-<ws-header
-  [currentUser]="authStatus.user"
-  [appName]="'Events' | translate"
-  (loginClick)="login()"
-  (logoutClick)="logout()"
-  [isLoggedIn]="authStatus.user && authStatus.isLoggedIn"
-  [showLoginAndLogoutButtons]="true">
-</ws-header>
+<ws-puppeteer-banner [currentUser]="currentUser"></ws-puppeteer-banner>
+<ws-auth-header [appName]="'Events' | translate">
+</ws-auth-header>
 
 <div class="container small">
-  <ng-container *ngIf="authStatus.authenticated">
-    <ws-breadcrumbs
-      *ngIf="showBreadcrumb"
-      [showHomeItem]="true"
-      [homeItemText]="'Events' | translate"
-      [homeItemRoute]="'/events'">
-    </ws-breadcrumbs>
-    <div *ngIf="!showBreadcrumb" class="mt-5"></div>
-    <div class="clearfix"></div>
-    <ws-alert></ws-alert>
-    <router-outlet></router-outlet>
-  </ng-container>
-  <ng-container *ngIf="!authStatus.authenticated">
-    <div class="mt-4">
-      <ws-spinner></ws-spinner>
-    </div>
-  </ng-container>
+  <ws-breadcrumbs
+    *ngIf="showBreadcrumb"
+    [showHomeItem]="true"
+    [homeItemText]="'Events' | translate"
+    [homeItemRoute]="'/events'">
+  </ws-breadcrumbs>
+  <div *ngIf="!showBreadcrumb" class="mt-5"></div>
+  <div class="clearfix"></div>
+  <ws-alert></ws-alert>
+  <router-outlet></router-outlet>
 </div>
 
-<ws-footer
-  [currentUser]="authStatus.user"
-  [isLoggedIn]="authStatus.user && authStatus.isLoggedIn"
-  (loginClick)="login()"
-  (logoutClick)="logout()"
+<ws-auth-footer
   (languageChange)="changeLanguage($event)"
   [languages]="languages"
   [selectedLanguage]="language"
-></ws-footer>
+></ws-auth-footer>

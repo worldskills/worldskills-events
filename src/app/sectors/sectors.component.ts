@@ -1,7 +1,6 @@
 import {Component, OnInit} from '@angular/core';
-import {User, WsComponent} from "@worldskills/worldskills-angular-lib";
+import {WsComponent} from "@worldskills/worldskills-angular-lib";
 import {Event} from "../../types/event";
-import {AuthService} from "../../services/auth/auth.service";
 import {EventService} from "../../services/event/event.service";
 import {combineLatest} from "rxjs";
 import {map} from "rxjs/operators";
@@ -15,13 +14,11 @@ import {LocaleContextService} from "../../services/locale-context/locale-context
 })
 export class SectorsComponent extends WsComponent implements OnInit {
 
-  authenticatedUser: User;
   event: Event;
   loading = false;
   additionalMenu = null;
 
   constructor(
-    private authService: AuthService,
     private eventService: EventService,
     private uiSectorService: UiSectorService,
     public localeContextService: LocaleContextService,
@@ -31,7 +28,6 @@ export class SectorsComponent extends WsComponent implements OnInit {
 
   ngOnInit(): void {
     this.subscribe(
-      this.authService.authStatus.subscribe(authStatus => (this.authenticatedUser = authStatus.user)),
       this.eventService.subject.subscribe(event => (this.event = event)),
       this.uiSectorService.subject.subscribe(templateRef => (setTimeout(() => this.additionalMenu = templateRef))),
       combineLatest([
