@@ -1,6 +1,6 @@
 import {Component, OnInit} from '@angular/core';
 import {Event} from "../../types/event";
-import {Tag, TagRequest} from "../../types/tag";
+import {Tag} from "../../types/tag";
 import {TagService} from "../../services/tag/tag.service";
 import {AlertService, AlertType, WsComponent} from "@worldskills/worldskills-angular-lib";
 import {TranslateService} from "@ngx-translate/core";
@@ -54,7 +54,7 @@ export class TagUpdateComponent extends WsComponent implements OnInit {
     return !!this.event && !!this.tag;
   }
 
-  save(request: TagRequest) {
+  save(request: Tag) {
     this.tagService.update(this.event.id, this.tag.id, request).subscribe(() => {
       this.translateService.get('The Tag has been updated successfully.').subscribe(t => {
         this.alertService.setAlert('updated-tag', AlertType.success,

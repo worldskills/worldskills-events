@@ -1,6 +1,6 @@
 import {Component, OnInit} from '@angular/core';
 import {Event} from "../../types/event";
-import {TagRequest} from "../../types/tag";
+import {Tag} from "../../types/tag";
 import {TagService} from "../../services/tag/tag.service";
 import {AlertService, AlertType, EntityTreeService, WsComponent} from "@worldskills/worldskills-angular-lib";
 import {TranslateService} from "@ngx-translate/core";
@@ -46,7 +46,7 @@ export class TagCreateComponent extends WsComponent implements OnInit {
     return !!this.event;
   }
 
-  save(request: TagRequest) {
+  save(request: Tag) {
     this.tagService.create(this.event.id, request).subscribe(() => {
       this.translateService.get('The Tag has been created successfully.').subscribe(t => {
         this.alertService.setAlert('created-tag', AlertType.success,

@@ -63,26 +63,6 @@ export class ImageService extends WsService<string | Image> {
     return this.request(observable, multicastOptions) as Observable<Image>;
   }
 
-  fetchBase64(imageId: number, thumbnailHash: string, rOpt?: RequestOptions): Observable<string>;
-  fetchBase64(imageId: number, thumbnailHash: string, params: FetchParams, rOpt?: RequestOptions): Observable<string>;
-  fetchBase64(imageId: number, thumbnailHash: string, mOpt: MulticastOptions, rOpt?: RequestOptions): Observable<string>;
-  fetchBase64(
-    imageId: number, thumbnailHash: string, params: FetchParams, mOpt: MulticastOptions, rOpt?: RequestOptions
-  ): Observable<string>;
-  fetchBase64(
-    imageId: number, thumbnailHash: string, p1: WsServiceRequestP1, p2?: WsServiceRequestP2, p3?: WsServiceRequestP3
-  ): Observable<string> {
-    const {fetchParams, multicastOptions, requestOptions} = this.resolveArgs(p1, p2, p3, FULL);
-    const params = HttpUtil.objectToParams(fetchParams || {});
-    const observable = this.http.get(
-      requestOptions.url ?? `${environment.worldskillsApiImages}/${imageId}/${thumbnailHash}/base64`, {
-        params,
-        responseType: 'text'
-      }
-    ).pipe(share());
-    return this.request(observable, multicastOptions) as Observable<string>;
-  }
-
   clone(imageId: number, thumbnailHash: string, image: ImageRequest, rOpt?: RequestOptions): Observable<Image>;
   clone(imageId: number, thumbnailHash: string, image: ImageRequest, params: FetchParams, rOpt?: RequestOptions): Observable<Image>;
   clone(imageId: number, thumbnailHash: string, image: ImageRequest, mOpt: MulticastOptions, rOpt?: RequestOptions): Observable<Image>;

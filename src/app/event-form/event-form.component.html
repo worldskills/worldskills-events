@@ -29,7 +29,8 @@
     </div>
 
     <div class="form-group row">
-      <label for="ws_entity" class="col-3 col-form-label text-right font-weight-bold">{{'Entity' | translate}}&nbsp;*</label>
+      <label for="ws_entity"
+             class="col-3 col-form-label text-right font-weight-bold">{{'Entity' | translate}}&nbsp;*</label>
       <div class="col-4">
         <ws-entity-tree-select
           id="ws_entity"
@@ -39,6 +40,9 @@
           [multiple]="false"
           [showFullPath]="false">
         </ws-entity-tree-select>
+        <p class="small">
+          {{"Owner of the entry, select the organization you are working for." | translate}}
+        </p>
       </div>
       <div class="col-5">
       <span
@@ -66,6 +70,9 @@
           <option value="general_assembly">{{'General Assembly' | translate}}</option>
           <option value="preparation_meeting">{{'Preparation Meeting' | translate}}</option>
         </select>
+        <p *ngIf="!event" class="small">
+          {{"Can't be changed once the event has been added." | translate}}
+        </p>
       </div>
       <div class="col-5">
       <span
@@ -91,7 +98,8 @@
                ngbDatepicker
                (focus)="dStartDate.open()"
                [autoClose]="true"
-               [restoreFocus]="true"/>
+               [restoreFocus]="true"
+               (change)="onStartDateChange($event)"/>
       </div>
       <div class="col-5">
       <span
@@ -104,7 +112,8 @@
     </div>
 
     <div class="form-group row">
-      <label for="end_date" class="col-3 col-form-label text-right font-weight-bold">{{'End date' | translate}}&nbsp;*</label>
+      <label for="end_date"
+             class="col-3 col-form-label text-right font-weight-bold">{{'End date' | translate}}&nbsp;*</label>
       <div class="col-4">
         <input #inputEndDate="ngModel" #dEndDate="ngbDatepicker"
                placeholder="{{'Start date' | translate}}"
@@ -117,7 +126,8 @@
                ngbDatepicker
                (focus)="dEndDate.open()"
                [autoClose]="true"
-               [restoreFocus]="true"/>
+               [restoreFocus]="true"
+               (change)="onEndDateChange($event)"/>
       </div>
       <div class="col-5">
       <span
@@ -130,7 +140,8 @@
     </div>
 
     <div class="form-group row">
-      <label for="utc_offset" class="col-3 col-form-label text-right font-weight-bold">{{'Timezone' | translate}}</label>
+      <label for="utc_offset"
+             class="col-3 col-form-label text-right font-weight-bold">{{'Timezone' | translate}}</label>
       <div class="col-4">
         <select
           id="utc_offset"
@@ -187,7 +198,8 @@
     <hr class="my-2">
 
     <div class="form-group row">
-      <label for="country" class="col-3 col-form-label text-right font-weight-bold">{{'Country' | translate}}&nbsp;*</label>
+      <label for="country"
+             class="col-3 col-form-label text-right font-weight-bold">{{'Country' | translate}}&nbsp;*</label>
       <div class="col-4">
         <ng-select
           id="country"
@@ -251,6 +263,9 @@
           [disabled]="!editable"
           [ngModel]="event ? event.code : undefined">
       </div>
+      <p class="small">
+        {{"Internal reference to the event, e.g. WSC2015." | translate}}
+      </p>
       <div class="col-5">&nbsp;</div>
     </div>
 
@@ -270,7 +285,8 @@
     </div>
 
     <div class="form-group row">
-      <label for="description" class="col-3 col-form-label text-right font-weight-bold">{{'Description' | translate}}</label>
+      <label for="description"
+             class="col-3 col-form-label text-right font-weight-bold">{{'Description' | translate}}</label>
       <div class="col-4">
       <textarea
         placeholder="{{'Description' | translate}}"
@@ -286,10 +302,10 @@
 
     <div class="form-group row">
       <div class="offset-sm-3 col-9">
-        <button type="submit" class="btn btn-success ml-1" id="saveEvent" [disabled]="loading" *ngIf="editable">
+        <button type="submit" class="btn btn-success mr-2" id="saveEvent" [disabled]="loading" *ngIf="editable">
           {{'Save' | translate}}
         </button>
-        <a class="btn btn-secondary" [routerLink]="['/events']">{{'Back' | translate}}</a><br/>
+        <a class="btn btn-secondary" [routerLink]="['/events']">{{'Cancel' | translate}}</a><br/>
         <ws-spinner *ngIf="loading"></ws-spinner>
       </div>
     </div>

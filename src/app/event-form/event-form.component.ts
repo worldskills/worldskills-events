@@ -6,6 +6,8 @@ import {CountriesService} from "../../services/countries/countries.service";
 import {isNgbDateStruct, NgbDateCache} from "../../utils/ngb";
 import {NgbDateParserFormatter} from "@ng-bootstrap/ng-bootstrap";
 import {Country} from "../../types/country";
+import {TranslateService} from "@ngx-translate/core";
+import {combineLatest} from "rxjs";
 
 @Component({
   selector: 'app-event-form',
@@ -24,6 +26,7 @@ export class EventFormComponent extends WsComponent implements OnInit {
 
   constructor(
     private countriesService: CountriesService,
+    private translateService: TranslateService,
     public formatter: NgbDateParserFormatter,
   ) {
     super();
@@ -32,7 +35,17 @@ export class EventFormComponent extends WsComponent implements OnInit {
 
   ngOnInit(): void {
     this.subscribe(
-      this.countriesService.subject.subscribe(countries => (this.countries = countries.country_list)),
+      combineLatest([
+        this.countriesService.subject,
+        this.translateService.get('Global')
+      ])
+        .subscribe(([countries, text]) => (this.countries = [{
+          code: 'GLOBAL',
+          name: {lang_code: 'en', text},
+          phone_prefix: '',
+          id: 0,
+          member: null
+        }, ...countries.country_list])),
       this.countriesService.loading.subscribe(loading => (this.loading = loading)),
     );
     this.countriesService.fetch();
@@ -67,7 +80,7 @@ export class EventFormComponent extends WsComponent implements OnInit {
         town,
         code,
         country: {
-          id: parseInt(country),
+          id: country === 0 ? null : parseInt(country),
         },
         utc_offset: parseInt(utc_offset),
         url,
@@ -78,6 +91,14 @@ export class EventFormComponent extends WsComponent implements OnInit {
       };
       this.save.emit(event);
     }
+  }
+
+  onStartDateChange(event) {
+
+  }
+
+  onEndDateChange(event) {
+
   }
 
 }

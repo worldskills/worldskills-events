@@ -8,17 +8,13 @@ export const environment = {
   worldskillsPeopleAppId: 600,
   worldskillsAuthAppId: 300,
   worldskillsApi: 'http://localhost:8080',
-  worldskillsApiAuth: 'http://localhost:8080/auth',
   worldskillsApiOrg: 'http://localhost:8090/org',
-  worldskillsApiPeople: 'http://localhost:8090/people',
   worldskillsApiEvents: 'https://localhost:8090/events',
   worldskillsApiImages: 'http://localhost:8080/images',
-  worldskillsApiResources: 'http://localhost:9999/resources',
   worldskillsClientId: '49775efbb906',
   worldskillsAuthorizeUrl: 'http://localhost:8080/auth',
   worldskillsAuthorizeRedirect: 'http://localhost:10600/',
   worldskillsAuthorizeUserinfoEndpoint: 'http://localhost:8080/events',
-  worldskillsPuppeteer: 'https://localhost:8080/auth/sessions/operate_puppet',
   worldskillsAuthUriPatterns: ['localhost'],
 };
 

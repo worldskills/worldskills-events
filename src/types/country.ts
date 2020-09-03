@@ -7,13 +7,6 @@ export interface CountryMember {
   name: I18nText;
 }
 
-export interface CountryRequest {
-  code: string;
-  member: number;
-  name: I18nText;
-  phone_prefix: string;
-}
-
 export interface Country {
   id: number;
   code: string;

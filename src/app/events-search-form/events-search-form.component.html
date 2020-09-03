@@ -96,8 +96,15 @@
         <div class="form-group row mb-0">
           <div class="col-12 text-right">
             <button
+              type="button"
+              class="btn btn-secondary btn-sm mr-1"
+              (click)="clear()">
+              {{'Clear' | translate}}
+            </button>&nbsp;
+            <button
               type="submit"
-              class="btn btn-primary btn-sm" id="saveCentre" [disabled]="loading">
+              class="btn btn-primary btn-sm"
+              [disabled]="loading">
               <ng-container *ngIf="!loading">{{'Search' | translate}}</ng-container>
               <ng-container *ngIf="loading">
                 <ws-spinner></ws-spinner>

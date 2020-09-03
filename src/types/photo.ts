@@ -1,15 +1,12 @@
 import {I18nText} from "@worldskills/worldskills-angular-lib";
-import {Link, List} from "./common";
+import {Link} from "./common";
 
-export interface PhotoRequest {
+export interface Photo {
+  id?: number;
   image_id: number;
   thumbnail_hash: string;
   thumbnail: string;
   description: I18nText;
   sort: number;
   links: Array<Link>;
-}
-
-export interface Photo extends PhotoRequest {
-  id: number;
 }

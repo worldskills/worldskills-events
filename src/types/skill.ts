@@ -1,28 +1,11 @@
 import {Link, List} from "./common";
 import {I18nText} from "@worldskills/worldskills-angular-lib";
 import {AuthEntity} from "./entity";
-import {Country} from "./country";
 import {Sector} from "./sector";
 import {Photo} from "./photo";
 import {Tag} from "./tag";
+import {Event} from "./event";
 import {Sponsor} from "./sponsor";
-
-export interface Event {
-  id: number;
-  name: string;
-  type: string;
-  start_date: string;
-  end_date: string;
-  venue: string;
-  town: string;
-  code: string;
-  country: Country;
-  utc_offset: number;
-  url: string;
-  description: string;
-  ws_entity: AuthEntity;
-  links: Array<Link>;
-}
 
 export interface EventSkillRequest {
   id: number;

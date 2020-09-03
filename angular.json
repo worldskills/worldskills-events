@@ -13,7 +13,7 @@
         "build": {
           "builder": "@angular-devkit/build-angular:browser",
           "options": {
-            "outputPath": "dist/worldskills-events",
+            "outputPath": "dist",
             "index": "src/index.html",
             "main": "src/main.ts",
             "polyfills": "src/polyfills.ts",
@@ -27,7 +27,8 @@
               "src/styles.css",
               "src/fonts.css",
               "node_modules/@worldskills/bootstrap/dist/css/bootstrap.css",
-              "node_modules/@ng-select/ng-select/themes/default.theme.css"
+              "node_modules/@ng-select/ng-select/themes/default.theme.css",
+              "node_modules/@worldskills/worldskills-angular-lib/assets/styles/index.css"
             ],
             "scripts": [
               "node_modules/jquery/dist/jquery.slim.js",
@@ -91,7 +92,7 @@
                 }
               ]
             },
-            "production": {
+            "prod": {
               "fileReplacements": [
                 {
                   "replace": "src/environments/environment.ts",
@@ -128,8 +129,8 @@
             "port": 11310
           },
           "configurations": {
-            "production": {
-              "browserTarget": "worldskills-events:build:production"
+            "prod": {
+              "browserTarget": "worldskills-events:build:prod"
             }
           }
         },
@@ -154,7 +155,8 @@
               "src/styles.css",
               "src/fonts.css",
               "node_modules/@worldskills/bootstrap/dist/css/bootstrap.css",
-              "node_modules/@ng-select/ng-select/themes/default.theme.css"
+              "node_modules/@ng-select/ng-select/themes/default.theme.css",
+              "node_modules/@worldskills/worldskills-angular-lib/assets/styles/index.css"
             ],
             "scripts": [
               "node_modules/jquery/dist/jquery.slim.js",
@@ -188,8 +190,8 @@
             "staging": {
               "devServerTarget": "worldskills-people:serve:staging"
             },
-            "production": {
-              "devServerTarget": "worldskills-organizations:serve:production"
+            "prod": {
+              "devServerTarget": "worldskills-organizations:serve:prod"
             }
           }
         }

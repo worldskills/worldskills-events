@@ -49,14 +49,14 @@
           </tr>
           <tr>
             <th><input type="checkbox" (change)="toggleSelectAll($event)"></th>
-            <th><input type="text" class="form-control" placeholder="{{'Number' | translate}}"
+            <th><input type="text" class="form-control form-control-sm" placeholder="{{'Number' | translate}}"
                        (change)="updateFilter('number', $event)"
                        (keyup)="updateFilter('number', $event)"/></th>
-            <th><input type="text" class="form-control" placeholder="{{'Name' | translate}}"
+            <th><input type="text" class="form-control form-control-sm" placeholder="{{'Name' | translate}}"
                        (change)="updateFilter('name', $event)"
                        (keyup)="updateFilter('name', $event)"/></th>
             <th>
-              <select class="form-control" (change)="updateFilter('type', $event)">
+              <select class="form-control form-control-sm" (change)="updateFilter('type', $event)">
                 <option value="">{{'Select type...' | translate}}</option>
                 <ng-container *ngFor="let l of TypeLabels">
                   <option value="{{l.key}}">{{l.label}}</option>

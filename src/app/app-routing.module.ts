@@ -59,7 +59,7 @@ const routes: Routes = [
               {
                 path: '',
                 pathMatch: 'full',
-                data: {breadcrumb: 'Update Event'},
+                data: {breadcrumb: 'Change Event'},
                 component: EventUpdateComponent,
               },
               {
@@ -84,7 +84,7 @@ const routes: Routes = [
                       {
                         path: '',
                         pathMatch: 'full',
-                        data: {breadcrumb: 'Update Skill'},
+                        data: {breadcrumb: 'Change Skill'},
                         component: SkillUpdateComponent,
                       },
                       {
@@ -103,7 +103,7 @@ const routes: Routes = [
                           },
                           {
                             path: ':skillPhotoId',
-                            data: {breadcrumb: 'Update Skill Photo'},
+                            data: {breadcrumb: 'Change Skill Photo'},
                             component: SkillPhotoUpdateComponent,
                           },
                         ],
@@ -144,7 +144,7 @@ const routes: Routes = [
                   },
                   {
                     path: ':sectorId',
-                    data: {breadcrumb: 'Update Sector'},
+                    data: {breadcrumb: 'Change Sector'},
                     component: SectorUpdateComponent,
                   }
                 ],
@@ -165,7 +165,7 @@ const routes: Routes = [
                   },
                   {
                     path: ':tagId',
-                    data: {breadcrumb: 'Update Tag'},
+                    data: {breadcrumb: 'Change Tag'},
                     component: TagUpdateComponent,
                   }
                 ],
@@ -186,7 +186,7 @@ const routes: Routes = [
                   },
                   {
                     path: ':sponsorId',
-                    data: {breadcrumb: 'Update Sponsor'},
+                    data: {breadcrumb: 'Change Sponsor'},
                     component: SponsorUpdateComponent,
                   }
                 ],

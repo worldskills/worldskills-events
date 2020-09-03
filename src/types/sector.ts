@@ -1,7 +1,7 @@
 import {I18nText} from "@worldskills/worldskills-angular-lib";
 import {AuthEntity} from "./entity";
 import {Link, List} from "./common";
-import {Event} from "./skill";
+import {Event} from "./event";
 
 export interface SectorRequest {
   name: I18nText;

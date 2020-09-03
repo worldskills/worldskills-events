@@ -74,4 +74,8 @@ export class EventsSearchFormComponent extends WsComponent implements OnInit {
     return fetchParams;
   }
 
+  clear() {
+    this.eventsService.updateFetchParams({}, false);
+  }
+
 }

@@ -9,7 +9,7 @@ import {combineLatest} from "rxjs";
 import {map} from "rxjs/operators";
 import {UiSkillService} from "../../services/ui-skill/ui-skill.service";
 import {SkillPhotoService} from "../../services/skill-photo/skill-photo.service";
-import {PhotoRequest as SkillPhotoRequest} from "../../types/photo";
+import {Photo as SkillPhotoRequest} from "../../types/photo";
 import {Router} from "@angular/router";
 
 @Component({

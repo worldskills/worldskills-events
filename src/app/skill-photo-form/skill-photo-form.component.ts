@@ -1,6 +1,6 @@
 import {Component, ElementRef, EventEmitter, Input, OnInit, Output, ViewChild} from '@angular/core';
 import {Event as WsEvent} from '../../types/event';
-import {Photo as SkillPhoto, PhotoRequest as SkillPhotoRequest} from '../../types/photo';
+import {Photo as SkillPhoto, Photo as SkillPhotoRequest} from '../../types/photo';
 import {NgForm} from '@angular/forms';
 import {UploadService, WsComponent} from '@worldskills/worldskills-angular-lib';
 import {ImageService} from "../../services/image/image.service";

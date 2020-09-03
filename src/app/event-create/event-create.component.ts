@@ -3,8 +3,6 @@ import {EventRequest} from "../../types/event";
 import {EventService} from "../../services/event/event.service";
 import {AlertService, AlertType, WsComponent} from "@worldskills/worldskills-angular-lib";
 import {TranslateService} from "@ngx-translate/core";
-import {combineLatest} from "rxjs";
-import {map} from "rxjs/operators";
 import {Router} from "@angular/router";
 
 @Component({
@@ -27,16 +25,8 @@ export class EventCreateComponent extends WsComponent implements OnInit {
 
   ngOnInit(): void {
     this.subscribe(
-      combineLatest([
-        this.eventService.loading,
-      ])
-        .pipe(map(ls => !ls.every(l => !l)))
-        .subscribe(loading => (this.loading = loading))
+      this.eventService.loading.subscribe(loading => (this.loading = loading)),
     );
-  }
-
-  get initialized() {
-    return true;
   }
 
   save(request: EventRequest) {

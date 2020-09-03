@@ -56,7 +56,7 @@ export class EventComponent extends WsComponent implements OnInit {
   }
 
   deleteEvent() {
-    if (confirm('Deleting the Event will also delete all questions and attempts. Click OK to proceed.')) {
+    if (confirm('Deleting the Event will also delete all data associated with this Event. Click OK to proceed.')) {
       this.eventService.delete(this.event.id).subscribe(() => {
           this.alertService.setAlert('new-event', AlertType.success,
             null, 'The Event has been deleted successfully.', true);

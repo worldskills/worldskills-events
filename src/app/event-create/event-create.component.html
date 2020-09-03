@@ -1,8 +1,8 @@
-<ng-container *ngIf="loading || !initialized">
+<ng-container *ngIf="loading">
   <ws-spinner></ws-spinner>
 </ng-container>
-<ng-container *ngIf="initialized && !loading">
-  <h2>{{'Add event' | translate}}</h2>
+<ng-container *ngIf="!loading">
+  <h2>{{'Add Event' | translate}}</h2>
   <app-event-form
     [editable]="true"
     (save)="save($event)"

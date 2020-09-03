@@ -1,6 +1,6 @@
 import {Component, EventEmitter, Input, OnInit, Output, ViewChild} from '@angular/core';
 import {Event} from '../../types/event';
-import {Tag, TagRequest} from '../../types/tag';
+import {Tag} from '../../types/tag';
 import {NgForm} from '@angular/forms';
 import {WsComponent} from '@worldskills/worldskills-angular-lib';
 
@@ -13,7 +13,7 @@ export class TagFormComponent extends WsComponent implements OnInit {
 
   @Input() event: Event;
   @Input() tag: Tag = null;
-  @Output() save: EventEmitter<TagRequest> = new EventEmitter<TagRequest>();
+  @Output() save: EventEmitter<Tag> = new EventEmitter<Tag>();
   @ViewChild('form') form: NgForm;
   loading = false;
 
@@ -33,7 +33,7 @@ export class TagFormComponent extends WsComponent implements OnInit {
       const {
         name,
       } = this.form.value;
-      const tag: TagRequest = {
+      const tag: Tag = {
         name: {
           text: name,
           lang_code: 'en',

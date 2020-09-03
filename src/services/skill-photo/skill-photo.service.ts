@@ -11,7 +11,7 @@ import {
   WsServiceRequestP2,
   WsServiceRequestP3
 } from "@worldskills/worldskills-angular-lib";
-import {Photo, PhotoRequest} from "../../types/photo";
+import {Photo} from "../../types/photo";
 import {HttpClient} from "@angular/common/http";
 import {Observable} from "rxjs";
 import {environment} from "../../environments/environment";
@@ -39,11 +39,11 @@ export class SkillPhotoService extends WsService<Photo> {
     return this.request(observable, multicastOptions);
   }
 
-  create(eventId: number, skillId: number, photoRequest: PhotoRequest, rOpt?: RequestOptions): Observable<Photo>;
-  create(eventId: number, skillId: number, photoRequest: PhotoRequest, params: FetchParams, rOpt?: RequestOptions): Observable<Photo>;
-  create(eventId: number, skillId: number, photoRequest: PhotoRequest, mOpt: MulticastOptions, rOpt?: RequestOptions): Observable<Photo>;
-  create(eventId: number, skillId: number, photoRequest: PhotoRequest, params: FetchParams, mOpt: MulticastOptions, rOpt?: RequestOptions): Observable<Photo>;
-  create(eventId: number, skillId: number, photoRequest: PhotoRequest, p1: WsServiceRequestP1, p2?: WsServiceRequestP2, p3?: WsServiceRequestP3): Observable<Photo> {
+  create(eventId: number, skillId: number, photoRequest: Photo, rOpt?: RequestOptions): Observable<Photo>;
+  create(eventId: number, skillId: number, photoRequest: Photo, params: FetchParams, rOpt?: RequestOptions): Observable<Photo>;
+  create(eventId: number, skillId: number, photoRequest: Photo, mOpt: MulticastOptions, rOpt?: RequestOptions): Observable<Photo>;
+  create(eventId: number, skillId: number, photoRequest: Photo, params: FetchParams, mOpt: MulticastOptions, rOpt?: RequestOptions): Observable<Photo>;
+  create(eventId: number, skillId: number, photoRequest: Photo, p1: WsServiceRequestP1, p2?: WsServiceRequestP2, p3?: WsServiceRequestP3): Observable<Photo> {
     const {fetchParams, multicastOptions, requestOptions} = this.resolveArgs(p1, p2, p3, FULL);
     const params = HttpUtil.objectToParams(fetchParams || {});
     const observable = this.http.post<Photo>(
@@ -52,13 +52,13 @@ export class SkillPhotoService extends WsService<Photo> {
     return this.request(observable, multicastOptions);
   }
 
-  update(eventId: number, skillId: number, photoId: number, photoRequest: PhotoRequest, rOpt?: RequestOptions): Observable<Photo>;
-  update(eventId: number, skillId: number, photoId: number, photoRequest: PhotoRequest, params: FetchParams, rOpt?: RequestOptions): Observable<Photo>;
-  update(eventId: number, skillId: number, photoId: number, photoRequest: PhotoRequest, mOpt: MulticastOptions, rOpt?: RequestOptions): Observable<Photo>;
-  update(eventId: number, skillId: number, photoId: number, photoRequest: PhotoRequest, params: FetchParams, mOpt: MulticastOptions, rOpt?: RequestOptions): Observable<Photo>;
+  update(eventId: number, skillId: number, photoId: number, photoRequest: Photo, rOpt?: RequestOptions): Observable<Photo>;
+  update(eventId: number, skillId: number, photoId: number, photoRequest: Photo, params: FetchParams, rOpt?: RequestOptions): Observable<Photo>;
+  update(eventId: number, skillId: number, photoId: number, photoRequest: Photo, mOpt: MulticastOptions, rOpt?: RequestOptions): Observable<Photo>;
+  update(eventId: number, skillId: number, photoId: number, photoRequest: Photo, params: FetchParams, mOpt: MulticastOptions, rOpt?: RequestOptions): Observable<Photo>;
   update(
     eventId: number, skillId: number, photoId: number,
-    photoRequest: PhotoRequest,
+    photoRequest: Photo,
     p1: WsServiceRequestP1,
     p2?: WsServiceRequestP2,
     p3?: WsServiceRequestP3

@@ -49,47 +49,55 @@
     </div>
   </div>
   <div class="row">
-    <div class="col-3">
-      <div class="card">
-        <div class="list-group list-group-flush">
+    <div class="col-12">
+      <ul class="nav nav-tabs">
+        <li class="nav-item">
           <a
             routerLinkActive="active"
             routerLink="./" [routerLinkActiveOptions]="{exact: true}"
-            class="list-group-item list-group-item-action">
+            class="nav-link">
             {{'Skill' | translate}}
           </a>
+        </li>
+        <li class="nav-item">
           <a
             *wsUserRole="['Admin', 'EditEvents', 'OrganizerEditEvents']; entity : event ? event.ws_entity.id : null; appId : appId"
             routerLinkActive="active"
             routerLink="photos"
-            class="list-group-item list-group-item-action">
+            class="nav-link">
             {{'Photos' | translate}}
           </a>
+        </li>
+        <li class="nav-item">
           <a
             *wsUserRole="['Admin', 'EditEvents', 'OrganizerEditEvents']; entity : event ? event.ws_entity.id : null; appId : appId"
             routerLinkActive="active"
             routerLink="tags"
-            class="list-group-item list-group-item-action">
+            class="nav-link">
             {{'Tags' | translate}}
           </a>
+        </li>
+        <li class="nav-item">
           <a
             *wsUserRole="['Admin', 'EditEvents', 'OrganizerEditEvents']; entity : event ? event.ws_entity.id : null; appId : appId"
             routerLinkActive="active"
             routerLink="sponsors"
-            class="list-group-item list-group-item-action">
+            class="nav-link">
             {{'Sponsors' | translate}}
           </a>
+        </li>
+        <li class="nav-item">
           <a
             *wsUserRole="['Admin', 'EditEvents']; entity : event ? event.ws_entity.id : null; appId : appId"
             routerLinkActive="active"
             routerLink="copy"
-            class="list-group-item list-group-item-action">
+            class="nav-link">
             {{'Copy' | translate}}
           </a>
-        </div>
-      </div>
+        </li>
+      </ul>
     </div>
-    <div class="col-9">
+    <div class="col-12">
       <router-outlet></router-outlet>
     </div>
   </div>
