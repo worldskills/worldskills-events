@@ -7,10 +7,10 @@ import {TranslateService} from "@ngx-translate/core";
 import {EventService} from "../../services/event/event.service";
 import {combineLatest} from "rxjs";
 import {map} from "rxjs/operators";
-import {UiSkillService} from "../../services/ui-skill/ui-skill.service";
 import {SkillPhotoService} from "../../services/skill-photo/skill-photo.service";
 import {Photo as SkillPhoto, Photo as SkillPhotoRequest} from "../../types/photo";
 import {ActivatedRoute, Router} from "@angular/router";
+import {AppService} from "../../services/app/app.service";
 
 @Component({
   selector: 'app-skill-photo-update',
@@ -25,12 +25,12 @@ export class SkillPhotoUpdateComponent extends WsComponent implements OnInit {
   loading = false;
 
   constructor(
+    private appService: AppService,
     private eventService: EventService,
     private skillService: SkillService,
     private skillPhotoService: SkillPhotoService,
     private alertService: AlertService,
     private translateService: TranslateService,
-    private uiSkillService: UiSkillService,
     private route: ActivatedRoute,
     private router: Router,
   ) {
@@ -38,7 +38,7 @@ export class SkillPhotoUpdateComponent extends WsComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.uiSkillService.subject.next(null);
+    this.appService.skillMenu.next(null);
     this.subscribe(
       combineLatest([
         this.route.params,

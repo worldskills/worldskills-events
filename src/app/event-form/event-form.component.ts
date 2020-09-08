@@ -1,10 +1,9 @@
-import {Component, EventEmitter, Input, OnInit, Output, ViewChild} from '@angular/core';
+import {Component, EventEmitter, Input, OnChanges, OnInit, Output, SimpleChanges, ViewChild} from '@angular/core';
 import {Event, EventRequest} from '../../types/event';
 import {NgForm} from '@angular/forms';
 import {WsComponent} from '@worldskills/worldskills-angular-lib';
 import {CountriesService} from "../../services/countries/countries.service";
-import {isNgbDateStruct, NgbDateCache} from "../../utils/ngb";
-import {NgbDateParserFormatter} from "@ng-bootstrap/ng-bootstrap";
+import {NgbDateParserFormatter, NgbDateStruct} from "@ng-bootstrap/ng-bootstrap";
 import {Country} from "../../types/country";
 import {TranslateService} from "@ngx-translate/core";
 import {combineLatest} from "rxjs";
@@ -14,7 +13,7 @@ import {combineLatest} from "rxjs";
   templateUrl: './event-form.component.html',
   styleUrls: ['./event-form.component.css']
 })
-export class EventFormComponent extends WsComponent implements OnInit {
+export class EventFormComponent extends WsComponent implements OnInit, OnChanges {
 
   @Input() event: Event = null;
   @Input() editable = false;
@@ -22,7 +21,8 @@ export class EventFormComponent extends WsComponent implements OnInit {
   @Output() save: EventEmitter<EventRequest> = new EventEmitter<EventRequest>();
   @ViewChild('form') form: NgForm;
   loading = false;
-  ngbDateCache: NgbDateCache;
+  startDate: NgbDateStruct;
+  endDate: NgbDateStruct;
 
   constructor(
     private countriesService: CountriesService,
@@ -30,7 +30,19 @@ export class EventFormComponent extends WsComponent implements OnInit {
     public formatter: NgbDateParserFormatter,
   ) {
     super();
-    this.ngbDateCache = new NgbDateCache(formatter);
+  }
+
+  ngOnChanges(changes: SimpleChanges) {
+    if (changes.event && changes.event.firstChange) {
+      if (this.event) {
+        if (this.event.start_date) {
+          this.startDate = this.formatter.parse(this.event.start_date);
+        }
+        if (this.event.end_date) {
+          this.endDate = this.formatter.parse(this.event.end_date);
+        }
+      }
+    }
   }
 
   ngOnInit(): void {
@@ -74,8 +86,8 @@ export class EventFormComponent extends WsComponent implements OnInit {
       const event: EventRequest = {
         name,
         type: this.event ? this.event.type : type,
-        start_date: start_date && isNgbDateStruct(start_date) ? this.formatter.format(start_date) : start_date,
-        end_date: end_date && isNgbDateStruct(end_date) ? this.formatter.format(end_date) : end_date,
+        start_date: this.formatter.format(start_date),
+        end_date: this.formatter.format(end_date),
         venue,
         town,
         code,
@@ -91,14 +103,6 @@ export class EventFormComponent extends WsComponent implements OnInit {
       };
       this.save.emit(event);
     }
-  }
-
-  onStartDateChange(event) {
-
-  }
-
-  onEndDateChange(event) {
-
   }
 
 }

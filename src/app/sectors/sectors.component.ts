@@ -4,8 +4,8 @@ import {Event} from "../../types/event";
 import {EventService} from "../../services/event/event.service";
 import {combineLatest} from "rxjs";
 import {map} from "rxjs/operators";
-import {UiSectorService} from "../../services/ui-sector/ui-sector.service";
 import {LocaleContextService} from "../../services/locale-context/locale-context.service";
+import {AppService} from "../../services/app/app.service";
 
 @Component({
   selector: 'app-sectors',
@@ -19,8 +19,8 @@ export class SectorsComponent extends WsComponent implements OnInit {
   additionalMenu = null;
 
   constructor(
+    private appService: AppService,
     private eventService: EventService,
-    private uiSectorService: UiSectorService,
     public localeContextService: LocaleContextService,
   ) {
     super();
@@ -29,7 +29,7 @@ export class SectorsComponent extends WsComponent implements OnInit {
   ngOnInit(): void {
     this.subscribe(
       this.eventService.subject.subscribe(event => (this.event = event)),
-      this.uiSectorService.subject.subscribe(templateRef => (setTimeout(() => this.additionalMenu = templateRef))),
+      this.appService.sectorMenu.subscribe(templateRef => (setTimeout(() => this.additionalMenu = templateRef))),
       combineLatest([
         this.eventService.loading,
       ])

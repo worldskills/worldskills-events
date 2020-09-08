@@ -1,0 +1,70 @@
+<button routerLink="create" class="btn btn-primary btn-sm my-1">
+  {{'Add photo' | translate}}
+</button>
+<ng-container *ngIf="loading || !initialized">
+  <ws-spinner></ws-spinner>
+</ng-container>
+<ng-container *ngIf="initialized && !loading">
+  <div class="row">
+    <div class="col-12">
+      <div class="table-responsive">
+        <table class="table table-striped">
+          <colgroup>
+            <col width="20%">
+            <col width="60%">
+            <col width="20%">
+          </colgroup>
+          <thead>
+          <tr>
+            <th class="border-top-0">{{'Photo' | translate}}</th>
+            <th class="border-top-0">{{'Description' | translate}}</th>
+            <th class="border-top-0 text-right">{{'Actions' | translate}}</th>
+          </tr>
+          </thead>
+          <tbody>
+          <tr *ngFor="let photo of baseSkill.photos; let index=index">
+            <td>
+              <a [routerLink]="[photo.id]">
+                <div class="photo bg-secondary" style="background-image: url({{photo.thumbnail}})"></div>
+              </a>
+            </td>
+            <td>
+              <a [routerLink]="[photo.id]">{{photo.description.text}}</a>
+            </td>
+            <td class="text-right">
+              <div class="btn-group btn-group-sm">
+                <button
+                  [disabled]="index === baseSkill.photos.length - 1"
+                  (click)="move(photo, baseSkill.photos[index + 1])"
+                  type="button"
+                  class="btn btn-primary"
+                >
+                  <fa-icon size="xs" [icon]="faCaretDown"></fa-icon>
+                </button>
+                <button
+                  [disabled]="index === 0"
+                  (click)="move(photo, baseSkill.photos[index - 1])"
+                  type="button"
+                  class="btn btn-primary"
+                >
+                  <fa-icon size="xs" [icon]="faCaretUp"></fa-icon>
+                </button>
+                <button
+                  (click)="delete(photo)"
+                  type="button"
+                  class="btn btn-danger"
+                >
+                  <fa-icon size="xs" [icon]="faTimes"></fa-icon>
+                </button>
+              </div>
+            </td>
+          </tr>
+          <tr *ngIf="baseSkill.photos.length === 0">
+            <td colspan="4">{{'No photos found' | translate}}</td>
+          </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</ng-container>

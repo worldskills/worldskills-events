@@ -1,17 +1,19 @@
 import {Component, OnInit} from '@angular/core';
-// import {AuthService, AuthStatus} from '../services/auth/auth.service';
 import {ActivatedRoute, Router} from '@angular/router';
-import {combineLatest, Subject} from 'rxjs';
+import {combineLatest} from 'rxjs';
 import {
   BreadcrumbsService,
   Language,
+  MenuItem,
   NgAuthService,
   User,
+  UserRoleUtil,
   WorldskillsAngularLibService
 } from '@worldskills/worldskills-angular-lib';
 import {LocaleContextService} from '../services/locale-context/locale-context.service';
 import {environment} from '../environments/environment';
 import {TranslateService} from '@ngx-translate/core';
+import {AppService} from "../services/app/app.service";
 
 @Component({
   selector: 'app-root',
@@ -20,7 +22,6 @@ import {TranslateService} from '@ngx-translate/core';
 })
 export class AppComponent implements OnInit {
 
-  static showBreadcrumbs = new Subject<boolean>();
   date;
   currentUser: User;
   showBreadcrumb = true;
@@ -30,6 +31,7 @@ export class AppComponent implements OnInit {
   isStaging = false;
 
   constructor(
+    private appService: AppService,
     private authService: NgAuthService,
     private router: Router,
     private route: ActivatedRoute,
@@ -45,7 +47,7 @@ export class AppComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    AppComponent.showBreadcrumbs.subscribe(showBreadcrumb => setTimeout(() => (this.showBreadcrumb = showBreadcrumb)));
+    this.appService.showBreadcrumbs.subscribe(showBreadcrumb => setTimeout(() => (this.showBreadcrumb = showBreadcrumb)));
     this.languages = this.localeContextService.languages;
     this.authService.currentUser.subscribe(currentUser => (this.currentUser = currentUser)),
       combineLatest([this.localeContextService.subject, this.localeContextService.lock])
@@ -79,6 +81,25 @@ export class AppComponent implements OnInit {
 
   changeLanguage(language) {
     this.localeContextService.changeLanguage(language);
+  }
+
+  get menuItems(): Array<MenuItem> {
+    const menuItems = [];
+    if (UserRoleUtil.userHasRoles(this.currentUser, environment.worldskillsAppId, 'Admin', 'EditBaseSkills')) {
+      menuItems.push({
+        label: 'Base Skills',
+        url: '/base-skills',
+        requiredRoles: [],
+      });
+    }
+    if (UserRoleUtil.userHasRoles(this.currentUser, environment.worldskillsAppId, 'Admin', 'EditBaseSponsors')) {
+      menuItems.push({
+        label: 'Base Sponsors',
+        url: '/base-sponsors',
+        requiredRoles: [],
+      });
+    }
+    return menuItems;
   }
 
 }

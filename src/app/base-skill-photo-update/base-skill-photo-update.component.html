@@ -1,0 +1,11 @@
+<ng-container *ngIf="loading || !initialized">
+  <ws-spinner></ws-spinner>
+</ng-container>
+<ng-container *ngIf="initialized && !loading">
+  <app-skill-photo-form
+    [cancelLink]="['/base-skills', baseSkill.id, 'photos']"
+    [skill]="baseSkill"
+    [skillPhoto]="baseSkillPhoto"
+    (save)="save($event)"
+  ></app-skill-photo-form>
+</ng-container>

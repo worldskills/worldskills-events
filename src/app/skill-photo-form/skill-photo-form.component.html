@@ -70,8 +70,9 @@
         <button type="submit" class="btn btn-success" id="saveSponsor" [disabled]="loading">
           {{'Save' | translate}}
         </button>&nbsp;
-        <a class="btn btn-secondary"
-           [routerLink]="['/events', this.event.id, 'skills', this.skill.id, 'photos']">{{'Cancel' | translate}}</a><br/>
+        <a *ngIf="cancelLink" class="btn btn-secondary" [routerLink]="cancelLink">
+          {{'Cancel' | translate}}
+        </a><br/>
         <ws-spinner *ngIf="loading"></ws-spinner>
       </div>
     </div>

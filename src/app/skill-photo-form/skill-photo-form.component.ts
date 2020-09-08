@@ -1,5 +1,4 @@
 import {Component, ElementRef, EventEmitter, Input, OnInit, Output, ViewChild} from '@angular/core';
-import {Event as WsEvent} from '../../types/event';
 import {Photo as SkillPhoto, Photo as SkillPhotoRequest} from '../../types/photo';
 import {NgForm} from '@angular/forms';
 import {UploadService, WsComponent} from '@worldskills/worldskills-angular-lib';
@@ -7,6 +6,7 @@ import {ImageService} from "../../services/image/image.service";
 import {HttpEventType} from "@angular/common/http";
 import {Image} from "../../types/image";
 import {Skill} from "../../types/skill";
+import {BaseSkill} from "../../types/base-skill";
 
 @Component({
   selector: 'app-skill-photo-form',
@@ -15,8 +15,8 @@ import {Skill} from "../../types/skill";
 })
 export class SkillPhotoFormComponent extends WsComponent implements OnInit {
 
-  @Input() event: WsEvent;
-  @Input() skill: Skill;
+  @Input() cancelLink: Array<any>;
+  @Input() skill: Skill | BaseSkill;
   @Input() skillPhoto: SkillPhoto = null;
   @Output() save: EventEmitter<SkillPhotoRequest> = new EventEmitter<SkillPhotoRequest>();
   @ViewChild('form') form: NgForm;

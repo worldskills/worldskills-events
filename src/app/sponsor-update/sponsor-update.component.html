@@ -16,6 +16,7 @@
       <app-sponsor-form
         [editable]="currentUser && event && event.ws_entity && hasUserRole(currentUser, appId, event.ws_entity.id, 'Admin', 'EditEvents')"
         [event]="event"
+        [cancelLink]="['/events', this.event.id, 'sponsors']"
         [sponsor]="sponsor"
         (save)="save($event)"
       ></app-sponsor-form>

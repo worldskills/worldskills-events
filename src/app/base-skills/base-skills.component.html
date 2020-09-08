@@ -1,0 +1,46 @@
+<h2 class="mt-0">{{'Base Skills' | translate}}</h2>
+
+<ng-container *ngIf="loading || !initialized">
+  <ws-spinner></ws-spinner>
+</ng-container>
+<ng-container *ngIf="initialized && !loading">
+  <div class="row mt-2">
+    <div class="col-12">
+      <div class="table-responsive-md">
+        <table class="table table-striped">
+          <colgroup>
+            <col width="10%">
+            <col width="90%">
+          </colgroup>
+          <thead>
+          <tr>
+            <th class="border-top-0">
+              {{'ID' | translate}}&nbsp;
+            </th>
+            <th class="border-top-0">
+              {{'Name' | translate}}&nbsp;
+            </th>
+          </tr>
+          </thead>
+          <tbody>
+          <tr *ngFor="let baseSkill of baseSkills">
+            <td>
+              <a routerLink="{{baseSkill.id}}">
+                {{baseSkill.id}}
+              </a>
+            </td>
+            <td>
+              <a routerLink="{{baseSkill.id}}">
+                {{baseSkill.name.text}}
+              </a>
+            </td>
+          </tr>
+          <tr *ngIf="baseSkills.length === 0">
+            <td colspan="4">{{'No Base Skills found.' | translate}}</td>
+          </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</ng-container>

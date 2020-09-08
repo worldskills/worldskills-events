@@ -1,6 +1,6 @@
 <ws-staging-banner *ngIf="isStaging"></ws-staging-banner>
 <ws-puppeteer-banner [currentUser]="currentUser"></ws-puppeteer-banner>
-<ws-auth-header [appName]="'Events' | translate">
+<ws-auth-header [appName]="'Events' | translate" [menuItems]="menuItems">
 </ws-auth-header>
 
 <div class="container">
@@ -12,7 +12,7 @@
   </ws-breadcrumbs>
   <div *ngIf="!showBreadcrumb" class="mt-5"></div>
   <div class="clearfix"></div>
-  <ws-alert></ws-alert>
+  <ws-alerts></ws-alerts>
   <router-outlet></router-outlet>
 </div>
 

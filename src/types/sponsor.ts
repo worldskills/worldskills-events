@@ -1,12 +1,6 @@
 import {Link, List} from "./common";
 import {Event} from "./event";
-
-export interface Logo {
-  id: number;
-  thumbnail_hash: string;
-  thumbnail: string;
-  links: Array<Link>;
-}
+import {Logo} from "./logo";
 
 export interface SponsorRequest {
   event: { id: number };

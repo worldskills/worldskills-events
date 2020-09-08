@@ -61,13 +61,28 @@ export class EventsService extends WsService<EventList, EventsFetchParams> {
     return queryParams;
   }
 
+  // TODO added to lib, can be removed when lib updated
+  stripNullOrUndefined(obj: any, deep = false): any {
+    if (Array.isArray(obj)) {
+      if (deep) {
+        // tslint:disable-next-line:forin
+        for (const k in obj) {
+          obj[k] = this.stripNullOrUndefined(obj[k], true);
+        }
+      }
+    } else if (obj && typeof obj === 'object') {
+      Object.keys(obj).forEach(key => (obj[key] === undefined || obj[key] === null) && delete obj[key]);
+    }
+    return obj;
+  }
+
   fetch(rOpt?: RequestOptions): Observable<EventList>;
   fetch(params: EventsFetchParams, rOpt?: RequestOptions): Observable<EventList>;
   fetch(mOpt: MulticastOptions, rOpt?: RequestOptions): Observable<EventList>;
   fetch(params: EventsFetchParams, mOpt: MulticastOptions, rOpt?: RequestOptions): Observable<EventList>;
   fetch(p1: WsServiceRequestP1, p2?: WsServiceRequestP2, p3?: WsServiceRequestP3): Observable<EventList> {
     const {fetchParams, multicastOptions, requestOptions} = this.resolveArgs(p1, p2, p3, FULL, DEFAULT_FETCH_PARAMS);
-    const params = HttpUtil.objectToParams(fetchParams || {});
+    const params = HttpUtil.objectToParams(this.stripNullOrUndefined(fetchParams) || {});
     const observable = this.http.get<EventList>(
       requestOptions.url ?? `${environment.worldskillsApiEvents}`, {params}
     ).pipe(share());

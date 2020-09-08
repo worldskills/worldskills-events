@@ -4,7 +4,6 @@ import {EventService} from "../../services/event/event.service";
 import {SkillService} from "../../services/skill/skill.service";
 import {TagsService} from "../../services/tags/tags.service";
 import {SkillTagService} from "../../services/skill-tag/skill-tag.service";
-import {UiSkillService} from "../../services/ui-skill/ui-skill.service";
 import {combineLatest} from "rxjs";
 import {map} from "rxjs/operators";
 import {Event} from "../../types/event";
@@ -13,6 +12,7 @@ import {Tag} from "../../types/tag";
 import {TranslateService} from "@ngx-translate/core";
 import {faTimes} from '@fortawesome/free-solid-svg-icons';
 import {environment} from "../../environments/environment";
+import {AppService} from "../../services/app/app.service";
 
 @Component({
   selector: 'app-skill-tags',
@@ -31,19 +31,19 @@ export class SkillTagsComponent extends WsComponent implements OnInit {
   appId = environment.worldskillsAppId;
 
   constructor(
+    private appService: AppService,
     private eventService: EventService,
     private skillService: SkillService,
     private tagsService: TagsService,
     private skillTagService: SkillTagService,
     private alertService: AlertService,
     private translateService: TranslateService,
-    private uiSkillService: UiSkillService,
   ) {
     super();
   }
 
   ngOnInit(): void {
-    this.uiSkillService.subject.next(this.button);
+    this.appService.skillMenu.next(this.button);
     this.subscribe(
       this.eventService.subject.subscribe(event => {
         this.event = event;

@@ -1,0 +1,51 @@
+<ng-container *ngIf="loading || !initialized">
+  <ws-spinner></ws-spinner>
+</ng-container>
+<ng-container *ngIf="initialized && !loading">
+  <div *ngIf="baseSponsors" class="btn-group" role="group">
+    <button type="button" class="btn btn-primary btn-sm mr-1 dropdown-toggle" data-toggle="dropdown"
+            aria-haspopup="true" aria-expanded="false" [disabled]="filteredSponsors.length === 0">
+      {{'Add sponsor' | translate}}
+    </button>
+    <div class="dropdown-menu">
+      <ng-container *ngFor="let sponsor of filteredSponsors">
+        <a class="dropdown-item" href="#" (click)="$event.preventDefault(); bind(sponsor)">{{sponsor.name.text}}</a>
+      </ng-container>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-12">
+      <div class="table-responsive">
+        <table class="table table-striped">
+          <colgroup>
+            <col width="50%">
+            <col width="40%">
+          </colgroup>
+          <thead>
+          <tr>
+            <th class="border-top-0">{{'Base Sponsor' | translate}}</th>
+            <th class="border-top-0">&nbsp;</th>
+          </tr>
+          </thead>
+          <tbody>
+          <tr *ngFor="let sponsor of baseSkill.sponsors">
+            <td>{{sponsor.name.text}}</td>
+            <td class="text-right">
+              <button
+                (click)="unbind(sponsor)"
+                type="button"
+                class="btn btn-danger btn-sm"
+              >
+                <fa-icon size="xs" [icon]="faTimes"></fa-icon>
+              </button>
+            </td>
+          </tr>
+          <tr *ngIf="baseSkill.sponsors.length === 0">
+            <td colspan="2">{{'No Base Sponsors found' | translate}}</td>
+          </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</ng-container>

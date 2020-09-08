@@ -4,7 +4,6 @@ import {EventService} from "../../services/event/event.service";
 import {SkillService} from "../../services/skill/skill.service";
 import {SponsorsService} from "../../services/sponsors/sponsors.service";
 import {SkillSponsorService} from "../../services/skill-sponsor/skill-sponsor.service";
-import {UiSkillService} from "../../services/ui-skill/ui-skill.service";
 import {combineLatest} from "rxjs";
 import {map} from "rxjs/operators";
 import {Event} from "../../types/event";
@@ -12,6 +11,7 @@ import {Skill} from "../../types/skill";
 import {Sponsor} from "../../types/sponsor";
 import {TranslateService} from "@ngx-translate/core";
 import {faTimes, faCaretDown, faCaretUp, faStar} from '@fortawesome/free-solid-svg-icons';
+import {AppService} from "../../services/app/app.service";
 
 @Component({
   selector: 'app-skill-sponsors',
@@ -31,19 +31,19 @@ export class SkillSponsorsComponent extends WsComponent implements OnInit {
   faStar = faStar;
 
   constructor(
+    private appService: AppService,
     private eventService: EventService,
     private skillService: SkillService,
     private skillSponsorsService: SponsorsService,
     private skillSponsorService: SkillSponsorService,
     private alertService: AlertService,
     private translateService: TranslateService,
-    private uiSkillService: UiSkillService,
   ) {
     super();
   }
 
   ngOnInit(): void {
-    this.uiSkillService.subject.next(this.button);
+    this.appService.skillMenu.next(this.button);
     this.subscribe(
       this.eventService.subject.subscribe(event => {
         this.event = event;

@@ -25,7 +25,6 @@ describe('SkillPhotoFormComponent', () => {
   beforeEach(() => {
     fixture = TestBed.createComponent(SkillPhotoFormComponent);
     component = fixture.componentInstance;
-    component.event = {id: 1} as any;
     component.skill = {id: 1} as any;
     fixture.detectChanges();
   });

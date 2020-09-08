@@ -6,6 +6,7 @@ import {UploadService, WsComponent} from '@worldskills/worldskills-angular-lib';
 import {ImageService} from "../../services/image/image.service";
 import {HttpEventType} from "@angular/common/http";
 import {Image} from "../../types/image";
+import {BaseSponsor, BaseSponsorRequest} from "../../types/base-sponsor";
 
 @Component({
   selector: 'app-sponsor-form',
@@ -15,9 +16,11 @@ import {Image} from "../../types/image";
 export class SponsorFormComponent extends WsComponent implements OnInit {
 
   @Input() event: WsEvent;
-  @Input() sponsor: Sponsor = null;
+  @Input() cancelLink: Array<any>;
+  @Input() sponsor: Sponsor | BaseSponsor = null;
+  @Input() isBaseSponsor = false;
   @Input() editable = false;
-  @Output() save: EventEmitter<SponsorRequest> = new EventEmitter<SponsorRequest>();
+  @Output() save: EventEmitter<SponsorRequest | BaseSponsorRequest> = new EventEmitter<SponsorRequest | BaseSponsorRequest>();
   @ViewChild('form') form: NgForm;
   loading = false;
 
@@ -77,15 +80,32 @@ export class SponsorFormComponent extends WsComponent implements OnInit {
     if (this.editable && this.form.valid) {
       const {
         name,
+        description,
+        website,
         url,
         removeFile,
       } = this.form.value;
-      const sponsor: SponsorRequest = {
-        name,
-        url,
-        logo: removeFile ? null : (this.sponsor && this.sponsor.logo) ? this.sponsor.logo : null,
-        event: this.event,
-      };
+      let sponsor: SponsorRequest | BaseSponsorRequest;
+      if (this.isBaseSponsor) {
+        const s: BaseSponsorRequest = {
+          entity: {id: 1},
+          name: {text: name, lang_code: 'en'},
+          url,
+          website,
+          description: {text: description, lang_code: 'en'},
+          logo: removeFile ? null : (this.sponsor && this.sponsor.logo) ? this.sponsor.logo : null,
+        };
+        sponsor = s;
+      } else {
+        const s: SponsorRequest = {
+          name,
+          url,
+          logo: removeFile ? null : (this.sponsor && this.sponsor.logo) ? this.sponsor.logo : null,
+          event: this.event,
+        };
+        sponsor = s;
+      }
+
       if (!removeFile && this.uploadFile) {
         // tslint:disable-next-line:variable-name
         this.upload(logo => {
@@ -96,6 +116,18 @@ export class SponsorFormComponent extends WsComponent implements OnInit {
         this.save.emit(sponsor);
       }
     }
+  }
+
+  get name() {
+    return this.sponsor ? (this.isBaseSponsor ? (this.sponsor as BaseSponsor).name.text : (this.sponsor as Sponsor).name) : undefined;
+  }
+
+  get description() {
+    return this.sponsor && this.isBaseSponsor ? (this.sponsor as BaseSponsor).description.text : undefined;
+  }
+
+  get website() {
+    return this.sponsor && this.isBaseSponsor ? (this.sponsor as BaseSponsor).website : undefined;
   }
 
 }

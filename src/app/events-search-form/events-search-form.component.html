@@ -18,14 +18,15 @@
 
         <div class="form-group row">
           <div class="col-12">
-            <input #inputAfter="ngModel" #dAfter="ngbDatepicker"
+            <input #dAfter="ngbDatepicker"
                    placeholder="{{'After' | translate}}"
                    type="text"
                    class="form-control"
                    name="after"
-                   [ngModel]="fetchParams.after ? ngbDateCache.getNgbDate(fetchParams.after.toString(), inputAfter) : undefined"
+                   [ngModel]="fetchParams.after"
                    ngbDatepicker
                    (focus)="dAfter.open()"
+                   [maxDate]="form.controls.before ? form.controls.before.value : undefined"
                    [autoClose]="true"
                    [restoreFocus]="true"/>
           </div>
@@ -33,14 +34,15 @@
 
         <div class="form-group row">
           <div class="col-12">
-            <input #inputBefore="ngModel" #dBefore="ngbDatepicker"
+            <input #dBefore="ngbDatepicker"
                    placeholder="{{'Before' | translate}}"
                    type="text"
                    class="form-control"
                    name="before"
-                   [ngModel]="fetchParams.before ? ngbDateCache.getNgbDate(fetchParams.before.toString(), inputBefore) : undefined"
+                   [ngModel]="fetchParams.before"
                    ngbDatepicker
                    (focus)="dBefore.open()"
+                   [maxDate]="form.controls.after ? form.controls.after.value : undefined"
                    [autoClose]="true"
                    [restoreFocus]="true"/>
           </div>

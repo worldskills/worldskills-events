@@ -1,7 +1,7 @@
 <ng-template #button>
-  <button routerLink="create" class="btn btn-primary btn-sm float-right mr-1" *wsUserRole="['Admin', 'EditEvents']; entity : event ? event.ws_entity.id : null; appId : appId">
-    {{'Add sector' | translate}}
-  </button>
+  `<button routerLink="create" class="btn btn-primary btn-sm float-right mr-1" *wsUserRole="['Admin', 'EditEvents']; entity : event ? event.ws_entity.id : null; appId : appId">
+    {{'Add Sector' | translate}}
+  </button>`
 </ng-template>
 <ng-container *ngIf="loading || !initialized">
   <ws-spinner></ws-spinner>

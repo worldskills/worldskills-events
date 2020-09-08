@@ -8,7 +8,7 @@
     <div class="form-group row">
       <label for="name"
              class="col-3 col-form-label text-right font-weight-bold">{{'Name' | translate}}&nbsp;*</label>
-      <div class="col-4">
+      <div class="col-6">
         <input
           placeholder="{{'Name' | translate}}"
           type="text"
@@ -17,9 +17,9 @@
           name="name"
           required
           [disabled]="!editable"
-          [ngModel]="sponsor ? sponsor.name : undefined">
+          [ngModel]="name">
       </div>
-      <div class="col-5">
+      <div class="col-3">
       <span
         class="form-text text-danger"
         style="display: block"
@@ -29,11 +29,27 @@
       </div>
     </div>
 
+    <div *ngIf="isBaseSponsor" class="form-group row">
+      <label for="description"
+             class="col-3 col-form-label text-right font-weight-bold">{{'Description' | translate}}</label>
+      <div class="col-6">
+      <textarea
+        placeholder="{{'Description' | translate}}"
+        class="form-control"
+        id="description"
+        name="description"
+        [disabled]="!editable"
+        [ngModel]="description">
+      </textarea>
+      </div>
+      <div class="col-3">&nbsp;</div>
+    </div>
+
     <div class="form-group row">
-      <label for="url" class="col-3 col-form-label text-right font-weight-bold">{{'Website' | translate}}</label>
-      <div class="col-4">
+      <label for="url" class="col-3 col-form-label text-right font-weight-bold">{{'URL' | translate}}</label>
+      <div class="col-6">
         <input
-          placeholder="{{'Name' | translate}}"
+          placeholder="{{'URL' | translate}}"
           type="text"
           class="form-control"
           id="url"
@@ -42,12 +58,28 @@
           [disabled]="!editable"
           [ngModel]="sponsor ? sponsor.url : undefined">
       </div>
-      <div class="col-5">&nbsp;</div>
+      <div class="col-3">&nbsp;</div>
+    </div>
+
+    <div *ngIf="isBaseSponsor" class="form-group row">
+      <label for="website" class="col-3 col-form-label text-right font-weight-bold">{{'Website' | translate}}</label>
+      <div class="col-6">
+        <input
+          placeholder="{{'Website' | translate}}"
+          type="text"
+          class="form-control"
+          id="website"
+          name="website"
+          required
+          [disabled]="!editable"
+          [ngModel]="website">
+      </div>
+      <div class="col-3">&nbsp;</div>
     </div>
 
     <div class="form-group row">
       <label for="url" class="col-3 col-form-label text-right font-weight-bold">{{'Logo' | translate}}</label>
-      <div class="col-4">
+      <div class="col-6">
         <div class="mb-1 mw-100">
           <img class="mw-100" *ngIf="!!sponsor && !!sponsor.logo" [src]="sponsor.logo.thumbnail"/>
           <div
@@ -77,7 +109,7 @@
           />&nbsp;{{'Delete image' | translate}}
         </ng-container>
       </div>
-      <div class="col-5">
+      <div class="col-3">
         <p *ngIf="resourceLoading">
           <ngb-progressbar
             type="info"
@@ -93,8 +125,7 @@
         <button type="submit" class="btn btn-success" id="saveSponsor" [disabled]="loading" *ngIf="editable">
           {{'Save' | translate}}
         </button>&nbsp;
-        <a class="btn btn-secondary"
-           [routerLink]="['/events', this.event.id, 'sponsors']">{{'Cancel' | translate}}</a><br/>
+        <a *ngIf="cancelLink" class="btn btn-secondary" [routerLink]="cancelLink">{{'Cancel' | translate}}</a><br/>
         <ws-spinner *ngIf="loading"></ws-spinner>
       </div>
     </div>

@@ -31,7 +31,7 @@
     "@ngx-translate/http-loader": "^6.0.0",
     "@sentry/browser": "^5.20.1",
     "@worldskills/bootstrap": "^4.4.1",
-    "@worldskills/worldskills-angular-lib": "^10.5.0",
+    "@worldskills/worldskills-angular-lib": "^10.9.0",
     "angular-oauth2-oidc": "^10.0.3",
     "jquery": "^3.5.1",
     "json2typescript": "^1.4.1",

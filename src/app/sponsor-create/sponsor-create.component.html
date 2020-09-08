@@ -16,6 +16,7 @@
       <app-sponsor-form
         [editable]="true"
         [event]="event"
+        [cancelLink]="['/events', this.event.id, 'sponsors']"
         (save)="save($event)"
       ></app-sponsor-form>
     </div>

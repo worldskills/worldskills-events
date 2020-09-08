@@ -3,7 +3,6 @@ import {Event} from '../../types/event';
 import {Skill, SkillRequest} from '../../types/skill';
 import {NgForm} from '@angular/forms';
 import {WsComponent} from '@worldskills/worldskills-angular-lib';
-import {NgbDateCache} from "../../utils/ngb";
 import {NgbDateParserFormatter} from "@ng-bootstrap/ng-bootstrap";
 import {BaseSkill} from "../../types/base-skill";
 import {BaseSkillsService} from "../../services/base-skills/base-skills.service";
@@ -28,7 +27,6 @@ export class SkillFormComponent extends WsComponent implements OnInit {
   @Output() save: EventEmitter<SkillRequest> = new EventEmitter<SkillRequest>();
   @ViewChild('form') form: NgForm;
   loading = false;
-  ngbDateCache: NgbDateCache;
   editor = ClassicEditor;
 
   constructor(
@@ -37,7 +35,6 @@ export class SkillFormComponent extends WsComponent implements OnInit {
     public formatter: NgbDateParserFormatter,
   ) {
     super();
-    this.ngbDateCache = new NgbDateCache(formatter);
   }
 
   ngOnInit(): void {

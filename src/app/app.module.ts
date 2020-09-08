@@ -48,6 +48,18 @@ import {SkillPhotoCreateComponent} from './skill-photo-create/skill-photo-create
 import {SkillPhotoUpdateComponent} from './skill-photo-update/skill-photo-update.component';
 import {CKEditorModule} from "@ckeditor/ckeditor5-angular";
 import {SectorsComponent} from './sectors/sectors.component';
+import {BaseSkillFormComponent} from './base-skill-form/base-skill-form.component';
+import {BaseSkillUpdateComponent} from './base-skill-update/base-skill-update.component';
+import {BaseSkillComponent} from './base-skill/base-skill.component';
+import {BaseSkillsComponent} from './base-skills/base-skills.component';
+import {BaseSponsorUpdateComponent} from './base-sponsor-update/base-sponsor-update.component';
+import {BaseSponsorCreateComponent} from './base-sponsor-create/base-sponsor-create.component';
+import {BaseSponsorsComponent} from './base-sponsors/base-sponsors.component';
+import {BaseSkillPhotoCreateComponent} from "./base-skill-photo-create/base-skill-photo-create.component";
+import {BaseSkillPhotoUpdateComponent} from "./base-skill-photo-update/base-skill-photo-update.component";
+import {BaseSkillPhotosComponent} from "./base-skill-photos/base-skill-photos.component";
+import {BaseSkillTagsComponent} from "./base-skill-tags/base-skill-tags.component";
+import {BaseSkillSponsorsComponent} from "./base-skill-sponsors/base-skill-sponsors.component";
 
 export function HttpLoaderFactory(http: HttpClient) {
   return new TranslateHttpLoader(http);
@@ -90,6 +102,18 @@ export function HttpLoaderFactory(http: HttpClient) {
     SkillPhotoCreateComponent,
     SkillPhotoUpdateComponent,
     SectorsComponent,
+    BaseSkillFormComponent,
+    BaseSkillUpdateComponent,
+    BaseSkillComponent,
+    BaseSkillsComponent,
+    BaseSponsorUpdateComponent,
+    BaseSponsorCreateComponent,
+    BaseSponsorsComponent,
+    BaseSkillPhotosComponent,
+    BaseSkillPhotoCreateComponent,
+    BaseSkillPhotoUpdateComponent,
+    BaseSkillTagsComponent,
+    BaseSkillSponsorsComponent,
   ],
   imports: [
     BrowserModule,

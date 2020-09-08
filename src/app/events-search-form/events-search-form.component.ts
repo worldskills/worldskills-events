@@ -3,7 +3,6 @@ import {LOADER_ONLY, WsComponent} from "@worldskills/worldskills-angular-lib";
 import {EventsFetchParams, EventsService} from "../../services/events/events.service";
 import {NgForm} from "@angular/forms";
 import {Event} from '../../types/event';
-import {isNgbDateStruct, NgbDateCache} from "../../utils/ngb";
 import {NgbDateParserFormatter} from "@ng-bootstrap/ng-bootstrap";
 import {CountriesService} from "../../services/countries/countries.service";
 import {Country} from "../../types/country";
@@ -22,7 +21,6 @@ export class EventsSearchFormComponent extends WsComponent implements OnInit {
   countries: Array<Country>;
   loading = false;
   @ViewChild('form') form: NgForm;
-  ngbDateCache: NgbDateCache;
 
   constructor(
     private eventsService: EventsService,
@@ -30,13 +28,17 @@ export class EventsSearchFormComponent extends WsComponent implements OnInit {
     public formatter: NgbDateParserFormatter,
   ) {
     super();
-    this.ngbDateCache = new NgbDateCache(formatter);
   }
 
   ngOnInit(): void {
     this.subscribe(
       this.countriesService.subject.subscribe(countries => (this.countries = countries.country_list)),
-      this.eventsService.fetchParams.subscribe(fetchParams => this.fetchParams = fetchParams),
+      this.eventsService.fetchParams.subscribe(fetchParams =>
+        this.fetchParams = {
+          ...fetchParams,
+          after: this.formatter.parse(fetchParams.after) as any || undefined,
+          before: this.formatter.parse(fetchParams.before) as any || undefined
+        }),
       combineLatest([
         this.eventsService.loading,
         this.countriesService.loading,
@@ -65,10 +67,10 @@ export class EventsSearchFormComponent extends WsComponent implements OnInit {
     if (!fetchParams.type) {
       fetchParams.type = undefined;
     }
-    if (fetchParams.after && isNgbDateStruct(fetchParams.after)) {
+    if (fetchParams.after) {
       fetchParams.after = this.formatter.format(fetchParams.after);
     }
-    if (fetchParams.before && isNgbDateStruct(fetchParams.before)) {
+    if (fetchParams.before) {
       fetchParams.before = this.formatter.format(fetchParams.before);
     }
     return fetchParams;

@@ -24,3 +24,7 @@ ul {
     text-overflow: ellipsis;
   }
 }
+
+.nav.nav-tabs {
+  margin: 20px 0 30px 0;
+}

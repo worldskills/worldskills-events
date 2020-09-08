@@ -11,8 +11,8 @@ import {TranslateService} from "@ngx-translate/core";
 import {faTimes} from '@fortawesome/free-solid-svg-icons';
 import {environment} from "../../environments/environment";
 import {SkillsService} from "../../services/skills/skills.service";
-import {UiSectorService} from "../../services/ui-sector/ui-sector.service";
 import {LocaleContextService} from "../../services/locale-context/locale-context.service";
+import {AppService} from "../../services/app/app.service";
 
 @Component({
   selector: 'app-sector-list',
@@ -30,11 +30,11 @@ export class SectorListComponent extends WsComponent implements OnInit, OnDestro
   appId = environment.worldskillsAppId;
 
   constructor(
+    private appService: AppService,
     private eventService: EventService,
     private sectorsService: SectorsService,
     private sectorService: SectorService,
     private skillsService: SkillsService,
-    private uiSectorService: UiSectorService,
     private alertService: AlertService,
     private translateService: TranslateService,
     private localeContextService: LocaleContextService,
@@ -43,7 +43,7 @@ export class SectorListComponent extends WsComponent implements OnInit, OnDestro
   }
 
   ngOnInit(): void {
-    this.uiSectorService.subject.next(this.button);
+    this.appService.sectorMenu.next(this.button);
     this.subscribe(
       combineLatest([
         this.eventService.subject,
@@ -74,7 +74,7 @@ export class SectorListComponent extends WsComponent implements OnInit, OnDestro
 
   ngOnDestroy(): void {
     super.ngOnDestroy();
-    this.uiSectorService.subject.next(null);
+    this.appService.sectorMenu.next(null);
   }
 
   deletableSectorLoading(sector: Sector) {

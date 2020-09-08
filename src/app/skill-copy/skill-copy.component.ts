@@ -4,13 +4,13 @@ import {Event} from "../../types/event";
 import {Skill} from "../../types/skill";
 import {EventService} from "../../services/event/event.service";
 import {SkillService} from "../../services/skill/skill.service";
-import {UiSkillService} from "../../services/ui-skill/ui-skill.service";
 import {combineLatest} from "rxjs";
 import {map} from "rxjs/operators";
 import {Router} from "@angular/router";
 import {EventsService} from "../../services/events/events.service";
 import {TranslateService} from "@ngx-translate/core";
 import {NgForm} from "@angular/forms";
+import {AppService} from "../../services/app/app.service";
 
 @Component({
   selector: 'app-skill-copy',
@@ -26,10 +26,10 @@ export class SkillCopyComponent extends WsComponent implements OnInit {
   @ViewChild('form') form: NgForm;
 
   constructor(
+    private appService: AppService,
     private eventService: EventService,
     private skillService: SkillService,
     private eventsService: EventsService,
-    private uiSkillService: UiSkillService,
     private alertService: AlertService,
     private translateService: TranslateService,
     private router: Router,
@@ -38,7 +38,7 @@ export class SkillCopyComponent extends WsComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.uiSkillService.subject.next(null);
+    this.appService.skillMenu.next(null);
     this.subscribe(
       this.eventService.subject.subscribe(event => (this.event = event)),
       this.skillService.subject.subscribe(skill => (this.skill = skill)),

@@ -8,11 +8,10 @@ import {SkillService} from "../../services/skill/skill.service";
 import {combineLatest} from "rxjs";
 import {map} from "rxjs/operators";
 import {SkillPhotoService} from "../../services/skill-photo/skill-photo.service";
-import {UiSkillService} from "../../services/ui-skill/ui-skill.service";
 import {faCaretDown, faCaretUp, faTimes} from '@fortawesome/free-solid-svg-icons';
-
 import {environment} from "../../environments/environment";
 import {TranslateService} from "@ngx-translate/core";
+import {AppService} from "../../services/app/app.service";
 
 @Component({
   selector: 'app-skill-photos',
@@ -31,10 +30,10 @@ export class SkillPhotosComponent extends WsComponent implements OnInit {
   appId = environment.worldskillsAppId;
 
   constructor(
+    private appService: AppService,
     private eventService: EventService,
     private skillService: SkillService,
     private skillPhotoService: SkillPhotoService,
-    private uiSkillService: UiSkillService,
     private alertService: AlertService,
     private translateService: TranslateService,
   ) {
@@ -42,7 +41,7 @@ export class SkillPhotosComponent extends WsComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.uiSkillService.subject.next(this.button);
+    this.appService.skillMenu.next(this.button);
     this.subscribe(
       this.eventService.subject.subscribe(event => (this.event = event)),
       this.skillService.subject.subscribe(skill => (this.skill = skill)),

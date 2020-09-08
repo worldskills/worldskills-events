@@ -7,10 +7,10 @@ import {TranslateService} from "@ngx-translate/core";
 import {EventService} from "../../services/event/event.service";
 import {combineLatest} from "rxjs";
 import {map} from "rxjs/operators";
-import {UiSkillService} from "../../services/ui-skill/ui-skill.service";
 import {SkillPhotoService} from "../../services/skill-photo/skill-photo.service";
 import {Photo as SkillPhotoRequest} from "../../types/photo";
 import {Router} from "@angular/router";
+import {AppService} from "../../services/app/app.service";
 
 @Component({
   selector: 'app-skill-photo-create',
@@ -24,19 +24,19 @@ export class SkillPhotoCreateComponent extends WsComponent implements OnInit {
   loading = false;
 
   constructor(
+    private appService: AppService,
     private eventService: EventService,
     private skillService: SkillService,
     private skillPhotoService: SkillPhotoService,
     private alertService: AlertService,
     private translateService: TranslateService,
-    private uiSkillService: UiSkillService,
     private router: Router,
   ) {
     super();
   }
 
   ngOnInit(): void {
-    this.uiSkillService.subject.next(null);
+    this.appService.skillMenu.next(null);
     this.subscribe(
       this.eventService.subject.subscribe(event => (this.event = event)),
       this.skillService.subject.subscribe(skill => (this.skill = skill)),

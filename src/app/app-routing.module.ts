@@ -26,6 +26,17 @@ import {SkillCreateComponent} from "./skill-create/skill-create.component";
 import {SkillPhotoCreateComponent} from "./skill-photo-create/skill-photo-create.component";
 import {SkillPhotoUpdateComponent} from "./skill-photo-update/skill-photo-update.component";
 import {SectorsComponent} from "./sectors/sectors.component";
+import {BaseSkillsComponent} from "./base-skills/base-skills.component";
+import {BaseSponsorsComponent} from "./base-sponsors/base-sponsors.component";
+import {BaseSkillComponent} from "./base-skill/base-skill.component";
+import {BaseSkillUpdateComponent} from "./base-skill-update/base-skill-update.component";
+import {BaseSkillPhotosComponent} from "./base-skill-photos/base-skill-photos.component";
+import {BaseSkillPhotoCreateComponent} from "./base-skill-photo-create/base-skill-photo-create.component";
+import {BaseSkillPhotoUpdateComponent} from "./base-skill-photo-update/base-skill-photo-update.component";
+import {BaseSkillTagsComponent} from "./base-skill-tags/base-skill-tags.component";
+import {BaseSkillSponsorsComponent} from "./base-skill-sponsors/base-skill-sponsors.component";
+import {BaseSponsorCreateComponent} from "./base-sponsor-create/base-sponsor-create.component";
+import {BaseSponsorUpdateComponent} from "./base-sponsor-update/base-sponsor-update.component";
 
 function forAppCode(appCode: number, roles: Array<string>) {
   return roles.map(name => ({
@@ -39,6 +50,81 @@ const routes: Routes = [
     path: '',
     component: HomeComponent,
     children: [
+      {
+        path: 'base-skills',
+        data: {breadcrumb: 'Base Skills'},
+        children: [
+          {
+            path: '',
+            pathMatch: 'full',
+            component: BaseSkillsComponent,
+          },
+          {
+            path: ':baseSkillId',
+            component: BaseSkillComponent,
+            data: {breadcrumb: 'Base Skill'},
+            children: [
+              {
+                path: '',
+                pathMatch: 'full',
+                component: BaseSkillUpdateComponent,
+              },
+              {
+                path: 'photos',
+                data: {breadcrumb: 'Base Skill Photos'},
+                children: [
+                  {
+                    path: '',
+                    pathMatch: 'full',
+                    component: BaseSkillPhotosComponent,
+                  },
+                  {
+                    path: 'create',
+                    data: {breadcrumb: 'Create Base Skill Photo'},
+                    component: BaseSkillPhotoCreateComponent,
+                  },
+                  {
+                    path: ':baseSkillPhotoId',
+                    data: {breadcrumb: 'Change Base Skill Photo'},
+                    component: BaseSkillPhotoUpdateComponent,
+                  },
+                ],
+              },
+              {
+                path: 'tags',
+                data: {breadcrumb: 'Base Skill Tags'},
+                component: BaseSkillTagsComponent,
+              },
+              {
+                path: 'sponsors',
+                data: {breadcrumb: 'Base Skill Sponsors'},
+                component: BaseSkillSponsorsComponent,
+              },
+            ],
+          },
+        ],
+      },
+      {
+        path: 'base-sponsors',
+        data: {breadcrumb: 'Base Sponsors'},
+        children: [
+          {
+            path: '',
+            pathMatch: 'full',
+            component: BaseSponsorsComponent,
+          },
+          {
+            path: 'create',
+            data: {breadcrumb: 'Create Base Sponsor'},
+            component: BaseSponsorCreateComponent,
+          },
+          {
+            path: ':baseSponsorId',
+            data: {breadcrumb: 'Change Base Sponsor'},
+            component: BaseSponsorUpdateComponent,
+          }
+        ],
+      },
       {
         path: 'events',
         children: [

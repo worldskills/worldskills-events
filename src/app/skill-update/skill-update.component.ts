@@ -14,8 +14,8 @@ import {TranslateService} from "@ngx-translate/core";
 import {EventService} from "../../services/event/event.service";
 import {combineLatest} from "rxjs";
 import {map} from "rxjs/operators";
-import {UiSkillService} from "../../services/ui-skill/ui-skill.service";
 import {environment} from "../../environments/environment";
+import {AppService} from "../../services/app/app.service";
 
 @Component({
   selector: 'app-skill-update',
@@ -32,19 +32,19 @@ export class SkillUpdateComponent extends WsComponent implements OnInit {
   hasUserRole = UserRoleUtil.userHasRolesOfEntity;
 
   constructor(
+    private appService: AppService,
     private authService: NgAuthService,
     private eventService: EventService,
     private skillService: SkillService,
     private alertService: AlertService,
     private translateService: TranslateService,
-    private uiSkillService: UiSkillService,
   ) {
     super();
   }
 
   ngOnInit(): void {
-    this.authService.currentUser.subscribe(currentUser => (this.currentUser = currentUser)),
-      this.uiSkillService.subject.next(null);
+    this.authService.currentUser.subscribe(currentUser => (this.currentUser = currentUser));
+    this.appService.skillMenu.next(null);
     this.subscribe(
       this.eventService.subject.subscribe(event => (this.event = event)),
       this.skillService.subject.subscribe(skill => (this.skill = skill)),

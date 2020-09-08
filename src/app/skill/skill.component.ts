@@ -8,9 +8,9 @@ import {TranslateService} from "@ngx-translate/core";
 import {EventService} from "../../services/event/event.service";
 import {combineLatest} from "rxjs";
 import {map} from "rxjs/operators";
-import {UiSkillService} from "../../services/ui-skill/ui-skill.service";
 import {environment} from "../../environments/environment";
 import {LocaleContextService} from "../../services/locale-context/locale-context.service";
+import {AppService} from "../../services/app/app.service";
 
 @Component({
   selector: 'app-skill',
@@ -27,12 +27,12 @@ export class SkillComponent extends WsComponent implements OnInit, OnDestroy {
   appId = environment.worldskillsAppId;
 
   constructor(
+    private appService: AppService,
     private eventService: EventService,
     private skillService: SkillService,
     private route: ActivatedRoute,
     private alertService: AlertService,
     private translateService: TranslateService,
-    private uiSkillService: UiSkillService,
     private router: Router,
     public localeContextService: LocaleContextService,
   ) {
@@ -41,7 +41,7 @@ export class SkillComponent extends WsComponent implements OnInit, OnDestroy {
 
   ngOnInit(): void {
     this.subscribe(
-      this.uiSkillService.subject.subscribe(templateRef => (setTimeout(() => this.additionalMenu = templateRef))),
+      this.appService.skillMenu.subscribe(templateRef => (setTimeout(() => this.additionalMenu = templateRef))),
       combineLatest([
         this.eventService.subject,
         this.route.params,

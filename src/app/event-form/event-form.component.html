@@ -7,7 +7,7 @@
 
     <div class="form-group row">
       <label for="name" class="col-3 col-form-label text-right font-weight-bold">{{'Name' | translate}}&nbsp;*</label>
-      <div class="col-4">
+      <div class="col-6">
         <input
           placeholder="{{'Name' | translate}}"
           type="text"
@@ -18,7 +18,7 @@
           [disabled]="!editable"
           [ngModel]="event ? event.name : undefined">
       </div>
-      <div class="col-5">
+      <div class="col-3">
       <span
         class="form-text text-danger"
         style="display: block"
@@ -31,7 +31,7 @@
     <div class="form-group row">
       <label for="ws_entity"
              class="col-3 col-form-label text-right font-weight-bold">{{'Entity' | translate}}&nbsp;*</label>
-      <div class="col-4">
+      <div class="col-6">
         <ws-entity-tree-select
           id="ws_entity"
           name="ws_entity"
@@ -44,7 +44,7 @@
           {{"Owner of the entry, select the organization you are working for." | translate}}
         </p>
       </div>
-      <div class="col-5">
+      <div class="col-3">
       <span
         class="form-text text-danger"
         style="display: block"
@@ -56,7 +56,7 @@
 
     <div class="form-group row">
       <label for="type" class="col-3 col-form-label text-right font-weight-bold">{{'Type' | translate}}&nbsp;*</label>
-      <div class="col-4">
+      <div class="col-6">
         <select
           class="form-control"
           id="type"
@@ -74,7 +74,7 @@
           {{"Can't be changed once the event has been added." | translate}}
         </p>
       </div>
-      <div class="col-5">
+      <div class="col-3">
       <span
         class="form-text text-danger"
         style="display: block"
@@ -86,22 +86,22 @@
 
     <div class="form-group row">
       <label for="start_date" class="col-3 col-form-label text-right font-weight-bold">{{'Start date' | translate}}&nbsp;*</label>
-      <div class="col-4">
-        <input #inputStartDate="ngModel" #dStartDate="ngbDatepicker"
+      <div class="col-6">
+        <input #dStartDate="ngbDatepicker"
                placeholder="{{'Start date' | translate}}"
                type="text"
                class="form-control"
                id="start_date"
                name="start_date"
                [disabled]="!editable"
-               [ngModel]="event ? ngbDateCache.getNgbDate(event.start_date, inputStartDate) : undefined"
+               [ngModel]="startDate"
                ngbDatepicker
                (focus)="dStartDate.open()"
                [autoClose]="true"
                [restoreFocus]="true"
-               (change)="onStartDateChange($event)"/>
+               [maxDate]="form.controls.end_date ? form.controls.end_date.value : undefined"/>
       </div>
-      <div class="col-5">
+      <div class="col-3">
       <span
         class="form-text text-danger"
         style="display: block"
@@ -114,22 +114,22 @@
     <div class="form-group row">
       <label for="end_date"
              class="col-3 col-form-label text-right font-weight-bold">{{'End date' | translate}}&nbsp;*</label>
-      <div class="col-4">
-        <input #inputEndDate="ngModel" #dEndDate="ngbDatepicker"
+      <div class="col-6">
+        <input #dEndDate="ngbDatepicker"
                placeholder="{{'Start date' | translate}}"
                type="text"
                class="form-control"
                id="end_date"
                name="end_date"
                [disabled]="!editable"
-               [ngModel]="event ? ngbDateCache.getNgbDate(event.end_date, inputEndDate) : undefined"
+               [ngModel]="endDate"
                ngbDatepicker
                (focus)="dEndDate.open()"
                [autoClose]="true"
                [restoreFocus]="true"
-               (change)="onEndDateChange($event)"/>
+               [minDate]="form.controls.start_date ? form.controls.start_date.value : undefined"/>
       </div>
-      <div class="col-5">
+      <div class="col-3">
       <span
         class="form-text text-danger"
         style="display: block"
@@ -142,7 +142,7 @@
     <div class="form-group row">
       <label for="utc_offset"
              class="col-3 col-form-label text-right font-weight-bold">{{'Timezone' | translate}}</label>
-      <div class="col-4">
+      <div class="col-6">
         <select
           id="utc_offset"
           class="form-control"
@@ -192,7 +192,7 @@
           <option value="50400">UTC+14:00</option>
         </select>
       </div>
-      <div class="col-5">&nbsp;</div>
+      <div class="col-3">&nbsp;</div>
     </div>
 
     <hr class="my-2">
@@ -200,7 +200,7 @@
     <div class="form-group row">
       <label for="country"
              class="col-3 col-form-label text-right font-weight-bold">{{'Country' | translate}}&nbsp;*</label>
-      <div class="col-4">
+      <div class="col-6">
         <ng-select
           id="country"
           [wsSelect]="['id', 'name.text']"
@@ -211,7 +211,7 @@
           [items]="countries || []"
         ></ng-select>
       </div>
-      <div class="col-5">
+      <div class="col-3">
       <span
         class="form-text text-danger"
         style="display: block"
@@ -223,7 +223,7 @@
 
     <div class="form-group row">
       <label for="town" class="col-3 col-form-label text-right font-weight-bold">{{'Town' | translate}}</label>
-      <div class="col-4">
+      <div class="col-6">
         <input
           placeholder="{{'Town' | translate}}"
           type="text"
@@ -233,12 +233,12 @@
           [disabled]="!editable"
           [ngModel]="event ? event.town : undefined">
       </div>
-      <div class="col-5">&nbsp;</div>
+      <div class="col-3">&nbsp;</div>
     </div>
 
     <div class="form-group row">
       <label for="venue" class="col-3 col-form-label text-right font-weight-bold">{{'Venue' | translate}}</label>
-      <div class="col-4">
+      <div class="col-6">
         <input
           placeholder="{{'Venue' | translate}}"
           type="text"
@@ -248,12 +248,12 @@
           [disabled]="!editable"
           [ngModel]="event ? event.venue : undefined">
       </div>
-      <div class="col-5">&nbsp;</div>
+      <div class="col-3">&nbsp;</div>
     </div>
 
     <div class="form-group row">
       <label for="code" class="col-3 col-form-label text-right font-weight-bold">{{'Code' | translate}}</label>
-      <div class="col-4">
+      <div class="col-6">
         <input
           placeholder="{{'Code' | translate}}"
           type="text"
@@ -262,16 +262,16 @@
           name="code"
           [disabled]="!editable"
           [ngModel]="event ? event.code : undefined">
+        <p class="small">
+          {{"Internal reference to the event, e.g. WSC2015." | translate}}
+        </p>
       </div>
-      <p class="small">
-        {{"Internal reference to the event, e.g. WSC2015." | translate}}
-      </p>
-      <div class="col-5">&nbsp;</div>
+      <div class="col-3">&nbsp;</div>
     </div>
 
     <div class="form-group row">
       <label for="url" class="col-3 col-form-label text-right font-weight-bold">{{'Website' | translate}}</label>
-      <div class="col-4">
+      <div class="col-6">
         <input
           placeholder="{{'http://www.example.org' | translate}}"
           type="text"
@@ -281,13 +281,13 @@
           [disabled]="!editable"
           [ngModel]="event ? event.url : undefined">
       </div>
-      <div class="col-5">&nbsp;</div>
+      <div class="col-3">&nbsp;</div>
     </div>
 
     <div class="form-group row">
       <label for="description"
              class="col-3 col-form-label text-right font-weight-bold">{{'Description' | translate}}</label>
-      <div class="col-4">
+      <div class="col-6">
       <textarea
         placeholder="{{'Description' | translate}}"
         class="form-control"
@@ -297,7 +297,7 @@
         [ngModel]="event ? event.description : undefined">
       </textarea>
       </div>
-      <div class="col-5">&nbsp;</div>
+      <div class="col-3">&nbsp;</div>
     </div>
 
     <div class="form-group row">

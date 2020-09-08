@@ -3,7 +3,7 @@
 </ng-container>
 <ng-container *ngIf="initialized && !loading">
   <app-skill-photo-form
-    [event]="event"
+    [cancelLink]="['/events', event.id, 'skills', skill.id, 'photos']"
     [skill]="skill"
     (save)="save($event)"
   ></app-skill-photo-form>

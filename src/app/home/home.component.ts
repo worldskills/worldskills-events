@@ -1,6 +1,6 @@
 import {Component, OnInit} from '@angular/core';
-import {NgAuthService, RedirectHandler, User} from "@worldskills/worldskills-angular-lib";
-import {Router} from "@angular/router";
+import {RedirectHandler} from "@worldskills/worldskills-angular-lib";
+import {ActivatedRoute} from "@angular/router";
 
 @Component({
   selector: 'app-home',
@@ -9,18 +9,17 @@ import {Router} from "@angular/router";
 })
 export class HomeComponent implements OnInit {
 
-  currentUser: User;
+  initialized = false;
 
   constructor(
-    private authService: NgAuthService,
-    private router: Router,
+    private handler: RedirectHandler,
+    private route: ActivatedRoute,
   ) {
   }
 
   ngOnInit(): void {
-    this.authService.currentUser.subscribe(currentUser => (this.currentUser = currentUser));
-    const handler = new RedirectHandler(this.authService, this.router);
-    handler.redirectOrReturn(['/events'], console.error);
+    this.handler.redirectOrReturn({url: ['/events'], onlyIfExact: this.route})
+      .subscribe(() => (this.initialized = true));
   }
 
 }
