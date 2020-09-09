@@ -1,10 +1,8 @@
 import {Injectable} from '@angular/core';
 import {HttpClient} from '@angular/common/http';
 import {
-  FetchParams,
   FULL,
   HttpUtil,
-  MulticastOptions,
   NO_SUBJECT,
   RequestOptions,
   WsService,
@@ -27,9 +25,6 @@ export class TagService extends WsService<Tag> {
   }
 
   fetch(eventId: number, tagId: number, rOpt?: RequestOptions): Observable<Tag>;
-  fetch(eventId: number, tagId: number, params: FetchParams, rOpt?: RequestOptions): Observable<Tag>;
-  fetch(eventId: number, tagId: number, mOpt: MulticastOptions, rOpt?: RequestOptions): Observable<Tag>;
-  fetch(eventId: number, tagId: number, params: FetchParams, mOpt: MulticastOptions, rOpt?: RequestOptions): Observable<Tag>;
   fetch(eventId: number, tagId: number, p1: WsServiceRequestP1, p2?: WsServiceRequestP2, p3?: WsServiceRequestP3): Observable<Tag> {
     const {fetchParams, multicastOptions, requestOptions} = this.resolveArgs(p1, p2, p3, FULL);
     const params = HttpUtil.objectToParams(fetchParams || {});
@@ -40,9 +35,6 @@ export class TagService extends WsService<Tag> {
   }
 
   create(eventId: number, tag: Tag, rOpt?: RequestOptions): Observable<Tag>;
-  create(eventId: number, tag: Tag, params: FetchParams, rOpt?: RequestOptions): Observable<Tag>;
-  create(eventId: number, tag: Tag, mOpt: MulticastOptions, rOpt?: RequestOptions): Observable<Tag>;
-  create(eventId: number, tag: Tag, params: FetchParams, mOpt: MulticastOptions, rOpt?: RequestOptions): Observable<Tag>;
   create(eventId: number, tag: Tag, p1: WsServiceRequestP1, p2?: WsServiceRequestP2, p3?: WsServiceRequestP3): Observable<Tag> {
     const {fetchParams, multicastOptions, requestOptions} = this.resolveArgs(p1, p2, p3, FULL);
     const params = HttpUtil.objectToParams(fetchParams || {});
@@ -53,9 +45,6 @@ export class TagService extends WsService<Tag> {
   }
 
   update(eventId: number, tagId: number, tag: Tag, rOpt?: RequestOptions): Observable<Tag>;
-  update(eventId: number, tagId: number, tag: Tag, params: FetchParams, rOpt?: RequestOptions): Observable<Tag>;
-  update(eventId: number, tagId: number, tag: Tag, mOpt: MulticastOptions, rOpt?: RequestOptions): Observable<Tag>;
-  update(eventId: number, tagId: number, tag: Tag, params: FetchParams, mOpt: MulticastOptions, rOpt?: RequestOptions): Observable<Tag>;
   update(eventId: number, tagId: number, tag: Tag, p1: WsServiceRequestP1, p2?: WsServiceRequestP2, p3?: WsServiceRequestP3): Observable<Tag> {
     const {fetchParams, multicastOptions, requestOptions} = this.resolveArgs(p1, p2, p3, FULL);
     const params = HttpUtil.objectToParams(fetchParams || {});
@@ -66,9 +55,6 @@ export class TagService extends WsService<Tag> {
   }
 
   delete(eventId: number, tagId: number, rOpt?: RequestOptions): Observable<Tag>;
-  delete(eventId: number, tagId: number, params: FetchParams, rOpt?: RequestOptions): Observable<Tag>;
-  delete(eventId: number, tagId: number, mOpt: MulticastOptions, rOpt?: RequestOptions): Observable<Tag>;
-  delete(eventId: number, tagId: number, params: FetchParams, mOpt: MulticastOptions, rOpt?: RequestOptions): Observable<Tag>;
   delete(eventId: number, tagId: number, p1: WsServiceRequestP1, p2?: WsServiceRequestP2, p3?: WsServiceRequestP3): Observable<Tag> {
     const {fetchParams, multicastOptions, requestOptions} = this.resolveArgs(p1, p2, p3, NO_SUBJECT);
     const params = HttpUtil.objectToParams(fetchParams || {});

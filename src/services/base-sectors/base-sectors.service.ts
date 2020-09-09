@@ -1,8 +1,7 @@
 import {Injectable} from '@angular/core';
 import {
-  FetchParams,
-  FULL, HttpUtil,
-  MulticastOptions,
+  FULL,
+  HttpUtil,
   RequestOptions,
   WsService,
   WsServiceRequestP1,
@@ -25,9 +24,6 @@ export class BaseSectorsService extends WsService<BaseSectorList> {
   }
 
   fetch(rOpt?: RequestOptions): Observable<BaseSectorList>;
-  fetch(params: FetchParams, rOpt?: RequestOptions): Observable<BaseSectorList>;
-  fetch(mOpt: MulticastOptions, rOpt?: RequestOptions): Observable<BaseSectorList>;
-  fetch(params: FetchParams, mOpt: MulticastOptions, rOpt?: RequestOptions): Observable<BaseSectorList>;
   fetch(p1: WsServiceRequestP1, p2?: WsServiceRequestP2, p3?: WsServiceRequestP3): Observable<BaseSectorList> {
     const {fetchParams, multicastOptions, requestOptions} = this.resolveArgs(p1, p2, p3, FULL);
     const params = HttpUtil.objectToParams(fetchParams || {});

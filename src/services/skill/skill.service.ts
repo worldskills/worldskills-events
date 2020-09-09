@@ -2,7 +2,8 @@ import {Injectable} from '@angular/core';
 import {EventSkillCloneRequest, Skill, SkillRequest} from '../../types/skill';
 import {
   FetchParams,
-  FULL, HttpUtil,
+  FULL,
+  HttpUtil,
   MulticastOptions,
   NO_SUBJECT,
   RequestOptions,
@@ -26,9 +27,6 @@ export class SkillService extends WsService<Skill> {
   }
 
   fetch(eventId: number, skillId: number, rOpt?: RequestOptions): Observable<Skill>;
-  fetch(eventId: number, skillId: number, params: FetchParams, rOpt?: RequestOptions): Observable<Skill>;
-  fetch(eventId: number, skillId: number, mOpt: MulticastOptions, rOpt?: RequestOptions): Observable<Skill>;
-  fetch(eventId: number, skillId: number, params: FetchParams, mOpt: MulticastOptions, rOpt?: RequestOptions): Observable<Skill>;
   fetch(eventId: number, skillId: number, p1: WsServiceRequestP1, p2?: WsServiceRequestP2, p3?: WsServiceRequestP3): Observable<Skill> {
     const {fetchParams, multicastOptions, requestOptions} = this.resolveArgs(p1, p2, p3, FULL);
     const params = HttpUtil.objectToParams(fetchParams || {});
@@ -39,9 +37,6 @@ export class SkillService extends WsService<Skill> {
   }
 
   create(eventId: number, skillRequest: SkillRequest, rOpt?: RequestOptions): Observable<Skill>;
-  create(eventId: number, skillRequest: SkillRequest, params: FetchParams, rOpt?: RequestOptions): Observable<Skill>;
-  create(eventId: number, skillRequest: SkillRequest, mOpt: MulticastOptions, rOpt?: RequestOptions): Observable<Skill>;
-  create(eventId: number, skillRequest: SkillRequest, params: FetchParams, mOpt: MulticastOptions, rOpt?: RequestOptions): Observable<Skill>;
   create(eventId: number, skillRequest: SkillRequest, p1: WsServiceRequestP1, p2?: WsServiceRequestP2, p3?: WsServiceRequestP3): Observable<Skill> {
     const {fetchParams, multicastOptions, requestOptions} = this.resolveArgs(p1, p2, p3, FULL);
     const params = HttpUtil.objectToParams(fetchParams || {});
@@ -52,11 +47,9 @@ export class SkillService extends WsService<Skill> {
   }
 
   update(eventId: number, skillId: number, skillRequest: SkillRequest, rOpt?: RequestOptions): Observable<Skill>;
-  update(eventId: number, skillId: number, skillRequest: SkillRequest, params: FetchParams, rOpt?: RequestOptions): Observable<Skill>;
-  update(eventId: number, skillId: number, skillRequest: SkillRequest, mOpt: MulticastOptions, rOpt?: RequestOptions): Observable<Skill>;
-  update(eventId: number, skillId: number, skillRequest: SkillRequest, params: FetchParams, mOpt: MulticastOptions, rOpt?: RequestOptions): Observable<Skill>;
   update(
-    eventId: number, skillId: number,
+    eventId: number,
+    skillId: number,
     skillRequest: SkillRequest,
     p1: WsServiceRequestP1,
     p2?: WsServiceRequestP2,

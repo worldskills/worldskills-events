@@ -1,10 +1,8 @@
 import {Injectable} from '@angular/core';
 import {TagList} from '../../types/tag';
 import {
-  FetchParams,
   FULL,
   HttpUtil,
-  MulticastOptions,
   RequestOptions,
   WsService,
   WsServiceRequestP1,
@@ -26,9 +24,6 @@ export class TagsService extends WsService<TagList> {
   }
 
   fetch(eventId: number, rOpt?: RequestOptions): Observable<TagList>;
-  fetch(eventId: number, params: FetchParams, rOpt?: RequestOptions): Observable<TagList>;
-  fetch(eventId: number, mOpt: MulticastOptions, rOpt?: RequestOptions): Observable<TagList>;
-  fetch(eventId: number, params: FetchParams, mOpt: MulticastOptions, rOpt?: RequestOptions): Observable<TagList>;
   fetch(eventId: number, p1: WsServiceRequestP1, p2?: WsServiceRequestP2, p3?: WsServiceRequestP3): Observable<TagList> {
     const {fetchParams, multicastOptions, requestOptions} = this.resolveArgs(p1, p2, p3, FULL);
     const params = HttpUtil.objectToParams(fetchParams || {});

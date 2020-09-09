@@ -76,10 +76,8 @@ export class EventsService extends WsService<EventList, EventsFetchParams> {
     return obj;
   }
 
-  fetch(rOpt?: RequestOptions): Observable<EventList>;
   fetch(params: EventsFetchParams, rOpt?: RequestOptions): Observable<EventList>;
   fetch(mOpt: MulticastOptions, rOpt?: RequestOptions): Observable<EventList>;
-  fetch(params: EventsFetchParams, mOpt: MulticastOptions, rOpt?: RequestOptions): Observable<EventList>;
   fetch(p1: WsServiceRequestP1, p2?: WsServiceRequestP2, p3?: WsServiceRequestP3): Observable<EventList> {
     const {fetchParams, multicastOptions, requestOptions} = this.resolveArgs(p1, p2, p3, FULL, DEFAULT_FETCH_PARAMS);
     const params = HttpUtil.objectToParams(this.stripNullOrUndefined(fetchParams) || {});

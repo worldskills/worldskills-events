@@ -1,8 +1,6 @@
 import {Injectable} from '@angular/core';
 import {
-  FetchParams,
   HttpUtil,
-  MulticastOptions,
   NO_SUBJECT,
   RequestOptions,
   WsService,
@@ -25,9 +23,6 @@ export class BaseSkillTagService extends WsService<void> {
   }
 
   bind(baseSkillId: number, tagId: number, rOpt?: RequestOptions): Observable<void>;
-  bind(baseSkillId: number, tagId: number, params: FetchParams, rOpt?: RequestOptions): Observable<void>;
-  bind(baseSkillId: number, tagId: number, mOpt: MulticastOptions, rOpt?: RequestOptions): Observable<void>;
-  bind(baseSkillId: number, tagId: number, params: FetchParams, mOpt: MulticastOptions, rOpt?: RequestOptions): Observable<void>;
   bind(baseSkillId: number, tagId: number, p1: WsServiceRequestP1, p2?: WsServiceRequestP2, p3?: WsServiceRequestP3): Observable<void> {
     const {fetchParams, multicastOptions, requestOptions} = this.resolveArgs(p1, p2, p3, NO_SUBJECT);
     const params = HttpUtil.objectToParams(fetchParams || {});
@@ -38,9 +33,6 @@ export class BaseSkillTagService extends WsService<void> {
   }
 
   unbind(baseSkillId: number, tagId: number, rOpt?: RequestOptions): Observable<void>;
-  unbind(baseSkillId: number, tagId: number, params: FetchParams, rOpt?: RequestOptions): Observable<void>;
-  unbind(baseSkillId: number, tagId: number, mOpt: MulticastOptions, rOpt?: RequestOptions): Observable<void>;
-  unbind(baseSkillId: number, tagId: number, params: FetchParams, mOpt: MulticastOptions, rOpt?: RequestOptions): Observable<void>;
   unbind(baseSkillId: number, tagId: number, p1: WsServiceRequestP1, p2?: WsServiceRequestP2, p3?: WsServiceRequestP3): Observable<void> {
     const {fetchParams, multicastOptions, requestOptions} = this.resolveArgs(p1, p2, p3, NO_SUBJECT);
     const params = HttpUtil.objectToParams(fetchParams || {});

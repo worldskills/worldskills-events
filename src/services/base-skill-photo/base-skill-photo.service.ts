@@ -1,6 +1,5 @@
 import {Injectable} from '@angular/core';
 import {
-  FetchParams,
   FULL,
   HttpUtil,
   MulticastOptions,
@@ -27,9 +26,6 @@ export class BaseSkillPhotoService extends WsService<Photo> {
   }
 
   fetch(baseSkillId: number, photoId: number, rOpt?: RequestOptions): Observable<Photo>;
-  fetch(baseSkillId: number, photoId: number, params: FetchParams, rOpt?: RequestOptions): Observable<Photo>;
-  fetch(baseSkillId: number, photoId: number, mOpt: MulticastOptions, rOpt?: RequestOptions): Observable<Photo>;
-  fetch(baseSkillId: number, photoId: number, params: FetchParams, mOpt: MulticastOptions, rOpt?: RequestOptions): Observable<Photo>;
   fetch(baseSkillId: number, photoId: number, p1: WsServiceRequestP1, p2?: WsServiceRequestP2, p3?: WsServiceRequestP3): Observable<Photo> {
     const {fetchParams, multicastOptions, requestOptions} = this.resolveArgs(p1, p2, p3, FULL);
     const params = HttpUtil.objectToParams(fetchParams || {});
@@ -40,9 +36,6 @@ export class BaseSkillPhotoService extends WsService<Photo> {
   }
 
   create(baseSkillId: number, photoRequest: Photo, rOpt?: RequestOptions): Observable<Photo>;
-  create(baseSkillId: number, photoRequest: Photo, params: FetchParams, rOpt?: RequestOptions): Observable<Photo>;
-  create(baseSkillId: number, photoRequest: Photo, mOpt: MulticastOptions, rOpt?: RequestOptions): Observable<Photo>;
-  create(baseSkillId: number, photoRequest: Photo, params: FetchParams, mOpt: MulticastOptions, rOpt?: RequestOptions): Observable<Photo>;
   create(baseSkillId: number, photoRequest: Photo, p1: WsServiceRequestP1, p2?: WsServiceRequestP2, p3?: WsServiceRequestP3): Observable<Photo> {
     const {fetchParams, multicastOptions, requestOptions} = this.resolveArgs(p1, p2, p3, FULL);
     const params = HttpUtil.objectToParams(fetchParams || {});
@@ -53,9 +46,7 @@ export class BaseSkillPhotoService extends WsService<Photo> {
   }
 
   update(baseSkillId: number, photoId: number, photoRequest: Photo, rOpt?: RequestOptions): Observable<Photo>;
-  update(baseSkillId: number, photoId: number, photoRequest: Photo, params: FetchParams, rOpt?: RequestOptions): Observable<Photo>;
   update(baseSkillId: number, photoId: number, photoRequest: Photo, mOpt: MulticastOptions, rOpt?: RequestOptions): Observable<Photo>;
-  update(baseSkillId: number, photoId: number, photoRequest: Photo, params: FetchParams, mOpt: MulticastOptions, rOpt?: RequestOptions): Observable<Photo>;
   update(
     baseSkillId: number, photoId: number,
     photoRequest: Photo,
@@ -72,9 +63,6 @@ export class BaseSkillPhotoService extends WsService<Photo> {
   }
 
   delete(baseSkillId: number, photoId: number, rOpt?: RequestOptions): Observable<Photo>;
-  delete(baseSkillId: number, photoId: number, params: FetchParams, rOpt?: RequestOptions): Observable<Photo>;
-  delete(baseSkillId: number, photoId: number, mOpt: MulticastOptions, rOpt?: RequestOptions): Observable<Photo>;
-  delete(baseSkillId: number, photoId: number, params: FetchParams, mOpt: MulticastOptions, rOpt?: RequestOptions): Observable<Photo>;
   delete(baseSkillId: number, photoId: number, p1: WsServiceRequestP1, p2?: WsServiceRequestP2, p3?: WsServiceRequestP3): Observable<Photo> {
     const {fetchParams, multicastOptions, requestOptions} = this.resolveArgs(p1, p2, p3, NO_SUBJECT);
     const params = HttpUtil.objectToParams(fetchParams || {});

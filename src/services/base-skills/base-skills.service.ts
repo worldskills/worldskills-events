@@ -3,7 +3,6 @@ import {
   FetchParams,
   FULL,
   HttpUtil,
-  MulticastOptions,
   RequestOptions,
   WsService,
   WsServiceRequestP1,
@@ -30,23 +29,7 @@ export class BaseSkillsService extends WsService<BaseSkillList> {
     super();
   }
 
-  fetch(rOpt?: RequestOptions): Observable<BaseSkillList>;
-  fetch(params: FetchParams, rOpt?: RequestOptions): Observable<BaseSkillList>;
-  fetch(mOpt: MulticastOptions, rOpt?: RequestOptions): Observable<BaseSkillList>;
-  fetch(params: FetchParams, mOpt: MulticastOptions, rOpt?: RequestOptions): Observable<BaseSkillList>;
-  fetch(p1: WsServiceRequestP1, p2?: WsServiceRequestP2, p3?: WsServiceRequestP3): Observable<BaseSkillList> {
-    const {fetchParams, multicastOptions, requestOptions} = this.resolveArgs(p1, p2, p3, FULL, DEFAULT_FETCH_PARAMS);
-    const params = HttpUtil.objectToParams(fetchParams || {});
-    const observable = this.http.get<BaseSkillList>(
-      requestOptions.url ?? `${environment.worldskillsApiEvents}/base_skills`, {params}
-    ).pipe(share());
-    return this.request(observable, multicastOptions);
-  }
-
   fetchByEntity(entityId: number, rOpt?: RequestOptions): Observable<BaseSkillList>;
-  fetchByEntity(entityId: number, params: FetchParams, rOpt?: RequestOptions): Observable<BaseSkillList>;
-  fetchByEntity(entityId: number, mOpt: MulticastOptions, rOpt?: RequestOptions): Observable<BaseSkillList>;
-  fetchByEntity(entityId: number, params: FetchParams, mOpt: MulticastOptions, rOpt?: RequestOptions): Observable<BaseSkillList>;
   fetchByEntity(entityId: number, p1: WsServiceRequestP1, p2?: WsServiceRequestP2, p3?: WsServiceRequestP3): Observable<BaseSkillList> {
     const {fetchParams, multicastOptions, requestOptions} = this.resolveArgs(p1, p2, p3, FULL, DEFAULT_FETCH_PARAMS);
     const params = HttpUtil.objectToParams(fetchParams || {});

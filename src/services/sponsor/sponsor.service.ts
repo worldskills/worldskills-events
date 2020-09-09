@@ -26,9 +26,6 @@ export class SponsorService extends WsService<Sponsor> {
   }
 
   fetch(sponsorId: number, rOpt?: RequestOptions): Observable<Sponsor>;
-  fetch(sponsorId: number, params: FetchParams, rOpt?: RequestOptions): Observable<Sponsor>;
-  fetch(sponsorId: number, mOpt: MulticastOptions, rOpt?: RequestOptions): Observable<Sponsor>;
-  fetch(sponsorId: number, params: FetchParams, mOpt: MulticastOptions, rOpt?: RequestOptions): Observable<Sponsor>;
   fetch(sponsorId: number, p1: WsServiceRequestP1, p2?: WsServiceRequestP2, p3?: WsServiceRequestP3): Observable<Sponsor> {
     const {fetchParams, multicastOptions, requestOptions} = this.resolveArgs(p1, p2, p3, FULL);
     const params = HttpUtil.objectToParams(fetchParams || {});
@@ -39,9 +36,6 @@ export class SponsorService extends WsService<Sponsor> {
   }
 
   create(sponsor: SponsorRequest, rOpt?: RequestOptions): Observable<Sponsor>;
-  create(sponsor: SponsorRequest, params: FetchParams, rOpt?: RequestOptions): Observable<Sponsor>;
-  create(sponsor: SponsorRequest, mOpt: MulticastOptions, rOpt?: RequestOptions): Observable<Sponsor>;
-  create(sponsor: SponsorRequest, params: FetchParams, mOpt: MulticastOptions, rOpt?: RequestOptions): Observable<Sponsor>;
   create(sponsor: SponsorRequest, p1: WsServiceRequestP1, p2?: WsServiceRequestP2, p3?: WsServiceRequestP3): Observable<Sponsor> {
     const {fetchParams, multicastOptions, requestOptions} = this.resolveArgs(p1, p2, p3, FULL);
     const params = HttpUtil.objectToParams(fetchParams || {});
@@ -52,9 +46,6 @@ export class SponsorService extends WsService<Sponsor> {
   }
 
   update(sponsorId: number, sponsor: SponsorRequest, rOpt?: RequestOptions): Observable<Sponsor>;
-  update(sponsorId: number, sponsor: SponsorRequest, params: FetchParams, rOpt?: RequestOptions): Observable<Sponsor>;
-  update(sponsorId: number, sponsor: SponsorRequest, mOpt: MulticastOptions, rOpt?: RequestOptions): Observable<Sponsor>;
-  update(sponsorId: number, sponsor: SponsorRequest, params: FetchParams, mOpt: MulticastOptions, rOpt?: RequestOptions): Observable<Sponsor>;
   update(sponsorId: number, sponsor: SponsorRequest, p1: WsServiceRequestP1, p2?: WsServiceRequestP2, p3?: WsServiceRequestP3): Observable<Sponsor> {
     const {fetchParams, multicastOptions, requestOptions} = this.resolveArgs(p1, p2, p3, FULL);
     const params = HttpUtil.objectToParams(fetchParams || {});
@@ -65,9 +56,6 @@ export class SponsorService extends WsService<Sponsor> {
   }
 
   delete(sponsorId: number, rOpt?: RequestOptions): Observable<Sponsor>;
-  delete(sponsorId: number, params: FetchParams, rOpt?: RequestOptions): Observable<Sponsor>;
-  delete(sponsorId: number, mOpt: MulticastOptions, rOpt?: RequestOptions): Observable<Sponsor>;
-  delete(sponsorId: number, params: FetchParams, mOpt: MulticastOptions, rOpt?: RequestOptions): Observable<Sponsor>;
   delete(sponsorId: number, p1: WsServiceRequestP1, p2?: WsServiceRequestP2, p3?: WsServiceRequestP3): Observable<Sponsor> {
     const {fetchParams, multicastOptions, requestOptions} = this.resolveArgs(p1, p2, p3, NO_SUBJECT);
     const params = HttpUtil.objectToParams(fetchParams || {});

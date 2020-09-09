@@ -1,10 +1,8 @@
 import {Injectable} from '@angular/core';
 import {HttpClient} from '@angular/common/http';
 import {
-  FetchParams,
   FULL,
   HttpUtil,
-  MulticastOptions,
   NO_SUBJECT,
   RequestOptions,
   WsService,
@@ -27,9 +25,6 @@ export class EventService extends WsService<Event> {
   }
 
   fetch(eventId: number, rOpt?: RequestOptions): Observable<Event>;
-  fetch(eventId: number, params: FetchParams, rOpt?: RequestOptions): Observable<Event>;
-  fetch(eventId: number, mOpt: MulticastOptions, rOpt?: RequestOptions): Observable<Event>;
-  fetch(eventId: number, params: FetchParams, mOpt: MulticastOptions, rOpt?: RequestOptions): Observable<Event>;
   fetch(eventId: number, p1: WsServiceRequestP1, p2?: WsServiceRequestP2, p3?: WsServiceRequestP3): Observable<Event> {
     const {fetchParams, multicastOptions, requestOptions} = this.resolveArgs(p1, p2, p3, FULL);
     const params = HttpUtil.objectToParams(fetchParams || {});
@@ -40,9 +35,6 @@ export class EventService extends WsService<Event> {
   }
 
   create(event: EventRequest, rOpt?: RequestOptions): Observable<Event>;
-  create(event: EventRequest, params: FetchParams, rOpt?: RequestOptions): Observable<Event>;
-  create(event: EventRequest, mOpt: MulticastOptions, rOpt?: RequestOptions): Observable<Event>;
-  create(event: EventRequest, params: FetchParams, mOpt: MulticastOptions, rOpt?: RequestOptions): Observable<Event>;
   create(event: EventRequest, p1: WsServiceRequestP1, p2?: WsServiceRequestP2, p3?: WsServiceRequestP3): Observable<Event> {
     const {fetchParams, multicastOptions, requestOptions} = this.resolveArgs(p1, p2, p3, FULL);
     const params = HttpUtil.objectToParams(fetchParams || {});
@@ -53,9 +45,6 @@ export class EventService extends WsService<Event> {
   }
 
   update(eventId: number, event: EventRequest, rOpt?: RequestOptions): Observable<Event>;
-  update(eventId: number, event: EventRequest, params: FetchParams, rOpt?: RequestOptions): Observable<Event>;
-  update(eventId: number, event: EventRequest, mOpt: MulticastOptions, rOpt?: RequestOptions): Observable<Event>;
-  update(eventId: number, event: EventRequest, params: FetchParams, mOpt: MulticastOptions, rOpt?: RequestOptions): Observable<Event>;
   update(eventId: number, event: EventRequest, p1: WsServiceRequestP1, p2?: WsServiceRequestP2, p3?: WsServiceRequestP3): Observable<Event> {
     const {fetchParams, multicastOptions, requestOptions} = this.resolveArgs(p1, p2, p3, FULL);
     const params = HttpUtil.objectToParams(fetchParams || {});
@@ -66,9 +55,6 @@ export class EventService extends WsService<Event> {
   }
 
   delete(eventId: number, rOpt?: RequestOptions): Observable<Event>;
-  delete(eventId: number, params: FetchParams, rOpt?: RequestOptions): Observable<Event>;
-  delete(eventId: number, mOpt: MulticastOptions, rOpt?: RequestOptions): Observable<Event>;
-  delete(eventId: number, params: FetchParams, mOpt: MulticastOptions, rOpt?: RequestOptions): Observable<Event>;
   delete(eventId: number, p1: WsServiceRequestP1, p2?: WsServiceRequestP2, p3?: WsServiceRequestP3): Observable<Event> {
     const {fetchParams, multicastOptions, requestOptions} = this.resolveArgs(p1, p2, p3, NO_SUBJECT);
     const params = HttpUtil.objectToParams(fetchParams || {});

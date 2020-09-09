@@ -1,10 +1,8 @@
 import {Injectable} from '@angular/core';
 import {HttpClient} from '@angular/common/http';
 import {
-  FetchParams,
   FULL,
   HttpUtil,
-  MulticastOptions,
   NO_SUBJECT,
   RequestOptions,
   WsService,
@@ -27,9 +25,6 @@ export class SectorService extends WsService<Sector> {
   }
 
   fetch(eventId: number, sectorId: number, rOpt?: RequestOptions): Observable<Sector>;
-  fetch(eventId: number, sectorId: number, params: FetchParams, rOpt?: RequestOptions): Observable<Sector>;
-  fetch(eventId: number, sectorId: number, mOpt: MulticastOptions, rOpt?: RequestOptions): Observable<Sector>;
-  fetch(eventId: number, sectorId: number, params: FetchParams, mOpt: MulticastOptions, rOpt?: RequestOptions): Observable<Sector>;
   fetch(eventId: number, sectorId: number, p1: WsServiceRequestP1, p2?: WsServiceRequestP2, p3?: WsServiceRequestP3): Observable<Sector> {
     const {fetchParams, multicastOptions, requestOptions} = this.resolveArgs(p1, p2, p3, FULL);
     const params = HttpUtil.objectToParams(fetchParams || {});
@@ -40,9 +35,6 @@ export class SectorService extends WsService<Sector> {
   }
 
   create(eventId: number, sector: SectorRequest, rOpt?: RequestOptions): Observable<Sector>;
-  create(eventId: number, sector: SectorRequest, params: FetchParams, rOpt?: RequestOptions): Observable<Sector>;
-  create(eventId: number, sector: SectorRequest, mOpt: MulticastOptions, rOpt?: RequestOptions): Observable<Sector>;
-  create(eventId: number, sector: SectorRequest, params: FetchParams, mOpt: MulticastOptions, rOpt?: RequestOptions): Observable<Sector>;
   create(eventId: number, sector: SectorRequest, p1: WsServiceRequestP1, p2?: WsServiceRequestP2, p3?: WsServiceRequestP3): Observable<Sector> {
     const {fetchParams, multicastOptions, requestOptions} = this.resolveArgs(p1, p2, p3, FULL);
     const params = HttpUtil.objectToParams(fetchParams || {});
@@ -53,9 +45,6 @@ export class SectorService extends WsService<Sector> {
   }
 
   update(eventId: number, sectorId: number, sector: SectorRequest, rOpt?: RequestOptions): Observable<Sector>;
-  update(eventId: number, sectorId: number, sector: SectorRequest, params: FetchParams, rOpt?: RequestOptions): Observable<Sector>;
-  update(eventId: number, sectorId: number, sector: SectorRequest, mOpt: MulticastOptions, rOpt?: RequestOptions): Observable<Sector>;
-  update(eventId: number, sectorId: number, sector: SectorRequest, params: FetchParams, mOpt: MulticastOptions, rOpt?: RequestOptions): Observable<Sector>;
   update(eventId: number, sectorId: number, sector: SectorRequest, p1: WsServiceRequestP1, p2?: WsServiceRequestP2, p3?: WsServiceRequestP3): Observable<Sector> {
     const {fetchParams, multicastOptions, requestOptions} = this.resolveArgs(p1, p2, p3, FULL);
     const params = HttpUtil.objectToParams(fetchParams || {});
@@ -66,9 +55,6 @@ export class SectorService extends WsService<Sector> {
   }
 
   delete(eventId: number, sectorId: number, rOpt?: RequestOptions): Observable<Sector>;
-  delete(eventId: number, sectorId: number, params: FetchParams, rOpt?: RequestOptions): Observable<Sector>;
-  delete(eventId: number, sectorId: number, mOpt: MulticastOptions, rOpt?: RequestOptions): Observable<Sector>;
-  delete(eventId: number, sectorId: number, params: FetchParams, mOpt: MulticastOptions, rOpt?: RequestOptions): Observable<Sector>;
   delete(eventId: number, sectorId: number, p1: WsServiceRequestP1, p2?: WsServiceRequestP2, p3?: WsServiceRequestP3): Observable<Sector> {
     const {fetchParams, multicastOptions, requestOptions} = this.resolveArgs(p1, p2, p3, NO_SUBJECT);
     const params = HttpUtil.objectToParams(fetchParams || {});

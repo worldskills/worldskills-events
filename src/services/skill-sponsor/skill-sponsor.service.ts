@@ -1,8 +1,7 @@
 import {Injectable} from '@angular/core';
 import {
   FetchParams,
-  HttpUtil,
-  MulticastOptions,
+  HttpUtil, MulticastOptions,
   NO_SUBJECT,
   RequestOptions,
   WsService,
@@ -26,9 +25,6 @@ export class SkillSponsorService extends WsService<void> {
   }
 
   bind(eventId: number, skillId: number, sponsorId: number, sponsorRequest: SponsorRequest, rOpt?: RequestOptions): Observable<void>;
-  bind(eventId: number, skillId: number, sponsorId: number, sponsorRequest: SponsorRequest, params: FetchParams, rOpt?: RequestOptions): Observable<void>;
-  bind(eventId: number, skillId: number, sponsorId: number, sponsorRequest: SponsorRequest, mOpt: MulticastOptions, rOpt?: RequestOptions): Observable<void>;
-  bind(eventId: number, skillId: number, sponsorId: number, sponsorRequest: SponsorRequest, params: FetchParams, mOpt: MulticastOptions, rOpt?: RequestOptions): Observable<void>;
   bind(eventId: number, skillId: number, sponsorId: number, sponsorRequest: SponsorRequest, p1: WsServiceRequestP1, p2?: WsServiceRequestP2, p3?: WsServiceRequestP3): Observable<void> {
     const {fetchParams, multicastOptions, requestOptions} = this.resolveArgs(p1, p2, p3, NO_SUBJECT);
     const params = HttpUtil.objectToParams(fetchParams || {});
@@ -40,10 +36,7 @@ export class SkillSponsorService extends WsService<void> {
     return this.request(observable, multicastOptions);
   }
 
-  update(eventId: number, skillId: number, sponsorId: number, sponsorRequest: SponsorRequest, rOpt?: RequestOptions): Observable<void>;
-  update(eventId: number, skillId: number, sponsorId: number, sponsorRequest: SponsorRequest, params: FetchParams, rOpt?: RequestOptions): Observable<void>;
   update(eventId: number, skillId: number, sponsorId: number, sponsorRequest: SponsorRequest, mOpt: MulticastOptions, rOpt?: RequestOptions): Observable<void>;
-  update(eventId: number, skillId: number, sponsorId: number, sponsorRequest: SponsorRequest, params: FetchParams, mOpt: MulticastOptions, rOpt?: RequestOptions): Observable<void>;
   update(eventId: number, skillId: number, sponsorId: number, sponsorRequest: SponsorRequest, p1: WsServiceRequestP1, p2?: WsServiceRequestP2, p3?: WsServiceRequestP3): Observable<void> {
     const {fetchParams, multicastOptions, requestOptions} = this.resolveArgs(p1, p2, p3, NO_SUBJECT);
     const params = HttpUtil.objectToParams(fetchParams || {});
@@ -56,9 +49,6 @@ export class SkillSponsorService extends WsService<void> {
   }
 
   unbind(eventId: number, skillId: number, sponsorId: number, rOpt?: RequestOptions): Observable<void>;
-  unbind(eventId: number, skillId: number, sponsorId: number, params: FetchParams, rOpt?: RequestOptions): Observable<void>;
-  unbind(eventId: number, skillId: number, sponsorId: number, mOpt: MulticastOptions, rOpt?: RequestOptions): Observable<void>;
-  unbind(eventId: number, skillId: number, sponsorId: number, params: FetchParams, mOpt: MulticastOptions, rOpt?: RequestOptions): Observable<void>;
   unbind(eventId: number, skillId: number, sponsorId: number, p1: WsServiceRequestP1, p2?: WsServiceRequestP2, p3?: WsServiceRequestP3): Observable<void> {
     const {fetchParams, multicastOptions, requestOptions} = this.resolveArgs(p1, p2, p3, NO_SUBJECT);
     const params = HttpUtil.objectToParams(fetchParams || {});

@@ -1,10 +1,8 @@
 import {Injectable} from '@angular/core';
 import {SponsorList} from '../../types/sponsor';
 import {
-  FetchParams,
   FULL,
   HttpUtil,
-  MulticastOptions,
   RequestOptions,
   WsService,
   WsServiceRequestP1,
@@ -31,9 +29,6 @@ export class SponsorsService extends WsService<SponsorList> {
   }
 
   fetch(eventId: number, rOpt?: RequestOptions): Observable<SponsorList>;
-  fetch(eventId: number, params: FetchParams, rOpt?: RequestOptions): Observable<SponsorList>;
-  fetch(eventId: number, mOpt: MulticastOptions, rOpt?: RequestOptions): Observable<SponsorList>;
-  fetch(eventId: number, params: FetchParams, mOpt: MulticastOptions, rOpt?: RequestOptions): Observable<SponsorList>;
   fetch(eventId: number, p1: WsServiceRequestP1, p2?: WsServiceRequestP2, p3?: WsServiceRequestP3): Observable<SponsorList> {
     const {fetchParams, multicastOptions, requestOptions} = this.resolveArgs(p1, p2, p3, FULL, DEFAULT_FETCH_PARAMS);
     const params = HttpUtil.objectToParams(fetchParams || {});

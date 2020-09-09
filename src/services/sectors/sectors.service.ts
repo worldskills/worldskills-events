@@ -4,7 +4,6 @@ import {
   FetchParams,
   FULL,
   HttpUtil,
-  MulticastOptions,
   RequestOptions,
   WsService,
   WsServiceRequestP1,
@@ -31,9 +30,6 @@ export class SectorsService extends WsService<SectorList> {
   }
 
   fetch(eventId: number, rOpt?: RequestOptions): Observable<SectorList>;
-  fetch(eventId: number, params: FetchParams, rOpt?: RequestOptions): Observable<SectorList>;
-  fetch(eventId: number, mOpt: MulticastOptions, rOpt?: RequestOptions): Observable<SectorList>;
-  fetch(eventId: number, params: FetchParams, mOpt: MulticastOptions, rOpt?: RequestOptions): Observable<SectorList>;
   fetch(eventId: number, p1: WsServiceRequestP1, p2?: WsServiceRequestP2, p3?: WsServiceRequestP3): Observable<SectorList> {
     const {fetchParams, multicastOptions, requestOptions} = this.resolveArgs(p1, p2, p3, FULL, DEFAULT_FETCH_PARAMS);
     const params = HttpUtil.objectToParams(fetchParams || {});
