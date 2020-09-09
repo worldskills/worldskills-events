@@ -1,10 +1,9 @@
 import {Component, OnInit, ViewChild} from '@angular/core';
-import {AlertService, AlertType, LOADER_ONLY, WsComponent} from "@worldskills/worldskills-angular-lib";
+import {AlertService, AlertType, LOADER_ONLY, RxjsUtil, WsComponent} from "@worldskills/worldskills-angular-lib";
 import {Photo} from "../../types/photo";
 import {BaseSkill} from "../../types/base-skill";
 import {BaseSkillService} from "../../services/base-skill/base-skill.service";
 import {combineLatest} from "rxjs";
-import {map} from "rxjs/operators";
 import {BaseSkillPhotoService} from "../../services/base-skill-photo/base-skill-photo.service";
 import {faCaretDown, faCaretUp, faTimes} from '@fortawesome/free-solid-svg-icons';
 import {environment} from "../../environments/environment";
@@ -37,12 +36,10 @@ export class BaseSkillPhotosComponent extends WsComponent implements OnInit {
   ngOnInit(): void {
     this.subscribe(
       this.baseSkillService.subject.subscribe(baseSkill => (this.baseSkill = baseSkill)),
-      combineLatest([
-        this.baseSkillService.loading,
-        this.baseSkillPhotoService.loading,
-      ])
-        .pipe(map(ls => !ls.every(l => !l)))
-        .subscribe(loading => (this.loading = loading))
+      RxjsUtil.loaderSubscriber(
+        this.baseSkillService,
+        this.baseSkillPhotoService,
+      ).subscribe(loading => (this.loading = loading))
     );
   }
 

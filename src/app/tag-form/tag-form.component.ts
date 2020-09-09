@@ -1,4 +1,4 @@
-import {Component, EventEmitter, Input, OnInit, Output, ViewChild} from '@angular/core';
+import {Component, EventEmitter, Input, Output, ViewChild} from '@angular/core';
 import {Event} from '../../types/event';
 import {Tag} from '../../types/tag';
 import {NgForm} from '@angular/forms';
@@ -9,7 +9,7 @@ import {WsComponent} from '@worldskills/worldskills-angular-lib';
   templateUrl: './tag-form.component.html',
   styleUrls: ['./tag-form.component.css']
 })
-export class TagFormComponent extends WsComponent implements OnInit {
+export class TagFormComponent extends WsComponent {
 
   @Input() event: Event;
   @Input() tag: Tag = null;
@@ -19,13 +19,6 @@ export class TagFormComponent extends WsComponent implements OnInit {
 
   constructor() {
     super();
-  }
-
-  ngOnInit(): void {
-  }
-
-  get initialized() {
-    return true;
   }
 
   submit() {

@@ -2,10 +2,8 @@ import {Component, OnInit} from '@angular/core';
 import {Event} from "../../types/event";
 import {BaseSponsor} from "../../types/base-sponsor";
 import {BaseSponsorService} from "../../services/base-sponsor/base-sponsor.service";
-import {AlertService, AlertType, User, WsComponent} from "@worldskills/worldskills-angular-lib";
+import {AlertService, AlertType, RxjsUtil, User, WsComponent} from "@worldskills/worldskills-angular-lib";
 import {TranslateService} from "@ngx-translate/core";
-import {combineLatest} from "rxjs";
-import {map} from "rxjs/operators";
 import {ActivatedRoute, Router} from "@angular/router";
 import {environment} from "../../environments/environment";
 import {SponsorRequest} from "../../types/sponsor";
@@ -39,11 +37,9 @@ export class BaseSponsorUpdateComponent extends WsComponent implements OnInit {
         this.baseSponsorService.fetch(parseInt(baseSponsorId));
       }),
       this.baseSponsorService.subject.subscribe(baseSponsor => (this.baseSponsor = baseSponsor)),
-      combineLatest([
-        this.baseSponsorService.loading
-      ])
-        .pipe(map(ls => !ls.every(l => !l)))
-        .subscribe(loading => (this.loading = loading))
+      RxjsUtil.loaderSubscriber(
+        this.baseSponsorService
+      ).subscribe(loading => (this.loading = loading))
     );
   }
 

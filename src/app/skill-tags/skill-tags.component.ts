@@ -1,11 +1,9 @@
 import {Component, OnInit, ViewChild} from '@angular/core';
-import {AlertService, AlertType, User, WsComponent} from "@worldskills/worldskills-angular-lib";
+import {AlertService, AlertType, RxjsUtil, User, WsComponent} from "@worldskills/worldskills-angular-lib";
 import {EventService} from "../../services/event/event.service";
 import {SkillService} from "../../services/skill/skill.service";
 import {TagsService} from "../../services/tags/tags.service";
 import {SkillTagService} from "../../services/skill-tag/skill-tag.service";
-import {combineLatest} from "rxjs";
-import {map} from "rxjs/operators";
 import {Event} from "../../types/event";
 import {Skill} from "../../types/skill";
 import {Tag} from "../../types/tag";
@@ -51,14 +49,12 @@ export class SkillTagsComponent extends WsComponent implements OnInit {
       }),
       this.skillService.subject.subscribe(skill => (this.skill = skill)),
       this.tagsService.subject.subscribe(tags => (this.tags = tags.tags)),
-      combineLatest([
-        this.eventService.loading,
-        this.skillService.loading,
-        this.tagsService.loading,
-        this.skillTagService.loading,
-      ])
-        .pipe(map(ls => !ls.every(l => !l)))
-        .subscribe(loading => (this.loading = loading))
+      RxjsUtil.loaderSubscriber(
+        this.eventService,
+        this.skillService,
+        this.tagsService,
+        this.skillTagService,
+      ).subscribe(loading => (this.loading = loading))
     );
   }
 

@@ -1,5 +1,5 @@
 import {Component, OnDestroy, OnInit} from '@angular/core';
-import {AlertService, AlertType, WsComponent} from "@worldskills/worldskills-angular-lib";
+import {AlertService, AlertType, RxjsUtil, WsComponent} from "@worldskills/worldskills-angular-lib";
 import {Skill} from "../../types/skill";
 import {Event} from "../../types/event";
 import {SkillService} from "../../services/skill/skill.service";
@@ -7,7 +7,6 @@ import {ActivatedRoute, Router} from "@angular/router";
 import {TranslateService} from "@ngx-translate/core";
 import {EventService} from "../../services/event/event.service";
 import {combineLatest} from "rxjs";
-import {map} from "rxjs/operators";
 import {environment} from "../../environments/environment";
 import {LocaleContextService} from "../../services/locale-context/locale-context.service";
 import {AppService} from "../../services/app/app.service";
@@ -52,12 +51,10 @@ export class SkillComponent extends WsComponent implements OnInit, OnDestroy {
           this.skillService.fetch(this.event.id, skillId);
         }),
       this.skillService.subject.subscribe(skill => (this.skill = skill)),
-      combineLatest([
-        this.eventService.loading,
-        this.skillService.loading,
-      ])
-        .pipe(map(ls => !ls.every(l => !l)))
-        .subscribe(loading => (this.loading = loading)),
+      RxjsUtil.loaderSubscriber(
+        this.eventService,
+        this.skillService,
+      ).subscribe(loading => (this.loading = loading)),
     );
   }
 

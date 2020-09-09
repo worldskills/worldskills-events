@@ -6,14 +6,13 @@ import {
   AlertService,
   AlertType,
   NgAuthService,
+  RxjsUtil,
   User,
   UserRoleUtil,
   WsComponent
 } from "@worldskills/worldskills-angular-lib";
 import {TranslateService} from "@ngx-translate/core";
 import {EventService} from "../../services/event/event.service";
-import {combineLatest} from "rxjs";
-import {map} from "rxjs/operators";
 import {environment} from "../../environments/environment";
 import {AppService} from "../../services/app/app.service";
 
@@ -48,12 +47,10 @@ export class SkillUpdateComponent extends WsComponent implements OnInit {
     this.subscribe(
       this.eventService.subject.subscribe(event => (this.event = event)),
       this.skillService.subject.subscribe(skill => (this.skill = skill)),
-      combineLatest([
-        this.eventService.loading,
-        this.skillService.loading
-      ])
-        .pipe(map(ls => !ls.every(l => !l)))
-        .subscribe(loading => (this.loading = loading))
+      RxjsUtil.loaderSubscriber(
+        this.eventService,
+        this.skillService,
+      ).subscribe(loading => (this.loading = loading))
     );
   }
 

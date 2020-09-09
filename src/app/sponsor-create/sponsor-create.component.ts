@@ -2,11 +2,9 @@ import {Component, OnInit} from '@angular/core';
 import {Event} from "../../types/event";
 import {SponsorRequest} from "../../types/sponsor";
 import {SponsorService} from "../../services/sponsor/sponsor.service";
-import {AlertService, AlertType, WsComponent} from "@worldskills/worldskills-angular-lib";
+import {AlertService, AlertType, RxjsUtil, WsComponent} from "@worldskills/worldskills-angular-lib";
 import {TranslateService} from "@ngx-translate/core";
 import {EventService} from "../../services/event/event.service";
-import {combineLatest} from "rxjs";
-import {map} from "rxjs/operators";
 import {Router} from "@angular/router";
 
 @Component({
@@ -32,12 +30,10 @@ export class SponsorCreateComponent extends WsComponent implements OnInit {
   ngOnInit(): void {
     this.subscribe(
       this.eventService.subject.subscribe(event => (this.event = event)),
-      combineLatest([
-        this.eventService.loading,
-        this.sponsorService.loading,
-      ])
-        .pipe(map(ls => !ls.every(l => !l)))
-        .subscribe(loading => (this.loading = loading))
+      RxjsUtil.loaderSubscriber(
+        this.eventService,
+        this.sponsorService,
+      ).subscribe(loading => (this.loading = loading))
     );
   }
 

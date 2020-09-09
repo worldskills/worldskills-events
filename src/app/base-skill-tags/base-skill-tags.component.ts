@@ -1,9 +1,7 @@
 import {Component, OnInit, ViewChild} from '@angular/core';
-import {AlertService, AlertType, User, WsComponent} from "@worldskills/worldskills-angular-lib";
+import {AlertService, AlertType, RxjsUtil, User, WsComponent} from "@worldskills/worldskills-angular-lib";
 import {BaseSkillService} from "../../services/base-skill/base-skill.service";
 import {BaseSkillTagService} from "../../services/base-skill-tag/base-skill-tag.service";
-import {combineLatest} from "rxjs";
-import {map} from "rxjs/operators";
 import {BaseSkill} from "../../types/base-skill";
 import {Tag} from "../../types/tag";
 import {TranslateService} from "@ngx-translate/core";
@@ -40,13 +38,11 @@ export class BaseSkillTagsComponent extends WsComponent implements OnInit {
     this.subscribe(
       this.baseSkillService.subject.subscribe(baseSkill => (this.baseSkill = baseSkill)),
       this.baseSkillTagsService.subject.subscribe(tags => (this.tags = tags.tags)),
-      combineLatest([
-        this.baseSkillService.loading,
-        this.baseSkillTagsService.loading,
-        this.baseSkillTagService.loading,
-      ])
-        .pipe(map(ls => !ls.every(l => !l)))
-        .subscribe(loading => (this.loading = loading))
+      RxjsUtil.loaderSubscriber(
+        this.baseSkillService,
+        this.baseSkillTagsService,
+        this.baseSkillTagService,
+      ).subscribe(loading => (this.loading = loading))
     );
     this.baseSkillTagsService.fetch();
   }

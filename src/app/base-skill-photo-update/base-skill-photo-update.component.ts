@@ -1,10 +1,9 @@
 import {Component, OnInit} from '@angular/core';
 import {BaseSkill} from "../../types/base-skill";
 import {BaseSkillService} from "../../services/base-skill/base-skill.service";
-import {AlertService, AlertType, WsComponent} from "@worldskills/worldskills-angular-lib";
+import {AlertService, AlertType, RxjsUtil, WsComponent} from "@worldskills/worldskills-angular-lib";
 import {TranslateService} from "@ngx-translate/core";
 import {combineLatest} from "rxjs";
-import {map} from "rxjs/operators";
 import {BaseSkillPhotoService} from "../../services/base-skill-photo/base-skill-photo.service";
 import {Photo as BaseSkillPhoto, Photo as BaseSkillPhotoRequest} from "../../types/photo";
 import {ActivatedRoute, Router} from "@angular/router";
@@ -41,12 +40,10 @@ export class BaseSkillPhotoUpdateComponent extends WsComponent implements OnInit
         this.baseSkillPhotoService.fetch(this.baseSkill.id, parseInt(baseSkillPhotoId));
       }),
       this.baseSkillPhotoService.subject.subscribe(baseSkillPhoto => (this.baseSkillPhoto = baseSkillPhoto)),
-      combineLatest([
-        this.baseSkillService.loading,
-        this.baseSkillPhotoService.loading,
-      ])
-        .pipe(map(ls => !ls.every(l => !l)))
-        .subscribe(loading => (this.loading = loading))
+      RxjsUtil.loaderSubscriber(
+        this.baseSkillService,
+        this.baseSkillPhotoService,
+      ).subscribe(loading => (this.loading = loading))
     );
   }
 

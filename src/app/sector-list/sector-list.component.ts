@@ -1,11 +1,10 @@
 import {Component, OnDestroy, OnInit, ViewChild} from '@angular/core';
-import {AlertService, AlertType, WsComponent} from "@worldskills/worldskills-angular-lib";
+import {AlertService, AlertType, RxjsUtil, WsComponent} from "@worldskills/worldskills-angular-lib";
 import {Event} from "../../types/event";
 import {Sector} from "../../types/sector";
 import {EventService} from "../../services/event/event.service";
 import {SectorsService} from "../../services/sectors/sectors.service";
 import {combineLatest} from "rxjs";
-import {map} from "rxjs/operators";
 import {SectorService} from "../../services/sector/sector.service";
 import {TranslateService} from "@ngx-translate/core";
 import {faTimes} from '@fortawesome/free-solid-svg-icons';
@@ -62,13 +61,11 @@ export class SectorListComponent extends WsComponent implements OnInit, OnDestro
           }).subscribe(skills => this.sectorDeletableInfo.set(sector.id, skills.total_count === 0));
         });
       }),
-      combineLatest([
-        this.eventService.loading,
-        this.sectorsService.loading,
-        this.sectorService.loading,
-      ])
-        .pipe(map(ls => !ls.every(l => !l)))
-        .subscribe(loading => (this.loading = loading)),
+      RxjsUtil.loaderSubscriber(
+        this.eventService,
+        this.sectorsService,
+        this.sectorService,
+      ).subscribe(loading => (this.loading = loading)),
     );
   }
 

@@ -1,10 +1,7 @@
 import {Component, OnInit} from '@angular/core';
-import {BaseSponsorRequest} from "../../types/base-sponsor";
 import {BaseSponsorService} from "../../services/base-sponsor/base-sponsor.service";
 import {AlertService, AlertType, WsComponent} from "@worldskills/worldskills-angular-lib";
 import {TranslateService} from "@ngx-translate/core";
-import {combineLatest} from "rxjs";
-import {map} from "rxjs/operators";
 import {Router} from "@angular/router";
 import {SponsorRequest} from "../../types/sponsor";
 
@@ -28,16 +25,8 @@ export class BaseSponsorCreateComponent extends WsComponent implements OnInit {
 
   ngOnInit(): void {
     this.subscribe(
-      combineLatest([
-        this.baseSponsorService.loading,
-      ])
-        .pipe(map(ls => !ls.every(l => !l)))
-        .subscribe(loading => (this.loading = loading))
+      this.baseSponsorService.loading.subscribe(loading => (this.loading = loading)),
     );
-  }
-
-  get initialized() {
-    return true
   }
 
   save(request: SponsorRequest) {

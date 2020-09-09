@@ -5,8 +5,6 @@ import {NgForm} from '@angular/forms';
 import {WsComponent} from '@worldskills/worldskills-angular-lib';
 import {BaseSector} from "../../types/base-sector";
 import {BaseSectorsService} from "../../services/base-sectors/base-sectors.service";
-import {combineLatest} from "rxjs";
-import {map} from "rxjs/operators";
 
 @Component({
   selector: 'app-sector-form',
@@ -32,11 +30,7 @@ export class SectorFormComponent extends WsComponent implements OnInit {
   ngOnInit(): void {
     this.subscribe(
       this.baseSectorsService.subject.subscribe(baseSectors => (this.baseSectors = baseSectors.base_sectors)),
-      combineLatest([
-        this.baseSectorsService.loading,
-      ])
-        .pipe(map(ls => !ls.every(l => !l)))
-        .subscribe(loading => (this.loading = loading)),
+      this.baseSectorsService.loading.subscribe(loading => (this.loading = loading)),
     );
     this.baseSectorsService.fetch();
   }

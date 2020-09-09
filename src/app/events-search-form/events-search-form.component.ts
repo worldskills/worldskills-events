@@ -1,13 +1,11 @@
 import {Component, OnInit, ViewChild} from '@angular/core';
-import {LOADER_ONLY, WsComponent} from "@worldskills/worldskills-angular-lib";
+import {LOADER_ONLY, RxjsUtil, WsComponent} from "@worldskills/worldskills-angular-lib";
 import {EventsFetchParams, EventsService} from "../../services/events/events.service";
 import {NgForm} from "@angular/forms";
 import {Event} from '../../types/event';
 import {NgbDateParserFormatter} from "@ng-bootstrap/ng-bootstrap";
 import {CountriesService} from "../../services/countries/countries.service";
 import {Country} from "../../types/country";
-import {combineLatest} from "rxjs";
-import {map} from "rxjs/operators";
 
 @Component({
   selector: 'app-events-search-form',
@@ -39,12 +37,10 @@ export class EventsSearchFormComponent extends WsComponent implements OnInit {
           after: this.formatter.parse(fetchParams.after) as any || undefined,
           before: this.formatter.parse(fetchParams.before) as any || undefined
         }),
-      combineLatest([
-        this.eventsService.loading,
-        this.countriesService.loading,
-      ])
-        .pipe(map(ls => !ls.every(l => !l)))
-        .subscribe(loading => (this.loading = loading)),
+      RxjsUtil.loaderSubscriber(
+        this.eventsService,
+        this.countriesService,
+      ).subscribe(loading => (this.loading = loading)),
     );
     this.eventsService.fetch(LOADER_ONLY).subscribe(events => (this.events = events.events));
     this.countriesService.fetch();

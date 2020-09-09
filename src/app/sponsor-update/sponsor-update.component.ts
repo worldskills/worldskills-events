@@ -6,14 +6,13 @@ import {
   AlertService,
   AlertType,
   NgAuthService,
+  RxjsUtil,
   User,
   UserRoleUtil,
   WsComponent
 } from "@worldskills/worldskills-angular-lib";
 import {TranslateService} from "@ngx-translate/core";
 import {EventService} from "../../services/event/event.service";
-import {combineLatest} from "rxjs";
-import {map} from "rxjs/operators";
 import {ActivatedRoute, Router} from "@angular/router";
 import {environment} from "../../environments/environment";
 
@@ -51,12 +50,10 @@ export class SponsorUpdateComponent extends WsComponent implements OnInit {
       }),
       this.eventService.subject.subscribe(event => (this.event = event)),
       this.sponsorService.subject.subscribe(sponsor => (this.sponsor = sponsor)),
-      combineLatest([
-        this.eventService.loading,
-        this.sponsorService.loading
-      ])
-        .pipe(map(ls => !ls.every(l => !l)))
-        .subscribe(loading => (this.loading = loading))
+      RxjsUtil.loaderSubscriber(
+        this.eventService,
+        this.sponsorService,
+      ).subscribe(loading => (this.loading = loading))
     );
   }
 

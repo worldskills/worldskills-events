@@ -2,12 +2,10 @@ import {Component, EventEmitter, Input, OnInit, Output, ViewChild} from '@angula
 import {Event} from '../../types/event';
 import {Skill, SkillRequest} from '../../types/skill';
 import {NgForm} from '@angular/forms';
-import {WsComponent} from '@worldskills/worldskills-angular-lib';
+import {RxjsUtil, WsComponent} from '@worldskills/worldskills-angular-lib';
 import {NgbDateParserFormatter} from "@ng-bootstrap/ng-bootstrap";
 import {BaseSkill} from "../../types/base-skill";
 import {BaseSkillsService} from "../../services/base-skills/base-skills.service";
-import {combineLatest} from "rxjs";
-import {map} from "rxjs/operators";
 import {SectorsService} from "../../services/sectors/sectors.service";
 import {Sector} from "../../types/sector";
 import * as ClassicEditor from '@ckeditor/ckeditor5-build-classic';
@@ -41,12 +39,10 @@ export class SkillFormComponent extends WsComponent implements OnInit {
     this.subscribe(
       this.baseSkillsService.subject.subscribe(baseSkills => (this.baseSkills = baseSkills.base_skills)),
       this.sectorsService.subject.subscribe(sectors => (this.sectors = sectors.sectors)),
-      combineLatest([
+      RxjsUtil.loaderSubscriber(
         this.baseSkillsService.loading,
         this.sectorsService.loading,
-      ])
-        .pipe(map(ls => !ls.every(l => !l)))
-        .subscribe(loading => (this.loading = loading)),
+      ).subscribe(loading => (this.loading = loading)),
     );
     this.baseSkillsService.fetchByEntity(this.event.ws_entity.id);
     this.sectorsService.fetch(this.event.id);

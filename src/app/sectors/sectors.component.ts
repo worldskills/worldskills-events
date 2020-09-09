@@ -2,8 +2,6 @@ import {Component, OnInit} from '@angular/core';
 import {WsComponent} from "@worldskills/worldskills-angular-lib";
 import {Event} from "../../types/event";
 import {EventService} from "../../services/event/event.service";
-import {combineLatest} from "rxjs";
-import {map} from "rxjs/operators";
 import {LocaleContextService} from "../../services/locale-context/locale-context.service";
 import {AppService} from "../../services/app/app.service";
 
@@ -30,11 +28,7 @@ export class SectorsComponent extends WsComponent implements OnInit {
     this.subscribe(
       this.eventService.subject.subscribe(event => (this.event = event)),
       this.appService.sectorMenu.subscribe(templateRef => (setTimeout(() => this.additionalMenu = templateRef))),
-      combineLatest([
-        this.eventService.loading,
-      ])
-        .pipe(map(ls => !ls.every(l => !l)))
-        .subscribe(loading => (this.loading = loading)),
+      this.eventService.loading.subscribe(loading => (this.loading = loading)),
     );
   }
 

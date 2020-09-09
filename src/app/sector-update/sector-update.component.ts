@@ -6,6 +6,7 @@ import {
   AlertService,
   AlertType,
   NgAuthService,
+  RxjsUtil,
   User,
   UserRoleUtil,
   WsComponent
@@ -13,7 +14,6 @@ import {
 import {TranslateService} from "@ngx-translate/core";
 import {EventService} from "../../services/event/event.service";
 import {combineLatest} from "rxjs";
-import {map} from "rxjs/operators";
 import {ActivatedRoute, Router} from "@angular/router";
 import {environment} from "../../environments/environment";
 
@@ -54,12 +54,10 @@ export class SectorUpdateComponent extends WsComponent implements OnInit {
         this.sectorService.fetch(this.event.id, parseInt(sectorId));
       }),
       this.sectorService.subject.subscribe(sector => (this.sector = sector)),
-      combineLatest([
-        this.eventService.loading,
-        this.sectorService.loading
-      ])
-        .pipe(map(ls => !ls.every(l => !l)))
-        .subscribe(loading => (this.loading = loading))
+      RxjsUtil.loaderSubscriber(
+        this.eventService,
+        this.sectorService
+      ).subscribe(loading => (this.loading = loading))
     );
   }
 

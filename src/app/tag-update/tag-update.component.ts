@@ -2,11 +2,10 @@ import {Component, OnInit} from '@angular/core';
 import {Event} from "../../types/event";
 import {Tag} from "../../types/tag";
 import {TagService} from "../../services/tag/tag.service";
-import {AlertService, AlertType, WsComponent} from "@worldskills/worldskills-angular-lib";
+import {AlertService, AlertType, RxjsUtil, WsComponent} from "@worldskills/worldskills-angular-lib";
 import {TranslateService} from "@ngx-translate/core";
 import {EventService} from "../../services/event/event.service";
 import {combineLatest} from "rxjs";
-import {map} from "rxjs/operators";
 import {ActivatedRoute, Router} from "@angular/router";
 
 @Component({
@@ -41,12 +40,10 @@ export class TagUpdateComponent extends WsComponent implements OnInit {
         this.tagService.fetch(this.event.id, parseInt(tagId));
       }),
       this.tagService.subject.subscribe(tag => (this.tag = tag)),
-      combineLatest([
-        this.eventService.loading,
-        this.tagService.loading
-      ])
-        .pipe(map(ls => !ls.every(l => !l)))
-        .subscribe(loading => (this.loading = loading))
+      RxjsUtil.loaderSubscriber(
+        this.eventService,
+        this.tagService,
+      ).subscribe(loading => (this.loading = loading))
     );
   }
 

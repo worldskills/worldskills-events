@@ -1,4 +1,4 @@
-import {Component, ElementRef, EventEmitter, Input, OnInit, Output, ViewChild} from '@angular/core';
+import {Component, ElementRef, EventEmitter, Input, Output, ViewChild} from '@angular/core';
 import {Photo as SkillPhoto, Photo as SkillPhotoRequest} from '../../types/photo';
 import {NgForm} from '@angular/forms';
 import {UploadService, WsComponent} from '@worldskills/worldskills-angular-lib';
@@ -13,7 +13,7 @@ import {BaseSkill} from "../../types/base-skill";
   templateUrl: './skill-photo-form.component.html',
   styleUrls: ['./skill-photo-form.component.css']
 })
-export class SkillPhotoFormComponent extends WsComponent implements OnInit {
+export class SkillPhotoFormComponent extends WsComponent {
 
   @Input() cancelLink: Array<any>;
   @Input() skill: Skill | BaseSkill;
@@ -32,14 +32,6 @@ export class SkillPhotoFormComponent extends WsComponent implements OnInit {
     private imageService: ImageService,
   ) {
     super();
-  }
-
-  ngOnInit(): void {
-
-  }
-
-  get initialized() {
-    return true;
   }
 
   setFileFromInput(event: Event) {

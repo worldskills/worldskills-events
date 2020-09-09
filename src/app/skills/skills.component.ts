@@ -3,9 +3,8 @@ import {Skill} from "../../types/skill";
 import {Event} from "../../types/event";
 import {EventService} from "../../services/event/event.service";
 import {SkillsService} from "../../services/skills/skills.service";
-import {AlertService, AlertType, WsComponent} from "@worldskills/worldskills-angular-lib";
+import {AlertService, AlertType, RxjsUtil, WsComponent} from "@worldskills/worldskills-angular-lib";
 import {combineLatest} from "rxjs";
-import {map} from "rxjs/operators";
 import {EventsService} from "../../services/events/events.service";
 import {SkillService} from "../../services/skill/skill.service";
 import {TranslateService} from "@ngx-translate/core";
@@ -65,13 +64,11 @@ export class SkillsComponent extends WsComponent implements OnInit {
       }),
       this.skillsService.subject.subscribe(skills => (this.skills = skills.skills)),
       this.eventsService.subject.subscribe(events => (this.events = events.events)),
-      combineLatest([
-        this.eventService.loading,
-        this.skillsService.loading,
-        this.eventsService.loading,
-      ])
-        .pipe(map(ls => !ls.every(l => !l)))
-        .subscribe(loading => (this.loading = loading)),
+      RxjsUtil.loaderSubscriber(
+        this.eventService,
+        this.skillsService,
+        this.eventsService,
+      ).subscribe(loading => (this.loading = loading)),
       this.skillService.loading.subscribe(loadingClone => (this.loadingClone = loadingClone)),
     );
     this.eventsService.fetch({limit: 9999, offset: 0});

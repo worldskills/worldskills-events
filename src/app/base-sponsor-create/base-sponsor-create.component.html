@@ -1,7 +1,7 @@
-<ng-container *ngIf="loading || !initialized">
+<ng-container *ngIf="loading">
   <ws-spinner></ws-spinner>
 </ng-container>
-<ng-container *ngIf="initialized && !loading">
+<ng-container *ngIf="!loading">
   <div class="row my-2">
     <div class="col-12">
       <h3 class="m-0 float-left">

@@ -1,11 +1,9 @@
 import {Component, OnInit} from '@angular/core';
-import {AlertService, AlertType, WsComponent} from "@worldskills/worldskills-angular-lib";
+import {AlertService, AlertType, RxjsUtil, WsComponent} from "@worldskills/worldskills-angular-lib";
 import {Event} from "../../types/event";
 import {Tag} from "../../types/tag";
 import {EventService} from "../../services/event/event.service";
 import {TagsService} from "../../services/tags/tags.service";
-import {combineLatest} from "rxjs";
-import {map} from "rxjs/operators";
 import {TagService} from "../../services/tag/tag.service";
 import {TranslateService} from "@ngx-translate/core";
 import {faTimes} from '@fortawesome/free-solid-svg-icons';
@@ -39,13 +37,11 @@ export class TagsComponent extends WsComponent implements OnInit {
         this.tagsService.fetch(this.event.id);
       }),
       this.tagsService.subject.subscribe(tags => (this.tags = tags.tags)),
-      combineLatest([
-        this.eventService.loading,
-        this.tagsService.loading,
-        this.tagService.loading,
-      ])
-        .pipe(map(ls => !ls.every(l => !l)))
-        .subscribe(loading => (this.loading = loading)),
+      RxjsUtil.loaderSubscriber(
+        this.eventService,
+        this.tagsService,
+        this.tagService,
+      ).subscribe(loading => (this.loading = loading)),
     );
   }
 

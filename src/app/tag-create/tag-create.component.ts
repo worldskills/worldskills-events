@@ -2,11 +2,9 @@ import {Component, OnInit} from '@angular/core';
 import {Event} from "../../types/event";
 import {Tag} from "../../types/tag";
 import {TagService} from "../../services/tag/tag.service";
-import {AlertService, AlertType, EntityTreeService, WsComponent} from "@worldskills/worldskills-angular-lib";
+import {AlertService, AlertType, EntityTreeService, RxjsUtil, WsComponent} from "@worldskills/worldskills-angular-lib";
 import {TranslateService} from "@ngx-translate/core";
 import {EventService} from "../../services/event/event.service";
-import {combineLatest} from "rxjs";
-import {map} from "rxjs/operators";
 import {Router} from "@angular/router";
 
 @Component({
@@ -33,12 +31,10 @@ export class TagCreateComponent extends WsComponent implements OnInit {
   ngOnInit(): void {
     this.subscribe(
       this.eventService.subject.subscribe(event => (this.event = event)),
-      combineLatest([
-        this.eventService.loading,
-        this.tagService.loading,
-      ])
-        .pipe(map(ls => !ls.every(l => !l)))
-        .subscribe(loading => (this.loading = loading))
+      RxjsUtil.loaderSubscriber(
+        this.eventService,
+        this.tagService,
+      ).subscribe(loading => (this.loading = loading))
     );
   }
 

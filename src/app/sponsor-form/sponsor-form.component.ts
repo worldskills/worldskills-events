@@ -1,4 +1,4 @@
-import {Component, ElementRef, EventEmitter, Input, OnInit, Output, ViewChild} from '@angular/core';
+import {Component, ElementRef, EventEmitter, Input, Output, ViewChild} from '@angular/core';
 import {Event as WsEvent} from '../../types/event';
 import {Sponsor, SponsorRequest} from '../../types/sponsor';
 import {NgForm} from '@angular/forms';
@@ -13,7 +13,7 @@ import {BaseSponsor, BaseSponsorRequest} from "../../types/base-sponsor";
   templateUrl: './sponsor-form.component.html',
   styleUrls: ['./sponsor-form.component.css']
 })
-export class SponsorFormComponent extends WsComponent implements OnInit {
+export class SponsorFormComponent extends WsComponent {
 
   @Input() event: WsEvent;
   @Input() cancelLink: Array<any>;
@@ -34,14 +34,6 @@ export class SponsorFormComponent extends WsComponent implements OnInit {
     private imageService: ImageService,
   ) {
     super();
-  }
-
-  ngOnInit(): void {
-
-  }
-
-  get initialized() {
-    return true;
   }
 
   setFileFromInput(event: Event) {

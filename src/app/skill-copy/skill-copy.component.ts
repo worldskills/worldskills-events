@@ -1,11 +1,9 @@
 import {Component, OnInit, ViewChild} from '@angular/core';
-import {AlertService, AlertType, WsComponent} from "@worldskills/worldskills-angular-lib";
+import {AlertService, AlertType, RxjsUtil, WsComponent} from "@worldskills/worldskills-angular-lib";
 import {Event} from "../../types/event";
 import {Skill} from "../../types/skill";
 import {EventService} from "../../services/event/event.service";
 import {SkillService} from "../../services/skill/skill.service";
-import {combineLatest} from "rxjs";
-import {map} from "rxjs/operators";
 import {Router} from "@angular/router";
 import {EventsService} from "../../services/events/events.service";
 import {TranslateService} from "@ngx-translate/core";
@@ -43,12 +41,10 @@ export class SkillCopyComponent extends WsComponent implements OnInit {
       this.eventService.subject.subscribe(event => (this.event = event)),
       this.skillService.subject.subscribe(skill => (this.skill = skill)),
       this.eventsService.subject.subscribe(events => (this.events = events.events)),
-      combineLatest([
+      RxjsUtil.loaderSubscriber(
         this.eventService.loading,
         this.skillService.loading,
-      ])
-        .pipe(map(ls => !ls.every(l => !l)))
-        .subscribe(loading => (this.loading = loading))
+      ).subscribe(loading => (this.loading = loading))
     );
     this.eventsService.fetch({limit: 9999, type: 'competition'});
   }

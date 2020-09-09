@@ -1,11 +1,9 @@
 import {Component, OnInit} from '@angular/core';
-import {AlertService, AlertType, WsComponent} from "@worldskills/worldskills-angular-lib";
+import {AlertService, AlertType, RxjsUtil, WsComponent} from "@worldskills/worldskills-angular-lib";
 import {Event} from "../../types/event";
 import {Sponsor} from "../../types/sponsor";
 import {EventService} from "../../services/event/event.service";
 import {SponsorsService} from "../../services/sponsors/sponsors.service";
-import {combineLatest} from "rxjs";
-import {map} from "rxjs/operators";
 import {SponsorService} from "../../services/sponsor/sponsor.service";
 import {TranslateService} from "@ngx-translate/core";
 import {faTimes} from '@fortawesome/free-solid-svg-icons';
@@ -39,13 +37,11 @@ export class SponsorsComponent extends WsComponent implements OnInit {
         this.sponsorsService.fetch(this.event.id);
       }),
       this.sponsorsService.subject.subscribe(sponsors => (this.sponsors = sponsors.sponsors)),
-      combineLatest([
-        this.eventService.loading,
-        this.sponsorsService.loading,
-        this.sponsorService.loading,
-      ])
-        .pipe(map(ls => !ls.every(l => !l)))
-        .subscribe(loading => (this.loading = loading)),
+      RxjsUtil.loaderSubscriber(
+        this.eventService,
+        this.sponsorsService,
+        this.sponsorService,
+      ).subscribe(loading => (this.loading = loading)),
     );
   }
 

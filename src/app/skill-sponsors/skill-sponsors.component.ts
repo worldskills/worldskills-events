@@ -1,16 +1,15 @@
 import {Component, OnInit, ViewChild} from '@angular/core';
-import {AlertService, AlertType, LOADER_ONLY, WsComponent} from "@worldskills/worldskills-angular-lib";
+import {AlertService, AlertType, LOADER_ONLY, RxjsUtil, WsComponent} from "@worldskills/worldskills-angular-lib";
 import {EventService} from "../../services/event/event.service";
 import {SkillService} from "../../services/skill/skill.service";
 import {SponsorsService} from "../../services/sponsors/sponsors.service";
 import {SkillSponsorService} from "../../services/skill-sponsor/skill-sponsor.service";
 import {combineLatest} from "rxjs";
-import {map} from "rxjs/operators";
 import {Event} from "../../types/event";
 import {Skill} from "../../types/skill";
 import {Sponsor} from "../../types/sponsor";
 import {TranslateService} from "@ngx-translate/core";
-import {faTimes, faCaretDown, faCaretUp, faStar} from '@fortawesome/free-solid-svg-icons';
+import {faCaretDown, faCaretUp, faStar, faTimes} from '@fortawesome/free-solid-svg-icons';
 import {AppService} from "../../services/app/app.service";
 
 @Component({
@@ -51,14 +50,12 @@ export class SkillSponsorsComponent extends WsComponent implements OnInit {
       }),
       this.skillService.subject.subscribe(skill => (this.skill = skill)),
       this.skillSponsorsService.subject.subscribe(sponsors => (this.sponsors = sponsors.sponsors)),
-      combineLatest([
-        this.eventService.loading,
-        this.skillService.loading,
-        this.skillSponsorsService.loading,
-        this.skillSponsorService.loading,
-      ])
-        .pipe(map(ls => !ls.every(l => !l)))
-        .subscribe(loading => (this.loading = loading))
+      RxjsUtil.loaderSubscriber(
+        this.eventService,
+        this.skillService,
+        this.skillSponsorsService,
+        this.skillSponsorService,
+      ).subscribe(loading => (this.loading = loading))
     );
   }
 

@@ -1,7 +1,7 @@
-<ng-container *ngIf="loading || !initialized">
+<ng-container *ngIf="loading">
   <ws-spinner></ws-spinner>
 </ng-container>
-<ng-container *ngIf="initialized && !loading">
+<ng-container *ngIf="!loading">
   <form class="form-horizontal" [ngClass]="{'was-validated': this.form.submitted}" novalidate
         (ngSubmit)="submit()" #form="ngForm">
 
