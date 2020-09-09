@@ -4,7 +4,7 @@ import {EventUpdateComponent} from './event-update.component';
 import {TranslateServiceTestingProvider, TranslationMockPipe} from "../../test";
 import {HttpClientTestingModule} from "@angular/common/http/testing";
 import {RouterTestingModule} from "@angular/router/testing";
-import {WorldskillsAngularLibModule} from "@worldskills/worldskills-angular-lib";
+import {NgAuthService, WorldskillsAngularLibModule} from "@worldskills/worldskills-angular-lib";
 
 describe('EventUpdateComponent', () => {
   let component: EventUpdateComponent;
@@ -15,6 +15,7 @@ describe('EventUpdateComponent', () => {
       declarations: [EventUpdateComponent, TranslationMockPipe],
       imports: [RouterTestingModule, WorldskillsAngularLibModule, HttpClientTestingModule],
       providers: [
+        {provide: NgAuthService, useValue: {currentUser: {subscribe: () => undefined}}},
         TranslateServiceTestingProvider
       ]
     })

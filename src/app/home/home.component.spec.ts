@@ -4,7 +4,7 @@ import {HomeComponent} from './home.component';
 import {TranslateServiceTestingProvider, TranslationMockPipe} from '../../test';
 import {HttpClientTestingModule} from '@angular/common/http/testing';
 import {RouterTestingModule} from '@angular/router/testing';
-import {WorldskillsAngularLibModule} from "@worldskills/worldskills-angular-lib";
+import {NgAuthService, WorldskillsAngularLibModule} from "@worldskills/worldskills-angular-lib";
 
 describe('HomeComponent', () => {
   let component: HomeComponent;
@@ -15,6 +15,15 @@ describe('HomeComponent', () => {
       declarations: [HomeComponent, TranslationMockPipe],
       imports: [RouterTestingModule, WorldskillsAngularLibModule, HttpClientTestingModule],
       providers: [
+        {
+          provide: NgAuthService, useValue: {
+            currentUser: {
+              subscribe: () => undefined
+            },
+            isLoggedIn: () => false,
+            login: () => undefined,
+          }
+        },
         TranslateServiceTestingProvider
       ]
     })

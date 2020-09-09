@@ -1,7 +1,7 @@
 import {async, TestBed} from '@angular/core/testing';
 import {RouterTestingModule} from '@angular/router/testing';
 import {AppComponent} from './app.component';
-import {WorldskillsAngularLibModule} from '@worldskills/worldskills-angular-lib';
+import {NgAuthService, WorldskillsAngularLibModule} from '@worldskills/worldskills-angular-lib';
 import {HttpClientTestingModule} from '@angular/common/http/testing';
 import {TranslateServiceTestingProvider, TranslationMockPipe} from '../test';
 
@@ -11,6 +11,7 @@ describe('AppComponent', () => {
       declarations: [AppComponent, TranslationMockPipe],
       imports: [RouterTestingModule, WorldskillsAngularLibModule, HttpClientTestingModule],
       providers: [
+        {provide: NgAuthService, useValue: {currentUser: {subscribe: () => undefined}}},
         TranslateServiceTestingProvider
       ]
     }).compileComponents();

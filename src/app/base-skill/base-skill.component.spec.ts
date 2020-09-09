@@ -1,6 +1,11 @@
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import {async, ComponentFixture, TestBed} from '@angular/core/testing';
 
-import { BaseSkillComponent } from './base-skill.component';
+import {BaseSkillComponent} from './base-skill.component';
+import {RouterTestingModule} from "@angular/router/testing";
+import {WorldskillsAngularLibModule} from "@worldskills/worldskills-angular-lib";
+import {HttpClientTestingModule} from "@angular/common/http/testing";
+import {TranslateServiceTestingProvider, TranslationMockPipe} from "../../test";
+import {BaseSponsorsComponent} from "../base-sponsors/base-sponsors.component";
 
 describe('BaseSkillComponent', () => {
   let component: BaseSkillComponent;
@@ -8,9 +13,13 @@ describe('BaseSkillComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ BaseSkillComponent ]
+      declarations: [BaseSkillComponent, TranslationMockPipe],
+      imports: [RouterTestingModule, WorldskillsAngularLibModule, HttpClientTestingModule],
+      providers: [
+        TranslateServiceTestingProvider
+      ],
     })
-    .compileComponents();
+      .compileComponents();
   }));
 
   beforeEach(() => {
