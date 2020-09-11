@@ -8,7 +8,7 @@ export const environment = {
   worldskillsApiImages: 'https://api.worldskills.org/images',
   worldskillsClientId: '9010714200be',
   worldskillsAuthorizeUrl: 'https://auth.worldskills.org/oauth/authorize',
-  worldskillsAuthorizeRedirect: 'https://api.worldskills.org/',
-  worldskillsAuthorizeUserinfoEndpoint: 'https://events.worldskills.org/',
+  worldskillsAuthorizeRedirect: 'https://events.worldskills.org/',
+  worldskillsAuthorizeUserinfoEndpoint: 'https://auth.worldskills.org/auth/users/loggedIn',
   worldskillsAuthUriPatterns: ['api.worldskills.org'],
 };
