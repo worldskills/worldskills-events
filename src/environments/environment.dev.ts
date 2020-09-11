@@ -1,28 +1,14 @@
-// This file can be replaced during build by using the `fileReplacements` array.
-// `ng build --prod` replaces `environment.ts` with `environment.prod.ts`.
-// The list of file replacements can be found in `angular.json`.
-
 export const environment = {
   production: false,
   worldskillsAppId: 400,
   worldskillsPeopleAppId: 600,
-  worldskillsAuthAppId: 300,
-  worldskillsApi: 'http://localhost:8080',
-  worldskillsApiOrg: 'http://localhost:8090/org',
-  worldskillsApiEvents: 'https://localhost:8090/events',
-  worldskillsApiImages: 'http://localhost:8080/images',
-  worldskillsClientId: '49775efbb906',
-  worldskillsAuthorizeUrl: 'http://localhost:8080/auth',
-  worldskillsAuthorizeRedirect: 'http://localhost:10600/',
-  worldskillsAuthorizeUserinfoEndpoint: 'http://localhost:8080/events',
-  worldskillsAuthUriPatterns: ['localhost'],
+  worldskillsApi: 'https://api.worldskills.dev',
+  worldskillsApiOrg: 'https://api.worldskills.dev/org',
+  worldskillsApiEvents: 'https://api.worldskills.dev/events',
+  worldskillsApiImages: 'https://api.worldskills.dev/images',
+  worldskillsClientId: '269f5d2',
+  worldskillsAuthorizeUrl: 'https://auth.worldskills.dev/oauth/authorize',
+  worldskillsAuthorizeRedirect: 'https://api.worldskills.dev/',
+  worldskillsAuthorizeUserinfoEndpoint: 'https://events.worldskills.dev/',
+  worldskillsAuthUriPatterns: ['api.worldskills.dev'],
 };
-
-/*
- * For easier debugging in development mode, you can import the following file
- * to ignore zone related error stack frames such as `zone.run`, `zoneDelegate.invokeTask`.
- *
- * This import should be commented out in production mode because it will have a negative impact
- * on performance if an error is thrown.
- */
-// import 'zone.js/dist/zone-error';  // Included with Angular CLI.
