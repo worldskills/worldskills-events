@@ -15,6 +15,7 @@ export const environment = {
   worldskillsAuthorizeRedirect: 'http://localhost:11310/',
   worldskillsAuthorizeUserinfoEndpoint: 'https://auth.worldskills.show/auth/users/loggedIn',
   worldskillsAuthUriPatterns: ['api.worldskills.show'],
+  environmentWarning: 'This is the local development environment. Happy coding!',
 };
 
 /*

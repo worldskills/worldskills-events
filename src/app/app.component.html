@@ -1,4 +1,4 @@
-<ws-staging-banner *ngIf="isStaging"></ws-staging-banner>
+<ws-staging-banner *ngIf="environmentWarning" [message]="environmentWarning"></ws-staging-banner>
 <ws-puppeteer-banner [currentUser]="currentUser"></ws-puppeteer-banner>
 <ws-auth-header [appName]="'Events' | translate" [menuItems]="menuItems">
 </ws-auth-header>

@@ -11,4 +11,5 @@ export const environment = {
   worldskillsAuthorizeRedirect: 'https://events.worldskills.dev/',
   worldskillsAuthorizeUserinfoEndpoint: 'https://auth.worldskills.dev/auth/users/loggedIn',
   worldskillsAuthUriPatterns: ['api.worldskills.dev'],
+  environmentWarning: 'This is the dev environment. Changes in this environment might get overwritten.',
 };

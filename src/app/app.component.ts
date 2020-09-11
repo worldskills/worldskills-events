@@ -28,7 +28,7 @@ export class AppComponent implements OnInit {
   languages: Array<Language>;
   language: Language;
   languageLock: boolean;
-  isStaging = false;
+  environmentWarning = environment.environmentWarning;
 
   constructor(
     private appService: AppService,
@@ -57,7 +57,6 @@ export class AppComponent implements OnInit {
             this.language = lock ? this.localeContextService.lockedLanguage : language;
           })
         );
-    this.isStaging = environment.worldskillsApi.includes('api.worldskills.show');
 
     this.wsi.authConfigSubject.next({
       loginUrl: environment.worldskillsAuthorizeUrl,

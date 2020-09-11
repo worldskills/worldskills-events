@@ -11,4 +11,5 @@ export const environment = {
   worldskillsAuthorizeRedirect: 'https://events.worldskills.show/',
   worldskillsAuthorizeUserinfoEndpoint: 'https://auth.worldskills.show/auth/users/loggedIn',
   worldskillsAuthUriPatterns: ['api.worldskills.show'],
+  environmentWarning: 'This is the staging environment. Changes in this environment might get overwritten.',
 };
