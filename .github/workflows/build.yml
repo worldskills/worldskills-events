@@ -37,7 +37,7 @@ jobs:
         aws s3 cp dist/index.html s3://events.worldskills.dev/index.html --metadata-directive REPLACE --cache-control max-age=60
     - name: Invalidate dev
       if: github.ref == 'refs/heads/dev'
-      run: aws cloudfront create-invalidation --distribution-id E2YVXBZSB5EAXR --paths /index.html
+      run: aws cloudfront create-invalidation --distribution-id E273YFDA39M6IK --paths /index.html
 
     - name: Build for staging
       if: github.ref == 'refs/heads/master'
