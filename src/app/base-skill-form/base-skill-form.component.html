@@ -29,13 +29,13 @@
 
     <div class="form-group row">
       <label for="sector"
-             class="col-3 col-form-label text-right font-weight-bold">{{'Country' | translate}}&nbsp;*</label>
+             class="col-3 col-form-label text-right font-weight-bold">{{'Sector' | translate}}&nbsp;*</label>
       <div class="col-6">
         <ng-select
           id="sector"
           [wsSelect]="['id', 'name.text']"
           name="sector"
-          [ngModel]="baseSkill ? baseSkill.sector.id : undefined"
+          [ngModel]="baseSkill.sector ? baseSkill.sector.id : undefined"
           placeholder="{{'Sector' | translate}}"
           [items]="baseSectors || []"
         ></ng-select>
