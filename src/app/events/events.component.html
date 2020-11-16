@@ -59,7 +59,7 @@
                 </a>
               </td>
               <td>{{event.start_date | date}}</td>
-              <td>{{event.country.name.text}}</td>
+              <td>{{event.country?.name.text}}</td>
             </tr>
             <tr *ngIf="eventList.events.length === 0">
               <td colspan="4">{{'No events found.' | translate}}</td>
