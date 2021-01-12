@@ -4,6 +4,7 @@
 <ng-container *ngIf="initialized && !loading">
   <app-skill-form
     [editable]="currentUser && event && event.ws_entity && hasUserRole(currentUser, appId, event.ws_entity.id, 'Admin', 'EditEvents')"
+    [organizerEditable]="currentUser && event && event.ws_entity && hasUserRole(currentUser, appId, event.ws_entity.id, 'OrganizerEditEvents')"
     [event]="event"
     [skill]="skill"
     (save)="save($event)"

@@ -15,7 +15,7 @@
           id="name"
           name="name"
           required
-          [disabled]="!editable"
+          [disabled]="!editable && !organizerEditable"
           [ngModel]="skill ? skill.name.text : ''">
       </div>
       <div class="col-3">
@@ -62,7 +62,7 @@
           id="number"
           name="number"
           required
-          [disabled]="!editable"
+          [readonly]="!editable"
           [ngModel]="skill ? skill.number : undefined">
       </div>
       <div class="col-3">
@@ -86,6 +86,7 @@
           [disabled]="!editable"
           [ngModel]="skill ? skill.type : undefined"
           required
+          *ngIf="!organizerEditable"
         >
           <option value="">{{'Select type...' | translate}}</option>
           <option value="official">{{'Official' | translate}}</option>
@@ -98,6 +99,7 @@
           <option value="host_member">{{'Host member' | translate}}</option>
           <option value="juniors">{{'Juniors' | translate}}</option>
         </select>
+        <input class="form-control" name="type" type="text" [ngModel]="skill ? skill.type : ''" readonly *ngIf="organizerEditable">
       </div>
       <div class="col-3">
       <span
@@ -120,12 +122,14 @@
           [disabled]="!editable"
           [ngModel]="skill ? skill.status : undefined"
           required
+          *ngIf="!organizerEditable"
         >
           <option value="">{{'Select status...' | translate}}</option>
           <option value="active">{{'Active' | translate}}</option>
           <option value="on_notice">{{'On notice' | translate}}</option>
           <option value="removed">{{'Removed' | translate}}</option>
         </select>
+        <input class="form-control" name="status" type="text" [ngModel]="skill ? skill.status : ''" readonly *ngIf="organizerEditable">
       </div>
       <div class="col-3">
       <span
@@ -145,7 +149,7 @@
           id="base_id"
           [wsSelect]="['id', 'name.text']"
           name="base_id"
-          [disabled]="!editable"
+          [readonly]="!editable"
           [ngModel]="skill ? skill.base_id : undefined"
           placeholder="{{'Base Skill' | translate}}"
           [items]="baseSkills || []"
@@ -169,7 +173,7 @@
           id="sector"
           [wsSelect]="['id', 'name.text']"
           name="sector"
-          [disabled]="!editable"
+          [readonly]="!editable"
           [ngModel]="skill && skill.sector ? skill.sector.id : undefined"
           placeholder="{{'Sector' | translate}}"
           [items]="sectors || []"
@@ -194,7 +198,7 @@
           name="description"
           id="description"
           [ngModel]="skill ? skill.description.text : ''"
-          [disabled]="!editable"
+          [disabled]="!editable && !organizerEditable"
         ></ckeditor>
       </div>
       <div class="col-3">&nbsp;</div>
@@ -209,7 +213,7 @@
           name="description_industry_action"
           id="description_industry_action"
           [ngModel]="skill ? skill.description_industry_action.text : ''"
-          [disabled]="!editable"
+          [disabled]="!editable && !organizerEditable"
         ></ckeditor>
       </div>
       <div class="col-3">&nbsp;</div>
@@ -224,7 +228,7 @@
           name="description_required_skills"
           id="description_required_skills"
           [ngModel]="skill ? skill.description_required_skills.text : ''"
-          [disabled]="!editable"
+          [disabled]="!editable && !organizerEditable"
         ></ckeditor>
       </div>
       <div class="col-3">&nbsp;</div>
@@ -239,7 +243,7 @@
           name="description_competition_action"
           id="description_competition_action"
           [ngModel]="skill ? skill.description_competition_action.text : ''"
-          [disabled]="!editable"
+          [disabled]="!editable && !organizerEditable"
         ></ckeditor>
       </div>
       <div class="col-3">&nbsp;</div>
@@ -254,7 +258,7 @@
           name="description_facts"
           id="description_facts"
           [ngModel]="skill ? skill.description_facts.text : ''"
-          [disabled]="!editable"
+          [disabled]="!editable && !organizerEditable"
         ></ckeditor>
       </div>
       <div class="col-3">&nbsp;</div>
@@ -270,7 +274,7 @@
           class="form-control"
           id="url_video"
           name="url_video"
-          [disabled]="!editable"
+          [readonly]="!editable && !organizerEditable"
           [ngModel]="skill ? skill.url_video : undefined">
       </div>
       <div class="col-3">&nbsp;</div>
@@ -286,7 +290,7 @@
           class="form-control"
           id="min_teams"
           name="min_teams"
-          [disabled]="!editable"
+          [readonly]="!editable"
           [ngModel]="skill ? skill.min_teams : undefined">
       </div>
       <div class="col-3">&nbsp;</div>
@@ -302,7 +306,7 @@
           class="form-control"
           id="max_teams"
           name="max_teams"
-          [disabled]="!editable"
+          [readonly]="!editable"
           [ngModel]="skill ? skill.max_teams : undefined">
       </div>
       <div class="col-3">&nbsp;</div>
@@ -318,7 +322,7 @@
           class="form-control"
           id="team_size"
           name="team_size"
-          [disabled]="!editable"
+          [readonly]="!editable"
           [ngModel]="skill ? skill.team_size : undefined">
       </div>
       <div class="col-3">&nbsp;</div>
@@ -334,7 +338,7 @@
           class="form-control"
           id="competitor_max_age"
           name="competitor_max_age"
-          [disabled]="!editable"
+          [readonly]="!editable"
           [ngModel]="skill ? skill.competitor_max_age : undefined">
       </div>
       <div class="col-3">&nbsp;</div>
@@ -347,7 +351,7 @@
             type="checkbox"
             id="identify_judges"
             name="identify_judges"
-            [disabled]="!editable"
+            [disabled]="!editable && !organizerEditable"
             [ngModel]="skill ? skill.identify_judges : false">
           &nbsp;{{'Identify judges'| translate}}
         </label>
@@ -361,7 +365,7 @@
             type="checkbox"
             id="group_competitors"
             name="group_competitors"
-            [disabled]="!editable"
+            [disabled]="!editable && !organizerEditable"
             [ngModel]="skill ? skill.group_competitors : false">
           &nbsp;{{'Group competitors'| translate}}
         </label>
@@ -375,7 +379,7 @@
             type="checkbox"
             id="compatriot_marking"
             name="compatriot_marking"
-            [disabled]="!editable"
+            [disabled]="!editable && !organizerEditable"
             [ngModel]="skill ? skill.compatriot_marking : false">
           &nbsp;{{'Compatriot marking'| translate}}
         </label>
@@ -389,7 +393,7 @@
             type="checkbox"
             id="generate_500_scale"
             name="generate_500_scale"
-            [disabled]="!editable"
+            [disabled]="!editable && !organizerEditable"
             [ngModel]="skill ? skill.generate_500_scale : false">
           &nbsp;{{'Generate 500 scale'| translate}}
         </label>
@@ -403,7 +407,7 @@
             type="checkbox"
             id="landscape_marking"
             name="landscape_marking"
-            [disabled]="!editable"
+            [disabled]="!editable && !organizerEditable"
             [ngModel]="skill ? skill.landscape_marking : false">
           &nbsp;{{'Landscape marking'| translate}}
         </label>
@@ -412,7 +416,7 @@
 
     <div class="form-group row">
       <div class="offset-sm-3 col-9">
-        <button type="submit" class="btn btn-success" id="saveSkill" [disabled]="loading" *ngIf="editable">
+        <button type="submit" class="btn btn-success" id="saveSkill" [disabled]="loading" *ngIf="editable || organizerEditable">
           {{'Save' | translate}}
         </button>&nbsp;
         <a class="btn btn-secondary" [routerLink]="['/event', this.event.id, 'skills']">{{'Back' | translate}}</a><br/>
