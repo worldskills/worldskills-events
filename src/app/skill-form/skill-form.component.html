@@ -419,7 +419,7 @@
         <button type="submit" class="btn btn-success" id="saveSkill" [disabled]="loading" *ngIf="editable || organizerEditable">
           {{'Save' | translate}}
         </button>&nbsp;
-        <a class="btn btn-secondary" [routerLink]="['/event', this.event.id, 'skills']">{{'Back' | translate}}</a><br/>
+        <a class="btn btn-secondary" [routerLink]="['/events', this.event.id, 'skills']">{{'Back' | translate}}</a><br/>
         <ws-spinner *ngIf="loading"></ws-spinner>
       </div>
     </div>
