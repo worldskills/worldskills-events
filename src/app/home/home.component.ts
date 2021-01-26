@@ -18,7 +18,7 @@ export class HomeComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.handler.redirectOrReturn({url: ['/events'], onlyIfExact: this.route})
+    this.handler.redirectOrReturn({url: ['/events'], onlyIfExact: this.route, showChildRoles: true})
       .subscribe(() => (this.initialized = true));
   }
 
