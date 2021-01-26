@@ -1,7 +1,6 @@
 export const environment = {
   production: false,
   worldskillsAppId: 400,
-  worldskillsPeopleAppId: 600,
   worldskillsApi: 'https://api.worldskills.show',
   worldskillsApiOrg: 'https://api.worldskills.show/org',
   worldskillsApiEvents: 'https://api.worldskills.show/events',

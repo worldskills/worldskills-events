@@ -5,7 +5,6 @@
 export const environment = {
   production: false,
   worldskillsAppId: 400,
-  worldskillsPeopleAppId: 600,
   worldskillsApi: 'http://localhost:8080',
   worldskillsApiOrg: 'http://localhost:8080/org',
   worldskillsApiEvents: 'http://localhost:8080/events',
