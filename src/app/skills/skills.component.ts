@@ -71,7 +71,7 @@ export class SkillsComponent extends WsComponent implements OnInit {
       ).subscribe(loading => (this.loading = loading)),
       this.skillService.loading.subscribe(loadingClone => (this.loadingClone = loadingClone)),
     );
-    this.eventsService.fetch({limit: 9999, offset: 0});
+    this.eventsService.fetch({limit: 9999, type: 'competition'});
   }
 
   get initialized() {
@@ -131,15 +131,17 @@ export class SkillsComponent extends WsComponent implements OnInit {
   copySelectedSkills(evt: any, event: Event) {
     evt.preventDefault();
     if (!this.loadingClone) {
-      combineLatest(
-        this.selectedSkills.map(skill => this.skillService.copySkill(this.event.id, skill.id, {event}))
-      ).subscribe(() => {
-        this.selectedSkills = [];
-        this.translateService.get('The skills have been successfully copied.').subscribe(t => {
-          this.alertService.setAlert('copied-events', AlertType.success,
-            null, t, true);
+      if (confirm('Copy ' + this.selectedSkills.length + ' skill(s) to ' + event.name + '?')) {
+        combineLatest(
+          this.selectedSkills.map(skill => this.skillService.copySkill(this.event.id, skill.id, {event}))
+        ).subscribe(() => {
+          this.selectedSkills = [];
+          this.translateService.get('The skills have been successfully copied.').subscribe(t => {
+            this.alertService.setAlert('copied-events', AlertType.success,
+              null, t, true);
+          });
         });
-      });
+      }
     }
   }
 
