@@ -206,7 +206,7 @@
           [wsSelect]="['id', 'name.text']"
           name="country"
           [disabled]="!editable"
-          [ngModel]="event ? event.country.id : undefined"
+          [ngModel]="event ? (event.country ? event.country.id : 0) : undefined"
           placeholder="{{'Country' | translate}}"
           [items]="countries || []"
         ></ng-select>
