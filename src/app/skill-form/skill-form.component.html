@@ -8,15 +8,20 @@
       <label for="name"
              class="col-3 col-form-label text-right font-weight-bold">{{'Name' | translate}}&nbsp;*</label>
       <div class="col-6">
-        <input
-          placeholder="{{'Name' | translate}}"
-          type="text"
-          class="form-control"
-          id="name"
-          name="name"
-          required
-          [disabled]="!editable && !organizerEditable"
-          [ngModel]="skill ? skill.name.text : ''">
+        <div class="input-group">
+          <input
+            placeholder="{{'Name' | translate}}"
+            type="text"
+            class="form-control"
+            id="name"
+            name="name"
+            required
+            [disabled]="!editable && !organizerEditable"
+            [ngModel]="skill ? skill.name.text : ''">
+          <div class="input-group-append" *ngIf="skill">
+            <span class="input-group-text text-uppercase">{{skill.name.lang_code}}</span>
+          </div>
+        </div>
       </div>
       <div class="col-3">
       <span
