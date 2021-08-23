@@ -33,7 +33,7 @@
                 <div class="photo bg-secondary" style="background-image: url({{photo.thumbnail}})"></div>
               </a>
               <ng-container
-                *wsUserRole="['Admin', 'EditEvents']; entity : event ? event.ws_entity.id : null; appId : appId">
+                *wsUserRole="['Admin', 'EditEvents']; entity : event ? event.ws_entity.id : null; appId : appId; negate: true">
                 <div class="photo bg-secondary" style="background-image: url({{photo.thumbnail}})"></div>
               </ng-container>
             </td>
@@ -41,6 +41,10 @@
               <ng-container
                 *wsUserRole="['Admin', 'EditEvents']; entity : event ? event.ws_entity.id : null; appId : appId">
                 <a [routerLink]="[photo.id]">{{photo.description.text}}</a>
+              </ng-container>
+              <ng-container
+                *wsUserRole="['Admin', 'EditEvents']; entity : event ? event.ws_entity.id : null; appId : appId; negate: true">
+                {{photo.description.text}}
               </ng-container>
             </td>
             <td>
