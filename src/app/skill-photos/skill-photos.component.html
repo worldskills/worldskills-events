@@ -42,10 +42,6 @@
                 *wsUserRole="['Admin', 'EditEvents']; entity : event ? event.ws_entity.id : null; appId : appId">
                 <a [routerLink]="[photo.id]">{{photo.description.text}}</a>
               </ng-container>
-              <ng-container
-                *wsUserRole="['Admin', 'EditEvents']; entity : event ? event.ws_entity.id : null; appId : appId">
-                {{photo.description.text}}
-              </ng-container>
             </td>
             <td>
               <div class="btn-group btn-group-sm"
