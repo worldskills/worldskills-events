@@ -63,7 +63,7 @@ export class SkillsComponent extends WsComponent implements OnInit {
         this.skillsService.fetch(this.event.id);
       }),
       this.skillsService.subject.subscribe(skills => (this.skills = skills.skills)),
-      this.eventsService.subject.subscribe(events => (this.events = events.events)),
+      this.eventsService.subject.subscribe(events => (this.events = events.events.filter(e => e.type === 'competition' || e.type === 'preparation_meeting'))),
       RxjsUtil.loaderSubscriber(
         this.eventService,
         this.skillsService,
@@ -71,7 +71,7 @@ export class SkillsComponent extends WsComponent implements OnInit {
       ).subscribe(loading => (this.loading = loading)),
       this.skillService.loading.subscribe(loadingClone => (this.loadingClone = loadingClone)),
     );
-    this.eventsService.fetch({limit: 9999, type: 'competition'});
+    this.eventsService.fetch({limit: 9999});
   }
 
   get initialized() {

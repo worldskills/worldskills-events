@@ -40,13 +40,13 @@ export class SkillCopyComponent extends WsComponent implements OnInit {
     this.subscribe(
       this.eventService.subject.subscribe(event => (this.event = event)),
       this.skillService.subject.subscribe(skill => (this.skill = skill)),
-      this.eventsService.subject.subscribe(events => (this.events = events.events)),
+      this.eventsService.subject.subscribe(events => (this.events = events.events.filter(e => e.type === 'competition' || e.type === 'preparation_meeting'))),
       RxjsUtil.loaderSubscriber(
         this.eventService.loading,
         this.skillService.loading,
       ).subscribe(loading => (this.loading = loading))
     );
-    this.eventsService.fetch({limit: 9999, type: 'competition'});
+    this.eventsService.fetch({limit: 9999});
   }
 
   get initialized() {
