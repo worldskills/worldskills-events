@@ -84,7 +84,7 @@ export class SponsorFormComponent extends WsComponent {
           name: {text: name, lang_code: 'en'},
           url,
           website,
-          description: {text: description, lang_code: 'en'},
+          description: {text: description || '', lang_code: 'en'},
           logo: removeFile ? null : (this.sponsor && this.sponsor.logo) ? this.sponsor.logo : null,
         };
         sponsor = s;
