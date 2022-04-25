@@ -86,10 +86,7 @@ export class SkillFormComponent extends WsComponent implements OnInit {
         status,
         url_video,
         sort: this.skill ? this.skill.sort : undefined,
-        name: {
-          text: name,
-          lang_code: 'en',
-        },
+        name: this.skill ? this.skill.name : undefined,
         description: {
           text: description,
           lang_code: 'en',

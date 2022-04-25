@@ -20,6 +20,7 @@ export class SkillComponent extends WsComponent implements OnInit, OnDestroy {
 
   event: Event;
   skill: Skill;
+  skillName = '';
   loading = false;
   loadingRemoving = false;
   additionalMenu = null;
@@ -48,9 +49,12 @@ export class SkillComponent extends WsComponent implements OnInit, OnDestroy {
       ])
         .subscribe(([event, {skillId}]) => {
           this.event = event;
-          this.skillService.fetch(this.event.id, skillId);
+          this.skillService.fetch(this.event.id, skillId, {translations: true});
         }),
-      this.skillService.subject.subscribe(skill => (this.skill = skill)),
+      this.skillService.subject.subscribe(skill => {
+        this.skill = skill;
+        this.skillName = skill.number + ' ' + skill.name.text;
+      }),
       RxjsUtil.loaderSubscriber(
         this.eventService,
         this.skillService,

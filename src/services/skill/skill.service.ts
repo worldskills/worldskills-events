@@ -26,14 +26,13 @@ export class SkillService extends WsService<Skill> {
     super();
   }
 
-  fetch(eventId: number, skillId: number, rOpt?: RequestOptions): Observable<Skill>;
-  fetch(eventId: number, skillId: number, p1: WsServiceRequestP1, p2?: WsServiceRequestP2, p3?: WsServiceRequestP3): Observable<Skill> {
-    const {fetchParams, multicastOptions, requestOptions} = this.resolveArgs(p1, p2, p3, FULL);
-    const params = HttpUtil.objectToParams(fetchParams || {});
-    const observable = this.http.get<Skill>(
-      requestOptions.url ?? `${environment.worldskillsApiEvents}/${eventId}/skills/${skillId}`, {params}
-    ).pipe(share());
-    return this.request(observable, multicastOptions);
+  fetch(eventId: number, skillId: number, options = {}): Observable<Skill> {
+    const params = HttpUtil.objectToParams(options);
+    const observable = this.http.get<Skill>(`${environment.worldskillsApiEvents}/${eventId}/skills/${skillId}`, {params}).pipe(share());
+    observable.subscribe(value => {
+      this.subject.next(value as Skill);
+    });
+    return observable
   }
 
   create(eventId: number, skillRequest: SkillRequest, rOpt?: RequestOptions): Observable<Skill>;

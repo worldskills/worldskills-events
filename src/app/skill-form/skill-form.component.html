@@ -1,3 +1,4 @@
+
 <ng-container *ngIf="loading || !initialized">
   <ws-spinner></ws-spinner>
 </ng-container>
@@ -8,20 +9,7 @@
       <label for="name"
              class="col-3 col-form-label text-right font-weight-bold">{{'Name' | translate}}&nbsp;*</label>
       <div class="col-6">
-        <div class="input-group">
-          <input
-            placeholder="{{'Name' | translate}}"
-            type="text"
-            class="form-control"
-            id="name"
-            name="name"
-            required
-            [disabled]="!editable && !organizerEditable"
-            [ngModel]="skill ? skill.name.text : ''">
-          <div class="input-group-append" *ngIf="skill">
-            <span class="input-group-text text-uppercase">{{skill.name.lang_code}}</span>
-          </div>
-        </div>
+        <ws-i18n-text [model]="skill.name" inputId="name" name="name" placeholder="{{'Name' | translate}}" required="true"></ws-i18n-text>
       </div>
       <div class="col-3">
       <span
@@ -40,8 +28,7 @@
         <ws-entity-tree-select
           id="ws_entity"
           name="ws_entity"
-          [disabled]="!editable || !!skill"
-          [ngModel]="skill ? skill.ws_entity.id : undefined"
+          [ngModel]="skill.ws_entity.id"
           [multiple]="false"
           [showFullPath]="false">
         </ws-entity-tree-select>
