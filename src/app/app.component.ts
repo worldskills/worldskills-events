@@ -6,9 +6,11 @@ import {
   Language,
   MenuItem,
   NgAuthService,
+  GenericUtil,
   User,
   UserRoleUtil,
-  WorldskillsAngularLibService
+  WorldskillsAngularLibService,
+  WsiTranslateService
 } from '@worldskills/worldskills-angular-lib';
 import {LocaleContextService} from '../services/locale-context/locale-context.service';
 import {environment} from '../environments/environment';
@@ -25,9 +27,6 @@ export class AppComponent implements OnInit {
   date;
   currentUser: User;
   showBreadcrumb = true;
-  languages: Array<Language>;
-  language: Language;
-  languageLock: boolean;
   environmentWarning = environment.environmentWarning;
 
   constructor(
@@ -37,6 +36,7 @@ export class AppComponent implements OnInit {
     private route: ActivatedRoute,
     private breadcrumb: BreadcrumbsService,
     private translateService: TranslateService,
+    private wsiTranslate: WsiTranslateService,
     private localeContextService: LocaleContextService,
     private wsi: WorldskillsAngularLibService,
   ) {
@@ -48,15 +48,7 @@ export class AppComponent implements OnInit {
 
   ngOnInit(): void {
     this.appService.showBreadcrumbs.subscribe(showBreadcrumb => setTimeout(() => (this.showBreadcrumb = showBreadcrumb)));
-    this.languages = this.localeContextService.languages;
-    this.authService.currentUser.subscribe(currentUser => (this.currentUser = currentUser)),
-      combineLatest([this.localeContextService.subject, this.localeContextService.lock])
-        .subscribe(([language, lock]) =>
-          setTimeout(() => {
-            this.languageLock = lock;
-            this.language = lock ? this.localeContextService.lockedLanguage : language;
-          })
-        );
+    this.authService.currentUser.subscribe(currentUser => (this.currentUser = currentUser));
 
     this.wsi.authConfigSubject.next({
       loginUrl: environment.worldskillsAuthorizeUrl,
@@ -76,10 +68,16 @@ export class AppComponent implements OnInit {
       appCode: [environment.worldskillsAppId],
       apiEndpoint: environment.worldskillsApi
     });
+
+    this.wsiTranslate.translator.setDefaultLang('en'); // translation fallback
+    this.wsiTranslate.onLangChanged.subscribe(
+      lang => this.handleLangChange(lang),
+      error => { } // no need to processs language as error, default will be loaded
+    );
   }
 
-  changeLanguage(language) {
-    this.localeContextService.changeLanguage(language);
+  handleLangChange(language: Language) {
+    window.location.reload();
   }
 
   get menuItems(): Array<MenuItem> {
