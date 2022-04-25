@@ -143,8 +143,5 @@
     "use-pipe-transform-interface": true,
     "unified-signatures": false,
     "radix": false
-  },
-  "rulesDirectory": [
-    "codelyzer"
-  ]
+  }
 }
