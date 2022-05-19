@@ -1,4 +1,4 @@
-import {Component, EventEmitter, Input, OnInit, Output, ViewChild} from '@angular/core';
+import {Component, EventEmitter, Input, OnChanges, OnInit, Output, SimpleChanges, ViewChild} from '@angular/core';
 import {Event} from '../../types/event';
 import {Skill, SkillRequest} from '../../types/skill';
 import {NgForm} from '@angular/forms';
@@ -15,7 +15,7 @@ import * as ClassicEditor from '@ckeditor/ckeditor5-build-classic';
   templateUrl: './skill-form.component.html',
   styleUrls: ['./skill-form.component.css']
 })
-export class SkillFormComponent extends WsComponent implements OnInit {
+export class SkillFormComponent extends WsComponent implements OnInit, OnChanges {
 
   @Input() event: Event;
   @Input() skill: Skill = null;
@@ -39,6 +39,14 @@ export class SkillFormComponent extends WsComponent implements OnInit {
     super();
   }
 
+  ngOnChanges(changes: SimpleChanges) {
+    if (changes.skill) {
+      if (this.skill) {
+        this.skillName = this.skill.name;
+      }
+    }
+  }
+
   ngOnInit(): void {
     this.subscribe(
       this.baseSkillsService.subject.subscribe(baseSkills => (this.baseSkills = baseSkills.base_skills)),
@@ -50,14 +58,9 @@ export class SkillFormComponent extends WsComponent implements OnInit {
     );
     this.baseSkillsService.fetchByEntity(this.event.ws_entity.id);
     this.sectorsService.fetch(this.event.id);
-    if (this.skill) {
-      this.skillName = this.skill.name;
-    } else {
-      const selectedLanguage = this.wsiTranslate.getSelectedLanguage();
-      this.skillName = {lang_code: selectedLanguage.code, text: ''};
-      this.skillName.translations = {} as any;
-      this.skillName.translations[selectedLanguage.code] = ''
-    }
+    const selectedLanguage = this.wsiTranslate.getSelectedLanguage();
+    this.skillName = {lang_code: selectedLanguage.code, text: '', translations: {} as any};
+    this.skillName.translations[selectedLanguage.code] = '';
   }
 
   get initialized() {
