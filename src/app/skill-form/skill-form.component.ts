@@ -2,7 +2,7 @@ import {Component, EventEmitter, Input, OnInit, Output, ViewChild} from '@angula
 import {Event} from '../../types/event';
 import {Skill, SkillRequest} from '../../types/skill';
 import {NgForm} from '@angular/forms';
-import {RxjsUtil, WsComponent} from '@worldskills/worldskills-angular-lib';
+import {I18nText, RxjsUtil, WsComponent, WsiTranslateService} from '@worldskills/worldskills-angular-lib';
 import {NgbDateParserFormatter} from "@ng-bootstrap/ng-bootstrap";
 import {BaseSkill} from "../../types/base-skill";
 import {BaseSkillsService} from "../../services/base-skills/base-skills.service";
@@ -28,9 +28,12 @@ export class SkillFormComponent extends WsComponent implements OnInit {
   loading = false;
   editor = ClassicEditor;
 
+  skillName: I18nText;
+
   constructor(
     private baseSkillsService: BaseSkillsService,
     private sectorsService: SectorsService,
+    private wsiTranslate: WsiTranslateService,
     public formatter: NgbDateParserFormatter,
   ) {
     super();
@@ -47,6 +50,14 @@ export class SkillFormComponent extends WsComponent implements OnInit {
     );
     this.baseSkillsService.fetchByEntity(this.event.ws_entity.id);
     this.sectorsService.fetch(this.event.id);
+    if (this.skill) {
+      this.skillName = this.skill.name;
+    } else {
+      const selectedLanguage = this.wsiTranslate.getSelectedLanguage();
+      this.skillName = {lang_code: selectedLanguage.code, text: ''};
+      this.skillName.translations = {} as any;
+      this.skillName.translations[selectedLanguage.code] = ''
+    }
   }
 
   get initialized() {
@@ -86,7 +97,7 @@ export class SkillFormComponent extends WsComponent implements OnInit {
         status,
         url_video,
         sort: this.skill ? this.skill.sort : undefined,
-        name: this.skill ? this.skill.name : undefined,
+        name: name,
         description: {
           text: description,
           lang_code: 'en',

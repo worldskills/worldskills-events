@@ -9,7 +9,7 @@
       <label for="name"
              class="col-3 col-form-label text-right font-weight-bold">{{'Name' | translate}}&nbsp;*</label>
       <div class="col-6">
-        <ws-i18n-text [model]="skill.name" inputId="name" name="name" placeholder="{{'Name' | translate}}" required="true"></ws-i18n-text>
+        <ws-i18n-text [ngModel]="skillName" inputId="name" name="name" placeholder="{{'Name' | translate}}" required="true"></ws-i18n-text>
       </div>
       <div class="col-3">
       <span
