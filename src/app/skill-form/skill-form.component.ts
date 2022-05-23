@@ -59,8 +59,12 @@ export class SkillFormComponent extends WsComponent implements OnInit, OnChanges
     this.baseSkillsService.fetchByEntity(this.event.ws_entity.id);
     this.sectorsService.fetch(this.event.id);
     const selectedLanguage = this.wsiTranslate.getSelectedLanguage();
-    this.skillName = {lang_code: selectedLanguage.code, text: '', translations: {} as any};
-    this.skillName.translations[selectedLanguage.code] = '';
+    if (this.skill) {
+      this.skillName = this.skill.name;
+    } else {
+      this.skillName = {lang_code: selectedLanguage.code, text: '', translations: {} as any};
+      this.skillName.translations[selectedLanguage.code] = '';
+    }
   }
 
   get initialized() {
