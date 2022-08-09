@@ -6,6 +6,7 @@ import {EventsComponent} from "./events/events.component";
 import {EventComponent} from "./event/event.component";
 import {EventUpdateComponent} from "./event-update/event-update.component";
 import {SkillsComponent} from "./skills/skills.component";
+import {SkillsTranslationsComponent} from './skills-translations/skills-translations.component';
 import {SkillComponent} from "./skill/skill.component";
 import {SkillUpdateComponent} from "./skill-update/skill-update.component";
 import {SkillPhotosComponent} from "./skill-photos/skill-photos.component";
@@ -156,6 +157,10 @@ const routes: Routes = [
                     path: '',
                     pathMatch: 'full',
                     component: SkillsComponent,
+                  },
+                  {
+                    path: 'translations',
+                    component: SkillsTranslationsComponent,
                   },
                   {
                     path: 'create',

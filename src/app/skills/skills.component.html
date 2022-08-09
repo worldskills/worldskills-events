@@ -27,6 +27,18 @@
           </ng-container>
         </div>
       </div>
+      <div class="btn-group float-right">
+        <button
+          class="btn btn-secondary btn-sm dropdown-toggle ml-1"
+          type="button"
+          data-toggle="dropdown"
+          aria-haspopup="true" aria-expanded="false">
+          {{'Reports' | translate}}
+        </button>
+        <div class="dropdown-menu dropdown-menu-right">
+          <a class="dropdown-item" routerLink="translations">{{'Translations' | translate}}</a>
+        </div>
+      </div>
       <div class="clearfix"></div>
     </div>
   </div>

@@ -60,6 +60,7 @@ import {BaseSkillPhotoUpdateComponent} from "./base-skill-photo-update/base-skil
 import {BaseSkillPhotosComponent} from "./base-skill-photos/base-skill-photos.component";
 import {BaseSkillTagsComponent} from "./base-skill-tags/base-skill-tags.component";
 import {BaseSkillSponsorsComponent} from "./base-skill-sponsors/base-skill-sponsors.component";
+import { SkillsTranslationsComponent } from './skills-translations/skills-translations.component';
 
 export function HttpLoaderFactory(http: HttpClient) {
   return new TranslateHttpLoader(http);
@@ -77,6 +78,7 @@ export function HttpLoaderFactory(http: HttpClient) {
     EventFormComponent,
     EventUpdateComponent,
     SkillsComponent,
+    SkillsTranslationsComponent,
     SkillComponent,
     SkillUpdateComponent,
     SkillFormComponent,

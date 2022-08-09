@@ -1,0 +1,50 @@
+<ng-container *ngIf="loading">
+  <ws-spinner></ws-spinner>
+</ng-container>
+
+<ng-container *ngIf="!loading">
+  <div class="row">
+    <div class="col-md-8">
+      <h3 class="mt-0">
+        {{'Translations Report' | translate}}
+      </h3>
+    </div>
+    <div class="col-md-4 text-right">
+      <a routerLink="../" class="btn btn-secondary btn-sm">{{'Back' | translate}}</a>
+    </div>
+  </div>
+
+  <div class="table-responsive">
+    <table class="table table-striped border-top">
+      <colgroup>
+        <col width="5%">
+        <col width="20%">
+        <col width="20%">
+        <col width="20%">
+        <col width="20%">
+      </colgroup>
+      <thead>
+        <tr>
+            <th class="border-top-0">&nbsp;</th>
+            <th class="border-top-0">{{'English' | translate}}</th>
+            <th class="border-top-0">{{'German' | translate}}</th>
+            <th class="border-top-0">{{'French' | translate}}</th>
+            <th class="border-top-0">{{'Italian' | translate}}</th>
+        </tr>
+      </thead>
+      <tbody>
+      <tr *ngFor="let skill of skills">
+        <td><a [routerLink]="['../', skill.id]">{{skill.number}}</a></td>
+        <td><a [routerLink]="['../', skill.id]">{{skill.name.translations.en}}</a></td>
+        <td><a [routerLink]="['../', skill.id]">{{skill.name.translations.de}}</a></td>
+        <td><a [routerLink]="['../', skill.id]">{{skill.name.translations.fr}}</a></td>
+        <td><a [routerLink]="['../', skill.id]">{{skill.name.translations.it}}</a></td>
+      </tr>
+      <tr *ngIf="skills.length === 0">
+        <td colspan="5">{{'No skills found' | translate}}</td>
+      </tr>
+      </tbody>
+    </table>
+  </div>
+
+</ng-container>
