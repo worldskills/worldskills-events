@@ -25,7 +25,7 @@ export interface EventsFetchParams extends FetchParams {
   type?: string;
   ws_entity?: number;
   update?: boolean;
-  show_cancelled: boolean;
+  show_cancelled?: boolean;
 }
 
 export function isEventsFetchParams(object: any): object is EventsFetchParams {
