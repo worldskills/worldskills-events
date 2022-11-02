@@ -80,6 +80,7 @@ export class EventFormComponent extends WsComponent implements OnInit, OnChanges
         country,
         utc_offset,
         url,
+        cancelled,
         description,
         ws_entity,
       } = this.form.value;
@@ -96,6 +97,7 @@ export class EventFormComponent extends WsComponent implements OnInit, OnChanges
         },
         utc_offset: parseInt(utc_offset),
         url,
+        cancelled,
         description,
         ws_entity: {
           id: this.event ? this.event.ws_entity.id : parseInt(ws_entity),

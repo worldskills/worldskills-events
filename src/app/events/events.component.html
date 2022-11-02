@@ -57,6 +57,8 @@
                 <a routerLink="{{event.id}}">
                   {{event.name}}
                 </a>
+                &nbsp;
+                <span *ngIf="event.cancelled" class="badge badge-secondary">{{'Cancelled' | translate}}</span>
               </td>
               <td>{{event.start_date | date}}</td>
               <td>{{event.country?.name.text}}</td>

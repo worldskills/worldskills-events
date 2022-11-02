@@ -15,6 +15,7 @@ export interface EventRequest {
   };
   utc_offset: number;
   url: string;
+  cancelled: boolean;
   description: string;
   ws_entity: {
     id: number;

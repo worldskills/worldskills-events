@@ -25,14 +25,15 @@ export interface EventsFetchParams extends FetchParams {
   type?: string;
   ws_entity?: number;
   update?: boolean;
+  show_cancelled: boolean;
 }
 
 export function isEventsFetchParams(object: any): object is EventsFetchParams {
   return object && 'limit' in object && 'offset' in object;
 }
 
-export const DEFAULT_FETCH_PARAMS: EventsFetchParams = {limit: 100, l: 'en', sort: 'start_date_desc'};
-export const DEFAULT_FETCH_PARAMS_PAGER: EventsFetchParams = {offset: 0, limit: 20, sort: 'start_date_desc'};
+export const DEFAULT_FETCH_PARAMS: EventsFetchParams = {limit: 100, l: 'en', sort: 'start_date_desc', show_cancelled: true};
+export const DEFAULT_FETCH_PARAMS_PAGER: EventsFetchParams = {offset: 0, limit: 20, sort: 'start_date_desc', show_cancelled: true};
 
 @Injectable({
   providedIn: 'root'
