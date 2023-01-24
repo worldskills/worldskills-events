@@ -131,7 +131,7 @@ export class SkillsComponent extends WsComponent implements OnInit {
   copySelectedSkills(evt: any, event: Event) {
     evt.preventDefault();
     if (!this.loadingClone) {
-      if (confirm('Copy ' + this.selectedSkills.length + ' skill(s) to ' + event.name + '?')) {
+      if (confirm('Copy ' + this.selectedSkills.length + ' skill(s) to ' + event.name + '? WARNING! Make sure to create sectors in target event first!')) {
         combineLatest(
           this.selectedSkills.map(skill => this.skillService.copySkill(this.event.id, skill.id, {event}))
         ).subscribe(() => {
