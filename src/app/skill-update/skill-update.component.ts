@@ -15,6 +15,7 @@ import {TranslateService} from "@ngx-translate/core";
 import {EventService} from "../../services/event/event.service";
 import {environment} from "../../environments/environment";
 import {AppService} from "../../services/app/app.service";
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-skill-update',
@@ -37,6 +38,7 @@ export class SkillUpdateComponent extends WsComponent implements OnInit {
     private skillService: SkillService,
     private alertService: AlertService,
     private translateService: TranslateService,
+    private router: Router,
   ) {
     super();
   }
@@ -63,6 +65,7 @@ export class SkillUpdateComponent extends WsComponent implements OnInit {
       this.translateService.get('The Skill has been updated successfully.').subscribe(t => {
         this.alertService.setAlert('updated-skill', AlertType.success,
           null, t, true);
+        this.router.navigate(['/events', this.event.id, 'skills']);
       });
     });
   }
