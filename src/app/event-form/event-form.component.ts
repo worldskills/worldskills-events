@@ -23,6 +23,7 @@ export class EventFormComponent extends WsComponent implements OnInit, OnChanges
   loading = false;
   startDate: NgbDateStruct;
   endDate: NgbDateStruct;
+  closingDate: NgbDateStruct;
 
   constructor(
     private countriesService: CountriesService,
@@ -40,6 +41,9 @@ export class EventFormComponent extends WsComponent implements OnInit, OnChanges
         }
         if (this.event.end_date) {
           this.endDate = this.formatter.parse(this.event.end_date);
+        }
+        if (this.event.closing_date) {
+          this.closingDate = this.formatter.parse(this.event.closing_date);
         }
       }
     }
@@ -74,6 +78,7 @@ export class EventFormComponent extends WsComponent implements OnInit, OnChanges
         type,
         start_date,
         end_date,
+        closing_date,
         venue,
         town,
         code,
@@ -89,6 +94,7 @@ export class EventFormComponent extends WsComponent implements OnInit, OnChanges
         type: this.event ? this.event.type : type,
         start_date: this.formatter.format(start_date),
         end_date: this.formatter.format(end_date),
+        closing_date: this.formatter.format(closing_date),
         venue,
         town,
         code,

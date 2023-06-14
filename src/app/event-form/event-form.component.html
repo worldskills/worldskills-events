@@ -117,7 +117,7 @@
              class="col-3 col-form-label text-right font-weight-bold">{{'End date' | translate}}&nbsp;*</label>
       <div class="col-6">
         <input #dEndDate="ngbDatepicker"
-               placeholder="{{'Start date' | translate}}"
+               placeholder="{{'End date' | translate}}"
                type="text"
                class="form-control"
                id="end_date"
@@ -137,6 +137,28 @@
         *ngIf="form.submitted && this.form.controls.end_date.errors && this.form.controls.end_date.errors.required">
         {{'Please select an end date!' | translate}}
       </span>
+      </div>
+    </div>
+
+    <div class="form-group row">
+      <label for="closing_date"
+             class="col-3 col-form-label text-right font-weight-bold">{{'closing_date' | translate}}</label>
+      <div class="col-6">
+        <input #dClosingDate="ngbDatepicker"
+               type="text"
+               class="form-control"
+               id="closing_date"
+               name="closing_date"
+               [disabled]="!editable || (event ? event.closed : false)"
+               [ngModel]="closingDate"
+               ngbDatepicker
+               (focus)="dClosingDate.open()"
+               [autoClose]="true"
+               [restoreFocus]="true"
+               [minDate]="form.controls.end_date ? form.controls.end_date.value : undefined"/>
+        <p class="small">
+          {{"closing_date_explanation" | translate}}
+        </p>
       </div>
     </div>
 

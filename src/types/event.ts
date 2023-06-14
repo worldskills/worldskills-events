@@ -7,6 +7,8 @@ export interface EventRequest {
   type: string;
   start_date: string;
   end_date: string;
+  closing_date: string;
+  closed?: boolean;
   venue: string;
   town: string;
   code: string;
