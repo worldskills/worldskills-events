@@ -26,6 +26,7 @@ export interface SkillRequest {
   url_video: string;
   sort: number;
   name: I18nText;
+  summary: I18nText;
   description: I18nText;
   description_required_skills: I18nText;
   description_industry_action: I18nText;
@@ -55,6 +56,7 @@ export interface Skill {
   url_video: string;
   sort: number;
   name: I18nText;
+  summary: I18nText;
   description: I18nText;
   description_required_skills: I18nText;
   description_industry_action: I18nText;

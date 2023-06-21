@@ -182,6 +182,21 @@
     </div>
 
     <div class="form-group row">
+      <label for="summary"
+             class="col-3 col-form-label text-right font-weight-bold">{{'Summary' | translate}}</label>
+      <div class="col-6">
+        <input
+          placeholder="{{'Summary' | translate}}"
+          type="text"
+          class="form-control"
+          id="summary"
+          name="summary"
+          [ngModel]="skill && skill.summary ? skill.summary.text : ''">
+      </div>
+      <div class="col-3"></div>
+    </div>
+
+    <div class="form-group row">
       <label for="description"
              class="col-3 col-form-label text-right font-weight-bold">{{'Description' | translate}}</label>
       <div class="col-6">

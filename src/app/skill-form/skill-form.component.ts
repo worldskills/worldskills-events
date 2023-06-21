@@ -80,6 +80,7 @@ export class SkillFormComponent extends WsComponent implements OnInit, OnChanges
         status,
         url_video,
         name,
+        summary,
         description,
         description_required_skills,
         description_industry_action,
@@ -105,6 +106,10 @@ export class SkillFormComponent extends WsComponent implements OnInit, OnChanges
         url_video,
         sort: this.skill ? this.skill.sort : undefined,
         name: name,
+        summary: {
+          text: summary,
+          lang_code: 'en',
+        },
         description: {
           text: description,
           lang_code: 'en',
