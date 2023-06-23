@@ -94,7 +94,7 @@ export class EventFormComponent extends WsComponent implements OnInit, OnChanges
         type: this.event ? this.event.type : type,
         start_date: this.formatter.format(start_date),
         end_date: this.formatter.format(end_date),
-        closing_date: this.formatter.format(closing_date),
+        closing_date: closing_date ? this.formatter.format(closing_date) : null,
         venue,
         town,
         code,
