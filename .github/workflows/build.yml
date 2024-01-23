@@ -39,7 +39,7 @@ jobs:
         aws s3 cp dist/index.html s3://events.worldskills.show/index.html --metadata-directive REPLACE --cache-control max-age=60
     - name: Invalidate staging
       if: github.ref == 'refs/heads/staging'
-      run: aws cloudfront create-invalidation --distribution-id E3VOFUYQ7T40H8 --paths /index.html
+      run: aws cloudfront create-invalidation --distribution-id E3VOFUYQ7T40H8 --paths /index.html /assets/i18n/*
 
     - name: Build for production
       if: github.ref == 'refs/heads/prod'
@@ -58,4 +58,4 @@ jobs:
         aws s3 cp dist/index.html s3://events.worldskills.org/index.html --metadata-directive REPLACE --cache-control max-age=60
     - name: Invalidate production
       if: github.ref == 'refs/heads/prod'
-      run: aws cloudfront create-invalidation --distribution-id EW0W81GM2S4NZ --paths /index.html
+      run: aws cloudfront create-invalidation --distribution-id EW0W81GM2S4NZ --paths /index.html /assets/i18n/*
