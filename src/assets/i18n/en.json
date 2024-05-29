@@ -1,4 +1,5 @@
 {
+    "date_explanation": "For Competitions use the first and last day of the Competition (C1 and C4) as start and end date.",
     "closing_date": "Closing date",
     "closing_date_explanation": "Optional date to end positions and close other WorldSkills applications."
 }
