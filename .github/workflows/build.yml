@@ -25,6 +25,8 @@ jobs:
     - name: Build for staging
       if: github.ref == 'refs/heads/staging'
       run: ng build --configuration=staging
+      env:
+        NODE_OPTIONS: --openssl-legacy-provider
     - name: Configure AWS credentials for staging
       if: github.ref == 'refs/heads/staging'
       uses: aws-actions/configure-aws-credentials@v1
@@ -44,6 +46,8 @@ jobs:
     - name: Build for production
       if: github.ref == 'refs/heads/prod'
       run: ng build --configuration=prod
+      env:
+        NODE_OPTIONS: --openssl-legacy-provider
     - name: Configure AWS credentials for production
       if: github.ref == 'refs/heads/prod'
       uses: aws-actions/configure-aws-credentials@v1
