@@ -11,7 +11,7 @@ export const environment = {
   worldskillsApiImages: 'http://localhost:8080/images',
   worldskillsClientId: '269f5d2',
   worldskillsAuthorizeUrl: 'http://localhost:50300/oauth/authorize',
-  worldskillsAuthorizeRedirect: 'http://localhost:11310/',
+  worldskillsAuthorizeRedirect: 'http://localhost:10400/',
   worldskillsAuthorizeUserinfoEndpoint: 'http://localhost:8080/auth/users/loggedIn',
   worldskillsAuthUriPatterns: ['localhost:8080'],
   environmentWarning: 'This is the local development environment. Happy coding!',
