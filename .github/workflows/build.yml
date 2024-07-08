@@ -23,10 +23,10 @@ jobs:
         CI: true
 
     - name: Build
-        if: github.ref != 'refs/heads/staging' && github.ref != 'refs/heads/prod'
-        run: ng build
-        env:
-          NODE_OPTIONS: --openssl-legacy-provider
+      if: github.ref != 'refs/heads/staging' && github.ref != 'refs/heads/prod'
+      run: ng build
+      env:
+        NODE_OPTIONS: --openssl-legacy-provider
 
     - name: Build for staging
       if: github.ref == 'refs/heads/staging'
