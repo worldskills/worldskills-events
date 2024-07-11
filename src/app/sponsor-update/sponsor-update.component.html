@@ -14,7 +14,7 @@
   <div class="row">
     <div class="col-12">
       <app-sponsor-form
-        [editable]="currentUser && event && event.ws_entity && hasUserRole(currentUser, appId, event.ws_entity.id, 'Admin', 'EditEvents')"
+        [editable]="currentUser && event && event.ws_entity && hasUserRole(currentUser, appId, event.ws_entity.id, 'Admin', 'EditEvents', 'OrganizerEditEvents')"
         [event]="event"
         [cancelLink]="['/events', this.event.id, 'sponsors']"
         [sponsor]="sponsor"
