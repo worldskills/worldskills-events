@@ -26,13 +26,13 @@ jobs:
       if: github.ref != 'refs/heads/staging' && github.ref != 'refs/heads/prod'
       run: ng build
       env:
-        NODE_OPTIONS: --openssl-legacy-provider
+        NODE_OPTIONS: --openssl-legacy-provider --no-experimental-fetch
 
     - name: Build for staging
       if: github.ref == 'refs/heads/staging'
       run: ng build --configuration=staging
       env:
-        NODE_OPTIONS: --openssl-legacy-provider
+        NODE_OPTIONS: --openssl-legacy-provider --no-experimental-fetch
     - name: Configure AWS credentials for staging
       if: github.ref == 'refs/heads/staging'
       uses: aws-actions/configure-aws-credentials@v1
@@ -53,7 +53,7 @@ jobs:
       if: github.ref == 'refs/heads/prod'
       run: ng build --configuration=prod
       env:
-        NODE_OPTIONS: --openssl-legacy-provider
+        NODE_OPTIONS: --openssl-legacy-provider --no-experimental-fetch
     - name: Configure AWS credentials for production
       if: github.ref == 'refs/heads/prod'
       uses: aws-actions/configure-aws-credentials@v1
