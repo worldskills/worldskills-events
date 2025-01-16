@@ -1,4 +1,4 @@
-import {async, ComponentFixture, TestBed} from '@angular/core/testing';
+import { ComponentFixture, TestBed, waitForAsync as  } from '@angular/core/testing';
 
 import {SectorsComponent} from './sectors.component';
 import {TranslateServiceTestingProvider, TranslationMockPipe} from "../../test";
@@ -10,7 +10,7 @@ describe('SectorsComponent', () => {
   let component: SectorsComponent;
   let fixture: ComponentFixture<SectorsComponent>;
 
-  beforeEach(async(() => {
+  beforeEach(waitForAsync(() => {
     TestBed.configureTestingModule({
       declarations: [SectorsComponent, TranslationMockPipe],
       imports: [RouterTestingModule, WorldskillsAngularLibModule, HttpClientTestingModule],

@@ -1,4 +1,4 @@
-import {async, ComponentFixture, TestBed} from '@angular/core/testing';
+import { ComponentFixture, TestBed, waitForAsync as  } from '@angular/core/testing';
 
 import {BaseSkillPhotoCreateComponent} from './base-skill-photo-create.component';
 import {TranslateServiceTestingProvider, TranslationMockPipe} from "../../test";
@@ -10,7 +10,7 @@ describe('BaseSkillPhotoCreateComponent', () => {
   let component: BaseSkillPhotoCreateComponent;
   let fixture: ComponentFixture<BaseSkillPhotoCreateComponent>;
 
-  beforeEach(async(() => {
+  beforeEach(waitForAsync(() => {
     TestBed.configureTestingModule({
       declarations: [BaseSkillPhotoCreateComponent, TranslationMockPipe],
       imports: [RouterTestingModule, WorldskillsAngularLibModule, HttpClientTestingModule],

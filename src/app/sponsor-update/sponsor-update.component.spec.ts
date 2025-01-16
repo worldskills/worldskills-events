@@ -1,4 +1,4 @@
-import {async, ComponentFixture, TestBed} from '@angular/core/testing';
+import { ComponentFixture, TestBed, waitForAsync as  } from '@angular/core/testing';
 
 import {SponsorUpdateComponent} from './sponsor-update.component';
 import {TranslateServiceTestingProvider, TranslationMockPipe} from "../../test";
@@ -10,7 +10,7 @@ describe('SponsorUpdateComponent', () => {
   let component: SponsorUpdateComponent;
   let fixture: ComponentFixture<SponsorUpdateComponent>;
 
-  beforeEach(async(() => {
+  beforeEach(waitForAsync(() => {
     TestBed.configureTestingModule({
       declarations: [SponsorUpdateComponent, TranslationMockPipe],
       imports: [RouterTestingModule, WorldskillsAngularLibModule, HttpClientTestingModule],

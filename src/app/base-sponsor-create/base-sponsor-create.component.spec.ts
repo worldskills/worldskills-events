@@ -1,4 +1,4 @@
-import {async, ComponentFixture, TestBed} from '@angular/core/testing';
+import { ComponentFixture, TestBed, waitForAsync as  } from '@angular/core/testing';
 
 import {BaseSponsorCreateComponent} from './base-sponsor-create.component';
 import {RouterTestingModule} from "@angular/router/testing";
@@ -11,7 +11,7 @@ describe('BaseSponsorCreateComponent', () => {
   let component: BaseSponsorCreateComponent;
   let fixture: ComponentFixture<BaseSponsorCreateComponent>;
 
-  beforeEach(async(() => {
+  beforeEach(waitForAsync(() => {
     TestBed.configureTestingModule({
       declarations: [BaseSponsorCreateComponent, TranslationMockPipe],
       imports: [RouterTestingModule, WorldskillsAngularLibModule, HttpClientTestingModule],

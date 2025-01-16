@@ -1,4 +1,4 @@
-import {async, ComponentFixture, TestBed} from '@angular/core/testing';
+import { ComponentFixture, TestBed, waitForAsync as  } from '@angular/core/testing';
 
 import {SponsorFormComponent} from './sponsor-form.component';
 import {TranslateServiceTestingProvider, TranslationMockPipe} from "../../test";
@@ -11,7 +11,7 @@ describe('SponsorFormComponent', () => {
   let component: SponsorFormComponent;
   let fixture: ComponentFixture<SponsorFormComponent>;
 
-  beforeEach(async(() => {
+  beforeEach(waitForAsync(() => {
     TestBed.configureTestingModule({
       declarations: [SponsorFormComponent, TranslationMockPipe],
       imports: [RouterTestingModule, WorldskillsAngularLibModule, HttpClientTestingModule, FormsModule],

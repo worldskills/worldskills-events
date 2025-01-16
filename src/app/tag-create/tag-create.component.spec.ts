@@ -1,4 +1,4 @@
-import {async, ComponentFixture, TestBed} from '@angular/core/testing';
+import { ComponentFixture, TestBed, waitForAsync as  } from '@angular/core/testing';
 
 import {TagCreateComponent} from './tag-create.component';
 import {TranslateServiceTestingProvider, TranslationMockPipe} from "../../test";
@@ -11,7 +11,7 @@ describe('TagCreateComponent', () => {
   let component: TagCreateComponent;
   let fixture: ComponentFixture<TagCreateComponent>;
 
-  beforeEach(async(() => {
+  beforeEach(waitForAsync(() => {
     TestBed.configureTestingModule({
       declarations: [TagCreateComponent, TranslationMockPipe],
       imports: [RouterTestingModule, WorldskillsAngularLibModule, HttpClientTestingModule],
