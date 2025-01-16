@@ -2,10 +2,11 @@ import { ComponentFixture, TestBed, waitForAsync as  } from '@angular/core/testi
 
 import {SectorCreateComponent} from './sector-create.component';
 import {TranslateServiceTestingProvider, TranslationMockPipe} from "../../test";
-import {HttpClientTestingModule} from "@angular/common/http/testing";
+import { provideHttpClientTesting } from "@angular/common/http/testing";
 import {RouterTestingModule} from "@angular/router/testing";
 import {EntityTreeService, WorldskillsAngularLibModule} from "@worldskills/worldskills-angular-lib";
 import {of} from "rxjs";
+import { provideHttpClient, withInterceptorsFromDi } from '@angular/common/http';
 
 describe('SectorCreateComponent', () => {
   let component: SectorCreateComponent;
@@ -13,13 +14,15 @@ describe('SectorCreateComponent', () => {
 
   beforeEach(waitForAsync(() => {
     TestBed.configureTestingModule({
-      declarations: [SectorCreateComponent, TranslationMockPipe],
-      imports: [RouterTestingModule, WorldskillsAngularLibModule, HttpClientTestingModule],
-      providers: [
-        {provide: EntityTreeService, useValue: {list: (fetchParams: any) => of([]), clearCache: () => undefined}},
-        TranslateServiceTestingProvider
-      ]
-    })
+    declarations: [SectorCreateComponent, TranslationMockPipe],
+    imports: [RouterTestingModule, WorldskillsAngularLibModule],
+    providers: [
+        { provide: EntityTreeService, useValue: { list: (fetchParams: any) => of([]), clearCache: () => undefined } },
+        TranslateServiceTestingProvider,
+        provideHttpClient(withInterceptorsFromDi()),
+        provideHttpClientTesting()
+    ]
+})
       .compileComponents();
   }));
 

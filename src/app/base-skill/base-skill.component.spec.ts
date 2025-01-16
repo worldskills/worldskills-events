@@ -3,9 +3,10 @@ import { ComponentFixture, TestBed, waitForAsync as  } from '@angular/core/testi
 import {BaseSkillComponent} from './base-skill.component';
 import {RouterTestingModule} from "@angular/router/testing";
 import {WorldskillsAngularLibModule} from "@worldskills/worldskills-angular-lib";
-import {HttpClientTestingModule} from "@angular/common/http/testing";
+import { provideHttpClientTesting } from "@angular/common/http/testing";
 import {TranslateServiceTestingProvider, TranslationMockPipe} from "../../test";
 import {BaseSponsorsComponent} from "../base-sponsors/base-sponsors.component";
+import { provideHttpClient, withInterceptorsFromDi } from '@angular/common/http';
 
 describe('BaseSkillComponent', () => {
   let component: BaseSkillComponent;
@@ -13,12 +14,14 @@ describe('BaseSkillComponent', () => {
 
   beforeEach(waitForAsync(() => {
     TestBed.configureTestingModule({
-      declarations: [BaseSkillComponent, TranslationMockPipe],
-      imports: [RouterTestingModule, WorldskillsAngularLibModule, HttpClientTestingModule],
-      providers: [
-        TranslateServiceTestingProvider
-      ],
-    })
+    declarations: [BaseSkillComponent, TranslationMockPipe],
+    imports: [RouterTestingModule, WorldskillsAngularLibModule],
+    providers: [
+        TranslateServiceTestingProvider,
+        provideHttpClient(withInterceptorsFromDi()),
+        provideHttpClientTesting()
+    ]
+})
       .compileComponents();
   }));
 

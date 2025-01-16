@@ -2,8 +2,9 @@ import { ComponentFixture, TestBed, waitForAsync as  } from '@angular/core/testi
 
 import {WsSpinnerComponent} from './ws-spinner.component';
 import {TranslateServiceTestingProvider, TranslationMockPipe} from '../../test';
-import {HttpClientTestingModule} from '@angular/common/http/testing';
+import { provideHttpClientTesting } from '@angular/common/http/testing';
 import {RouterTestingModule} from '@angular/router/testing';
+import { provideHttpClient, withInterceptorsFromDi } from '@angular/common/http';
 
 describe('WsSpinnerComponent', () => {
   let component: WsSpinnerComponent;
@@ -11,10 +12,10 @@ describe('WsSpinnerComponent', () => {
 
   beforeEach(waitForAsync(() => {
     TestBed.configureTestingModule({
-      declarations: [WsSpinnerComponent, TranslationMockPipe],
-      providers: [TranslateServiceTestingProvider],
-      imports: [HttpClientTestingModule, RouterTestingModule],
-    })
+    declarations: [WsSpinnerComponent, TranslationMockPipe],
+    imports: [RouterTestingModule],
+    providers: [TranslateServiceTestingProvider, provideHttpClient(withInterceptorsFromDi()), provideHttpClientTesting()]
+})
     .compileComponents();
   }));
 

@@ -1,5 +1,5 @@
 import {Injectable} from '@angular/core';
-import {HttpRequest} from '@angular/common/http';
+import { HttpRequest } from '@angular/common/http';
 import {environment} from '../../environments/environment';
 
 @Injectable({

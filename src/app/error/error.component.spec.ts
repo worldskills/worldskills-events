@@ -3,7 +3,8 @@ import { ComponentFixture, TestBed, waitForAsync as  } from '@angular/core/testi
 import {ErrorComponent} from './error.component';
 import {RouterTestingModule} from '@angular/router/testing';
 import {TranslateServiceTestingProvider, TranslationMockPipe} from '../../test';
-import {HttpClientTestingModule} from '@angular/common/http/testing';
+import { provideHttpClientTesting } from '@angular/common/http/testing';
+import { provideHttpClient, withInterceptorsFromDi } from '@angular/common/http';
 
 describe('ErrorComponent', () => {
   let component: ErrorComponent;
@@ -11,10 +12,10 @@ describe('ErrorComponent', () => {
 
   beforeEach(waitForAsync(() => {
     TestBed.configureTestingModule({
-      declarations: [ErrorComponent, TranslationMockPipe],
-      providers: [TranslateServiceTestingProvider],
-      imports: [HttpClientTestingModule, RouterTestingModule],
-    })
+    declarations: [ErrorComponent, TranslationMockPipe],
+    imports: [RouterTestingModule],
+    providers: [TranslateServiceTestingProvider, provideHttpClient(withInterceptorsFromDi()), provideHttpClientTesting()]
+})
     .compileComponents();
   }));
 
