@@ -100,19 +100,19 @@
         "serve": {
           "builder": "@angular-devkit/build-angular:dev-server",
           "options": {
-            "browserTarget": "worldskills-events:build",
-            "port": 10400
+            "port": 10400,
+            "buildTarget": "worldskills-events:build"
           },
           "configurations": {
             "prod": {
-              "browserTarget": "worldskills-events:build:prod"
+              "buildTarget": "worldskills-events:build:prod"
             }
           }
         },
         "extract-i18n": {
           "builder": "@angular-devkit/build-angular:extract-i18n",
           "options": {
-            "browserTarget": "worldskills-events:build"
+            "buildTarget": "worldskills-events:build"
           }
         },
         "test": {
