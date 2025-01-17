@@ -4,7 +4,7 @@ import {Component, Input, OnInit} from '@angular/core';
   // tslint:disable-next-line:component-selector
   selector: 'ws-spinner',
   templateUrl: './ws-spinner.component.html',
-  styleUrls: ['./ws-spinner.component.css']
+  styleUrls: ['./ws-spinner.component.css'],
 })
 export class WsSpinnerComponent implements OnInit {
 

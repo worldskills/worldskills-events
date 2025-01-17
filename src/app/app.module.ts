@@ -1,6 +1,6 @@
 import {BrowserModule} from '@angular/platform-browser';
 import {NgModule} from '@angular/core';
-import {WorldskillsAngularLibModule, WsHttpInterceptor} from '@worldskills/worldskills-angular-lib';
+import {AlertsComponent, WorldskillsAngularLibModule, WsHttpInterceptor} from '@worldskills/worldskills-angular-lib';
 import {TranslateHttpLoader} from '@ngx-translate/http-loader';
 import {AppRoutingModule} from './app-routing.module';
 import {AppComponent} from './app.component';
@@ -13,7 +13,7 @@ import {TranslateLoader, TranslateModule} from '@ngx-translate/core';
 import { HTTP_INTERCEPTORS, HttpClient } from '@angular/common/http';
 import {NgSelectModule} from '@ng-select/ng-select';
 import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
-import {DatePipe} from '@angular/common';
+import {CommonModule, DatePipe} from '@angular/common';
 import {HttpInterceptorService} from '../services/http-interceptor/http-interceptor.service';
 import {WsSpinnerComponent} from './ws-spinner/ws-spinner.component';
 import {EventsComponent} from './events/events.component';
@@ -67,6 +67,28 @@ export function HttpLoaderFactory(http: HttpClient) {
 }
 
 @NgModule({
+  imports: [
+    CommonModule,
+    NgModule,
+    BrowserModule,
+    AppRoutingModule,
+    FormsModule,
+    ReactiveFormsModule,
+    OAuthModule.forRoot(),
+    NgSelectModule,
+    NgbModule,
+    FontAwesomeModule,
+    TranslateModule.forRoot({
+      defaultLanguage: 'en',
+      loader: {
+        provide: TranslateLoader,
+        useFactory: HttpLoaderFactory,
+        deps: [HttpClient]
+      }
+    }),
+    CKEditorModule,
+    WorldskillsAngularLibModule,
+  ],
   declarations: [
     AppComponent,
     HomeComponent,
@@ -116,26 +138,6 @@ export function HttpLoaderFactory(http: HttpClient) {
     BaseSkillPhotoUpdateComponent,
     BaseSkillTagsComponent,
     BaseSkillSponsorsComponent,
-  ],
-  imports: [
-    BrowserModule,
-    AppRoutingModule,
-    OAuthModule.forRoot(),
-    WorldskillsAngularLibModule,
-    NgSelectModule,
-    NgbModule,
-    FontAwesomeModule,
-    FormsModule,
-    ReactiveFormsModule,
-    TranslateModule.forRoot({
-      defaultLanguage: 'en',
-      loader: {
-        provide: TranslateLoader,
-        useFactory: HttpLoaderFactory,
-        deps: [HttpClient]
-      }
-    }),
-    CKEditorModule,
   ],
   providers: [
     DatePipe,
