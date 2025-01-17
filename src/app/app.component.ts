@@ -1,12 +1,12 @@
 import {Component, OnInit} from '@angular/core';
 import {ActivatedRoute, Router} from '@angular/router';
-import {combineLatest} from 'rxjs';
+
 import {
+  PuppeteerBannerComponent,
   BreadcrumbsService,
   Language,
   MenuItem,
   NgAuthService,
-  GenericUtil,
   User,
   UserRoleUtil,
   WorldskillsAngularLibService,

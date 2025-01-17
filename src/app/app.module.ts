@@ -1,6 +1,6 @@
 import {BrowserModule} from '@angular/platform-browser';
 import {NgModule} from '@angular/core';
-import {WorldskillsAngularLibModule, WsHttpInterceptor} from '@worldskills/worldskills-angular-lib';
+import {PuppeteerBannerComponent, WorldskillsAngularLibModule, WsHttpInterceptor} from '@worldskills/worldskills-angular-lib';
 import {TranslateHttpLoader} from '@ngx-translate/http-loader';
 import {AppRoutingModule} from './app-routing.module';
 import {AppComponent} from './app.component';
@@ -90,18 +90,6 @@ export const appTranslationConfig = TranslateModule.forRoot({
     appTranslationConfig,
     CKEditorModule,
   ],
-  /*
-          FormsModule,
-        OAuthModule.forRoot(),
-        RouterModule.forRoot(appRoutes, routerOptions),
-        WorldskillsAngularLibModule,
-        NgbModule,
-        NgSelectModule,
-        appTranslationConfig], providers: [
-        { provide: HTTP_INTERCEPTORS, useClass: WsHttpInterceptor, multi: true },
-        DatePipe,
-        provideHttpClient(withInterceptorsFromDi())
-  */
   declarations: [
     AppComponent,
     HomeComponent,
@@ -149,7 +137,7 @@ export const appTranslationConfig = TranslateModule.forRoot({
     BaseSkillPhotoCreateComponent,
     BaseSkillPhotoUpdateComponent,
     BaseSkillTagsComponent,
-    BaseSkillSponsorsComponent,
+    BaseSkillSponsorsComponent
   ],
   providers: [
     DatePipe,
@@ -158,7 +146,7 @@ export const appTranslationConfig = TranslateModule.forRoot({
     provideHttpClient(withInterceptorsFromDi())
 
   ],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
 })
 export class AppModule {
 }
