@@ -1,6 +1,6 @@
 import {BrowserModule} from '@angular/platform-browser';
 import {NgModule} from '@angular/core';
-import {PuppeteerBannerComponent, WorldskillsAngularLibModule, WsHttpInterceptor} from '@worldskills/worldskills-angular-lib';
+import {WorldskillsAngularLibModule, WsHttpInterceptor} from '@worldskills/worldskills-angular-lib';
 import {TranslateHttpLoader} from '@ngx-translate/http-loader';
 import {AppRoutingModule} from './app-routing.module';
 import {AppComponent} from './app.component';
@@ -76,8 +76,6 @@ export const appTranslationConfig = TranslateModule.forRoot({
 
 @NgModule({
   imports: [
-    CommonModule,
-    NgModule,
     BrowserModule,
     AppRoutingModule,
     FormsModule,
