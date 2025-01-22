@@ -18,10 +18,11 @@
     <table class="table table-striped border-top">
       <colgroup>
         <col width="5%">
-        <col width="20%">
-        <col width="20%">
-        <col width="20%">
-        <col width="20%">
+        <col width="15%">
+        <col width="15%">
+        <col width="15%">
+        <col width="15%">
+        <col width="15%">
       </colgroup>
       <thead>
         <tr>
@@ -30,18 +31,20 @@
             <th class="border-top-0">{{'German' | translate}}</th>
             <th class="border-top-0">{{'French' | translate}}</th>
             <th class="border-top-0">{{'Italian' | translate}}</th>
+            <th class="border-top-0">{{'Chinese' | translate}}</th>
         </tr>
       </thead>
       <tbody>
       <tr *ngFor="let skill of skills">
         <td><a [routerLink]="['../', skill.id]">{{skill.number}}</a></td>
-        <td><a [routerLink]="['../', skill.id]">{{skill.name.translations.en}}</a></td>
-        <td><a [routerLink]="['../', skill.id]">{{skill.name.translations.de}}</a></td>
-        <td><a [routerLink]="['../', skill.id]">{{skill.name.translations.fr}}</a></td>
-        <td><a [routerLink]="['../', skill.id]">{{skill.name.translations.it}}</a></td>
+        <td><a [routerLink]="['../', skill.id]">{{skill.name.translations?.en}}</a></td>
+        <td><a [routerLink]="['../', skill.id]">{{skill.name.translations?.de}}</a></td>
+        <td><a [routerLink]="['../', skill.id]">{{skill.name.translations?.fr}}</a></td>
+        <td><a [routerLink]="['../', skill.id]">{{skill.name.translations?.it}}</a></td>
+        <td><a [routerLink]="['../', skill.id]">{{skill.name.translations?.zh_CN}}</a></td>
       </tr>
       <tr *ngIf="skills.length === 0">
-        <td colspan="5">{{'No skills found' | translate}}</td>
+        <td colspan="6">{{'No skills found' | translate}}</td>
       </tr>
       </tbody>
     </table>
