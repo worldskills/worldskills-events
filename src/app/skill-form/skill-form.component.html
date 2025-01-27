@@ -206,6 +206,7 @@
           id="description"
           [ngModel]="skill ? skill.description.text : ''"
           [disabled]="!editable && !organizerEditable"
+          [config]="editorConfig"
         ></ckeditor>
       </div>
       <div class="col-3">&nbsp;</div>

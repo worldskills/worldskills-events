@@ -27,6 +27,9 @@ export class SkillFormComponent extends WsComponent implements OnInit, OnChanges
   @ViewChild('form') form: NgForm;
   loading = false;
   editor = ClassicEditor;
+  editorConfig = {
+    licenseKey: 'GPL'
+  }
 
   skillName: I18nText;
 
