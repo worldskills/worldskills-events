@@ -17,12 +17,12 @@
             "index": "src/index.html",
             "main": "src/main.ts",
             "polyfills": "src/polyfills.ts",
-            "tsConfig": "tsconfig.app.json",
-            "aot": true,
+            "tsConfig": "src/tsconfig.app.json",
             "assets": [
               "src/favicon.ico",
               "src/assets"
             ],
+            "aot": false,
             "styles": [
               "src/styles.css",
               "src/fonts.css",
@@ -33,7 +33,13 @@
             "scripts": [
               "node_modules/jquery/dist/jquery.slim.js",
               "node_modules/@worldskills/bootstrap/dist/js/bootstrap.bundle.js"
-            ]
+            ],
+            "vendorChunk": true,
+            "extractLicenses": false,
+            "buildOptimizer": false,
+            "sourceMap": true,
+            "optimization": false,
+            "namedChunks": true
           },
           "configurations": {
             "staging": {
@@ -45,8 +51,6 @@
               ],
               "optimization": true,
               "outputHashing": "all",
-              "sourceMap": true,
-              "extractCss": true,
               "namedChunks": false,
               "extractLicenses": true,
               "vendorChunk": false,
@@ -74,7 +78,6 @@
               "optimization": true,
               "outputHashing": "all",
               "sourceMap": false,
-              "extractCss": true,
               "namedChunks": false,
               "extractLicenses": true,
               "vendorChunk": false,
@@ -92,24 +95,25 @@
                 }
               ]
             }
-          }
+          },
+          "defaultConfiguration": ""
         },
         "serve": {
           "builder": "@angular-devkit/build-angular:dev-server",
           "options": {
-            "browserTarget": "worldskills-events:build",
-            "port": 10400
+            "port": 10400,
+            "buildTarget": "worldskills-events:build"
           },
           "configurations": {
             "prod": {
-              "browserTarget": "worldskills-events:build:prod"
+              "buildTarget": "worldskills-events:build:prod"
             }
           }
         },
         "extract-i18n": {
           "builder": "@angular-devkit/build-angular:extract-i18n",
           "options": {
-            "browserTarget": "worldskills-events:build"
+            "buildTarget": "worldskills-events:build"
           }
         },
         "test": {
@@ -136,19 +140,6 @@
             ]
           }
         },
-        "lint": {
-          "builder": "@angular-devkit/build-angular:tslint",
-          "options": {
-            "tsConfig": [
-              "tsconfig.app.json",
-              "tsconfig.spec.json",
-              "e2e/tsconfig.json"
-            ],
-            "exclude": [
-              "**/node_modules/**"
-            ]
-          }
-        },
         "e2e": {
           "builder": "@angular-devkit/build-angular:protractor",
           "options": {
@@ -169,6 +160,5 @@
         }
       }
     }
-  },
-  "defaultProject": "worldskills-events"
+  }
 }

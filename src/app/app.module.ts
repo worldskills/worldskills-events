@@ -10,12 +10,11 @@ import {OAuthModule} from 'angular-oauth2-oidc';
 import {FontAwesomeModule} from '@fortawesome/angular-fontawesome';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {TranslateLoader, TranslateModule} from '@ngx-translate/core';
-import {HTTP_INTERCEPTORS, HttpClient} from '@angular/common/http';
+import { HTTP_INTERCEPTORS, HttpClient, provideHttpClient, withInterceptorsFromDi } from '@angular/common/http';
 import {NgSelectModule} from '@ng-select/ng-select';
 import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
-import {DatePipe} from '@angular/common';
+import {CommonModule, DatePipe} from '@angular/common';
 import {HttpInterceptorService} from '../services/http-interceptor/http-interceptor.service';
-import {WsSpinnerComponent} from './ws-spinner/ws-spinner.component';
 import {EventsComponent} from './events/events.component';
 import {EventsSearchFormComponent} from './events-search-form/events-search-form.component';
 import {EventComponent} from './event/event.component';
@@ -66,12 +65,33 @@ export function HttpLoaderFactory(http: HttpClient) {
   return new TranslateHttpLoader(http);
 }
 
+export const appTranslationConfig = TranslateModule.forRoot({
+  loader: {
+      provide: TranslateLoader,
+      useFactory: HttpLoaderFactory,
+      deps: [HttpClient]
+  },
+  isolate: true // isolate property is the key point to remember/
+});
+
 @NgModule({
+  imports: [
+    BrowserModule,
+    AppRoutingModule,
+    FormsModule,
+    ReactiveFormsModule,
+    WorldskillsAngularLibModule,
+    OAuthModule.forRoot(),
+    NgbModule,
+    NgSelectModule,
+    FontAwesomeModule,
+    appTranslationConfig,
+    CKEditorModule,
+  ],
   declarations: [
     AppComponent,
     HomeComponent,
     ErrorComponent,
-    WsSpinnerComponent,
     EventsComponent,
     EventsSearchFormComponent,
     EventComponent,
@@ -115,34 +135,16 @@ export function HttpLoaderFactory(http: HttpClient) {
     BaseSkillPhotoCreateComponent,
     BaseSkillPhotoUpdateComponent,
     BaseSkillTagsComponent,
-    BaseSkillSponsorsComponent,
-  ],
-  imports: [
-    BrowserModule,
-    AppRoutingModule,
-    OAuthModule.forRoot(),
-    WorldskillsAngularLibModule,
-    NgSelectModule,
-    NgbModule,
-    FontAwesomeModule,
-    FormsModule,
-    ReactiveFormsModule,
-    TranslateModule.forRoot({
-      defaultLanguage: 'en',
-      loader: {
-        provide: TranslateLoader,
-        useFactory: HttpLoaderFactory,
-        deps: [HttpClient]
-      }
-    }),
-    CKEditorModule,
+    BaseSkillSponsorsComponent
   ],
   providers: [
     DatePipe,
     {provide: HTTP_INTERCEPTORS, useClass: WsHttpInterceptor, multi: true},
-    {provide: HTTP_INTERCEPTORS, useClass: HttpInterceptorService, multi: true}
+    {provide: HTTP_INTERCEPTORS, useClass: HttpInterceptorService, multi: true},
+    provideHttpClient(withInterceptorsFromDi())
+
   ],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
 })
 export class AppModule {
 }

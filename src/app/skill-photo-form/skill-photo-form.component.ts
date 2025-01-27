@@ -3,7 +3,7 @@ import {Photo as SkillPhoto, Photo as SkillPhotoRequest} from '../../types/photo
 import {NgForm} from '@angular/forms';
 import {UploadService, WsComponent} from '@worldskills/worldskills-angular-lib';
 import {ImageService} from "../../services/image/image.service";
-import {HttpEventType} from "@angular/common/http";
+import { HttpEventType } from "@angular/common/http";
 import {Image} from "../../types/image";
 import {Skill} from "../../types/skill";
 import {BaseSkill} from "../../types/base-skill";

@@ -1,8 +1,8 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { RxjsUtil, WsComponent } from '@worldskills/worldskills-angular-lib';
-import { EventService } from 'src/services/event/event.service';
-import { SkillService } from 'src/services/skill/skill.service';
-import { SkillsService } from 'src/services/skills/skills.service';
+import { EventService } from '../../services/event/event.service';
+import { SkillService } from '../../services/skill/skill.service';
+import { SkillsService } from '../../services/skills/skills.service';
 import { Skill } from '../../types/skill';
 import { Event } from "../../types/event";
 

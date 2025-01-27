@@ -19,6 +19,9 @@ export class BaseSkillFormComponent extends WsComponent implements OnInit {
   baseSectors: Array<BaseSector>;
   loading = false;
   editor = ClassicEditor;
+  editorConfig = {
+    licenseKey: 'GPL'
+  }
 
   constructor(private baseSectorsService: BaseSectorsService) {
     super();

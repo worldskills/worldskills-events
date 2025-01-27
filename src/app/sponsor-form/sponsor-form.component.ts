@@ -4,7 +4,7 @@ import {Sponsor, SponsorRequest} from '../../types/sponsor';
 import {NgForm} from '@angular/forms';
 import {UploadService, WsComponent} from '@worldskills/worldskills-angular-lib';
 import {ImageService} from "../../services/image/image.service";
-import {HttpEventType} from "@angular/common/http";
+import { HttpEventType } from "@angular/common/http";
 import {Image} from "../../types/image";
 import {BaseSponsor, BaseSponsorRequest} from "../../types/base-sponsor";
 

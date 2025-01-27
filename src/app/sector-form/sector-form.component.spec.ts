@@ -1,24 +1,27 @@
-import {async, ComponentFixture, TestBed} from '@angular/core/testing';
+import { ComponentFixture, TestBed, waitForAsync as  } from '@angular/core/testing';
 
 import {SectorFormComponent} from './sector-form.component';
 import {TranslateServiceTestingProvider, TranslationMockPipe} from "../../test";
-import {HttpClientTestingModule} from "@angular/common/http/testing";
+import { provideHttpClientTesting } from "@angular/common/http/testing";
 import {RouterTestingModule} from "@angular/router/testing";
 import {WorldskillsAngularLibModule} from "@worldskills/worldskills-angular-lib";
 import {FormsModule} from "@angular/forms";
+import { provideHttpClient, withInterceptorsFromDi } from '@angular/common/http';
 
 describe('SectorFormComponent', () => {
   let component: SectorFormComponent;
   let fixture: ComponentFixture<SectorFormComponent>;
 
-  beforeEach(async(() => {
+  beforeEach(waitForAsync(() => {
     TestBed.configureTestingModule({
-      declarations: [SectorFormComponent, TranslationMockPipe],
-      imports: [RouterTestingModule, WorldskillsAngularLibModule, HttpClientTestingModule, FormsModule],
-      providers: [
-        TranslateServiceTestingProvider
-      ]
-    })
+    declarations: [SectorFormComponent, TranslationMockPipe],
+    imports: [RouterTestingModule, WorldskillsAngularLibModule, FormsModule],
+    providers: [
+        TranslateServiceTestingProvider,
+        provideHttpClient(withInterceptorsFromDi()),
+        provideHttpClientTesting()
+    ]
+})
       .compileComponents();
   }));
 

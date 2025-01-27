@@ -1,23 +1,26 @@
-import {async, ComponentFixture, TestBed} from '@angular/core/testing';
+import { ComponentFixture, TestBed, waitForAsync as  } from '@angular/core/testing';
 
 import {SponsorCreateComponent} from './sponsor-create.component';
 import {TranslateServiceTestingProvider, TranslationMockPipe} from "../../test";
 import {RouterTestingModule} from "@angular/router/testing";
 import {WorldskillsAngularLibModule} from "@worldskills/worldskills-angular-lib";
-import {HttpClientTestingModule} from "@angular/common/http/testing";
+import { provideHttpClientTesting } from "@angular/common/http/testing";
+import { provideHttpClient, withInterceptorsFromDi } from '@angular/common/http';
 
 describe('SponsorCreateComponent', () => {
   let component: SponsorCreateComponent;
   let fixture: ComponentFixture<SponsorCreateComponent>;
 
-  beforeEach(async(() => {
+  beforeEach(waitForAsync(() => {
     TestBed.configureTestingModule({
-      declarations: [SponsorCreateComponent, TranslationMockPipe],
-      imports: [RouterTestingModule, WorldskillsAngularLibModule, HttpClientTestingModule],
-      providers: [
-        TranslateServiceTestingProvider
-      ]
-    })
+    declarations: [SponsorCreateComponent, TranslationMockPipe],
+    imports: [RouterTestingModule, WorldskillsAngularLibModule],
+    providers: [
+        TranslateServiceTestingProvider,
+        provideHttpClient(withInterceptorsFromDi()),
+        provideHttpClientTesting()
+    ]
+})
       .compileComponents();
   }));
 
